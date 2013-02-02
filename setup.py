@@ -12,6 +12,5 @@ setup(
     license='MIT',
     keywords='twitter',
     description='Classes for interacting with twitter.com.',
-    long_description=open('README.txt').read(),
     install_requires = ['oauth2']
 )
