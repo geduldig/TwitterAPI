@@ -1,16 +1,10 @@
-### UNDER DEVELOPMENT ###
-
-_Expected release date is sometime in early February 2013_
-
----
-
 # twitterapi #
 
 _Python classes and command line scripts for using the Twitter API._
 
 ### What's it do? ###
 
-This python package can download tweets, post tweets and get tweet trends.  You can either use the classes to program your own requests to twitter.com, or you can use the command line scripts in the twitterapi.tools sub-module.
+This python package can download tweets, post tweets and get tweet trends.  You can either use the classes to program your own requests to twitter.com, or you can use the command line scripts in the twitterapi.tools sub-package.
 
 The classes implement the following Twitter Streaming API and REST API endpoints:
 
@@ -23,7 +17,7 @@ If you need other Twitter endpoints, it shouldn't be much trouble to add them.  
 
 ### Features ###
 
-*Retrieving Tweets*
+***Retrieving Tweets***
 
 There are two classes, TwSearch and TwStream, that provide methods for downloading tweets.  Use TwSearch to search old or new tweets; use TwStream to stream current tweets in real-time.  In either case, the tweets are returned as dictionaries containing the entire status record, which include the tweet text, user info and much more. 
 
@@ -33,35 +27,35 @@ TwSearch has a few convenience methods:
 
 * TwSearch.get_quota() returns the quota status, including the remaining number of searches and, if the quota was exceeded, the time until which searches should be suspended.
 
-* TwSearch.past_results() returns tweets by successively calling TwSearch.results().  With each call the previous 'page' of tweets is returned.  However, this is hidden so that all the client sees is a generator successively older tweets.  Twitter will return at most about 1 week of old tweets unless the generator quits with a quota exceeded exception first.
+* TwSearch.past_results() returns tweets by successively calling TwSearch.results().  With each call the previous 'page' of tweets is returned.  However, this is hidden so that all the client sees is a generator of successively older tweets.  Twitter will return at most about 1 week of old tweets unless the generator quits with a quota exceeded exception first.
 
 * TwSearch.new_results() operates similarly to past_results() except pages of newer rather than older tweets are returned.  Like the streaming method, this method is not guaranteed to get all tweets.  TwStream.results() and TwSearch.new_results() return mostly the same tweets, although you will see discrepancies. 
 
-*Posting Tweets*
+***Posting Tweets***
 
 TwUpdate provides a method for posting (tweeting) a 140 character message.
 
-*Trends*
+***Trends***
 
-TwTrends has a method for getting the trending words and hashtags for a given place, and another method for getting all places (countries and towns) that have trending data.  For added convenience, there is also a method for returning worldwide trends.
+TwTrends has a method for getting the trending words and hashtags for a given place, and another method for getting all places (countries, cities and towns) that have trending data.  There is also a method for returning worldwide trends.
 
 ### Authentication ###
 
-Twitter requests require OAuth authentication.  This is done by passing an instance of TwCredentials to the initiator of any class.  TwCredentials is a simple class for holding OAuth's consumer and access token keys and secrets.  You can either instantiate TwCredentials class with the four keys and secrets, or use the the TwCredentials class method read_file which reads a text file that has a line for each key and secret, like this:
+Twitter requests require OAuth authentication.  This is done by passing an instance of TwCredentials to the initiator of any class.  TwCredentials is a simple class that holds OAuth's consumer and access token keys and secrets.  You can either instantiate TwCredentials with the four keys and secrets, or use the the TwCredentials class method read_file which reads a text file that has a line for each key and secret, like this:
 
-`consumer_key=<YOUR CONSUMER KEY>'
-`consumer_secret=<YOUR CONSUMER SECRET>'
-`access_token_key=<YOUR ACCESS TOKEN KEY>'
-`access_token_secret=<YOUR ACCESS TOKEN SECRET>'
+	consumer_key=<YOUR CONSUMER KEY>
+	consumer_secret=<YOUR CONSUMER SECRET>
+	access_token_key=<YOUR ACCESS TOKEN KEY>
+	access_token_secret=<YOUR ACCESS TOKEN SECRET>
 
 ### Extras ###
 
-Sub-package twitterapi.tools has command line scripts that demonstrate how to work with the classes.  You will first need to enter your twitter application credentials in twitterapi/tools/credentials.txt.  Then, you can use the following syntax:
+Sub-package twitterapi.tools has command line scripts that demonstrate how to work with the classes.  First, you will need to enter your twitter application credentials in twitterapi/tools/credentials.txt.  Then, you can use the following syntax:
 
-`python -m twitterapi.tools.Search [-new] word(s)`
-`python -m twitterapi.tools.Stream word(s)`
-`python -m twitterapi.tools.Trends [-woeid woeid]`
-`python -m twitterapi.tools.Update message`
+	python -m twitterapi.tools.Search [-new] word(s)
+	python -m twitterapi.tools.Stream word(s)
+	python -m twitterapi.tools.Trends [-woeid woeid]
+	python -m twitterapi.tools.Update message
 
 ### External Dependencies ###
 
@@ -72,11 +66,12 @@ This package uses the following external package.
 ### Installation ###
 
 I like to use pip: 
-`pip install puttytat`
 
-Before running scripts in the twitterapi.test and twitterapi.tools sub-pacages, you must add your Twitter OAuth application credentials in twitterapi/test/credentials.txt and in twitterapi/tools/credentials.txt.  If you do not have credentials, first create a Twitter application by logging into dev.twitter.com.  Run scripts with the -m option.  For example,
+	pip install twitterapi
 
-`python -m twitterapi.test.test_search`
+Before running scripts in the twitterapi.test and twitterapi.tools sub-packages, you must add your Twitter OAuth application credentials in twitterapi/test/credentials.txt and in twitterapi/tools/credentials.txt.  If you do not have credentials, first create a Twitter application by logging into dev.twitter.com.  Run scripts with the -m option.  For example,
+
+	python -m twitterapi.test.test_search
 
 ### Contributors ###
 
