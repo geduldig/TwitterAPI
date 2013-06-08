@@ -2,15 +2,15 @@ from distutils.core import setup
 
 setup(
     name='TwitterAPI',
-    version='1.0.0',
+    version='2.0.0',
     author='Jonas Geduldig',
     author_email='boxnumber03@gmail.com',
-    packages=['twitterapi', 'twitterapi.test', 'twitterapi.tools'],
+    packages=['TwitterAPI'],
 	package_data={'': ['credentials.txt']},
-    url='https://github.com/geduldig/twitterapi',
-    download_url = 'https://github.com/gedldig/twitterapi/tarball/master',
+    url='https://github.com/geduldig/TwitterAPI',
+    download_url = 'https://github.com/geduldig/TwitterAPI/tarball/master',
     license='MIT',
     keywords='twitter',
-    description='Classes for interacting with twitter.com.',
-    install_requires = ['oauth2']
+    description='Easy access to all twitter.com endpoints',
+    install_requires = ['requests']
 )
