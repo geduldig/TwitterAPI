@@ -21,7 +21,7 @@ class TwitterAPI(object):
 	"""
 
 	def __init__(self, consumer_key, consumer_secret, access_token_key, access_token_secret):
-		self.session = requests.Session()
+		self.session = requests.Session() 
 		self.session.auth = OAuth1(consumer_key, consumer_secret, access_token_key, access_token_secret)
 		
 	def _make_url(self, subdomain, path):
