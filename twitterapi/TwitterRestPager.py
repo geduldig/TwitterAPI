@@ -13,7 +13,7 @@ class TwitterRestPager(object):
 		
 		api: The TwitterAPI instance.
 		resource: Any REST API resource string.
-		params: The resources parameters dictionary.
+		params: A dict containing parameters for the resource.
 		"""		
 		self.api = api
 		self.resource = resource

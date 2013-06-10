@@ -21,7 +21,6 @@ class TwitterAPI(object):
 	"""
 
 	def __init__(self, consumer_key, consumer_secret, access_token_key, access_token_secret):
-		"""Authenticate with Twitter's OAuth 1.0 application credentials."""
 		self.session = requests.Session()
 		self.session.auth = OAuth1(consumer_key, consumer_secret, access_token_key, access_token_secret)
 		
@@ -65,7 +64,7 @@ class TwitterAPI(object):
 			return RestIterator(self.response)
 
 	def get_rest_quota(self):
-		"""Reads quota information from the response header from a REST API request."""
+		"""Returns quota information from the response header of a REST API request."""
 		remaining, limit, reset = None, None, None
 		if self.response and not self.session.stream:
 			if 'x-rate-limit-remaining' in self.response.headers:
@@ -79,7 +78,7 @@ class TwitterAPI(object):
 				
 class RestIterator(object):
 	def __init__(self, response):
-		"""Extract from the response the parts that can be iterated."""
+		"""Extracts from the response the parts that can be iterated."""
 		resp = response.json()
 		if 'errors' in resp:
 			self.results = resp['errors']

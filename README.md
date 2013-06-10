@@ -47,7 +47,7 @@ Call any Streaming API endpoint (using the -field option to print only the scree
 
 	> python -m TwitterAPI.cli -e statuses/filter -p track=zzz -f screen_name text
 	
-If you do not include the -field (-f) option cly.y prints the entire JSON response object.
+If you do not include the -field (-f) option cly.py prints the entire JSON response object.
 To print just fields of interest add one or more field names after -field.
 
 ### Installation ###
