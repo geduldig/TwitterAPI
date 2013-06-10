@@ -4,10 +4,10 @@
 	Version 1.1, Streaming API and REST API.
 	
 	The complete URL for each endpoint would look like this:
-		PROTOCOL://{subdomain}.DOMAIN/VERSION/{endpoint}?{parameters}
+		PROTOCOL://{subdomain}.DOMAIN/VERSION/{resource}?{parameters}
 		
 	The REST API endpoints all use 'api' for the subdomain.
-	The Streaming API endpoints can use POST (with parameters) and GET (without parameters).
+	The Streaming API endpoints use either POST (with parameters) or GET (without parameters).
 """
 
 __author__ = "Jonas Geduldig"
@@ -20,7 +20,7 @@ VERSION = '1.1'
 USER_AGENT = 'puttytat'
 
 STREAMING_ENDPOINTS = {
-		# feature :                                ( subdomain )
+		# resource:                                ( subdomain )
 
 		'statuses/filter':                         ('stream',),
 		'statuses/firehose':                       ('stream',),
@@ -30,7 +30,7 @@ STREAMING_ENDPOINTS = {
 }
 
 REST_ENDPOINTS = {
-		# feature :                                ( method )
+		# resource:                                ( method )
 
 		'statuses/destroy':                        ('POST',),
 		'statuses/home_timeline':                  ('GET',),

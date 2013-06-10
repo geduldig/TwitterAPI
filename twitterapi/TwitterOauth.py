@@ -1,12 +1,9 @@
 """
-	Beginning with Twitter's version 1.1 APIs, all requests require OAuth authentication.
-	Simply log into dev.twitter.com, create an application, and generate your consumer
+	Log into dev.twitter.com and create an application to generate your consumer
 	key and secret and your access token key and secret.
-	
-	To use puttytat's classes, you will instantiate them with TwitterOauth which 
-	contains your secrets and keys.  If you don't want to hard-code your credentials,
-	you can store them in a text file and have TwitterOauth read them for you.  Save 
-	your keys and secrets in a file, like this:
+
+	You can use TwitterOAuth to read your application credentials from a text file
+	if you save your credentials to a text file with this format:
 	
 		consumer_key=YOUR_CONSUMER_KEY
 		consumer_secret=YOUR_CONSUMER_SECRET
@@ -21,7 +18,7 @@ __license__ = "MIT"
 import os
 
 
-class TwitterOauth:
+class TwitterOAuth:
 	"""A container for Twitter's OAuth credentials"""
 
 	def __init__(self, consumer_key, consumer_secret, access_token_key, access_token_secret):
@@ -34,11 +31,7 @@ class TwitterOauth:
 	def read_file(cls, file_name=None):
 		"""Read OAuth credentials from a text file
 		
-		Parameter
-		---------
-		file_name : str
-			Name of file containing a key-value pair on each line.  (No quotes around key or value.)
-		
+		file_name : Name of file containing a key-value pair on each line.
 		"""
 		if file_name is None:
 			path = os.path.dirname(__file__)
@@ -50,7 +43,7 @@ class TwitterOauth:
 				if '=' in line:
 					name, value = line.split('=', 1)
 					oauth[name.strip()] = value.strip()
-			return TwitterOauth(
+			return TwitterOAuth(
 				oauth['consumer_key'], 
 				oauth['consumer_secret'], 
 				oauth['access_token_key'], 

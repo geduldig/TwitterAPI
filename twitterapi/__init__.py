@@ -1,2 +1,3 @@
-from TwitterOauth import TwitterOauth
-from TwitterAPI import TwitterAPI, TwitterRestPager
+from TwitterOAuth import TwitterOAuth
+from TwitterAPI import TwitterAPI
+from TwitterRestPager import TwitterRestPager

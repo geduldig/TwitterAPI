@@ -6,7 +6,6 @@ import constants
 import json
 import requests
 from requests_oauthlib import OAuth1
-import time
 
 
 STREAM_SOCKET_TIMEOUT = 90 # 90 seconds per Twitter's recommendation
@@ -15,7 +14,14 @@ REST_SUBDOMAIN = 'api'
 
 
 class TwitterAPI(object):	
+	"""Access to any REST or Streaming API resource.  
+	
+	Valid resource strings are found in constants.py.  Documentation and parameters for 
+	each resource here: https://dev.twitter.com/docs/api/1.1
+	"""
+
 	def __init__(self, consumer_key, consumer_secret, access_token_key, access_token_secret):
+		"""Authenticate with Twitter's OAuth 1.0 application credentials."""
 		self.session = requests.Session()
 		self.session.auth = OAuth1(consumer_key, consumer_secret, access_token_key, access_token_secret)
 		
@@ -37,6 +43,13 @@ class TwitterAPI(object):
 		return self.response
 		
 	def request(self, resource, params=None):
+		"""Request any Twitter resource.
+		
+		resource: A REST or Streaming API resource string (ex 'search/tweets').
+		params: Dictionary of resource parameters (ex {'q':'zzz, 'count':10}).
+		
+		Returns a response object from the requests module.  
+		"""
 		if resource in constants.REST_ENDPOINTS:
 			return self._rest_request(resource, params)
 		elif resource in constants.STREAMING_ENDPOINTS:
@@ -45,12 +58,14 @@ class TwitterAPI(object):
 			raise Exception('"%s" is not valid endpoint' % resource)
 			
 	def get_iterator(self):
+		"""Returns the appropriate iterator for either a REST or Streaming API request."""
 		if self.session.stream:
 			return StreamingIterator(self.response)
 		else:
 			return RestIterator(self.response)
 
 	def get_rest_quota(self):
+		"""Reads quota information from the response header from a REST API request."""
 		remaining, limit, reset = None, None, None
 		if self.response and not self.session.stream:
 			if 'x-rate-limit-remaining' in self.response.headers:
@@ -64,12 +79,13 @@ class TwitterAPI(object):
 				
 class RestIterator(object):
 	def __init__(self, response):
+		"""Extract from the response the parts that can be iterated."""
 		resp = response.json()
 		if 'errors' in resp:
 			self.results = resp['errors']
 		elif 'statuses' in resp:
 			self.results = resp['statuses']
-		elif hasattr(resp, '__iter__'):
+		elif hasattr(resp, '__iter__') and type(resp) is not dict:
 			if len(resp) > 0 and 'trends' in resp[0]:
 				self.results = resp[0]['trends']
 			else:
@@ -78,6 +94,7 @@ class RestIterator(object):
 			self.results = (resp,)
 		
 	def __iter__(self):
+		"""Returns a tweet status as a JSON object."""
 		for item in self.results:
 			yield item
 				
@@ -87,40 +104,7 @@ class StreamingIterator(object):
 		self.response = response
 		
 	def __iter__(self):
+		"""Returns a tweet status as a JSON object."""
 		for item in self.response.iter_lines():
 			if item:
 				yield json.loads(item)
-	
-
-class TwitterRestPager(object):
-	def __init__(self, api, resource, params=None):
-		self.api = api
-		self.resource = resource
-		self.params = params
-
-	def get_iterator(self, wait=5, new_tweets=False):
-		while True:
-			# get one page of results
-			self.api._rest_request(self.resource, self.params)
-			iter = self.api.get_iterator()
-			if new_tweets:
-				iter.results = reversed(iter.results)
-				
-			# yield each item in the page
-			id = None
-			for item in iter:
-				if 'id' in item:
-					id = item['id']
-				yield item
-				
-			# sleep before getting another page of results
-			time.sleep(wait)
-			
-			# depending on the newer/older direction, use the first or last tweet id to limit
-			# the next request
-			if id is None:
-				break
-			elif new_tweets:
-				self.params['since_id'] = str(id)
-			else:
-				self.params['max_id'] = str(id - 1)
