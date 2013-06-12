@@ -27,14 +27,14 @@ class TwitterAPI(object):
 		method = constants.REST_ENDPOINTS[resource][0]
 		url = self._make_url(constants.REST_SUBDOMAIN, resource + '.json')
 		self.session.stream = False
-		self.response = self.session.request(method, url, params=params, timeout=REST_SOCKET_TIMEOUT)
+		self.response = self.session.request(method, url, params=params, timeout=constants.REST_SOCKET_TIMEOUT)
 		return self.response
 		
 	def _streaming_request(self, resource, params=None):
 		method = 'GET' if params is None else 'POST'
 		url = self._make_url(constants.STREAMING_ENDPOINTS[resource][0], resource + '.json')
 		self.session.stream = True
-		self.response = self.session.request(method, url, params=params, timeout=STREAMING_SOCKET_TIMEOUT)
+		self.response = self.session.request(method, url, params=params, timeout=constants.STREAMING_SOCKET_TIMEOUT)
 		return self.response
 		
 	def request(self, resource, params=None):
