@@ -8,13 +8,8 @@ import requests
 from requests_oauthlib import OAuth1
 
 
-STREAM_SOCKET_TIMEOUT = 90 # 90 seconds per Twitter's recommendation
-REST_SOCKET_TIMEOUT = 5
-REST_SUBDOMAIN = 'api'
-
-
 class TwitterAPI(object):	
-	"""Access to any REST or Streaming API resource.  
+	"""Access any REST or Streaming API resource.  
 	
 	Valid resource strings are found in constants.py.  Documentation and parameters for 
 	each resource here: https://dev.twitter.com/docs/api/1.1
@@ -23,13 +18,14 @@ class TwitterAPI(object):
 	def __init__(self, consumer_key, consumer_secret, access_token_key, access_token_secret):
 		self.session = requests.Session() 
 		self.session.auth = OAuth1(consumer_key, consumer_secret, access_token_key, access_token_secret)
+		self.session.headers = {'User-Agent':constants.USER_AGENT}
 		
 	def _make_url(self, subdomain, path):
 		return '%s://%s.%s/%s/%s' % (constants.PROTOCOL, subdomain, constants.DOMAIN, constants.VERSION, path)
 		
 	def _rest_request(self, resource, params=None):
 		method = constants.REST_ENDPOINTS[resource][0]
-		url = self._make_url(REST_SUBDOMAIN, resource + '.json')
+		url = self._make_url(constants.REST_SUBDOMAIN, resource + '.json')
 		self.session.stream = False
 		self.response = self.session.request(method, url, params=params, timeout=REST_SOCKET_TIMEOUT)
 		return self.response
@@ -38,7 +34,7 @@ class TwitterAPI(object):
 		method = 'GET' if params is None else 'POST'
 		url = self._make_url(constants.STREAMING_ENDPOINTS[resource][0], resource + '.json')
 		self.session.stream = True
-		self.response = self.session.request(method, url, params=params, timeout=STREAM_SOCKET_TIMEOUT)
+		self.response = self.session.request(method, url, params=params, timeout=STREAMING_SOCKET_TIMEOUT)
 		return self.response
 		
 	def request(self, resource, params=None):

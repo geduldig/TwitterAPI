@@ -14,10 +14,16 @@ __author__ = "Jonas Geduldig"
 __date__ = "February 3, 2012"
 __license__ = "MIT"
 
+
 PROTOCOL = 'https'
+
 DOMAIN = 'twitter.com'
+
 VERSION = '1.1'
-USER_AGENT = 'puttytat'
+
+USER_AGENT = 'python-TwitterAPI.cli.py'
+
+STREAMING_SOCKET_TIMEOUT = 90 # 90 seconds per Twitter's recommendation
 
 STREAMING_ENDPOINTS = {
 		# resource:                                ( subdomain )
@@ -28,6 +34,10 @@ STREAMING_ENDPOINTS = {
 		'site':                                    ('sitestream',),
 		'user':                                    ('userstream',)
 }
+
+REST_SUBDOMAIN = 'api'
+
+REST_SOCKET_TIMEOUT = 5
 
 REST_ENDPOINTS = {
 		# resource:                                ( method )
