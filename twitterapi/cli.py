@@ -70,11 +70,7 @@ if __name__ == '__main__':
 
 	try:
 		params = to_dict(args.parameters)
-		#oauth = TwitterOAuth.read_file(args.oauth)
-		oauth = TwitterOAuth('1M7kTHFb4aDJYaH3w3np9g',
-							 'NWfJ1wE12Cjh677buqObs1jSKzvXhEP0tJ0zYcbQ5Kw',
-							 '43513175-iznkrt1saCyFyzSyaHuOTLcceGPGXHcz6rgQHM2A6',
-							 'xWtKlDyeiuAmUmgZtTBZtsEivCd9HqXc2FWaUy8')
+		oauth = TwitterOAuth.read_file(args.oauth)
 
 		api = TwitterAPI(oauth.consumer_key, oauth.consumer_secret, oauth.access_token_key, oauth.access_token_secret)
 		api.request(args.endpoint, params)
