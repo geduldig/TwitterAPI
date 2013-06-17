@@ -25,13 +25,10 @@ __author__ = "Jonas Geduldig"
 __date__ = "June 7, 2013"
 __license__ = "MIT"
 
-# unicode printing for Windows 
-import sys, codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-
 import argparse
 import constants
-import pprint
+from pprint import PrettyPrinter
+import sys
 from TwitterOAuth import TwitterOAuth
 from TwitterAPI import TwitterAPI
 
@@ -76,20 +73,20 @@ if __name__ == '__main__':
 		api.request(args.endpoint, params)
 		iter = api.get_iterator()
 		
-		pp = pprint.PrettyPrinter()
+		pp = PrettyPrinter()
 		for item in iter:
 			if 'message' in item:
-				print 'ERROR:', item['message']
+				sys.stderr.write('ERROR: %s\n' % item['message'])
 			elif args.fields is None:
 				pp.pprint(item)
 			else:
 				for name in args.fields:
 					value = find_field(name, item)
 					if value is not None:
-						print '%s: %s' % (name, value)
+						sys.stdout.write('%s: %s\n' % (name, value))
 						
 	except KeyboardInterrupt:
-		print>>sys.stderr, '\nTerminated by user'
+		sys.stderr.write('\nTerminated by user\n')
 		
-	except Exception, e:
-		print>>sys.stderr, '*** STOPPED', e
+	except Exception as e:
+		sys.stderr.write('*** STOPPED %s\n' % str(e))
