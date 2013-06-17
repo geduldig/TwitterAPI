@@ -26,11 +26,10 @@ __date__ = "June 7, 2013"
 __license__ = "MIT"
 
 import argparse
-import constants
 from pprint import PrettyPrinter
 import sys
-from TwitterOAuth import TwitterOAuth
-from TwitterAPI import TwitterAPI
+from .TwitterOAuth import TwitterOAuth
+from .TwitterAPI import TwitterAPI
 
 
 def find_field(name, obj):
