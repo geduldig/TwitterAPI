@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='TwitterAPI',
-    version='2.0.1',
+    version='2.0.2',
     author='Jonas Geduldig',
     author_email='boxnumber03@gmail.com',
     packages=['TwitterAPI'],
@@ -12,5 +12,5 @@ setup(
     license='MIT',
     keywords='twitter',
     description='Easy access to all twitter.com endpoints',
-    install_requires = ['requests']
+    install_requires = ['requests', 'requests-oauthlib']
 )
