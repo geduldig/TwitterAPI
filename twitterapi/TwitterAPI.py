@@ -102,4 +102,4 @@ class StreamingIterator(object):
 		"""Returns a tweet status as a JSON object."""
 		for item in self.response.iter_lines():
 			if item:
-				yield json.loads(item)
+				yield json.loads(item.decode('utf-8'))

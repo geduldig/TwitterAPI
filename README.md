@@ -1,4 +1,7 @@
-# TwitterAPI # 
+# TwitterAPI #
+
+This python package supports the latest Twitter API (version 1.1) with OAuth, and it works 
+with the latest python versions in both 2.x and 3.x tracks.  
 
 ### Scripting Usage ###
 
@@ -27,7 +30,7 @@ Stream tweets from New York City:
 	for item in iter:
 		print item
 
-### Command-line Usage ###
+### Command-line Usage (cly.py) ###
 
 For help:
 
@@ -41,14 +44,16 @@ argument.
 Call any REST API endpoint:
 
 	> python -m TwitterAPI.cli -endpoint statuses/update -parameters status='my tweet'
+
+Another example (here using abreviated option names) that parses selected output fields:
+
 	> python -m TwitterAPI.cli -e search/tweets -p q=zzz count=10 -field screen_name text 
 
-Call any Streaming API endpoint (using the -field option to print only the screen_name and the tweet text):
+Calling any Streaming API endpoint works too:
 
 	> python -m TwitterAPI.cli -e statuses/filter -p track=zzz -f screen_name text
 	
-If you do not include the -field (-f) option cly.py prints the entire JSON response object.
-To print just fields of interest add one or more field names after -field.
+If you do not include the -field (-f) option cly.py prints the entire JSON response object.  Or, to print just fields of interest add one or more field names after -field.
 
 ### Installation ###
 
