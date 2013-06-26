@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='TwitterAPI',
-    version='2.0.5',
+    version='2.0.6',
     author='Jonas Geduldig',
     author_email='boxnumber03@gmail.com',
     packages=['TwitterAPI'],

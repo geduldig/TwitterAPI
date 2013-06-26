@@ -26,10 +26,21 @@ __date__ = "June 7, 2013"
 __license__ = "MIT"
 
 import argparse
+import codecs
 from pprint import PrettyPrinter
 import sys
 from .TwitterOAuth import TwitterOAuth
 from .TwitterAPI import TwitterAPI
+
+
+try:
+	# python 3
+	sys.stdout = codecs.getwriter('utf8')(sys.stdout.buffer)
+	sys.stderr = codecs.getwriter('utf8')(sys.stderr.buffer)
+except:
+	# python 2
+	sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+	sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
 
 def find_field(name, obj):
