@@ -48,7 +48,7 @@ class TwitterRestPager(object):
 			# use the first or last tweet id to limit (depending on the newer/older direction)
 			# the next request
 			if id is None:
-				break
+				continue
 			elif new_tweets:
 				self.params['since_id'] = str(id)
 			else:
