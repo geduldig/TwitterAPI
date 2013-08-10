@@ -30,7 +30,7 @@ Stream tweets from New York City:
 	for item in iter:
 		print item
 
-### Command-line Usage (cly.py) ###
+### Command-line Usage (cli.py) ###
 
 For help:
 
@@ -53,7 +53,7 @@ Calling any Streaming API endpoint works too:
 
 	> python -m TwitterAPI.cli -e statuses/filter -p track=zzz -f screen_name text
 	
-If you do not include the -field (-f) option cly.py prints the entire JSON response object.  Or, to print just fields of interest add one or more field names after -field.
+If you do not include the -field (-f) option cli.py prints the entire JSON response object.  Or, to print just fields of interest add one or more field names after -field.
 
 ### Installation ###
 
