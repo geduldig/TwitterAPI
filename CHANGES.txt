@@ -30,3 +30,5 @@ v2.0.4,  16 Jun 2013 -- Works with python 3.
 v2.0.6,  25 Jun 2013 -- Fixed printing.
 
 v2.0.7,  06 Aug 2013 -- TwitterRestPager does not exit when no tweets.
+
+v2.0.8,  22 Aug 2013 -- Renamed TwitterOauth.py to TwitterOAuth.py

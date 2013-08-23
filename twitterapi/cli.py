@@ -9,13 +9,13 @@
 	
 	Examples:
 	
-	> python cly.py -endpoint search/tweets -parameters q=zzz 
-	> python cly.py -endpoint statuses/filter -parameters track=zzz
+	> python cli.py -endpoint search/tweets -parameters q=zzz 
+	> python cli.py -endpoint statuses/filter -parameters track=zzz
 		
 	These examples print the raw json response.  You can also print one or more fields
 	from the response, for instance the tweet 'text' field, like this:
 	
-	> python cly.py -endpoint statuses/filter -parameters track=zzz -fields text
+	> python cli.py -endpoint statuses/filter -parameters track=zzz -fields text
 		
 	Twitter's endpoints are documented at this site:
 		https://dev.twitter.com/docs/api/1.1
@@ -86,7 +86,7 @@ if __name__ == '__main__':
 		pp = PrettyPrinter()
 		for item in iter:
 			if 'message' in item:
-				sys.stderr.write('ERROR: %s\n' % item['message'])
+				sys.stdout.write('ERROR %s: %s\n' % (item['code'], item['message']))
 			elif args.fields is None:
 				pp.pprint(item)
 			else:
