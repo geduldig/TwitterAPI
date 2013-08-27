@@ -96,10 +96,10 @@ class RestIterator(object):
 				
 class StreamingIterator(object):
 	def __init__(self, response):
-		self.response = response
+		self.results = response.iter_lines()
 		
 	def __iter__(self):
 		"""Returns a tweet status as a JSON object."""
-		for item in self.response.iter_lines():
+		for item in self.results:
 			if item:
 				yield json.loads(item.decode('utf-8'))

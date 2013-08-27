@@ -87,13 +87,16 @@ if __name__ == '__main__':
 		for item in iter:
 			if 'message' in item:
 				sys.stdout.write('ERROR %s: %s\n' % (item['code'], item['message']))
+				sys.stdout.flush()
 			elif args.fields is None:
 				pp.pprint(item)
+				sys.stdout.flush()
 			else:
 				for name in args.fields:
 					value = find_field(name, item)
 					if value is not None:
 						sys.stdout.write('%s: %s\n' % (name, value))
+						sys.stdout.flush()
 						
 	except KeyboardInterrupt:
 		sys.stderr.write('\nTerminated by user\n')
