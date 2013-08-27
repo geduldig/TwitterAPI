@@ -1,6 +1,5 @@
 [![Downloads](https://pypip.in/d/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 [![Downloads](https://pypip.in/v/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
-[![Coverage Status](https://coveralls.io/repos/TwitterAPI/TwitterAPI/badge.png?branch=master)](https://coveralls.io/r/TwitterAPI/TwitterAPI?branch=master)
 
 TwitterAPI
 ==========
@@ -9,7 +8,7 @@ with the latest python versions in both 2.x and 3.x branches.
 
 Scripting Usage
 ---------------
-(See TwitterAPI/cli.py for a working code example.)
+*See TwitterAPI/cli.py for a working code example.*
 
 First, authenticate with your application credentials:
 
@@ -38,7 +37,7 @@ Stream tweets from New York City:
 Notice that request() accepts both REST and Streaming API methods, and it takes two
 arguments: 1) the Twitter method, 2) a dictionary of method parameters.  In the above
 examples we use the get_iterator() helper to get each tweet object.  This iterator knows
-how to iterate both REST and Streaming API results, in addition to error objects.  
+how to iterate both REST and Streaming API results, in addition to error objects.
 Alternatively, you have access to the response object which is returned by request().  
 From the response object you can get the raw response (.text) and the http status
 code (.status_code).  See the documentation for the Requests library for more info.
@@ -76,4 +75,4 @@ Installation
 	
 Contributors
 ------------
-	- Jonas Geduldig
+* Jonas Geduldig
