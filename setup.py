@@ -23,6 +23,6 @@ setup(
     license='MIT',
     keywords='twitter',
     description='Minimal wrapper for Twitter\'s REST and Streaming APIs',
-    long_description=read('README.rst'),
+    long_description=read('README.html'),
     install_requires = ['requests', 'requests-oauthlib']
 )
