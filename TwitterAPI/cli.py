@@ -89,14 +89,12 @@ if __name__ == '__main__':
 			if 'message' in item:
 				sys.stdout.write('ERROR %s: %s\n' % (item['code'], item['message']))
 				sys.stdout.flush()
-			#elif args.fields is None:
 			elif not args.fields:
 				pp.pprint(item)
 				sys.stdout.flush()
 			else:
 				for name in args.fields:
 					value = search(name, item)
-					#if value is not None:
 					if value:
 						sys.stdout.write('%s: %s\n' % (name, value))
 						sys.stdout.flush()
