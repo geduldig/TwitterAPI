@@ -1,8 +1,19 @@
 from distutils.core import setup
+import TwitterAPI
+import io
 
+def read(*filenames, **kwargs):
+    encoding = kwargs.get('encoding', 'utf-8')
+    sep = kwargs.get('sep', '\n')
+    buf = []
+    for filename in filenames:
+        with io.open(filename, encoding=encoding) as f:
+            buf.append(f.read())
+    return sep.join(buf)
+    
 setup(
     name='TwitterAPI',
-    version='2.0.9.1',
+    version=TwitterAPI.__version__,
     author='Jonas Geduldig',
     author_email='boxnumber03@gmail.com',
     packages=['TwitterAPI'],
@@ -11,6 +22,7 @@ setup(
     download_url = 'https://github.com/geduldig/TwitterAPI/tarball/master',
     license='MIT',
     keywords='twitter',
-    description='Easy access to all twitter.com endpoints',
+    description='Minimal wrapper for Twitter\'s REST and Streaming APIs',
+    long_description=read('README.md'),
     install_requires = ['requests', 'requests-oauthlib']
 )

@@ -74,7 +74,7 @@ class TwitterAPI(object):
 				
 class RestIterator(object):
 	def __init__(self, response):
-		"""Extracts from the response the parts that can be iterated."""
+		"""Extracts iterable parts from the response."""
 		resp = response.json()
 		if 'errors' in resp:
 			self.results = resp['errors']

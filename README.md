@@ -2,7 +2,7 @@
 [![Downloads](https://pypip.in/v/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 TwitterAPI
 ==========
-This python package supports the latest Twitter API (version 1.1) with OAuth.  It works with the latest python versions in both 2.x and 3.x branches.  
+This python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth.  It works with the latest python versions in both 2.x and 3.x branches.  
 
 Scripting Usage
 ---------------
@@ -32,7 +32,7 @@ Stream tweets from New York City:
 	for item in iter:
 		print item
 		
-Notice that request() accepts both REST and Streaming API methods, and it takes two arguments: 1) the Twitter method, 2) a dictionary of method parameters.  In the above examples we use the get_iterator() helper to get each tweet object.  This iterator knows how to iterate both REST and Streaming API results, in addition to error objects.  Alternatively, you have access to the response object which is returned by request().  From the response object you can get the raw response (.text) and the http status code (.status_code).  See the documentation for the Requests library for more info.
+Notice that request() accepts both REST and Streaming API methods, and it takes two arguments: 1) the Twitter method, 2) a dictionary of method parameters.  In the above examples we use the get\_iterator() helper to get each tweet object.  This iterator knows how to iterate both REST and Streaming API results, in addition to error objects.  Alternatively, you have access to the response object which is returned by request().  From the response object you can get the raw response (.text) and the http status code (.status\_code).  See the documentation for the Requests library for more info.
 
 Command-line Usage (cli.py)
 ---------------------------

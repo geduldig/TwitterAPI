@@ -43,8 +43,8 @@ except:
 	sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
 
-def find_field(name, obj):
-	"""Breadth-first search of the JSON result fields."""
+def search(name, obj):
+	"""Breadth-first search for name in the JSON response and return value."""
 	q = []
 	q.append(obj)
 	while q:
@@ -61,7 +61,8 @@ def find_field(name, obj):
 
 def to_dict(param_list):
 	"""Convert a list of key=value to dict[key]=value"""			
-	if param_list is not None:
+	#if param_list is not None:
+	if param_list:
 		return {name: value for (name, value) in [param.split('=') for param in param_list]}
 	else:
 		return None
@@ -88,13 +89,15 @@ if __name__ == '__main__':
 			if 'message' in item:
 				sys.stdout.write('ERROR %s: %s\n' % (item['code'], item['message']))
 				sys.stdout.flush()
-			elif args.fields is None:
+			#elif args.fields is None:
+			elif not args.fields:
 				pp.pprint(item)
 				sys.stdout.flush()
 			else:
 				for name in args.fields:
-					value = find_field(name, item)
-					if value is not None:
+					value = search(name, item)
+					#if value is not None:
+					if value:
 						sys.stdout.write('%s: %s\n' % (name, value))
 						sys.stdout.flush()
 						
