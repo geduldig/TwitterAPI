@@ -26,21 +26,9 @@ __date__ = "June 7, 2013"
 __license__ = "MIT"
 
 import argparse
-import codecs
 from pprint import PrettyPrinter
-import sys
 from .TwitterOAuth import TwitterOAuth
 from .TwitterAPI import TwitterAPI
-
-
-try:
-	# python 3
-	sys.stdout = codecs.getwriter('utf8')(sys.stdout.buffer)
-	sys.stderr = codecs.getwriter('utf8')(sys.stderr.buffer)
-except:
-	# python 2
-	sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-	sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
 
 def search(name, obj):
@@ -61,7 +49,6 @@ def search(name, obj):
 
 def to_dict(param_list):
 	"""Convert a list of key=value to dict[key]=value"""			
-	#if param_list is not None:
 	if param_list:
 		return {name: value for (name, value) in [param.split('=') for param in param_list]}
 	else:
@@ -87,20 +74,17 @@ if __name__ == '__main__':
 		pp = PrettyPrinter()
 		for item in iter:
 			if 'message' in item:
-				sys.stdout.write('ERROR %s: %s\n' % (item['code'], item['message']))
-				sys.stdout.flush()
+				print('ERROR %s: %s' % (item['code'], item['message']))
 			elif not args.fields:
 				pp.pprint(item)
-				sys.stdout.flush()
 			else:
 				for name in args.fields:
 					value = search(name, item)
 					if value:
-						sys.stdout.write('%s: %s\n' % (name, value))
-						sys.stdout.flush()
+						print('%s: %s' % (name, value))
 						
 	except KeyboardInterrupt:
-		sys.stderr.write('\nTerminated by user\n')
+		print('\nTerminated by user')
 		
 	except Exception as e:
-		sys.stderr.write('*** STOPPED %s\n' % str(e))
+		print('*** STOPPED %s' % str(e))

@@ -14,7 +14,7 @@ request_key = credentials.get('oauth_token')[0]
 request_secret = credentials.get('oauth_token_secret')[0]
 
 # obtain authorization from resource owner
-print 'Go here to authorize,', 'https://api.twitter.com/oauth/authorize?oauth_token=' + request_key
+print('Go here to authorize:\n  https://api.twitter.com/oauth/authorize?oauth_token=%s' % request_key)
 verifier = raw_input('Enter your authorization code: ')
 
 # obtain access token
@@ -29,4 +29,4 @@ api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_s
 api.request('statuses/filter', {'track':'zzz'})
 iter = api.get_iterator()
 for item in iter:
-	print item['text']
+	print(item['text'])

@@ -20,19 +20,19 @@ class TwitterAPI(object):
 		self.session.auth = OAuth1(consumer_key, consumer_secret, access_token_key, access_token_secret)
 		self.session.headers = {'User-Agent':USER_AGENT}
 		
-	def _make_url(self, subdomain, path):
+	def _prepare_url(self, subdomain, path):
 		return '%s://%s.%s/%s/%s' % (PROTOCOL, subdomain, DOMAIN, VERSION, path)
 		
 	def _rest_request(self, resource, params=None):
 		method = REST_ENDPOINTS[resource][0]
-		url = self._make_url(REST_SUBDOMAIN, resource + '.json')
+		url = self._prepare_url(REST_SUBDOMAIN, resource + '.json')
 		self.session.stream = False
 		self.response = self.session.request(method, url, params=params, timeout=REST_SOCKET_TIMEOUT)
 		return self.response
 		
 	def _streaming_request(self, resource, params=None):
 		method = 'GET' if params is None else 'POST'
-		url = self._make_url(STREAMING_ENDPOINTS[resource][0], resource + '.json')
+		url = self._prepare_url(STREAMING_ENDPOINTS[resource][0], resource + '.json')
 		self.session.stream = True
 		self.response = self.session.request(method, url, params=params, timeout=STREAMING_SOCKET_TIMEOUT)
 		return self.response
