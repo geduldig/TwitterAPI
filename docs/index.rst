@@ -22,7 +22,7 @@ Contents:
 .. autoclass:: RestIterator
    :members:
 
-.. autoclass:: StreamIterator
+.. autoclass:: StreamingIterator
    :members:
 
 Indices and tables
