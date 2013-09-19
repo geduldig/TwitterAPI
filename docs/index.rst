@@ -16,6 +16,14 @@ Contents:
 .. autoclass:: TwitterAPI
    :members:
 
+.. autoclass:: TwitterResponse
+   :members:
+
+.. autoclass:: RestIterator
+   :members:
+
+.. autoclass:: StreamIterator
+   :members:
 
 Indices and tables
 ==================
