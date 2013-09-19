@@ -14,16 +14,16 @@ Contents:
 .. automodule:: TwitterAPI
 	:members:
 
-.. autoclass:: TwitterAPI.RestIterator
+.. autoclass:: RestIterator
 	:members:
 
-.. autoclass:: TwitterAPI.StreamingIterator
-	:members: __iter__
-
-.. autoclass:: TwitterAPI.TwitterAPI
+.. autoclass:: StreamingIterator
 	:members:
 
-.. autoclass:: TwitterAPI.TwitterResponse
+.. autoclass:: TwitterAPI
+	:members:
+
+.. autoclass:: TwitterResponse
 	:members:
 
 .. autoclass:: TwitterOAuth
