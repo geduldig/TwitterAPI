@@ -11,8 +11,35 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-.. automodule:: TwitterAPI
-	:members:
+.. module:: TwitterAPI.TwitterAPI
+
+Module TwitterAPI
+-----------------
+.. autoclass:: TwitterAPI
+   :members:
+
+.. autoclass:: TwitterResponse
+   :members:
+
+.. autoclass:: RestIterator
+   :members:
+
+.. autoclass:: StreamingIterator
+   :members:
+
+Module TwitterOAuth
+-------------------
+.. module:: TwitterAPI.TwitterOAuth
+
+.. autoclass:: TwitterOAuth
+   :members:
+
+Module TwitterRestPager
+-----------------------
+.. module:: TwitterAPI.TwitterRestPager
+
+.. autoclass:: TwitterRestPager
+   :members:
 
 Indices and tables
 ==================
