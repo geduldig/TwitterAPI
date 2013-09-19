@@ -11,7 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-.. module:: TwitterAPI
+.. module:: TwitterAPI.TwitterAPI
 
 .. autoclass:: TwitterAPI.TwitterAPI
    :members:
