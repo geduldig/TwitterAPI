@@ -52,18 +52,6 @@
 </ul>
 </div>
 <span class="target" id="module-TwitterAPI"></span><dl class="class">
-<dt id="TwitterAPI.RestIterator">
-<em class="property">class </em><tt class="descclassname">TwitterAPI.</tt><tt class="descname">RestIterator</tt><big>(</big><em>response</em><big>)</big><a class="headerlink" href="#TwitterAPI.RestIterator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterator of REST API response data</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="TwitterAPI.StreamingIterator">
-<em class="property">class </em><tt class="descclassname">TwitterAPI.</tt><tt class="descname">StreamingIterator</tt><big>(</big><em>response</em><big>)</big><a class="headerlink" href="#TwitterAPI.StreamingIterator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterator of Streaming API response data</p>
-</dd></dl>
-
-<dl class="class">
 <dt id="TwitterAPI.TwitterAPI">
 <em class="property">class </em><tt class="descclassname">TwitterAPI.</tt><tt class="descname">TwitterAPI</tt><big>(</big><em>consumer_key</em>, <em>consumer_secret</em>, <em>access_token_key</em>, <em>access_token_secret</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI" title="Permalink to this definition">¶</a></dt>
 <dd><p>Access REST API or Streaming API resources.</p>
@@ -82,6 +70,55 @@
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A TwitterResponse object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="TwitterAPI.TwitterOAuth">
+<em class="property">class </em><tt class="descclassname">TwitterAPI.</tt><tt class="descname">TwitterOAuth</tt><big>(</big><em>consumer_key</em>, <em>consumer_secret</em>, <em>access_token_key</em>, <em>access_token_secret</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterOAuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container for Twitter&#8217;s OAuth credentials</p>
+<dl class="classmethod">
+<dt id="TwitterAPI.TwitterOAuth.read_file">
+<em class="property">classmethod </em><tt class="descname">read_file</tt><big>(</big><em>file_name=None</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterOAuth.read_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read OAuth credentials from a text file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> &#8211; A string with the file name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="TwitterAPI.TwitterRestPager">
+<em class="property">class </em><tt class="descclassname">TwitterAPI.</tt><tt class="descname">TwitterRestPager</tt><big>(</big><em>api</em>, <em>resource</em>, <em>params=None</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterRestPager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pagination iterator for REST API resources</p>
+<dl class="method">
+<dt id="TwitterAPI.TwitterRestPager.get_iterator">
+<tt class="descname">get_iterator</tt><big>(</big><em>wait=5</em>, <em>new_tweets=False</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterRestPager.get_iterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets an iterator for the data returned by Twitter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wait</strong> &#8211; An integer number of seconds wait between requests 
+(depending on the resource, appropriate values are 5 or 60 seconds)</li>
+<li><strong>new_tweets</strong> &#8211; A bool determining the search direction 
+(False: old results, True: current results)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A JSON object representing the return value</p>
 </td>
 </tr>
 </tbody>
@@ -153,52 +190,15 @@
 </dd></dl>
 
 <dl class="class">
-<dt id="TwitterAPI.TwitterOAuth">
-<em class="property">class </em><tt class="descclassname">TwitterAPI.</tt><tt class="descname">TwitterOAuth</tt><big>(</big><em>consumer_key</em>, <em>consumer_secret</em>, <em>access_token_key</em>, <em>access_token_secret</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterOAuth" title="Permalink to this definition">¶</a></dt>
-<dd><p>A container for Twitter&#8217;s OAuth credentials</p>
-<dl class="classmethod">
-<dt id="TwitterAPI.TwitterOAuth.read_file">
-<em class="property">classmethod </em><tt class="descname">read_file</tt><big>(</big><em>file_name=None</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterOAuth.read_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read OAuth credentials from a text file</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> &#8211; A string with the file name</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+<dt id="TwitterAPI.RestIterator">
+<em class="property">class </em><tt class="descclassname">TwitterAPI.</tt><tt class="descname">RestIterator</tt><big>(</big><em>response</em><big>)</big><a class="headerlink" href="#TwitterAPI.RestIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterator of REST API response data</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="TwitterAPI.TwitterRestPager">
-<em class="property">class </em><tt class="descclassname">TwitterAPI.</tt><tt class="descname">TwitterRestPager</tt><big>(</big><em>api</em>, <em>resource</em>, <em>params=None</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterRestPager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pagination iterator for REST API resources</p>
-<dl class="method">
-<dt id="TwitterAPI.TwitterRestPager.get_iterator">
-<tt class="descname">get_iterator</tt><big>(</big><em>wait=5</em>, <em>new_tweets=False</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterRestPager.get_iterator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets an iterator for the data returned by Twitter</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>wait</strong> &#8211; An integer number of seconds wait between requests 
-(depending on the resource, appropriate values are 5 or 60 seconds)</li>
-<li><strong>new_tweets</strong> &#8211; A bool determining the search direction 
-(False: old results, True: current results)</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A JSON object representing the return value</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+<dt id="TwitterAPI.StreamingIterator">
+<em class="property">class </em><tt class="descclassname">TwitterAPI.</tt><tt class="descname">StreamingIterator</tt><big>(</big><em>response</em><big>)</big><a class="headerlink" href="#TwitterAPI.StreamingIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterator of Streaming API response data</p>
 </dd></dl>
 
 </div>

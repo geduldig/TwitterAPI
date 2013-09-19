@@ -14,26 +14,6 @@ Contents:
 .. automodule:: TwitterAPI
 	:members:
 
-.. autoclass:: RestIterator
-	:members:
-
-.. autoclass:: StreamingIterator
-	:members:
-
-.. autoclass:: TwitterAPI
-	:members:
-
-.. autoclass:: TwitterResponse
-	:members:
-
-.. autoclass:: TwitterOAuth
-	:members:
-
-.. autoclass:: TwitterRestPager
-	:members:
-
-
-
 Indices and tables
 ==================
 
