@@ -12,7 +12,6 @@ Contents:
    :maxdepth: 2
 
 .. module:: TwitterAPI.TwitterAPI
-	:members:
 
 
 Indices and tables
