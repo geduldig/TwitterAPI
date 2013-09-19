@@ -25,6 +25,11 @@ Contents:
 .. autoclass:: StreamingIterator
    :members:
 
+.. module:: TwitterAPI.TwitterOAuth
+
+.. autoclass:: TwitterOAuth
+   :members:
+
 Indices and tables
 ==================
 
