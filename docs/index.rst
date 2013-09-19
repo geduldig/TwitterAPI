@@ -13,6 +13,8 @@ Contents:
 
 .. module:: TwitterAPI.TwitterAPI
 
+Module TwitterAPI
+-----------------
 .. autoclass:: TwitterAPI
    :members:
 
@@ -25,9 +27,18 @@ Contents:
 .. autoclass:: StreamingIterator
    :members:
 
+Module TwitterOAuth
+-------------------
 .. module:: TwitterAPI.TwitterOAuth
 
 .. autoclass:: TwitterOAuth
+   :members:
+
+Module TwitterRestPager
+-----------------------
+.. module:: TwitterAPI.TwitterRestPager
+
+.. autoclass:: TwitterRestPager
    :members:
 
 Indices and tables
