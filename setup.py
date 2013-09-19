@@ -24,5 +24,5 @@ setup(
     keywords='twitter',
     description='Minimal wrapper for Twitter\'s REST and Streaming APIs',
     long_description=read('README.txt'),
-    install_requires = ['requests', 'requests-oauthlib']
+    install_requires = ['requests', 'requests_oauthlib']
 )
