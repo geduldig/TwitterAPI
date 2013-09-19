@@ -13,6 +13,8 @@ Contents:
 
 .. module:: TwitterAPI.TwitterAPI
 
+.. class:: TwitterAPI
+
 
 Indices and tables
 ==================
