@@ -13,8 +13,7 @@ Contents:
 
 .. module:: TwitterAPI
 
-.. class:: TwitterAPI.TwitterAPI
-.. autoclass::
+.. autoclass:: TwitterAPI.TwitterAPI
    :members:
 
 
