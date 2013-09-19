@@ -1,12 +1,14 @@
 [![Downloads](https://pypip.in/d/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 [![Downloads](https://pypip.in/v/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 
+To users of prior versions, please look carefully at the code usage examples below.  Beginning with version 2.1, the TwitterAPI object no longer holds onto the connection state when calling request().  Instead the connection state is held by the returned object.  From this object you get the response.
+
 TwitterAPI
 ==========
 This python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth.  It works with the latest python versions in both 2.x and 3.x branches.  
 
-Scripting Usage
----------------
+Code Usage
+----------
 *See TwitterAPI/cli.py for a working code example.*
 
 First, authenticate with your application credentials:
@@ -21,16 +23,14 @@ Tweet something:
 
 Get some tweets:
 
-	api.request('search/tweets', {'q':'zzz'})
-	iter = api.get_iterator()
-	for item in iter:
+	r = api.request('search/tweets', {'q':'zzz'})
+	for item in r.get_iterator():
 		print item
 
 Stream tweets from New York City:
 
-	api.request('statuses/filter', {'locations':'-74,40,-73,41'})
-	iter = api.get_iterator()
-	for item in iter:
+	r = api.request('statuses/filter', {'locations':'-74,40,-73,41'})
+	for item in r.get_iterator():
 		print item
 		
 Notice that request() accepts both REST and Streaming API methods, and it takes two arguments: 1) the Twitter method, 2) a dictionary of method parameters.  In the above examples we use the get\_iterator() helper to get each tweet object.  This iterator knows how to iterate both REST and Streaming API results, in addition to error objects.  Alternatively, you have access to the response object which is returned by request().  From the response object you can get the raw response (.text) and the http status code (.status\_code).  See the documentation for the Requests library for more info.

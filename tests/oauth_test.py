@@ -26,7 +26,5 @@ access_token_secret = credentials.get('oauth_token_secret')[0]
 
 # access resource
 api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret)
-api.request('statuses/filter', {'track':'zzz'})
-iter = api.get_iterator()
-for item in iter:
+for item in api.request('statuses/filter', {'track':'zzz'})
 	print(item['text'])

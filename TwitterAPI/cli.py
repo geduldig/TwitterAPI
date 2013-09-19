@@ -68,11 +68,10 @@ if __name__ == '__main__':
 		oauth = TwitterOAuth.read_file(args.oauth)
 
 		api = TwitterAPI(oauth.consumer_key, oauth.consumer_secret, oauth.access_token_key, oauth.access_token_secret)
-		api.request(args.endpoint, params)
-		iter = api.get_iterator()
+		response = api.request(args.endpoint, params)
 		
 		pp = PrettyPrinter()
-		for item in iter:
+		for item in response.get_iterator():
 			if 'message' in item:
 				print('ERROR %s: %s' % (item['code'], item['message']))
 			elif not args.fields:

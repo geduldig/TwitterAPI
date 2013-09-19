@@ -31,7 +31,7 @@ class TwitterOAuth:
 	def read_file(cls, file_name=None):
 		"""Read OAuth credentials from a text file
 		
-		file_name : Name of file containing a key-value pair on each line.
+		:param file_name: A string with the file name
 		"""
 		if file_name is None:
 			path = os.path.dirname(__file__)
