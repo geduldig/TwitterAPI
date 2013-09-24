@@ -1,0 +1,129 @@
+# Vendored files and directories are excluded from language
+# statistics.
+#
+# Lines in this file are Regexps that are matched against the file
+# pathname.
+#
+# Please add additional test coverage to
+# `test/test_blob.rb#test_vendored` if you make any changes.
+
+## Vendor Conventions ##
+
+# Caches
+- cache/
+
+# C deps
+#  https://github.com/joyent/node
+- ^deps/
+- ^tools/
+- (^|/)configure$
+- (^|/)configure.ac$
+- (^|/)config.guess$
+- (^|/)config.sub$
+
+# Node dependencies
+- node_modules/
+
+# Erlang bundles
+- ^rebar$
+
+# Vendored dependencies
+- vendor/
+
+# Debian packaging
+- ^debian/
+
+## Commonly Bundled JavaScript frameworks ##
+
+# jQuery
+- (^|/)jquery([^.]*)(\.min)?\.js$
+- (^|/)jquery\-\d\.\d(\.\d)?(\.min)?\.js$
+
+# jQuery UI
+- (^|/)jquery\-ui(\-\d\.\d+(\.\d+)?)?(\.\w+)?(\.min)?\.(js|css)$
+- (^|/)jquery\.(ui|effects)\.([^.]*)(\.min)?\.(js|css)$
+
+# Prototype
+- (^|/)prototype(.*)\.js$
+- (^|/)effects\.js$
+- (^|/)controls\.js$
+- (^|/)dragdrop\.js$
+
+# MooTools
+- (^|/)mootools([^.]*)\d+\.\d+.\d+([^.]*)\.js$
+
+# Dojo
+- (^|/)dojo\.js$
+
+# MochiKit
+- (^|/)MochiKit\.js$
+
+# YUI
+- (^|/)yahoo-([^.]*)\.js$
+- (^|/)yui([^.]*)\.js$
+
+# WYS editors
+- (^|/)ckeditor\.js$
+- (^|/)tiny_mce([^.]*)\.js$
+- (^|/)tiny_mce/(langs|plugins|themes|utils)
+
+# MathJax
+- (^|/)MathJax/
+
+# SyntaxHighlighter - http://alexgorbatchev.com/
+- (^|/)shBrush([^.]*)\.js$
+- (^|/)shCore\.js$
+- (^|/)shLegacy\.js$
+
+## Python ##
+
+# django
+- (^|/)admin_media/
+
+# Fabric
+- ^fabfile\.py$
+
+# WAF
+- ^waf$
+
+
+## Obj-C ##
+
+# Sparkle
+- (^|/)Sparkle/
+
+## .NET ##
+
+# Visual Studio IntelliSense
+- -vsdoc\.js$
+
+# jQuery validation plugin (MS bundles this with asp.net mvc)
+- (^|/)jquery([^.]*)\.validate(\.unobtrusive)?(\.min)?\.js$
+- (^|/)jquery([^.]*)\.unobtrusive\-ajax(\.min)?\.js$
+
+# Microsoft Ajax
+- (^|/)[Mm]icrosoft([Mm]vc)?([Aa]jax|[Vv]alidation)(\.debug)?\.js$
+
+# NuGet
+- ^[Pp]ackages/
+
+# ExtJS
+- (^|/)extjs/
+
+# Samples folders
+- ^[Ss]amples/
+
+# LICENSE, README, git config files
+- ^COPYING$
+- ^LICENSE$
+- gitattributes$
+- gitignore$
+- gitmodules$
+- ^README$
+- ^readme$
+
+# Test fixtures
+- ^[Tt]est/fixtures/
+
+# .DS_Store's
+- .[Dd][Ss]_[Ss]tore$

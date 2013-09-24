@@ -36,3 +36,5 @@ v2.0.8,  22 Aug 2013 -- Renamed TwitterOauth.py to TwitterOAuth.py.
 v2.0.9,  22 Aug 2013 -- Added flush to cli.py for python3 buffered stdout.
 
 v2.1.0,  16 Sep 2013 -- New class TwitterResponse.  TwitterAPI no longer saves state.
+
+v2.1.1,  23 Sep 2013 -- Added sphinx-generated docs; added tags.
