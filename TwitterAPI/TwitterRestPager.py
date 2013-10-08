@@ -29,8 +29,10 @@ class TwitterRestPager(object):
 		
 		:returns: A JSON object representing the return value
 		"""		
+		elapsed = 0
 		while True:
 			# get one page of results
+			start = time.time()
 			req = self.api.request(self.resource, self.params)
 			iter = req.get_iterator()
 			if new_tweets:
@@ -44,7 +46,9 @@ class TwitterRestPager(object):
 				yield item
 				
 			# sleep before getting another page of results
-			time.sleep(wait)
+			elapsed = time.time() - start
+			pause = wait - elapsed if elapsed < wait else 0;
+			time.sleep(pause)
 			
 			# use the first or last tweet id to limit (depending on the newer/older direction)
 			# the next request
