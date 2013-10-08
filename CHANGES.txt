@@ -46,3 +46,5 @@ v2.1.4,  07 Oct 2013 -- Fix endpoints with params in path.
 v2.1.5,  07 Oct 2013 -- Better timing in TwitterRestPager.
 
 v2.1.6,  07 Oct 2013 -- cli upports UTF-8 printing to console.
+
+v2.1.7,  07 Oct 2013 -- Fix endpoints with params in path.

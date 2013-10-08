@@ -73,7 +73,7 @@ REST_ENDPOINTS = {
 		'friendships/incoming':                    ('GET',),
 		'friendships/lookup':                      ('GET',),
 		'friendships/no_retweets/ids':             ('GET',),
-		'friendships/outgoing.format':             ('GET',),
+		'friendships/outgoing':                    ('GET',),
 		'friendships/show':                        ('GET',),
 		'friendships/update':                      ('POST',),
 
@@ -99,7 +99,7 @@ REST_ENDPOINTS = {
 		'users/report_spam':                       ('POST',),
 		'users/search':                            ('GET',),
 		'users/show':                              ('GET',),
-		'users/suggestions.format':                ('GET',),
+		'users/suggestions':                       ('GET',),
 		'users/suggestions/:SLUG':                 ('GET',),
 		'users/suggestions/:SLUG/members':         ('GET',),
 

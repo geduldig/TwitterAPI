@@ -16,22 +16,36 @@ class TwitterAPI(object):
 				
 	def _prepare_url(self, subdomain, path):
 		return '%s://%s.%s/%s/%s.json' % (PROTOCOL, subdomain, DOMAIN, VERSION, path)
+		
+	def _get_endpoint(self, resource):
+		""" If the resource path contains parameters, substitute for :ID or :SLUG."""
+		if ':' in resource:
+			parts = resource.split('/')
+			parts = [k if k[0] != ':' else ':ID' if k[1:].isdigit() else ':SLUG' for k in parts]
+			endpoint = '/'.join(parts)
+			resource = resource.replace(':', '')
+			return (resource, endpoint)
+		else:
+			return (resource, resource)
 	
 	def request(self, resource, params=None):
 		"""Return a TwitterResponse object."""
 		session = requests.Session() 
 		session.auth = self.auth
 		session.headers = {'User-Agent':USER_AGENT}
-		if resource in STREAMING_ENDPOINTS:
+		resource, endpoint = self._get_endpoint(resource)
+		if endpoint in STREAMING_ENDPOINTS:
 			session.stream = True
 			method = 'GET' if params is None else 'POST'
-			url = self._prepare_url(STREAMING_ENDPOINTS[resource][0], resource)
+			url = self._prepare_url(STREAMING_ENDPOINTS[endpoint][0], resource)
 			timeout = STREAMING_SOCKET_TIMEOUT
-		else:
+		elif endpoint in REST_ENDPOINTS:
 			session.stream = False
-			method = REST_ENDPOINTS[resource][0]
+			method = REST_ENDPOINTS[endpoint][0]
 			url = self._prepare_url(REST_SUBDOMAIN, resource)
 			timeout = REST_SOCKET_TIMEOUT
+		else:
+			raise Exception('"%s" is not valid endpoint' % resource)
 		r = session.request(method, url, params=params, timeout=timeout)
 		return TwitterResponse(r, session.stream)
 
