@@ -23,15 +23,15 @@ class TwitterAPI(object):
 		session.auth = self.auth
 		session.headers = {'User-Agent':USER_AGENT}
 		if resource in STREAMING_ENDPOINTS:
-			session.stream = False
-			method = REST_ENDPOINTS[resource][0]
-			url = self._prepare_url(REST_SUBDOMAIN, resource)
-			timeout = REST_SOCKET_TIMEOUT
-		else:
 			session.stream = True
 			method = 'GET' if params is None else 'POST'
 			url = self._prepare_url(STREAMING_ENDPOINTS[resource][0], resource)
 			timeout = STREAMING_SOCKET_TIMEOUT
+		else:
+			session.stream = False
+			method = REST_ENDPOINTS[resource][0]
+			url = self._prepare_url(REST_SUBDOMAIN, resource)
+			timeout = REST_SOCKET_TIMEOUT
 		r = session.request(method, url, params=params, timeout=timeout)
 		return TwitterResponse(r, session.stream)
 
