@@ -42,14 +42,14 @@ REST_SOCKET_TIMEOUT = 5
 REST_ENDPOINTS = {
 		# resource:                                ( method )
 
-		'statuses/destroy':                        ('POST',),
+		'statuses/destroy/:ID':                    ('POST',),
 		'statuses/home_timeline':                  ('GET',),
 		'statuses/mentions_timeline':              ('GET',),
 		'statuses/oembed':                         ('GET',),
 		'statuses/retweets_of_me':                 ('GET',),
-		'statuses/retweet':                        ('POST',),
-		'statuses/retweets':                       ('GET',),
-		'statuses/show':                           ('GET',),
+		'statuses/retweet/:ID':                    ('POST',),
+		'statuses/retweets/:ID':                   ('GET',),
+		'statuses/show/:ID':                       ('GET',),
 		'statuses/user_timeline':                  ('GET',),
 		'statuses/update':                         ('POST',),
 		'statuses/update_with_media':              ('POST',),
@@ -100,8 +100,8 @@ REST_ENDPOINTS = {
 		'users/search':                            ('GET',),
 		'users/show':                              ('GET',),
 		'users/suggestions.format':                ('GET',),
-		'users/suggestions':                       ('GET',),
-		'users/suggestions/{SLUG}/members':        ('GET',), # replace SLUG with a category name
+		'users/suggestions/:SLUG':                 ('GET',),
+		'users/suggestions/:SLUG/members':         ('GET',),
 
 		'favorites/create':                        ('POST',),
 		'favorites/destroy':                       ('POST',),
@@ -127,11 +127,11 @@ REST_ENDPOINTS = {
 		'lists/update':                            ('POST',),
 
 		'saved_searches/create':                   ('POST',),
-		'saved_searches/destroy':                  ('POST',),
+		'saved_searches/destroy/:ID':              ('POST',),
 		'saved_searches/list':                     ('GET',),
-		'saved_searches/show':                     ('GET',),
+		'saved_searches/show/:ID':                 ('GET',),
 
-		'geo/id':                                  ('GET',),
+		'geo/id/:PLACE_ID':                        ('GET',),
 		'geo/place':                               ('POST',),
 		'geo/reverse_geocode':                     ('GET',),
 		'geo/search':                              ('GET',),
