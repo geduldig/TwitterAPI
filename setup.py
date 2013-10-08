@@ -1,5 +1,5 @@
 from distutils.core import setup
-import TwitterAPI
+from TwitterAPI import __version__
 import io
 
 def read(*filenames, **kwargs):
@@ -13,7 +13,7 @@ def read(*filenames, **kwargs):
     
 setup(
     name='TwitterAPI',
-    version=TwitterAPI.__version__,
+    version=__version__,
     author='Jonas Geduldig',
     author_email='boxnumber03@gmail.com',
     packages=['TwitterAPI'],
