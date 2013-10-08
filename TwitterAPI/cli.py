@@ -26,7 +26,9 @@ __date__ = "June 7, 2013"
 __license__ = "MIT"
 
 import argparse
+import codecs
 from pprint import PrettyPrinter
+import sys
 from .TwitterOAuth import TwitterOAuth
 from .TwitterAPI import TwitterAPI
 
@@ -56,6 +58,14 @@ def to_dict(param_list):
 
 
 if __name__ == '__main__':
+	# print UTF-8 to the console
+	try:
+		# python 3
+		sys.stdout = codecs.getwriter('utf8')(sys.stdout.buffer)
+	except:
+		# python 2
+		sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+
 	parser = argparse.ArgumentParser(description='Request any Twitter Streaming or REST API endpoint')
 	parser.add_argument('-oauth', metavar='FILENAME', type=str, help='file containing OAuth credentials')
 	parser.add_argument('-endpoint', metavar='ENDPOINT', type=str, help='Twitter endpoint', required=True)

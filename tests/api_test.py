@@ -1,5 +1,14 @@
-from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRestPager
+import codecs
 from datetime import datetime
+import sys
+from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRestPager
+
+try:
+	# python 3
+	sys.stdout = codecs.getwriter('utf8')(sys.stdout.buffer)
+except:
+	# python 2
+	sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
 
 # SAVE YOUR APPLICATION CREDENTIALS IN TwitterAPI/credentials.txt.
@@ -11,11 +20,11 @@ TEST_NUMBER = 0
 
 
 try:
-        if TEST_NUMBER == 0:
+	if TEST_NUMBER == 0:
 
-                # VERIFY YOUR CREDS
-                r = api.request('account/verify_credentials')
-                print(r.text)
+		# VERIFY YOUR CREDS
+		r = api.request('account/verify_credentials')
+		print(r.text)
 
 	if TEST_NUMBER == 1:
 	
