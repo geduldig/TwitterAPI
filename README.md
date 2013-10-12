@@ -1,7 +1,7 @@
 [![Downloads](https://pypip.in/d/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 [![Downloads](https://pypip.in/v/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 
-To users of prior versions, please look carefully at the code usage examples below.  Beginning with version 2.1, the TwitterAPI object no longer holds onto the connection state when calling request().  Instead the connection state is held by the returned object.  From this object you get the response.
+To users of prior versions: please look carefully at the code usage examples below.  Beginning with version 2.1, the TwitterAPI object no longer holds onto the connection state when calling request().  Instead the connection state is held by the returned object.  From this object you get the response.
 
 TwitterAPI
 ==========
