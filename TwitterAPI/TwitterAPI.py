@@ -18,10 +18,11 @@ class TwitterAPI(object):
 		return '%s://%s.%s/%s/%s.json' % (PROTOCOL, subdomain, DOMAIN, VERSION, path)
 		
 	def _get_endpoint(self, resource):
-		""" If the resource path contains parameters, substitute for :ID or :SLUG."""
+		""" Substitute parameters in the resource path with :PARAM."""
 		if ':' in resource:
 			parts = resource.split('/')
-			parts = [k if k[0] != ':' else ':ID' if k[1:].isdigit() else ':SLUG' for k in parts]
+			# embedded parameters start with ':'
+			parts = [k if k[0] != ':' else ':PARAM' for k in parts]
 			endpoint = '/'.join(parts)
 			resource = resource.replace(':', '')
 			return (resource, endpoint)

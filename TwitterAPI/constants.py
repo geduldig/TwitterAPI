@@ -42,14 +42,14 @@ REST_SOCKET_TIMEOUT = 5
 REST_ENDPOINTS = {
 		# resource:                                ( method )
 
-		'statuses/destroy/:ID':                    ('POST',),
+		'statuses/destroy/:PARAM':                 ('POST',), # ID
 		'statuses/home_timeline':                  ('GET',),
 		'statuses/mentions_timeline':              ('GET',),
 		'statuses/oembed':                         ('GET',),
 		'statuses/retweets_of_me':                 ('GET',),
-		'statuses/retweet/:ID':                    ('POST',),
-		'statuses/retweets/:ID':                   ('GET',),
-		'statuses/show/:ID':                       ('GET',),
+		'statuses/retweet/:PARAM':                 ('POST',), # ID
+		'statuses/retweets/:PARAM':                ('GET',),  # ID
+		'statuses/show/:PARAM':                    ('GET',),  # ID
 		'statuses/user_timeline':                  ('GET',),
 		'statuses/update':                         ('POST',),
 		'statuses/update_with_media':              ('POST',),
@@ -100,8 +100,8 @@ REST_ENDPOINTS = {
 		'users/search':                            ('GET',),
 		'users/show':                              ('GET',),
 		'users/suggestions':                       ('GET',),
-		'users/suggestions/:SLUG':                 ('GET',),
-		'users/suggestions/:SLUG/members':         ('GET',),
+		'users/suggestions/:PARAM':                ('GET',),  # SLUG
+		'users/suggestions/:PARAM/members':        ('GET',),  # SLUG
 
 		'favorites/create':                        ('POST',),
 		'favorites/destroy':                       ('POST',),
@@ -127,11 +127,11 @@ REST_ENDPOINTS = {
 		'lists/update':                            ('POST',),
 
 		'saved_searches/create':                   ('POST',),
-		'saved_searches/destroy/:ID':              ('POST',),
+		'saved_searches/destroy/:PARAM':           ('POST',), # ID
 		'saved_searches/list':                     ('GET',),
-		'saved_searches/show/:ID':                 ('GET',),
+		'saved_searches/show/:PARAM':              ('GET',),  # ID
 
-		'geo/id/:PLACE_ID':                        ('GET',),
+		'geo/id/:PARAM':                           ('GET',),  # PLACE_ID
 		'geo/place':                               ('POST',),
 		'geo/reverse_geocode':                     ('GET',),
 		'geo/search':                              ('GET',),
