@@ -23,7 +23,7 @@ VERSION = '1.1'
 
 USER_AGENT = 'python-TwitterAPI.cli.py'
 
-STREAMING_SOCKET_TIMEOUT = 90 # 90 seconds per Twitter's recommendation
+TOKEN_ENDPOINT = 'oauth2/token'
 
 STREAMING_ENDPOINTS = {
 		# resource:                                ( subdomain )
