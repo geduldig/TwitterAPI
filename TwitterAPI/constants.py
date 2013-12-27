@@ -25,6 +25,8 @@ USER_AGENT = 'python-TwitterAPI.cli.py'
 
 TOKEN_ENDPOINT = 'oauth2/token'
 
+STREAMING_SOCKET_TIMEOUT = 90  # 90 seconds per Twitter's recommendation
+
 STREAMING_ENDPOINTS = {
 		# resource:                                ( subdomain )
 
@@ -42,12 +44,12 @@ REST_SOCKET_TIMEOUT = 5
 REST_ENDPOINTS = {
 		# resource:                                ( method )
 
-		'statuses/destroy/:PARAM':                 ('POST',), # ID
+		'statuses/destroy/:PARAM':                 ('POST',),  # ID
 		'statuses/home_timeline':                  ('GET',),
 		'statuses/mentions_timeline':              ('GET',),
 		'statuses/oembed':                         ('GET',),
 		'statuses/retweets_of_me':                 ('GET',),
-		'statuses/retweet/:PARAM':                 ('POST',), # ID
+		'statuses/retweet/:PARAM':                 ('POST',),  # ID
 		'statuses/retweets/:PARAM':                ('GET',),  # ID
 		'statuses/show/:PARAM':                    ('GET',),  # ID
 		'statuses/user_timeline':                  ('GET',),
@@ -127,7 +129,7 @@ REST_ENDPOINTS = {
 		'lists/update':                            ('POST',),
 
 		'saved_searches/create':                   ('POST',),
-		'saved_searches/destroy/:PARAM':           ('POST',), # ID
+		'saved_searches/destroy/:PARAM':           ('POST',),  # ID
 		'saved_searches/list':                     ('GET',),
 		'saved_searches/show/:PARAM':              ('GET',),  # ID
 
