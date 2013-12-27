@@ -14,7 +14,7 @@ except:
 
 
 __all__ = [
-	'TwitterAPI', 
-	'TwitterOAuth', 
+	'TwitterAPI',
+	'TwitterOAuth',
 	'TwitterRestPager'
 ]

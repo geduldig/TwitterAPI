@@ -13,7 +13,7 @@ from BearerAuth import BearerAuth
 class TwitterAPI(object):  
   """Access REST API or Streaming API resources."""
   
-  def __init__(self, auth_type="oAuth1", consumer_key=None, consumer_secret=None, access_token_key=None, access_token_secret=None):
+  def __init__(self, consumer_key=None, consumer_secret=None, access_token_key=None, access_token_secret=None, auth_type="oAuth1"):
     """Initialize with your Twitter application credentials"""
     if auth_type is "oAuth1":
       if not all([consumer_key, consumer_secret, access_token_key, access_token_secret]):
