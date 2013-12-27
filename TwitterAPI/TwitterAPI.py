@@ -3,6 +3,7 @@ __date__ = "June 7, 2013"
 __license__ = "MIT"
 
 from .constants import *
+from BearerAuth import BearerAuth
 import json
 import requests
 from requests_oauthlib import OAuth1
