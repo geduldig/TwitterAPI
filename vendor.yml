@@ -10,7 +10,8 @@
 ## Vendor Conventions ##
 
 # Sphynx documentation
-- docs/
+- ^docs/_build/html/*\.(js|css|html)$
+- ^docs/_build/html/_static/*\.(js|css|html)$
 
 # Caches
 - cache/
