@@ -9,13 +9,13 @@
 	
 	Examples:
 	
-	> python cli.py -endpoint search/tweets -parameters q=zzz 
-	> python cli.py -endpoint statuses/filter -parameters track=zzz
+	> python -u -m TwitterAPI.cli -endpoint search/tweets -parameters q=zzz 
+	> python -u -m TwitterAPI.cli -endpoint statuses/filter -parameters track=zzz
 		
 	These examples print the raw json response.  You can also print one or more fields
 	from the response, for instance the tweet 'text' field, like this:
 	
-	> python cli.py -endpoint statuses/filter -parameters track=zzz -fields text
+	> python -u -m TwitterAPI.cli -endpoint statuses/filter -parameters track=zzz -fields text
 		
 	Twitter's endpoints are documented at this site:
 		https://dev.twitter.com/docs/api/1.1

@@ -1,11 +1,9 @@
 [![Downloads](https://pypip.in/d/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 [![Downloads](https://pypip.in/v/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 
-To users of prior versions: please look carefully at the code usage examples below.  Beginning with version 2.1, the TwitterAPI object no longer holds onto the connection state when calling request().  Instead the connection state is held by the returned object.  From this object you get the response.
-
 TwitterAPI
 ==========
-This python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth.  It works with the latest python versions in both 2.x and 3.x branches.  
+This python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest python versions in both 2.x and 3.x branches.  
 
 Code Usage
 ----------
@@ -39,21 +37,21 @@ Command-line Usage (cli.py)
 ---------------------------
 For help:
 
-	> python -m TwitterAPI.cli -h 
+	> python -u -m TwitterAPI.cli -h 
 
 You will need to supply your Twitter application OAuth credentials.  The easiest option is to enter them in TwitterAPI/credentials.txt.  It is the default place where cli.py will look for them.  You also can supply an alternative credentials file as a command-line argument.
 
 Call any REST API endpoint:
 
-	> python -m TwitterAPI.cli -endpoint statuses/update -parameters status='my tweet'
+	> python -u -m TwitterAPI.cli -endpoint statuses/update -parameters status='my tweet'
 
 Another example (here using abbreviated option names) that parses selected output fields:
 
-	> python -m TwitterAPI.cli -e search/tweets -p q=zzz count=10 -field screen_name text 
+	> python -u -m TwitterAPI.cli -e search/tweets -p q=zzz count=10 -field screen_name text 
 
 Calling any Streaming API endpoint works too:
 
-	> python -m TwitterAPI.cli -e statuses/filter -p track=zzz -f screen_name text
+	> python -u -m TwitterAPI.cli -e statuses/filter -p track=zzz -f screen_name text
 
 After the -field option you must supply one or more key names from the raw JSON response object.  This will print values only for these keys.  When the -field option is omitted cli.py prints the entire JSON response object.  
 
@@ -64,3 +62,4 @@ Installation
 Contributors
 ------------
 * Jonas Geduldig
+* Andrea Biancini

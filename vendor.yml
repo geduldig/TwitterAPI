@@ -9,6 +9,9 @@
 
 ## Vendor Conventions ##
 
+# Sphynx documentation
+- docs/
+
 # Caches
 - cache/
 
