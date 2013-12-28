@@ -21,7 +21,7 @@ DOMAIN = 'twitter.com'
 
 VERSION = '1.1'
 
-USER_AGENT = 'python-TwitterAPI.cli.py'
+USER_AGENT = 'python-TwitterAPI'
 
 STREAMING_SOCKET_TIMEOUT = 90  # 90 seconds per Twitter's recommendation
 

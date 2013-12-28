@@ -2,6 +2,7 @@
 CHANGES.txt
 README.txt
 setup.py
+TwitterAPI/BearerAuth.py
 TwitterAPI/TwitterAPI.py
 TwitterAPI/TwitterOAuth.py
 TwitterAPI/TwitterRestPager.py
