@@ -21,7 +21,7 @@ class TwitterAPI(object):
 		elif auth_type is "oAuth2":
 			if not all([consumer_key, consumer_secret]):
 				raise Exception("Missing authentication parameter.")
-			token_url = '%s://%s.%s/%s' % (PROTOCOL, REST_SUBDOMAIN, DOMAIN, TOKEN_ENDPOINT)
+			token_url = '%s://%s.%s/%s' % (PROTOCOL, REST_SUBDOMAIN, DOMAIN, OAUTH2_TOKEN_ENDPOINT)
 			self.auth = BearerAuth(token_url, consumer_key, consumer_secret)
 				
 	def _prepare_url(self, subdomain, path):

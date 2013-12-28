@@ -39,7 +39,7 @@ REST_SUBDOMAIN = 'api'
 
 REST_SOCKET_TIMEOUT = 5
 
-TOKEN_ENDPOINT = 'oauth2/token'
+OAUTH2_TOKEN_ENDPOINT = 'oauth2/token'
 
 REST_ENDPOINTS = {
 		# resource:                                ( method )
@@ -142,11 +142,6 @@ REST_ENDPOINTS = {
 		'trends/available':                        ('GET',),
 		'trends/closest':                          ('GET',),
 		'trends/place':                            ('GET',),
-
-		'oauth/access_token':                      ('POST',),
-		'oauth/authenticate':                      ('GET',),
-		'oauth/authorize':                         ('GET',),
-		'oauth/request_token':                     ('POST',),
 
 		'help/configuration':                      ('GET',),
 		'help/languages':                          ('GET',),
