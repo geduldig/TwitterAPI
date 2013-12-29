@@ -41,6 +41,13 @@ Module TwitterRestPager
 .. autoclass:: TwitterRestPager
    :members:
 
+Module BearerAuth
+-----------------
+.. module:: TwitterAPI.BearerAuth
+
+.. autoclass:: BearerAuth
+   :members:
+
 Indices and tables
 ==================
 
