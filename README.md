@@ -58,6 +58,10 @@ After the -field option you must supply one or more key names from the raw JSON 
 Installation
 ------------
 	> pip install TwitterAPI
+
+Documentation
+-------------
+* [Modules](http://geduldig.github.com/TwitterAPI)
 	
 Contributors
 ------------
