@@ -1,4 +1,4 @@
-twitterapi.github.io
-====================
+http://geduldig.github.com/TwitterAPI
+=====================================
 
 TwitterAPI documentation
