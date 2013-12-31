@@ -1,5 +1,5 @@
 import base64
-import constants
+from .constants import USER_AGENT
 import requests
 
 
@@ -16,7 +16,7 @@ class BearerAuth(requests.auth.AuthBase):
 		b64_bearer_token_creds = base64.b64encode(self._consumer_key + ':' + self._consumer_secret)
 		params = {'grant_type':'client_credentials'}
 		headers = {}
-		headers['User-Agent'] = constants.USER_AGENT
+		headers['User-Agent'] = USER_AGENT
 		headers['Authorization'] = 'Basic ' + b64_bearer_token_creds
 		headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 		try:

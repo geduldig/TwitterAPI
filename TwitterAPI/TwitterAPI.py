@@ -2,7 +2,7 @@ __author__ = "Jonas Geduldig"
 __date__ = "June 7, 2013"
 __license__ = "MIT"
 
-from BearerAuth import BearerAuth
+from .BearerAuth import BearerAuth
 from .constants import *
 import json
 import requests
