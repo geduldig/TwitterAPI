@@ -1,0 +1,68 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module TwitterAPI.cli</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="TwitterAPI.html"><font color="#ffffff">TwitterAPI</font></a>.cli</strong></big></big> (June 7, 2013)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Library/Python/2.7/site-packages/TwitterAPI/cli.py">/Library/Python/2.7/site-packages/TwitterAPI/cli.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;command&nbsp;line&nbsp;script&nbsp;can&nbsp;be&nbsp;run&nbsp;with&nbsp;any&nbsp;Twitter&nbsp;endpoint.&nbsp;&nbsp;The&nbsp;json-formatted<br>
+response&nbsp;is&nbsp;printed&nbsp;to&nbsp;the&nbsp;console.&nbsp;&nbsp;The&nbsp;script&nbsp;works&nbsp;with&nbsp;both&nbsp;Streaming&nbsp;API&nbsp;and<br>
+REST&nbsp;API&nbsp;endpoints.<br>
+&nbsp;<br>
+IMPORTANT:&nbsp;Before&nbsp;using&nbsp;this&nbsp;script,&nbsp;you&nbsp;must&nbsp;enter&nbsp;your&nbsp;Twitter&nbsp;application's&nbsp;OAuth&nbsp;<br>
+credentials&nbsp;in&nbsp;TwitterAPI/credentials.txt.&nbsp;&nbsp;Log&nbsp;into&nbsp;to&nbsp;dev.twitter.com&nbsp;to&nbsp;create&nbsp;<br>
+your&nbsp;application.<br>
+&nbsp;<br>
+Examples:<br>
+&nbsp;<br>
+&gt;&nbsp;python&nbsp;-u&nbsp;-m&nbsp;TwitterAPI.cli&nbsp;-endpoint&nbsp;search/tweets&nbsp;-parameters&nbsp;q=zzz&nbsp;<br>
+&gt;&nbsp;python&nbsp;-u&nbsp;-m&nbsp;TwitterAPI.cli&nbsp;-endpoint&nbsp;statuses/filter&nbsp;-parameters&nbsp;track=zzz<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+These&nbsp;examples&nbsp;print&nbsp;the&nbsp;raw&nbsp;json&nbsp;response.&nbsp;&nbsp;You&nbsp;can&nbsp;also&nbsp;print&nbsp;one&nbsp;or&nbsp;more&nbsp;fields<br>
+from&nbsp;the&nbsp;response,&nbsp;for&nbsp;instance&nbsp;the&nbsp;tweet&nbsp;'text'&nbsp;field,&nbsp;like&nbsp;this:<br>
+&nbsp;<br>
+&gt;&nbsp;python&nbsp;-u&nbsp;-m&nbsp;TwitterAPI.cli&nbsp;-endpoint&nbsp;statuses/filter&nbsp;-parameters&nbsp;track=zzz&nbsp;-fields&nbsp;text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Twitter's&nbsp;endpoints&nbsp;are&nbsp;documented&nbsp;at&nbsp;this&nbsp;site:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://dev.twitter.com/docs/api/1.1</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="argparse.html">argparse</a><br>
+</td><td width="25%" valign=top><a href="codecs.html">codecs</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-search"><strong>search</strong></a>(name, obj)</dt><dd><tt>Breadth-first&nbsp;search&nbsp;for&nbsp;name&nbsp;in&nbsp;the&nbsp;JSON&nbsp;response&nbsp;and&nbsp;return&nbsp;value.</tt></dd></dl>
+ <dl><dt><a name="-to_dict"><strong>to_dict</strong></a>(param_list)</dt><dd><tt>Convert&nbsp;a&nbsp;list&nbsp;of&nbsp;key=value&nbsp;to&nbsp;dict[key]=value</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__author__</strong> = 'Jonas Geduldig'<br>
+<strong>__date__</strong> = 'June 7, 2013'<br>
+<strong>__license__</strong> = 'MIT'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Jonas&nbsp;Geduldig</td></tr></table>
+</body></html>

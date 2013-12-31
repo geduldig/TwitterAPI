@@ -1,0 +1,39 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: class TwitterRestPager</title>
+</head><body bgcolor="#f0f0f8">
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><strong>TwitterAPI.TwitterRestPager</strong> = <a name="TwitterAPI.TwitterRestPager">class TwitterRestPager</a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Pagination&nbsp;iterator&nbsp;for&nbsp;REST&nbsp;API&nbsp;resources<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="TwitterRestPager-__init__"><strong>__init__</strong></a>(self, api, resource, params<font color="#909090">=None</font>)</dt><dd><tt>Initialize&nbsp;with&nbsp;an&nbsp;authenticated&nbsp;instance&nbsp;of&nbsp;TwitterAPI<br>
+&nbsp;<br>
+:param&nbsp;api:&nbsp;A&nbsp;TwitterAPI&nbsp;object&nbsp;<br>
+:param&nbsp;resource:&nbsp;A&nbsp;string&nbsp;with&nbsp;the&nbsp;resource&nbsp;path&nbsp;(ex.&nbsp;search/tweets)<br>
+:param&nbsp;params:&nbsp;A&nbsp;dict&nbsp;of&nbsp;resource&nbsp;parameters</tt></dd></dl>
+
+<dl><dt><a name="TwitterRestPager-get_iterator"><strong>get_iterator</strong></a>(self, wait<font color="#909090">=5</font>, new_tweets<font color="#909090">=False</font>)</dt><dd><tt>Gets&nbsp;an&nbsp;iterator&nbsp;for&nbsp;the&nbsp;data&nbsp;returned&nbsp;by&nbsp;Twitter<br>
+&nbsp;<br>
+:param&nbsp;wait:&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;seconds&nbsp;wait&nbsp;between&nbsp;requests&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(depending&nbsp;on&nbsp;the&nbsp;resource,&nbsp;appropriate&nbsp;values&nbsp;are&nbsp;5&nbsp;or&nbsp;60&nbsp;seconds)<br>
+:param&nbsp;new_tweets:&nbsp;A&nbsp;bool&nbsp;determining&nbsp;the&nbsp;search&nbsp;direction&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(False:&nbsp;old&nbsp;results,&nbsp;True:&nbsp;current&nbsp;results)<br>
+&nbsp;<br>
+:returns:&nbsp;A&nbsp;JSON&nbsp;object&nbsp;representing&nbsp;the&nbsp;return&nbsp;value</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table>
+</body></html>
