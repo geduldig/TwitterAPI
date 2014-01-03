@@ -1,4 +1,4 @@
 TwitterAPI Project Website
 ==========================
 
-https://geduldig.github.io/TwitterAPI
+http://geduldig.github.io/TwitterAPI
