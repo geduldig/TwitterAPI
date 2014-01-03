@@ -1,0 +1,44 @@
+TwitterAPI package
+==================
+
+Submodules
+----------
+
+.. automodule:: TwitterAPI.BearerAuth
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: TwitterAPI.TwitterAPI
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: TwitterAPI.TwitterOAuth
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: TwitterAPI.TwitterRestPager
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: TwitterAPI.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: TwitterAPI.constants
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: TwitterAPI
+    :members:
+    :undoc-members:
+    :show-inheritance:

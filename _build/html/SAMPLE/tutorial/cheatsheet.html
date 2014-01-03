@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sphinx cheat sheet &mdash; TwitterAPI 2.1.8 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.1.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="TwitterAPI 2.1.8 documentation" href="../../index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../index.html"><img src="../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">home</a>|&nbsp;</li>
+        <li><a href="../../search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Sphinx cheat sheet</a><ul>
+<li><a class="reference internal" href="#formatting-text">Formatting text</a></li>
+<li><a class="reference internal" href="#making-a-list">Making a list</a><ul>
+<li><a class="reference internal" href="#bullet-points">Bullet points</a></li>
+<li><a class="reference internal" href="#enumerated-points">Enumerated points</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#making-a-table">Making a table</a></li>
+<li><a class="reference internal" href="#making-links">Making links</a></li>
+<li><a class="reference internal" href="#this-file">This file</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/SAMPLE/tutorial/cheatsheet.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sphinx-cheat-sheet">
+<span id="cheat-sheet"></span><h1>Sphinx cheat sheet<a class="headerlink" href="#sphinx-cheat-sheet" title="Permalink to this headline">¶</a></h1>
+<p>Here is a quick and dirty cheat sheet for some common stuff you want
+to do in sphinx and ReST.  You can see the literal source for this
+file at <em class="xref std std-ref">cheatsheet
+-literal</em>.</p>
+<div class="section" id="formatting-text">
+<span id="id1"></span><h2>Formatting text<a class="headerlink" href="#formatting-text" title="Permalink to this headline">¶</a></h2>
+<p>You use inline markup to make text <em>italics</em>, <strong>bold</strong>, or <tt class="docutils literal"><span class="pre">monotype</span></tt>.</p>
+<p>You can represent code blocks fairly easily:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or literally include code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Ellipse</span>
+
+<span class="n">delta</span> <span class="o">=</span> <span class="mf">45.0</span> <span class="c"># degrees</span>
+
+<span class="n">angles</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="o">+</span><span class="n">delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+<span class="n">ells</span> <span class="o">=</span> <span class="p">[</span><span class="n">Ellipse</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">angles</span><span class="p">]</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ells</span><span class="p">:</span>
+    <span class="n">e</span><span class="o">.</span><span class="n">set_clip_box</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span>
+    <span class="n">e</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-a-list">
+<span id="id2"></span><h2>Making a list<a class="headerlink" href="#making-a-list" title="Permalink to this headline">¶</a></h2>
+<p>It is easy to make lists in rest</p>
+<div class="section" id="bullet-points">
+<h3>Bullet points<a class="headerlink" href="#bullet-points" title="Permalink to this headline">¶</a></h3>
+<p>This is a subsection making bullet points</p>
+<ul class="simple">
+<li>point A</li>
+<li>point B</li>
+<li>point C</li>
+</ul>
+</div>
+<div class="section" id="enumerated-points">
+<h3>Enumerated points<a class="headerlink" href="#enumerated-points" title="Permalink to this headline">¶</a></h3>
+<p>This is a subsection making numbered points</p>
+<ol class="arabic simple">
+<li>point A</li>
+<li>point B</li>
+<li>point C</li>
+</ol>
+</div>
+</div>
+<div class="section" id="making-a-table">
+<span id="id3"></span><h2>Making a table<a class="headerlink" href="#making-a-table" title="Permalink to this headline">¶</a></h2>
+<p>This shows you how to make a table &#8211; if you only want to make a list see <a class="reference internal" href="#making-a-list"><em>Making a list</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="60%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Age</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>John D Hunter</td>
+<td>40</td>
+</tr>
+<tr class="row-odd"><td>Cast of Thousands</td>
+<td>41</td>
+</tr>
+<tr class="row-even"><td>And Still More</td>
+<td>42</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="making-links">
+<span id="id4"></span><h2>Making links<a class="headerlink" href="#making-links" title="Permalink to this headline">¶</a></h2>
+<p>It is easy to make a link to <a class="reference external" href="http://yahoo.com">yahoo</a> or to some
+section inside this document (see <a class="reference internal" href="#making-a-table"><em>Making a table</em></a>) or another
+document.</p>
+<p>You can also reference classes, modules, functions, etc that are
+documented using the sphinx <a class="reference external" href="http://sphinx.pocoo.org/ext/autodoc.html">autodoc</a> facilites.  For example,
+see the module <tt class="xref py py-mod docutils literal"><span class="pre">matplotlib.backend_bases</span></tt> documentation, or the
+class <tt class="xref py py-class docutils literal"><span class="pre">LocationEvent</span></tt>, or the method
+<tt class="xref py py-meth docutils literal"><span class="pre">mpl_connect()</span></tt>.</p>
+</div>
+<div class="section" id="this-file">
+<span id="cheatsheet-literal"></span><h2>This file<a class="headerlink" href="#this-file" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>.. _cheat-sheet:
+
+******************
+Sphinx cheat sheet
+******************
+
+Here is a quick and dirty cheat sheet for some common stuff you want
+to do in sphinx and ReST.  You can see the literal source for this
+file at :ref:`cheatsheet
+-literal`.
+   
+
+.. _formatting-text:
+
+Formatting text
+===============
+
+You use inline markup to make text *italics*, **bold**, or ``monotype``.
+
+You can represent code blocks fairly easily::
+
+   import numpy as np
+   x = np.random.rand(12)
+
+Or literally include code:
+
+.. literalinclude:: pyplots/ellipses.py
+
+.. _making-a-list:
+
+Making a list
+=============
+
+It is easy to make lists in rest
+
+Bullet points
+-------------
+
+This is a subsection making bullet points
+
+* point A
+
+* point B
+
+* point C
+
+
+Enumerated points
+------------------
+
+This is a subsection making numbered points
+
+#. point A
+
+#. point B
+
+#. point C
+
+
+.. _making-a-table:
+
+Making a table
+==============
+
+This shows you how to make a table -- if you only want to make a list see :ref:`making-a-list`.
+
+==================   ============
+Name                 Age
+==================   ============
+John D Hunter        40
+Cast of Thousands    41
+And Still More       42
+==================   ============
+
+.. _making-links:
+
+Making links
+============
+
+It is easy to make a link to `yahoo &lt;http://yahoo.com&gt;`_ or to some
+section inside this document (see :ref:`making-a-table`) or another
+document.
+
+You can also reference classes, modules, functions, etc that are
+documented using the sphinx `autodoc
+&lt;http://sphinx.pocoo.org/ext/autodoc.html&gt;`_ facilites.  For example,
+see the module :mod:`matplotlib.backend_bases` documentation, or the
+class :class:`~matplotlib.backend_bases.LocationEvent`, or the method
+:meth:`~matplotlib.backend_bases.FigureCanvasBase.mpl_connect`.
+
+
+
+.. _cheatsheet-literal:
+
+This file
+=========
+
+.. literalinclude:: cheatsheet.rst
+</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">home</a>|&nbsp;</li>
+        <li><a href="../../search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jonas Geduldig.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>
