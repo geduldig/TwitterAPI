@@ -6,28 +6,29 @@ import time
 	
 
 class TwitterRestPager(object):
-	"""Pagination iterator for REST API resources"""
-	
+	"""Continuous (stream-like) pagination of response from Twitter REST API resource.
+
+	:param api: An authenticated TwitterAPI object 
+	:param resource: String with the resource path (ex. search/tweets)
+	:param params: Dictionary of resource parameters
+	"""		
+
 	def __init__(self, api, resource, params=None):
-		"""Initialize with an authenticated instance of TwitterAPI
-		
-		:param api: A TwitterAPI object 
-		:param resource: A string with the resource path (ex. search/tweets)
-		:param params: A dict of resource parameters
-		"""		
 		self.api = api
 		self.resource = resource
 		self.params = params
 
 	def get_iterator(self, wait=5, new_tweets=False):
-		"""Gets an iterator for the data returned by Twitter
+		"""Iterate response from Twitter REST API resource.  Resource is called 
+		in a loop to retrieve consecutive pages of results.
 		
-		:param wait: An integer number of seconds wait between requests 
-		             (depending on the resource, appropriate values are 5 or 60 seconds)
-		:param new_tweets: A bool determining the search direction 
-		                   (False: old results, True: current results)
+		:param wait: Integer number (default=5) of seconds wait between requests. 
+		             Depending on the resource, appropriate values are 5 or 60 seconds.
+		:param new_tweets: Boolean determining the search direction 
+		                   False (default) retrieves old results.
+		                   True retrieves current results.
 		
-		:returns: A JSON object representing the return value
+		:returns: JSON objects containing statuses, errors or other return info.
 		"""		
 		elapsed = 0
 		while True:

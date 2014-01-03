@@ -10,7 +10,14 @@ from requests_oauthlib import OAuth1
 
 
 class TwitterAPI(object):	
-	"""Access REST API or Streaming API resources."""
+	"""Access REST API or Streaming API resources.
+		
+	:param consumer_key: Twitter application consumer key
+	:param consumer_secret: Twitter application consumer secret
+	:param access_token_key: Twitter application access token key
+	:param access_token_secret: Twitter application access token secret
+	:param auth_type: "oAuth1" (default) or "oAuth2"
+	"""
 	
 	def __init__(self, consumer_key=None, consumer_secret=None, access_token_key=None, access_token_secret=None, auth_type="oAuth1"):
 		"""Initialize with your Twitter application credentials"""
@@ -40,7 +47,13 @@ class TwitterAPI(object):
 			return (resource, resource)
 	
 	def request(self, resource, params=None):
-		"""Return a TwitterResponse object."""
+		"""Request a Twitter REST API or Streaming API resource.
+		
+		:param resource: A valid Twitter endpoint (ex. "search/tweets")
+		:param params: A dictionary of endpoint parameters or None (default)
+		
+		:returns: TwitterAPI.TwitterResponse object
+		"""
 		session = requests.Session() 
 		session.auth = self.auth
 		session.headers = {'User-Agent':USER_AGENT}
@@ -62,29 +75,33 @@ class TwitterAPI(object):
 
 
 class TwitterResponse(object):
-	"""Response from either a REST API or Streaming API resource call."""
+	"""Response from either a REST API or Streaming API resource call.
+
+	:param response: The requests.Response object returned by the API call
+	:param stream: Boolean connection type (True if a streaming connection)
+	"""
 	
 	def __init__(self, response, stream):
-		"""Args: 
-			requests.Response object 
-			boolean, True if streaming connection
-		"""
 		self.response = response
 		self.stream = stream
 
 	@property
 	def headers(self):
+		""":returns: Dictionary of API response header contents."""
 		return self.response.headers
 
 	@property
 	def status_code(self):
+		""":returns: HTTP response status code."""
 		return self.response.status_code
 
 	@property
 	def text(self):
+		""":returns: Raw API response text."""
 		return self.response.text
 
 	def get_iterator(self):
+		""":returns: TwitterAPI.StreamingIterator or TwitterAPI.RestIterator."""
 		if self.stream:
 			return StreamingIterator(self.response) 
 		else:
@@ -95,7 +112,7 @@ class TwitterResponse(object):
 			yield item
 
 	def get_rest_quota(self):
-		"""Return quota information from the response header of a REST API request."""
+		""":returns: Quota information in the response header.  Valid only for REST API responses."""
 		remaining, limit, reset = None, None, None
 		if self.response:
 			if 'x-rate-limit-remaining' in self.response.headers:
@@ -108,8 +125,12 @@ class TwitterResponse(object):
 
 				
 class RestIterator(object):
+	"""Iterate statuses, errors or other iterable objects in a REST API response.
+	
+	:param response: The request.Response from a Twitter REST API request
+	"""
+	
 	def __init__(self, response):
-		"""Extract iterable parts from the response."""
 		resp = response.json()
 		if 'errors' in resp:
 			self.results = resp['errors']
@@ -124,12 +145,17 @@ class RestIterator(object):
 			self.results = (resp,)
 		
 	def __iter__(self):
-		"""Returns a tweet status as a JSON object."""
+		"""Return a tweet status as a JSON object."""
 		for item in self.results:
 			yield item
 				
 				
 class StreamingIterator(object):
+	"""Iterate statuses or other objects in a Streaming API response.
+	
+	:param response: The request.Response from a Twitter Streaming API request
+	"""
+	
 	def __init__(self, response):
 		self.results = response.iter_lines()
 		

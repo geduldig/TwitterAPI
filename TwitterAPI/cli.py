@@ -1,23 +1,30 @@
 """
-	This command line script can be run with any Twitter endpoint.  The json-formatted
+	A Command-Line Interface to Twitter's REST API and Streaming API.
+	-----------------------------------------------------------------
+	
+	You can run this command line script with any Twitter endpoint.  The json-formatted
 	response is printed to the console.  The script works with both Streaming API and
 	REST API endpoints.
 
 	IMPORTANT: Before using this script, you must enter your Twitter application's OAuth 
-	credentials in TwitterAPI/credentials.txt.  Log into to dev.twitter.com to create 
+	credentials in TwitterAPI/credentials.txt.  Log into to http://dev.twitter.com to create 
 	your application.
 	
 	Examples:
+
+	::	
 	
-	> python -u -m TwitterAPI.cli -endpoint search/tweets -parameters q=zzz 
-	> python -u -m TwitterAPI.cli -endpoint statuses/filter -parameters track=zzz
+		python -u -m TwitterAPI.cli -endpoint search/tweets -parameters q=zzz 
+		python -u -m TwitterAPI.cli -endpoint statuses/filter -parameters track=zzz
 		
 	These examples print the raw json response.  You can also print one or more fields
 	from the response, for instance the tweet 'text' field, like this:
 	
-	> python -u -m TwitterAPI.cli -endpoint statuses/filter -parameters track=zzz -fields text
+	::	
+	
+		python -u -m TwitterAPI.cli -endpoint statuses/filter -parameters track=zzz -fields text
 		
-	Twitter's endpoints are documented at this site:
+	Twitter's endpoints are documented here:
 		https://dev.twitter.com/docs/api/1.1
 """
 
@@ -33,7 +40,7 @@ from .TwitterOAuth import TwitterOAuth
 from .TwitterAPI import TwitterAPI
 
 
-def search(name, obj):
+def _search(name, obj):
 	"""Breadth-first search for name in the JSON response and return value."""
 	q = []
 	q.append(obj)
@@ -49,7 +56,7 @@ def search(name, obj):
 		return None
 
 
-def to_dict(param_list):
+def _to_dict(param_list):
 	"""Convert a list of key=value to dict[key]=value"""			
 	if param_list:
 		return {name: value for (name, value) in [param.split('=') for param in param_list]}
@@ -74,7 +81,7 @@ if __name__ == '__main__':
 	args = parser.parse_args()	
 
 	try:
-		params = to_dict(args.parameters)
+		params = _to_dict(args.parameters)
 		oauth = TwitterOAuth.read_file(args.oauth)
 
 		api = TwitterAPI(oauth.consumer_key, oauth.consumer_secret, oauth.access_token_key, oauth.access_token_secret)
@@ -88,7 +95,7 @@ if __name__ == '__main__':
 				pp.pprint(item)
 			else:
 				for name in args.fields:
-					value = search(name, item)
+					value = _search(name, item)
 					if value:
 						print('%s: %s' % (name, value))
 						

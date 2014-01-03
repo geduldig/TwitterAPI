@@ -1,18 +1,21 @@
+__author__ = "Andrea Biancini, Jonas Geduldig"
+__date__ = "January 3, 2014"
+__license__ = "MIT"
+
 import base64
 from .constants import USER_AGENT
 import requests
 
 
 class BearerAuth(requests.auth.AuthBase):
-	"""Request bearer access token for oAuth2 authentication."""
+	"""Request bearer access token for oAuth2 authentication.
+		
+	:param token_url: Twitter oAuth2 token access URL
+	:param consumer_key: Twitter application consumer key
+	:param consumer_secret: Twitter application consumer secret
+	"""
 	
 	def __init__(self, token_url, consumer_key, consumer_secret):
-		"""Retrieve oAuth2 access token with your Twitter application credentials
-		
-		:param token_url: Twitter oAuth2 token access URL
-		:param consumer_key: Twitter application consumer key
-		:param consumer_secret: Twitter application consumer secret
-		"""
 		self._token_url = token_url
 		self._consumer_key = consumer_key
 		self._consumer_secret = consumer_secret

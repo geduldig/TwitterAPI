@@ -1,13 +1,14 @@
 """
-	All Twitter endpoints.
+	Constants For All Twitter Endpoints
+	-----------------------------------
 	
 	Version 1.1, Streaming API and REST API.
 	
-	The complete URL for each endpoint would look like this:
+	The entire URL for each endpoint looks like this:
 		PROTOCOL://{subdomain}.DOMAIN/VERSION/{resource}?{parameters}
 		
-	The REST API endpoints all use 'api' for the subdomain.
-	The Streaming API endpoints use either POST (with parameters) or GET (without parameters).
+	REST API endpoints all use 'api' for the subdomain.
+	Streaming API endpoints use either POST (with parameters) or GET (without parameters).
 """
 
 __author__ = "Jonas Geduldig"

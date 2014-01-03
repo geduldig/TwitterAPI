@@ -1,16 +1,3 @@
-"""
-	Log into dev.twitter.com and create an application to generate your consumer
-	key and secret and your access token key and secret.
-
-	You can use TwitterOAuth to read your application credentials from a text file
-	if you save your credentials to a text file with this format:
-	
-		consumer_key=YOUR_CONSUMER_KEY
-		consumer_secret=YOUR_CONSUMER_SECRET
-		access_token_key=YOUR_ACCESS_TOKEN_KEY
-		access_token_secret=YOUR_ACCESS_TOKEN_SECRET
-"""
-
 __author__ = "Jonas Geduldig"
 __date__ = "February 7, 2013"
 __license__ = "MIT"
@@ -19,7 +6,13 @@ import os
 
 
 class TwitterOAuth:
-	"""A container for Twitter's OAuth credentials"""
+	"""Optional class for retrieving Twitter credentials stored in a text file.
+
+	:param consumer_key: Twitter application consumer key
+	:param consumer_secret: Twitter application consumer secret
+	:param access_token_key: Twitter application access token key
+	:param access_token_secret: Twitter application access token secret
+	"""
 
 	def __init__(self, consumer_key, consumer_secret, access_token_key, access_token_secret):
 		self.consumer_key = consumer_key
@@ -29,9 +22,18 @@ class TwitterOAuth:
 		
 	@classmethod
 	def read_file(cls, file_name=None):
-		"""Read OAuth credentials from a text file
+		"""Read OAuth credentials from a text file.  File format:
+	
+			consumer_key=YOUR_CONSUMER_KEY
+			
+			consumer_secret=YOUR_CONSUMER_SECRET
+			
+			access_token_key=YOUR_ACCESS_TOKEN_KE:
+			
+			access_token_secret=YOUR_ACCESS_TOKEN_SECRET
 		
-		:param file_name: A string with the file name
+		:param file_name: File containing credentials or None (default) reads credentials
+		                  from TwitterAPI/credentials.txt
 		"""
 		if file_name is None:
 			path = os.path.dirname(__file__)
