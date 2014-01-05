@@ -1,10 +1,11 @@
-TwitterAPI
+TwitterAPI 
 ==========
-This python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest python versions in both 2.x and 3.x branches.  
 
-Code Usage
-----------
-*See TwitterAPI/cli.py for a working code example.*
+This Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches.  
+
+Some Code Examples
+------------------
+*See TwitterAPI/cli.py and TwitterAPI/examples for more working examples.*
 
 First, authenticate with your application credentials:
 
@@ -18,7 +19,7 @@ Tweet something:
 
 Get some tweets:
 
-	r = api.request('search/tweets', {'q':'zzz'})
+	r = api.request('search/tweets', {'q':'pizza'})
 	for item in r.get_iterator():
 		print item
 
@@ -28,15 +29,15 @@ Stream tweets from New York City:
 	for item in r.get_iterator():
 		print item
 		
-Notice that request() accepts both REST and Streaming API methods, and it takes two arguments: 1) the Twitter method, 2) a dictionary of method parameters.  In the above examples we use the get\_iterator() helper to get each tweet object.  This iterator knows how to iterate both REST and Streaming API results, in addition to error objects.  Alternatively, you have access to the response object which is returned by request().  From the response object you can get the raw response (.text) and the http status code (.status\_code).  See the documentation for the Requests library for more info.
+Notice that request() accepts both REST and Streaming API methods, and it takes two arguments: 1) the Twitter method, 2) a dictionary of method parameters.  In the above examples we use the get\_iterator() helper to get each tweet object.  This iterator knows how to iterate both REST and Streaming API results, in addition to error objects.  Alternatively, you have access to the response object returned by request().  From the response object you may call properties that return the raw response (r.text) and the http status code (r.status\_code).  See the documentation for the [Requests](http://docs.python-requests.org/en/latest/user/quickstart/) library for more info.
 
-Command-line Usage (cli.py)
+Command-Line Usage (cli.py)
 ---------------------------
-For help:
+For syntax help:
 
 	> python -u -m TwitterAPI.cli -h 
 
-You will need to supply your Twitter application OAuth credentials.  The easiest option is to enter them in TwitterAPI/credentials.txt.  It is the default place where cli.py will look for them.  You also can supply an alternative credentials file as a command-line argument.
+You will need to supply your Twitter application OAuth credentials.  The easiest option is to save them in TwitterAPI/credentials.txt.  It is the default place where cli.py will look for them.  You also may supply an alternative credentials file as a command-line argument.
 
 Call any REST API endpoint:
 
@@ -55,6 +56,10 @@ After the -field option you must supply one or more key names from the raw JSON 
 Installation
 ------------
 	> pip install TwitterAPI
+
+Documentation
+-------------
+* [Modules](http://geduldig.github.com/TwitterAPI)
 	
 Contributors
 ------------
