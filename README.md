@@ -5,11 +5,11 @@ TwitterAPI
 [![Downloads](https://pypip.in/d/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 [![Downloads](https://pypip.in/v/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI) 
 
-This python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest python versions in both 2.x and 3.x branches.  
+This Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches.  
 
-Code Usage
-----------
-*See TwitterAPI/cli.py for a working code example.*
+Some Code Examples
+------------------
+*See TwitterAPI/cli.py and TwitterAPI/examples/ for more working examples.*
 
 First, authenticate with your application credentials:
 
