@@ -46,11 +46,12 @@ class TwitterAPI(object):
 		else:
 			return (resource, resource)
 	
-	def request(self, resource, params=None):
+	def request(self, resource, params=None, files=None):
 		"""Request a Twitter REST API or Streaming API resource.
 		
 		:param resource: A valid Twitter endpoint (ex. "search/tweets")
-		:param params: A dictionary of endpoint parameters or None (default)
+		:param params: Dictionary with endpoint parameters or None (default)
+		:param files: Dictionary with multipart-encoded file or None (default)
 		
 		:returns: TwitterAPI.TwitterResponse object
 		"""
@@ -70,7 +71,7 @@ class TwitterAPI(object):
 			timeout = REST_SOCKET_TIMEOUT
 		else:
 			raise Exception('"%s" is not valid endpoint' % resource)
-		r = session.request(method, url, params=params, timeout=timeout)
+		r = session.request(method, url, params=params, timeout=timeout, files=files)
 		return TwitterResponse(r, session.stream)
 
 

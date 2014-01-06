@@ -1,7 +1,7 @@
 from TwitterAPI import TwitterAPI
 
 
-TWEET_TEXT = "Ce n'est pas un tweet."
+TWEET_TEXT = "Ce n'est pas un tweet tweet."
 
 
 CONSUMER_KEY = ''
