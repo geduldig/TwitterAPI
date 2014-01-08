@@ -4,11 +4,8 @@
 	
 	Version 1.1, Streaming API and REST API.
 	
-	The entire URL for each endpoint looks like this:
+	URLs for each endpoint are composed of the following pieces:
 		PROTOCOL://{subdomain}.DOMAIN/VERSION/{resource}?{parameters}
-		
-	REST API endpoints all use 'api' for the subdomain.
-	Streaming API endpoints use either POST (with parameters) or GET (without parameters).
 """
 
 __author__ = "Jonas Geduldig"

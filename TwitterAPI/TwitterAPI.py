@@ -2,11 +2,11 @@ __author__ = "Jonas Geduldig"
 __date__ = "June 7, 2013"
 __license__ = "MIT"
 
-from .BearerAuth import BearerAuth
 from .constants import *
 import json
-import requests
 from requests_oauthlib import OAuth1
+from .BearerAuth import BearerAuth as OAuth2
+import requests
 
 
 class TwitterAPI(object):	
@@ -28,14 +28,13 @@ class TwitterAPI(object):
 		elif auth_type is "oAuth2":
 			if not all([consumer_key, consumer_secret]):
 				raise Exception("Missing authentication parameter.")
-			token_url = '%s://%s.%s/%s' % (PROTOCOL, REST_SUBDOMAIN, DOMAIN, OAUTH2_TOKEN_ENDPOINT)
-			self.auth = BearerAuth(token_url, consumer_key, consumer_secret)
+			self.auth = OAuth2(consumer_key, consumer_secret)
 				
 	def _prepare_url(self, subdomain, path):
 		return '%s://%s.%s/%s/%s.json' % (PROTOCOL, subdomain, DOMAIN, VERSION, path)
 		
 	def _get_endpoint(self, resource):
-		""" Substitute parameters in the resource path with :PARAM."""
+		""" Substitute any parameters in the resource path with :PARAM."""
 		if ':' in resource:
 			parts = resource.split('/')
 			# embedded parameters start with ':'

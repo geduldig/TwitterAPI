@@ -13,7 +13,12 @@ except:
 
 # SAVE YOUR APPLICATION CREDENTIALS IN TwitterAPI/credentials.txt.
 o = TwitterOAuth.read_file()
+
+# Using OAuth1...
 api = TwitterAPI(o.consumer_key, o.consumer_secret, o.access_token_key, o.access_token_secret)
+
+# Using OAuth2...
+#api = TwitterAPI(o.consumer_key, o.consumer_secret, auth_type="oAuth2")
 
 
 TEST_NUMBER = 0

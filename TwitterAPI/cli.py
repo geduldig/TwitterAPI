@@ -2,12 +2,12 @@
 	A Command-Line Interface to Twitter's REST API and Streaming API.
 	-----------------------------------------------------------------
 	
-	You can run this command line script with any Twitter endpoint.  The json-formatted
+	Run this command line script with any Twitter endpoint.  The json-formatted
 	response is printed to the console.  The script works with both Streaming API and
 	REST API endpoints.
 
 	IMPORTANT: Before using this script, you must enter your Twitter application's OAuth 
-	credentials in TwitterAPI/credentials.txt.  Log into to http://dev.twitter.com to create 
+	credentials in TwitterAPI/credentials.txt.  Log into http://dev.twitter.com to create 
 	your application.
 	
 	Examples:
@@ -24,8 +24,8 @@
 	
 		python -u -m TwitterAPI.cli -endpoint statuses/filter -parameters track=zzz -fields text
 		
-	Twitter's endpoints are documented here:
-		https://dev.twitter.com/docs/api/1.1
+	Documentation for all Twitter endpoints is located at:
+		 https://dev.twitter.com/docs/api/1.1
 """
 
 __author__ = "Jonas Geduldig"
