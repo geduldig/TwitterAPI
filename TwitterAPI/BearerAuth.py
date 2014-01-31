@@ -21,11 +21,12 @@ class BearerAuth(requests.auth.AuthBase):
 
 	def _get_access_token(self):
 		token_url = '%s://%s.%s/%s' % (PROTOCOL, REST_SUBDOMAIN, DOMAIN, OAUTH2_TOKEN_ENDPOINT)
-		b64_bearer_token_creds = base64.b64encode(self._consumer_key + ':' + self._consumer_secret)
+		auth = self._consumer_key + ':' + self._consumer_secret
+		b64_bearer_token_creds = base64.b64encode(auth.encode('utf8'))
 		params = {'grant_type':'client_credentials'}
 		headers = {}
 		headers['User-Agent'] = USER_AGENT
-		headers['Authorization'] = 'Basic ' + b64_bearer_token_creds
+		headers['Authorization'] = 'Basic ' + b64_bearer_token_creds.decode('utf8')
 		headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 		try:
 			response = requests.post(token_url, params=params, headers=headers)
