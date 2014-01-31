@@ -20,16 +20,17 @@ class TwitterAPI(object):
 	:param auth_type: "oAuth1" (default) or "oAuth2"
 	"""
 	
-	def __init__(self, consumer_key=None, consumer_secret=None, access_token_key=None, access_token_secret=None, auth_type="oAuth1"):
+	def __init__(self, consumer_key=None, consumer_secret=None, access_token_key=None, access_token_secret=None, auth_type='oAuth1'):
 		"""Initialize with your Twitter application credentials"""
-		if auth_type is "oAuth1":
+		if auth_type is 'oAuth1':
 			if not all([consumer_key, consumer_secret, access_token_key, access_token_secret]):
-				raise Exception("Missing authentication parameter.")
+				raise Exception('Missing authentication parameter.')
 			self.auth = OAuth1(consumer_key, consumer_secret, access_token_key, access_token_secret)
-		elif auth_type is "oAuth2":
+		elif auth_type is 'oAuth2':
 			if not all([consumer_key, consumer_secret]):
 				raise Exception("Missing authentication parameter.")
 			self.auth = OAuth2(consumer_key, consumer_secret)
+		self.proxies = None
 				
 	def _prepare_url(self, subdomain, path):
 		return '%s://%s.%s/%s/%s.json' % (PROTOCOL, subdomain, DOMAIN, VERSION, path)
@@ -45,6 +46,10 @@ class TwitterAPI(object):
 			return (resource, endpoint)
 		else:
 			return (resource, resource)
+			
+	def set_proxy_url(self, proxy_url):
+		""":param proxy_url: HTTPS proxy URL (ex. 'https://USER:PASSWORD@SERVER:PORT')"""
+		self.proxies = {'https':proxy_url} if proxy_url else None
 	
 	def request(self, resource, params=None, files=None):
 		"""Request a Twitter REST API or Streaming API resource.
@@ -71,7 +76,7 @@ class TwitterAPI(object):
 			timeout = REST_SOCKET_TIMEOUT
 		else:
 			raise Exception('"%s" is not valid endpoint' % resource)
-		r = session.request(method, url, params=params, timeout=timeout, files=files)
+		r = session.request(method, url, params=params, timeout=timeout, files=files, proxies=self.proxies)
 		return TwitterResponse(r, session.stream)
 
 
