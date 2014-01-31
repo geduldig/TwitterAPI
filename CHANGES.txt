@@ -49,4 +49,6 @@ v2.1.6,  07 Oct 2013 -- cli upports UTF-8 printing to console.
 
 v2.1.7,  07 Oct 2013 -- Fix endpoints with params in path.
 
-v2.1.8   27 Dec 2013 -- Added OAuth 2.0 support.
+v2.1.8,  27 Dec 2013 -- Added OAuth 2.0 support.
+
+v2.1.9,  30 Jan 2014 -- Added image posting support.
