@@ -18,10 +18,14 @@ class TwitterAPI(object):
 	:param access_token_key: Twitter application access token key
 	:param access_token_secret: Twitter application access token secret
 	:param auth_type: "oAuth1" (default) or "oAuth2"
+	:param proxy_url: HTTPS proxy URL (ex. "https://USER:PASSWORD@SERVER:PORT")
 	"""
 	
-	def __init__(self, consumer_key=None, consumer_secret=None, access_token_key=None, access_token_secret=None, auth_type='oAuth1'):
+	def __init__(self, 
+		         consumer_key=None, consumer_secret=None, access_token_key=None, access_token_secret=None, 
+		         auth_type='oAuth1', proxy_url=None):
 		"""Initialize with your Twitter application credentials"""
+		self.proxies = {'https':proxy_url} if proxy_url else None
 		if auth_type is 'oAuth1':
 			if not all([consumer_key, consumer_secret, access_token_key, access_token_secret]):
 				raise Exception('Missing authentication parameter.')
@@ -29,14 +33,13 @@ class TwitterAPI(object):
 		elif auth_type is 'oAuth2':
 			if not all([consumer_key, consumer_secret]):
 				raise Exception("Missing authentication parameter.")
-			self.auth = OAuth2(consumer_key, consumer_secret)
-		self.proxies = None
-				
+			self.auth = OAuth2(consumer_key, consumer_secret, proxies=self.proxies)
+
 	def _prepare_url(self, subdomain, path):
 		return '%s://%s.%s/%s/%s.json' % (PROTOCOL, subdomain, DOMAIN, VERSION, path)
 		
 	def _get_endpoint(self, resource):
-		""" Substitute any parameters in the resource path with :PARAM."""
+		"""Substitute any parameters in the resource path with :PARAM."""
 		if ':' in resource:
 			parts = resource.split('/')
 			# embedded parameters start with ':'
@@ -46,10 +49,6 @@ class TwitterAPI(object):
 			return (resource, endpoint)
 		else:
 			return (resource, resource)
-			
-	def set_proxy_url(self, proxy_url):
-		""":param proxy_url: HTTPS proxy URL (ex. 'https://USER:PASSWORD@SERVER:PORT')"""
-		self.proxies = {'https':proxy_url} if proxy_url else None
 	
 	def request(self, resource, params=None, files=None):
 		"""Request a Twitter REST API or Streaming API resource.

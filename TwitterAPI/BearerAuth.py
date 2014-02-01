@@ -12,11 +12,13 @@ class BearerAuth(requests.auth.AuthBase):
 		
 	:param consumer_key: Twitter application consumer key
 	:param consumer_secret: Twitter application consumer secret
+	:param proxies: Dictionary of proxy URLs (see documentation for python-requests).
 	"""
 	
-	def __init__(self, consumer_key, consumer_secret):
+	def __init__(self, consumer_key, consumer_secret, proxies=None):
 		self._consumer_key = consumer_key
 		self._consumer_secret = consumer_secret
+		self.proxies = proxies
 		self._bearer_token = self._get_access_token()
 
 	def _get_access_token(self):
@@ -29,7 +31,7 @@ class BearerAuth(requests.auth.AuthBase):
 		headers['Authorization'] = 'Basic ' + b64_bearer_token_creds.decode('utf8')
 		headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 		try:
-			response = requests.post(token_url, params=params, headers=headers)
+			response = requests.post(token_url, params=params, headers=headers, proxies=self.proxies)
 			data = response.json()
 			return data['access_token']
 		except Exception as e:
