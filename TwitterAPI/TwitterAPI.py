@@ -6,7 +6,7 @@ from .constants import *
 import json
 from requests_oauthlib import OAuth1
 from .BearerAuth import BearerAuth as OAuth2
-import datetime
+from datetime import datetime
 import requests
 
 
