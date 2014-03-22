@@ -16,3 +16,5 @@ r = api.request('search/tweets', {'q':SEARCH_TERM})
 
 for item in r:
 	print(item['text'] if 'text' in item else item)
+
+print('\nQUOTA: %s' % r.get_rest_quota())

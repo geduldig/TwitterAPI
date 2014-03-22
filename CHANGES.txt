@@ -54,3 +54,5 @@ v2.1.8,    27 Dec 2013 -- Added OAuth 2.0 support.
 v2.1.9,    30 Jan 2014 -- Added image posting support.
 
 v2.1.10,   31 Jan 2014 -- Added proxy server support.
+
+v2.1.11,   22 Mar 2014 -- Fixed datetime import and oauth_test.py
