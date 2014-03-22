@@ -48,8 +48,8 @@ REST_ENDPOINTS = {
 		'statuses/oembed':                         ('GET',),
 		'statuses/retweets_of_me':                 ('GET',),
 		'statuses/retweet/:PARAM':                 ('POST',),  # ID
-		'statuses/retweets/:PARAM':                ('GET',),  # ID
-		'statuses/show/:PARAM':                    ('GET',),  # ID
+		'statuses/retweets/:PARAM':                ('GET',),   # ID
+		'statuses/show/:PARAM':                    ('GET',),   # ID
 		'statuses/user_timeline':                  ('GET',),
 		'statuses/update':                         ('POST',),
 		'statuses/update_with_media':              ('POST',),
@@ -129,9 +129,9 @@ REST_ENDPOINTS = {
 		'saved_searches/create':                   ('POST',),
 		'saved_searches/destroy/:PARAM':           ('POST',),  # ID
 		'saved_searches/list':                     ('GET',),
-		'saved_searches/show/:PARAM':              ('GET',),  # ID
+		'saved_searches/show/:PARAM':              ('GET',),   # ID
 
-		'geo/id/:PARAM':                           ('GET',),  # PLACE_ID
+		'geo/id/:PARAM':                           ('GET',),   # PLACE_ID
 		'geo/place':                               ('POST',),
 		'geo/reverse_geocode':                     ('GET',),
 		'geo/search':                              ('GET',),

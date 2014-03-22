@@ -1,20 +1,20 @@
 __title__ = 'TwitterAPI'
-__version__ = '2.1.11'
+__version__ = '2.1.12'
 __author__ = 'Jonas Geduldig'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2013 Jonas Geduldig'
 
 
 try:
-	from .TwitterOAuth import TwitterOAuth
-	from .TwitterAPI import TwitterAPI, TwitterResponse, RestIterator, StreamingIterator
-	from .TwitterRestPager import TwitterRestPager
+    from .TwitterOAuth import TwitterOAuth
+    from .TwitterAPI import TwitterAPI, TwitterResponse, RestIterator, StreamingIterator
+    from .TwitterRestPager import TwitterRestPager
 except:
-	pass
+    pass
 
 
 __all__ = [
-	'TwitterAPI',
-	'TwitterOAuth',
-	'TwitterRestPager'
+    'TwitterAPI',
+    'TwitterOAuth',
+    'TwitterRestPager'
 ]
