@@ -34,6 +34,7 @@ __license__ = "MIT"
 
 import argparse
 import codecs
+import json
 from pprint import PrettyPrinter
 import sys
 from .TwitterOAuth import TwitterOAuth
@@ -120,7 +121,7 @@ if __name__ == '__main__':
             if 'message' in item:
                 print('ERROR %s: %s' % (item['code'], item['message']))
             elif not args.fields:
-                pp.pprint(item)
+                print(json.dumps(item, ensure_ascii='False'))  
             else:
                 for name in args.fields:
                     value = _search(name, item)
