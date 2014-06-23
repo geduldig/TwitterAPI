@@ -60,3 +60,5 @@ v2.1.11,   22 Mar 2014 -- Fixed datetime import and oauth_test.py.
 v2.1.12,   22 Mar 2014 -- Ran code against autopep8.
 
 v2.1.13,   24 Mar 2014 -- Decreased streaming buffer size to 1.
+
+v2.2.0,    22 Jun 2014 -- Added indent option to cli.py.
