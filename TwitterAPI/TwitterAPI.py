@@ -100,6 +100,7 @@ class TwitterAPI(object):
         r = session.request(
             method,
             url,
+            data=data,
             params=params,
             timeout=timeout,
             files=files,
