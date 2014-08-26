@@ -92,11 +92,11 @@ class TwitterAPI(object):
             timeout = REST_SOCKET_TIMEOUT
         else:
             raise Exception('"%s" is not valid endpoint' % resource)
-        if method is 'GET':
-            data = None
-        elif method is 'POST':
+        if method is 'POST':
             data = params
             params = None
+        else:
+            data = None
         r = session.request(
             method,
             url,
