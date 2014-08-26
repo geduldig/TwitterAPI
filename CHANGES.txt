@@ -62,3 +62,5 @@ v2.1.12,   22 Mar 2014 -- Ran code against autopep8.
 v2.1.13,   24 Mar 2014 -- Decreased streaming buffer size to 1.
 
 v2.2.0,    22 Jun 2014 -- Added indent option to cli.py.
+
+v2.2.1,    26 Aug 2014 -- Fix POST request for query string.
