@@ -143,8 +143,7 @@ class TwitterResponse(object):
             return RestIterator(self.response)
 
     def __iter__(self):
-        for item in self.get_iterator():
-            yield item
+        return self.get_iterator()
 
     def get_rest_quota(self):
         """:returns: Quota information in the response header.  Valid only for REST API responses."""
@@ -168,6 +167,7 @@ class RestIterator(object):
     """
 
     def __init__(self, response):
+        self._generator = self._get_next_result()
         resp = response.json()
         if 'errors' in resp:
             self.results = resp['errors']
@@ -182,10 +182,23 @@ class RestIterator(object):
             self.results = (resp,)
 
     def __iter__(self):
+        return self
+    
+    def next(self):
+        """Return a tweet status as a JSON object. Python 2 compatibility"""
+        return self.__next__()
+
+    def __next__(self):
         """Return a tweet status as a JSON object."""
+        if hasattr(self._generator, "next"):
+            return self._generator.next() #Python 2 compatibility
+        else:
+            return next(self._generator)
+       
+    def _get_next_result(self):
+        """Internal generator to support iteration over results"""
         for item in self.results:
             yield item
-
 
 class StreamingIterator(object):
 
@@ -195,10 +208,25 @@ class StreamingIterator(object):
     """
 
     def __init__(self, response):
+        self._generator = self._get_next_result()
         self.results = response.iter_lines(1)
 
     def __iter__(self):
+        return self
+    
+    def next(self):
+        """Return a tweet status as a JSON object. Python 2 compatibility"""
+        return self.__next__()
+
+    def __next__(self):
         """Return a tweet status as a JSON object."""
+        if hasattr(self._generator, "next"):
+            return self._generator.next() #Python 2 compatibility
+        else:
+            return next(self._generator)
+
+    def _get_next_result(self):
+        """Internal generator to support iteration over results"""
         for item in self.results:
             if item:
                 yield json.loads(item.decode('utf-8'))
