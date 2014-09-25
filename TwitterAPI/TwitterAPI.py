@@ -136,15 +136,14 @@ class TwitterResponse(object):
         return self.response.text
 
     def get_iterator(self):
-        """:returns: TwitterAPI.StreamingIterator or TwitterAPI.RestIterator."""
+        """:returns iterator from  TwitterAPI.StreamingIterable or TwitterAPI.RestIterable."""
         if self.stream:
-            return StreamingIterator(self.response)
+            return iter(StreamingIterable(self.response))
         else:
-            return RestIterator(self.response)
+            return iter(RestIterable(self.response))
 
     def __iter__(self):
-        for item in self.get_iterator():
-            yield item
+        return self.get_iterator()
 
     def get_rest_quota(self):
         """:returns: Quota information in the response header.  Valid only for REST API responses."""
@@ -160,7 +159,10 @@ class TwitterResponse(object):
         return {'remaining': remaining, 'limit': limit, 'reset': reset}
 
 
-class RestIterator(object):
+class Foo():
+    t = 34
+
+class RestIterable(object):
 
     """Iterate statuses, errors or other iterable objects in a REST API response.
 
@@ -187,7 +189,7 @@ class RestIterator(object):
             yield item
 
 
-class StreamingIterator(object):
+class StreamingIterable(object):
 
     """Iterate statuses or other objects in a Streaming API response.
 
@@ -202,3 +204,21 @@ class StreamingIterator(object):
         for item in self.results:
             if item:
                 yield json.loads(item.decode('utf-8'))
+
+def RestIterator(*args, **kwargs):
+    print("importing")
+    """Deprecated. Use RestIterable instead."""
+    from warnings import warn
+    warn("RestIterator is deprecated. Use RestIterable instead",
+        DeprecationWarning,
+        stacklevel=2)
+    return RestIterable(*args, **kwargs)
+
+def StreamingIterator(*args, **kwargs):
+    """Deprecated. Use StreamingIterable instead."""
+    from warnings import warn
+    warn("StreamingIterator is deprecated. Use StreamingIterable instead",
+        DeprecationWarning,
+        stacklevel=2)
+    return StreamingIterable(*args, **kwargs)
+
