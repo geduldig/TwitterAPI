@@ -159,9 +159,6 @@ class TwitterResponse(object):
         return {'remaining': remaining, 'limit': limit, 'reset': reset}
 
 
-class Foo():
-    t = 34
-
 class RestIterable(object):
 
     """Iterate statuses, errors or other iterable objects in a REST API response.
