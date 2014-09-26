@@ -136,7 +136,7 @@ class TwitterResponse(object):
         return self.response.text
 
     def get_iterator(self):
-        """:returns iterator from  TwitterAPI.StreamingIterable or TwitterAPI.RestIterable."""
+        """:returns: Iterator for tweets or other message objects in response."""
         if self.stream:
             return iter(StreamingIterable(self.response))
         else:
@@ -202,20 +202,21 @@ class StreamingIterable(object):
             if item:
                 yield json.loads(item.decode('utf-8'))
 
+
 def RestIterator(*args, **kwargs):
-    print("importing")
     """Deprecated. Use RestIterable instead."""
     from warnings import warn
-    warn("RestIterator is deprecated. Use RestIterable instead",
-        DeprecationWarning,
-        stacklevel=2)
+    warn('RestIterator is deprecated. Use RestIterable instead',
+         DeprecationWarning,
+         stacklevel=2)
     return RestIterable(*args, **kwargs)
+
 
 def StreamingIterator(*args, **kwargs):
     """Deprecated. Use StreamingIterable instead."""
     from warnings import warn
-    warn("StreamingIterator is deprecated. Use StreamingIterable instead",
-        DeprecationWarning,
-        stacklevel=2)
+    warn('StreamingIterator is deprecated. Use StreamingIterable instead',
+         DeprecationWarning,
+         stacklevel=2)
     return StreamingIterable(*args, **kwargs)
 
