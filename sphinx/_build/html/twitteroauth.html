@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TwitterAPI.TwitterOAuth &mdash; TwitterAPI 2.2.4 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.2.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="TwitterAPI 2.2.4 documentation" href="index.html" />
+    <link rel="prev" title="TwitterAPI.TwitterRestPager" href="twitterrestpager.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>TwitterAPI 2.2.4 documentation</span></a></h1>
+        <h2 class="heading"><span>TwitterAPI.TwitterOAuth</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="twitterrestpager.html">TwitterAPI.TwitterRestPager</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-TwitterAPI.TwitterOAuth">
+<span id="twitterapi-twitteroauth"></span><h1>TwitterAPI.TwitterOAuth<a class="headerlink" href="#module-TwitterAPI.TwitterOAuth" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="TwitterAPI.TwitterOAuth.TwitterOAuth">
+<em class="property">class </em><tt class="descclassname">TwitterAPI.TwitterOAuth.</tt><tt class="descname">TwitterOAuth</tt><big>(</big><em>consumer_key</em>, <em>consumer_secret</em>, <em>access_token_key</em>, <em>access_token_secret</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterOAuth.TwitterOAuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional class for retrieving Twitter credentials stored in a text file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>consumer_key</strong> &#8211; Twitter application consumer key</li>
+<li><strong>consumer_secret</strong> &#8211; Twitter application consumer secret</li>
+<li><strong>access_token_key</strong> &#8211; Twitter application access token key</li>
+<li><strong>access_token_secret</strong> &#8211; Twitter application access token secret</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="classmethod">
+<dt id="TwitterAPI.TwitterOAuth.TwitterOAuth.read_file">
+<em class="property">classmethod </em><tt class="descname">read_file</tt><big>(</big><em>file_name=None</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterOAuth.TwitterOAuth.read_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read OAuth credentials from a text file.  File format:</p>
+<blockquote>
+<div><p>consumer_key=YOUR_CONSUMER_KEY</p>
+<p>consumer_secret=YOUR_CONSUMER_SECRET</p>
+<p>access_token_key=YOUR_ACCESS_TOKEN</p>
+<p>access_token_secret=YOUR_ACCESS_TOKEN_SECRET</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> &#8211; File containing credentials or None (default) reads credentials
+from TwitterAPI/credentials.txt</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="twitterrestpager.html">TwitterAPI.TwitterRestPager</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, Jonas Geduldig.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>
