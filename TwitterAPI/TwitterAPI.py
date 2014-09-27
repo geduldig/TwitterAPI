@@ -138,9 +138,9 @@ class TwitterResponse(object):
     def get_iterator(self):
         """:returns: Iterator for tweets or other message objects in response."""
         if self.stream:
-            return iter(StreamingIterable(self.response))
+            return iter(_StreamingIterable(self.response))
         else:
-            return iter(RestIterable(self.response))
+            return iter(_RestIterable(self.response))
 
     def __iter__(self):
         return self.get_iterator()
@@ -159,7 +159,7 @@ class TwitterResponse(object):
         return {'remaining': remaining, 'limit': limit, 'reset': reset}
 
 
-class RestIterable(object):
+class _RestIterable(object):
 
     """Iterate statuses, errors or other iterable objects in a REST API response.
 
@@ -186,7 +186,7 @@ class RestIterable(object):
             yield item
 
 
-class StreamingIterable(object):
+class _StreamingIterable(object):
 
     """Iterate statuses or other objects in a Streaming API response.
 
@@ -204,19 +204,19 @@ class StreamingIterable(object):
 
 
 def RestIterator(*args, **kwargs):
-    """Deprecated. Use RestIterable instead."""
+    """Deprecated. Use _RestIterable instead."""
     from warnings import warn
-    warn('RestIterator is deprecated. Use RestIterable instead',
+    warn('RestIterator is deprecated. Use _RestIterable instead',
          DeprecationWarning,
          stacklevel=2)
-    return RestIterable(*args, **kwargs)
+    return _RestIterable(*args, **kwargs)
 
 
 def StreamingIterator(*args, **kwargs):
-    """Deprecated. Use StreamingIterable instead."""
+    """Deprecated. Use _StreamingIterable instead."""
     from warnings import warn
-    warn('StreamingIterator is deprecated. Use StreamingIterable instead',
+    warn('StreamingIterator is deprecated. Use _StreamingIterable instead',
          DeprecationWarning,
          stacklevel=2)
-    return StreamingIterable(*args, **kwargs)
+    return _StreamingIterable(*args, **kwargs)
 
