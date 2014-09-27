@@ -38,7 +38,7 @@ class TwitterRestPager(object):
             req = self.api.request(self.resource, self.params)
             it = req.get_iterator()
             if new_tweets:
-                it.results = reversed(it.results)
+                it = reversed(list(it))
 
             # yield each item in the page
             id = None
