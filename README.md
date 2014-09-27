@@ -9,7 +9,7 @@ This Python package supports Twitter's REST and Streaming APIs (version 1.1) wit
 
 Some Code Examples
 ------------------
-*See TwitterAPI/cli.py and TwitterAPI/examples for more working examples.*
+*See [TwitterAPI/cli.py](https://github.com/geduldig/TwitterAPI/blob/master/TwitterAPI/cli.py) and [TwitterAPI/examples](https://github.com/geduldig/TwitterAPI/tree/master/examples) for more working examples.*
 
 First, authenticate with your application credentials:
 
