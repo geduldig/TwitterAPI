@@ -6,15 +6,16 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>TwitterAPI’s Documentation &mdash; TwitterAPI 2.1.8 documentation</title>
+    <title>Introduction &mdash; TwitterAPI 2.2.4 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.1.8',
+        VERSION:     '2.2.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,118 +24,75 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="TwitterAPI 2.1.8 documentation" href="#" />
-    <link rel="next" title="TwitterAPI" href="modules/modules.html" /> 
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="TwitterAPI 2.2.4 documentation" href="#" />
+    <link rel="next" title="TwitterAPI.TwitterAPI" href="twitterapi.html" /> 
   </head>
   <body>
-
-<div style="background-color: #333; text-align: left; padding: 10px 10px 15px 15px">
-<a href="#"><img src="_static/logo.png" border="0" alt="py4sci"/></a>
-</div>
-
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="modules/modules.html" title="TwitterAPI"
-             accesskey="N">next</a> |</li>
-        <li><a href="#">home</a>|&nbsp;</li>
-        <li><a href="search.html">search</a>|&nbsp;</li>
- 
-      </ul>
-    </div>
-
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">TwitterAPI&#8217;s Documentation</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
-
-  <h4>Next topic</h4>
-  <p class="topless"><a href="modules/modules.html"
-                        title="next chapter">TwitterAPI</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
+      <div class="header"><h1 class="heading"><a href="#">
+          <span>TwitterAPI 2.2.4 documentation</span></a></h1>
+        <h2 class="heading"><span>Introduction</span></h2>
       </div>
+      <div class="topnav">
+      
+        <p>
+        <a class="uplink" href="#">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="twitterapi.html">TwitterAPI.TwitterAPI</a>&#160;&#160;»
+        </p>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  <div class="section" id="twitterapi-s-documentation">
-<h1>TwitterAPI&#8217;s Documentation<a class="headerlink" href="#twitterapi-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p><em>Minimal Python wrapper for Twitter&#8217;s REST and Streaming APIs</em></p>
+<p>The principle behind TwitterAPI&#8217;s design is to provide a single method for accessing any Twitter API endpoint. The method may be called with <em>any</em> endpoint found on Twitter&#8217;s <a class="reference external" href="https://dev.twitter.com/overview/documentation">developer site</a>, the complete reference for all endpoint. The benefits of a single method approach is very little code and just a single method to learn. Here is a quck example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">TwitterAPI</span> <span class="kn">import</span> <span class="n">TwitterAPI</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">TwitterAPI</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">,</span> <span class="n">access_token_key</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;search/tweets&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;q&#39;</span><span class="p">:</span><span class="s">&#39;pizza&#39;</span><span class="p">})</span>
+<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+</pre></div>
+</div>
+<p>If you want the response string containing the raw tweets you would use <tt class="docutils literal"><span class="pre">r.text</span></tt>. However, you also have the option of a powerful iterator:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
+    <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">][</span><span class="s">&#39;screen_name&#39;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;text&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>As you can see, the iterator returns decoded JSON objects. What makes the iterator very powerful is it works with both REST API and Streaming API endpoints. No syntax changes required; just supply the endpoint and the parameters.</p>
+<p>TwiterAPI works with Python 2 and Python 3. It authenticates using either OAauth 1 or OAuth 2. Proxy authentication is also supported. All with very little code change for you.</p>
+</div>
+<div class="section" id="modules">
+<h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules/modules.html">TwitterAPI</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules/TwitterAPI.html">TwitterAPI package</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="twitterapi.html">TwitterAPI.TwitterAPI</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
-<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+<p>Optional:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="twitterrestpager.html">TwitterAPI.TwitterRestPager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twitteroauth.html">TwitterAPI.TwitterOAuth</a></li>
 </ul>
+</div>
 </div>
 
 
-          </div>
-        </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="modules/modules.html" title="TwitterAPI"
-             >next</a> |</li>
-        <li><a href="#">home</a>|&nbsp;</li>
-        <li><a href="search.html">search</a>|&nbsp;</li>
- 
-      </ul>
-    </div>
+      <div class="bottomnav">
+      
+        <p>
+        <a class="uplink" href="#">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="twitterapi.html">TwitterAPI.TwitterAPI</a>&#160;&#160;»
+        </p>
+
+      </div>
+
     <div class="footer">
-        &copy; Copyright 2013, Jonas Geduldig.
+        &copy; Copyright 2014, Jonas Geduldig.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
     </div>
   </body>
