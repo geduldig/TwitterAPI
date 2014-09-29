@@ -19,15 +19,18 @@ class TwitterRestPager(object):
         self.resource = resource
         self.params = params
 
-    def get_iterator(self, wait=5, new_tweets=False):
+    def get_iterator(self, wait=5, new_tweets=False, stop_on_empty=False):
         """Iterate response from Twitter REST API resource.  Resource is called
         in a loop to retrieve consecutive pages of results.
 
         :param wait: Integer number (default=5) of seconds wait between requests.
                      Depending on the resource, appropriate values are 5 or 60 seconds.
-        :param new_tweets: Boolean determining the search direction
+        :param new_tweets: Boolean determining the search direction.
                            False (default) retrieves old results.
                            True retrieves current results.
+        :param stop_on_empty: Boolean determining what happens when no results found. 
+                              False (default) to not stop requesting more results. 
+                              True to exit.
 
         :returns: JSON objects containing statuses, errors or other return info.
         """
@@ -35,8 +38,8 @@ class TwitterRestPager(object):
         while True:
             # get one page of results
             start = time.time()
-            req = self.api.request(self.resource, self.params)
-            it = req.get_iterator()
+            r = self.api.request(self.resource, self.params)
+            it = r.get_iterator()
             if new_tweets:
                 it = reversed(list(it))
 
@@ -47,6 +50,10 @@ class TwitterRestPager(object):
                     id = item['id']
                 yield item
 
+			# user can elect to bail when no results
+            if id is None and stop_on_empty:
+            	break
+
             # sleep before getting another page of results
             elapsed = time.time() - start
             pause = wait - elapsed if elapsed < wait else 0
@@ -55,7 +62,7 @@ class TwitterRestPager(object):
             # use the first or last tweet id to limit (depending on the newer/older direction)
             # the next request
             if id is None:
-                continue
+            	continue
             elif new_tweets:
                 self.params['since_id'] = str(id)
             else:
