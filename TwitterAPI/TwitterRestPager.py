@@ -19,7 +19,7 @@ class TwitterRestPager(object):
         self.resource = resource
         self.params = params
 
-    def get_iterator(self, wait=5, new_tweets=False, stop_on_empty=False):
+    def get_iterator(self, wait=5, new_tweets=False):
         """Iterate response from Twitter REST API resource.  Resource is called
         in a loop to retrieve consecutive pages of results.
 
@@ -28,9 +28,6 @@ class TwitterRestPager(object):
         :param new_tweets: Boolean determining the search direction.
                            False (default) retrieves old results.
                            True retrieves current results.
-        :param stop_on_empty: Boolean determining what happens when no results found. 
-                              False (default) to not stop requesting more results. 
-                              True to exit.
 
         :returns: JSON objects containing statuses, errors or other return info.
         """
@@ -50,8 +47,8 @@ class TwitterRestPager(object):
                     id = item['id']
                 yield item
 
-			# user can elect to bail when no results
-            if id is None and stop_on_empty:
+			# bail when no more older results
+            if id is None and not new_tweets:
             	break
 
             # sleep before getting another page of results
@@ -59,8 +56,8 @@ class TwitterRestPager(object):
             pause = wait - elapsed if elapsed < wait else 0
             time.sleep(pause)
 
-            # use the first or last tweet id to limit (depending on the newer/older direction)
-            # the next request
+            # use the first id to limit the next batch of newer tweets, or
+            # use the last id to limit the next batch of older tweets
             if id is None:
             	continue
             elif new_tweets:
