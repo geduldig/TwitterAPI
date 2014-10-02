@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; TwitterAPI 2.2.4 documentation</title>
+    <title>Introduction &mdash; TwitterAPI 2.2 documentation</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.2.4',
+        VERSION:     '2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,12 +25,12 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
-    <link rel="top" title="TwitterAPI 2.2.4 documentation" href="#" />
-    <link rel="next" title="TwitterAPI.TwitterAPI" href="twitterapi.html" /> 
+    <link rel="top" title="TwitterAPI 2.2 documentation" href="#" />
+    <link rel="next" title="Authentication" href="authentication.html" /> 
   </head>
   <body>
       <div class="header"><h1 class="heading"><a href="#">
-          <span>TwitterAPI 2.2.4 documentation</span></a></h1>
+          <span>TwitterAPI 2.2 documentation</span></a></h1>
         <h2 class="heading"><span>Introduction</span></h2>
       </div>
       <div class="topnav">
@@ -38,7 +38,7 @@
         <p>
         <a class="uplink" href="#">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="twitterapi.html">TwitterAPI.TwitterAPI</a>&#160;&#160;»
+        <a href="authentication.html">Authentication</a>&#160;&#160;»
         </p>
 
       </div>
@@ -48,20 +48,31 @@
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p><em>Minimal Python wrapper for Twitter&#8217;s REST and Streaming APIs</em></p>
-<p>The principle behind TwitterAPI&#8217;s design is to provide a single method for accessing any Twitter API endpoint. The method may be called with <em>any</em> endpoint found on Twitter&#8217;s <a class="reference external" href="https://dev.twitter.com/overview/documentation">developer site</a>, the complete reference for all endpoint. The benefits of a single method approach is very little code and just a single method to learn. Here is a quck example:</p>
+<p>The principle behind TwitterAPI&#8217;s design is to provide a single method for accessing the Twitter API. The method <tt class="docutils literal"><span class="pre">request</span></tt> may be called with <em>any</em> endpoint found on Twitter&#8217;s <a class="reference external" href="https://dev.twitter.com/overview/documentation">developer site</a>, the complete reference for all endpoints. The benefits of a single method approach are very little code for me to maintain and just a single method for you to learn. Here is a quck example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">TwitterAPI</span> <span class="kn">import</span> <span class="n">TwitterAPI</span>
 <span class="n">api</span> <span class="o">=</span> <span class="n">TwitterAPI</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">,</span> <span class="n">access_token_key</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;search/tweets&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;q&#39;</span><span class="p">:</span><span class="s">&#39;pizza&#39;</span><span class="p">})</span>
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 </pre></div>
 </div>
-<p>If you want the response string containing the raw tweets you would use <tt class="docutils literal"><span class="pre">r.text</span></tt>. However, you also have the option of a powerful iterator:</p>
+<p>If you want Twitter&#8217;s entire response as one long string, containing tweets in this example, you would use <tt class="docutils literal"><span class="pre">r.text</span></tt>. But, often an iterator is more useful:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
     <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">][</span><span class="s">&#39;screen_name&#39;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;text&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>As you can see, the iterator returns decoded JSON objects. What makes the iterator very powerful is it works with both REST API and Streaming API endpoints. No syntax changes required; just supply the endpoint and the parameters.</p>
-<p>TwiterAPI works with Python 2 and Python 3. It authenticates using either OAauth 1 or OAuth 2. Proxy authentication is also supported. All with very little code change for you.</p>
+<p>As you can see, the iterator returns decoded JSON objects. What makes the iterator very powerful is it works with both REST API and Streaming API endpoints. No syntax changes required; just supply any endpoint and parameters that are found on Twitter&#8217;s dev site.</p>
+<p>TwitterAPI works with Python 2 or Python 3. It authenticates using either OAauth 1 or OAuth 2. It also supports web proxy server authentication. All with very little code change for you.</p>
+</div>
+<div class="section" id="topics">
+<h1>Topics<a class="headerlink" href="#topics" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">Error Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="paging.html">Paging Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tiny Examples</a></li>
+</ul>
+</div>
 </div>
 <div class="section" id="modules">
 <h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
@@ -86,7 +97,7 @@
         <p>
         <a class="uplink" href="#">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="twitterapi.html">TwitterAPI.TwitterAPI</a>&#160;&#160;»
+        <a href="authentication.html">Authentication</a>&#160;&#160;»
         </p>
 
       </div>
