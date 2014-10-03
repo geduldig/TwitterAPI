@@ -66,3 +66,5 @@ v2.2.0,    22 Jun 2014 -- Added indent option to cli.py.
 v2.2.3,    26 Aug 2014 -- Fix POST request for query string.
 
 v2.2.4,    25 Sep 2014 -- Merged tangentmonger-alternative branch with cleaner iterator syntax.
+
+v2.2.5,    25 Sep 2014 -- Added sphinx docs builder.
