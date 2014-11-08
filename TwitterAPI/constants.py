@@ -49,6 +49,7 @@ REST_ENDPOINTS = {
 		'statuses/retweets_of_me':                 ('GET',),
 		'statuses/retweet/:PARAM':                 ('POST',),  # ID
 		'statuses/retweets/:PARAM':                ('GET',),   # ID
+		'statuses/retweeters/ids':                 ('GET',),
 		'statuses/show/:PARAM':                    ('GET',),   # ID
 		'statuses/user_timeline':                  ('GET',),
 		'statuses/update':                         ('POST',),
