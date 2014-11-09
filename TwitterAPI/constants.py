@@ -44,16 +44,19 @@ REST_ENDPOINTS = {
 
 		'statuses/destroy/:PARAM':                 ('POST',),  # ID
 		'statuses/home_timeline':                  ('GET',),
+		'statuses/lookup':                         ('GET',),
 		'statuses/mentions_timeline':              ('GET',),
 		'statuses/oembed':                         ('GET',),
-		'statuses/retweets_of_me':                 ('GET',),
 		'statuses/retweet/:PARAM':                 ('POST',),  # ID
-		'statuses/retweets/:PARAM':                ('GET',),   # ID
 		'statuses/retweeters/ids':                 ('GET',),
+		'statuses/retweets/:PARAM':                ('GET',),   # ID
+		'statuses/retweets_of_me':                 ('GET',),
 		'statuses/show/:PARAM':                    ('GET',),   # ID
 		'statuses/user_timeline':                  ('GET',),
 		'statuses/update':                         ('POST',),
-		'statuses/update_with_media':              ('POST',),
+		'statuses/update_with_media':              ('POST',),  # [deprecated]
+
+		'media/upload':                            ('POST',),
 
 		'search/tweets':                           ('GET',),
 
@@ -104,6 +107,11 @@ REST_ENDPOINTS = {
 		'users/suggestions/:PARAM':                ('GET',),  # SLUG
 		'users/suggestions/:PARAM/members':        ('GET',),  # SLUG
 
+		'mutes/users/create':                      ('POST',),
+		'mutes/users/destroy':                     ('POST',),
+		'mutes/users/ids':                         ('GET',),
+		'mutes/users/list':                        ('GET',),
+
 		'favorites/create':                        ('POST',),
 		'favorites/destroy':                       ('POST',),
 		'favorites/list':                          ('GET',),
@@ -118,6 +126,7 @@ REST_ENDPOINTS = {
 		'lists/members/destroy_all':               ('POST',),
 		'lists/members/show':                      ('GET',),
 		'lists/memberships':                       ('GET',),
+		'lists/ownerships':                        ('GET',),
 		'lists/show':                              ('GET',),
 		'lists/statuses':                          ('GET',),
 		'lists/subscribers':                       ('GET',),
