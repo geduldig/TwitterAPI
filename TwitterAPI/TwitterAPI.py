@@ -76,27 +76,25 @@ class TwitterAPI(object):
 
         :returns: TwitterAPI.TwitterResponse object
         """
+        resource, endpoint = self._get_endpoint(resource)        
+        if endpoint not in ENDPOINTS:
+            raise Exception('Endpoint "%s" unsupported' % endpoint)
         session = requests.Session()
         session.auth = self.auth
         session.headers = {'User-Agent': USER_AGENT}
-        resource, endpoint = self._get_endpoint(resource)
-        if endpoint in STREAMING_ENDPOINTS:
-            session.stream = True
-            method = 'GET' if params is None else 'POST'
-            url = self._prepare_url(STREAMING_ENDPOINTS[endpoint][0], resource)
-            timeout = STREAMING_SOCKET_TIMEOUT
-        elif endpoint in REST_ENDPOINTS:
-            session.stream = False
-            method = REST_ENDPOINTS[endpoint][0]
-            url = self._prepare_url(REST_SUBDOMAIN, resource)
-            timeout = REST_SOCKET_TIMEOUT
-        else:
-            raise Exception('"%s" is not valid endpoint' % resource)
+        method, subdomain = ENDPOINTS[endpoint]
+        url = self._prepare_url(subdomain, resource)
         if method is 'POST':
             data = params
             params = None
         else:
             data = None
+		if 'stream' in subdomain:
+			session.stream = True
+			timeout = STREAMING_TIMEOUT
+		else:
+			session.stream = False
+			timeout = REST_TIMEOUT
         r = session.request(
             method,
             url,
@@ -194,13 +192,17 @@ class _StreamingIterable(object):
     """
 
     def __init__(self, response):
-        self.results = response.iter_lines(1)
+        #self.results = response.iter_lines(1)
+        self.results = response.iter_lines()
 
     def __iter__(self):
         """Return a tweet status as a JSON object."""
         for item in self.results:
             if item:
-                yield json.loads(item.decode('utf-8'))
+                try:
+                    yield json.loads(item.decode('utf-8'))
+                except ValueError:
+                	continue
 
 
 def RestIterator(*args, **kwargs):

@@ -1,3 +1,8 @@
+'''
+The method in this example for uploading image files is depricated.
+See update_media.py for the recommeded way to tweet an image.
+'''
+
 from TwitterAPI import TwitterAPI
 
 
