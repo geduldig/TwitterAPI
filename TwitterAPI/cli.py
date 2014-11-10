@@ -46,7 +46,7 @@ def _search(name, obj):
     q.append(obj)
     while q:
         obj = q.pop(0)
-        if hasattr(obj, '__iter__'):
+        if hasattr(obj, '__iter__') and type(obj) is not str:
             isdict = isinstance(obj, dict)
             if isdict and name in obj:
                 return obj[name]
@@ -120,6 +120,8 @@ if __name__ == '__main__':
             oauth.access_token_key,
             oauth.access_token_secret)
         response = api.request(args.endpoint, params)
+        if response.status_code != 200:
+        	raise Exception(response.text)
 
         for item in response.get_iterator():
             if 'message' in item:
