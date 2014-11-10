@@ -192,8 +192,7 @@ class _StreamingIterable(object):
     """
 
     def __init__(self, response):
-        #self.results = response.iter_lines(1)
-        self.results = response.iter_lines()
+        self.results = response.iter_lines(1)
 
     def __iter__(self):
         """Return a tweet status as a JSON object."""
