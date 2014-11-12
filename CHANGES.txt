@@ -73,3 +73,5 @@ v2.2.6,    12 Nov 2014 -- Silenced ValueError for streaming endpoints.
                           Fixed cli.py field search for streaming endpoints.
                           Updated constants.py with new endpoints - media/upload has new example.
                           Streaming always uses 'delimited=length'.
+
+v2.2.7,    12 Nov 2014 -- Fix streaming delimited.

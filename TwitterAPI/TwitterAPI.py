@@ -84,19 +84,21 @@ class TwitterAPI(object):
         session.headers = {'User-Agent': USER_AGENT}
         method, subdomain = ENDPOINTS[endpoint]
         url = self._prepare_url(subdomain, resource)
+        if 'stream' in subdomain:
+            session.stream = True
+            timeout = STREAMING_TIMEOUT
+            # always use 'delimited' for efficient stream parsing
+            if not params:
+                params = {}
+            params['delimited'] = 'length'
+        else:
+            session.stream = False
+            timeout = REST_TIMEOUT
         if method is 'POST':
             data = params
             params = None
         else:
             data = None
-        if 'stream' in subdomain:
-            session.stream = True
-            timeout = STREAMING_TIMEOUT
-            # always use 'delimited' for efficient stream parsing
-            params['delimited'] = 'length'
-        else:
-            session.stream = False
-            timeout = REST_TIMEOUT
         r = session.request(
             method,
             url,
@@ -224,7 +226,7 @@ class _StreamingIterable(object):
                 try:
                     yield json.loads(item.decode('utf-8'))
                 except ValueError:
-                	continue
+                    continue
 
 
 def RestIterator(*args, **kwargs):
