@@ -84,12 +84,17 @@
 </div>
 <div class="section" id="post-a-tweet-with-a-picture">
 <h2>Post a tweet with a picture<a class="headerlink" href="#post-a-tweet-with-a-picture" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;./image_of_pizza.png&#39;</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># STEP 1 - upload image</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;./image_of_pizza.png&#39;</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;statuses/update_with_media&#39;</span><span class="p">,</span>
-                <span class="p">{</span><span class="s">&#39;status&#39;</span><span class="p">:</span><span class="s">&#39;I found pizza!&#39;</span><span class="p">},</span>
-                <span class="p">{</span><span class="s">&#39;media[]&#39;</span><span class="p">:</span><span class="n">data</span><span class="p">})</span>
-<span class="k">print</span> <span class="s">&#39;SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s">&#39;FAILURE&#39;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;media/upload&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;media&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">})</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&#39;UPLOAD MEDIA SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s">&#39;UPLOAD MEDIA FAILURE&#39;</span><span class="p">)</span>
+
+<span class="c"># STEP 2 - post tweet with reference to uploaded image</span>
+<span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="n">media_id</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">&#39;media_id&#39;</span><span class="p">]</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;statuses/update&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;status&#39;</span><span class="p">:</span><span class="s">&#39;I found pizza!&#39;</span><span class="p">,</span> <span class="s">&#39;media_ids&#39;</span><span class="p">:</span><span class="n">media_id</span><span class="p">})</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;UPDATE STATUS SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s">&#39;UPDATE STATUS FAILURE&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
