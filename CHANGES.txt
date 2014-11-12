@@ -68,3 +68,8 @@ v2.2.3,    26 Aug 2014 -- Fix POST request for query string.
 v2.2.4,    25 Sep 2014 -- Merged tangentmonger-alternative branch with cleaner iterator syntax.
 
 v2.2.5,    25 Sep 2014 -- Added sphinx docs builder.
+
+v2.2.6,    12 Nov 2014 -- Silenced ValueError for streaming endpoints.
+                          Fixed cli.py field search for streaming endpoints.
+                          Updated constants.py with new endpoints - media/upload has new example.
+                          Streaming always uses 'delimited=length'.

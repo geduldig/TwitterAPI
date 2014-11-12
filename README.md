@@ -1,9 +1,7 @@
-![](logo.png?raw=true)
-
-TwitterAPI 
-==========
 [![Downloads](https://pypip.in/d/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI)
 [![Downloads](https://pypip.in/v/TwitterAPI/badge.png)](https://crate.io/packages/TwitterAPI) 
+
+# ![](https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png) TwitterAPI
 
 This Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches.  
 
@@ -64,8 +62,3 @@ Installation
 Documentation
 -------------
 * [Modules](http://geduldig.github.com/TwitterAPI)
-	
-Contributors
-------------
-* Jonas Geduldig
-* Andrea Biancini

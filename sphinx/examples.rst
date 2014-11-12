@@ -44,12 +44,18 @@ Post a tweet with a picture
 
 .. code-block:: python 
 
+    # STEP 1 - upload image
     file = open('./image_of_pizza.png', 'rb')
     data = file.read()
-    r = api.request('statuses/update_with_media',
-                    {'status':'I found pizza!'},
-                    {'media[]':data})
-    print 'SUCCESS' if r.status_code == 200 else 'FAILURE'
+    r = api.request('media/upload', None, {'media': data})
+    print('UPLOAD MEDIA SUCCESS' if r.status_code == 200 else 'UPLOAD MEDIA FAILURE')
+
+    # STEP 2 - post tweet with reference to uploaded image
+    if r.status_code == 200:
+	    media_id = r.json()['media_id']
+	    r = api.request('statuses/update', {'status':'I found pizza!', 'media_ids':media_id})
+	    print('UPDATE STATUS SUCCESS' if r.status_code == 200 else 'UPDATE STATUS FAILURE')
+
 
 Stream tweets 
 -------------

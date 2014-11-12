@@ -89,12 +89,14 @@ class TwitterAPI(object):
             params = None
         else:
             data = None
-		if 'stream' in subdomain:
-			session.stream = True
-			timeout = STREAMING_TIMEOUT
-		else:
-			session.stream = False
-			timeout = REST_TIMEOUT
+        if 'stream' in subdomain:
+            session.stream = True
+            timeout = STREAMING_TIMEOUT
+            # always use 'delimited' for efficient stream parsing
+            params['delimited'] = 'length'
+        else:
+            session.stream = False
+            timeout = REST_TIMEOUT
         r = session.request(
             method,
             url,
@@ -132,6 +134,10 @@ class TwitterResponse(object):
     def text(self):
         """:returns: Raw API response text."""
         return self.response.text
+        
+    def json(self):
+        """:returns: response as JSON object."""
+        return self.response.json()
 
     def get_iterator(self):
         """:returns: Iterator for tweets or other message objects in response."""
@@ -144,7 +150,7 @@ class TwitterResponse(object):
         return self.get_iterator()
 
     def get_rest_quota(self):
-        """:returns: Quota information in the response header.  Valid only for REST API responses."""
+        """:returns: Quota information in the REST-only response header."""
         remaining, limit, reset = None, None, None
         if self.response:
             if 'x-rate-limit-remaining' in self.response.headers:
@@ -166,6 +172,7 @@ class _RestIterable(object):
 
     def __init__(self, response):
         resp = response.json()
+        # hack to force json response into something iterable
         if 'errors' in resp:
             self.results = resp['errors']
         elif 'statuses' in resp:
@@ -192,11 +199,27 @@ class _StreamingIterable(object):
     """
 
     def __init__(self, response):
-        self.results = response.iter_lines(1)
-
+        self.stream = response.raw
+    
+    def _iter_stream(self):
+        """Return next item in the stream (with or without 'delimited')."""
+        while True:
+            item = None
+            buf = bytearray()
+            while True:
+                # add bytes until item boundary reached
+                buf += self.stream.read(1)
+                if buf[-2:] == b'\r\n': 
+                    item = buf[0:-2]
+                    # when delimited=length, use byte size to read next item
+                    if item.isdigit():  
+                        item = self.stream.read(int(item))
+                    break
+            yield item
+    
     def __iter__(self):
         """Return a tweet status as a JSON object."""
-        for item in self.results:
+        for item in self._iter_stream():
             if item:
                 try:
                     yield json.loads(item.decode('utf-8'))
@@ -207,7 +230,7 @@ class _StreamingIterable(object):
 def RestIterator(*args, **kwargs):
     """Deprecated. Use _RestIterable instead."""
     from warnings import warn
-    warn('RestIterator is deprecated. Use _RestIterable instead',
+    warn('RestIterator is deprecated. Use _RestIterable instead.',
          DeprecationWarning,
          stacklevel=2)
     return _RestIterable(*args, **kwargs)
@@ -216,7 +239,7 @@ def RestIterator(*args, **kwargs):
 def StreamingIterator(*args, **kwargs):
     """Deprecated. Use _StreamingIterable instead."""
     from warnings import warn
-    warn('StreamingIterator is deprecated. Use _StreamingIterable instead',
+    warn('StreamingIterator is deprecated. Use _StreamingIterable instead.',
          DeprecationWarning,
          stacklevel=2)
     return _StreamingIterable(*args, **kwargs)
