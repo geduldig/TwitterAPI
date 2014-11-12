@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Paging Results &mdash; TwitterAPI 2.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="TwitterAPI 2.2 documentation" href="index.html" />
+    <link rel="next" title="Tiny Examples" href="examples.html" />
+    <link rel="prev" title="Error Handling" href="errors.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>TwitterAPI 2.2 documentation</span></a></h1>
+        <h2 class="heading"><span>Paging Results</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="errors.html">Error Handling</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="examples.html">Tiny Examples</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="paging-results">
+<h1>Paging Results<a class="headerlink" href="#paging-results" title="Permalink to this headline">¶</a></h1>
+<p>Paging refers to getting successive batches of results. The Streaming API endpoints in a sense do this inherently. REST API endpoints will never return more than a specificied maximum number of results. When you request <cite>search/tweets</cite>, for example, by default you will get at most 20 tweets. You can increase that number to a maximum of 100. This is the page size. Twitter <a class="reference external" href="http://dev.twitter.com/rest/public/timelines">provides</a> a way to get successive pages, so it is possible to get more than 100 tweets with <cite>search/tweets</cite>, just not in a single request.</p>
+<p>If you don&#8217;t want to implement paging yourself, you can use the <a class="reference external" href="./twitterrestpager.html">TwitterRestPager</a> helper class with any REST API endpoint that returns multiples of something. The following, for example, searches for all tweets containing &#8216;pizza&#8217; that Twitter has stored &#8211; about a week&#8217;s worth.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">r</span> <span class="o">=</span> <span class="n">TwitterRestPager</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s">&#39;search/tweets&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;q&#39;</span><span class="p">:</span><span class="s">&#39;pizza&#39;</span><span class="p">,</span> <span class="s">&#39;count&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;text&#39;</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="s">&#39;message&#39;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">88</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;SUSPEND, RATE LIMIT EXCEEDED: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;message&#39;</span><span class="p">]</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="errors.html">Error Handling</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="examples.html">Tiny Examples</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, Jonas Geduldig.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>
