@@ -75,3 +75,5 @@ v2.2.6,    12 Nov 2014 -- Silenced ValueError for streaming endpoints.
                           Streaming always uses 'delimited=length'.
 
 v2.2.7,    12 Nov 2014 -- Fix streaming delimited.
+
+v2.2.8,    12 Nov 2014 -- Fix error in BearerAuth.py for OAuth 2.
