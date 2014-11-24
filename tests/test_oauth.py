@@ -20,7 +20,7 @@ class OAuthTest(unittest.TestCase):
 		self.assertEqual(status_code, 200)
 
 	def test_oauth_2(self):
-		"""Test user authentication."""
+		"""Test application authentication."""
 		api = TwitterAPI(self.oa.consumer_key, self.oa.consumer_secret,
 		                 auth_type='oAuth2')
 		status_code = self.verify_credentials(api)
