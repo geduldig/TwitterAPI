@@ -2,12 +2,14 @@ __author__ = "Jonas Geduldig"
 __date__ = "June 7, 2013"
 __license__ = "MIT"
 
-from .constants import *
-import json
-from requests_oauthlib import OAuth1
 from .BearerAuth import BearerAuth as OAuth2
+from .constants import *
 from datetime import datetime
+import json
+import logging
 import requests
+from requests_oauthlib import OAuth1
+from .TwitterError import *
 
 
 class TwitterAPI(object):
@@ -208,25 +210,41 @@ class _StreamingIterable(object):
         while True:
             item = None
             buf = bytearray()
-            while True:
-                # add bytes until item boundary reached
-                buf += self.stream.read(1)
-                if buf[-2:] == b'\r\n': 
-                    item = buf[0:-2]
-                    # when delimited=length, use byte size to read next item
-                    if item.isdigit():  
-                        item = self.stream.read(int(item))
-                    break
-            yield item
+            try:
+                while True:
+                    # add bytes until item boundary reached
+                    buf += self.stream.read(1)
+                    if buf[-2:] == b'\r\n': 
+                        item = buf[0:-2]
+                        # when delimited=length, use byte size to read next item
+                        if item.isdigit():  
+                            nbytes = int(item)
+                            item = None
+                            item = self.stream.read(nbytes)
+                        break
+                if item:
+    		        yield item
+            except requests.packages.urllib3.exceptions.ReadTimeoutError as e:
+                # client must re-connect
+                logging.info('%s %s' % (type(e), e))
+                raise TwitterConnectionError(e)
+            except requests.packages.urllib3.exceptions.ProtocolError as e:
+                # fewer than expected bytes received
+                logging.info('%s %s' % (type(e), e))
+            except Exception as e:
+                logging.error('%s %s, BUF: %s' % (type(e), e, buf), exc_info=True)
     
     def __iter__(self):
         """Return a tweet status as a JSON object."""
         for item in self._iter_stream():
             if item:
                 try:
-                    yield json.loads(item.decode('utf-8'))
-                except ValueError:
-                    continue
+                    yield json.loads(item.decode('utf8'))
+                except ValueError as e:
+                    # ignore mal-formed JSON string
+                    logging.info('%s %s' % (type(e), e))
+                except Exception as e:
+                    logging.error('%s %s, ITEM: %s' % (type(e), e, item), exc_info=True)
 
 
 def RestIterator(*args, **kwargs):
