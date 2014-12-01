@@ -8,6 +8,11 @@ from datetime import datetime
 import json
 import logging
 import requests
+from requests.packages.urllib3.exceptions import (
+    ReadTimeoutError, 
+    ProtocolError, 
+    ConnectionError
+)
 from requests_oauthlib import OAuth1
 from .TwitterError import *
 
@@ -224,13 +229,10 @@ class _StreamingIterable(object):
                         break
                 if item:
     		        yield item
-            except requests.packages.urllib3.exceptions.ReadTimeoutError as e:
+            except (ConnectionError, ProtocolError, ReadTimeoutError) as e:
                 # client must re-connect
                 logging.info('%s %s' % (type(e), e))
                 raise TwitterConnectionError(e)
-            except requests.packages.urllib3.exceptions.ProtocolError as e:
-                # fewer than expected bytes received
-                logging.info('%s %s' % (type(e), e))
             except Exception as e:
                 logging.error('%s %s, BUF: %s' % (type(e), e, buf), exc_info=True)
     
