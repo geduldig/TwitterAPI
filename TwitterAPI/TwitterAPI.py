@@ -8,11 +8,7 @@ from datetime import datetime
 import json
 import logging
 import requests
-from requests.packages.urllib3.exceptions import (
-    ReadTimeoutError, 
-    ProtocolError, 
-    ConnectionError
-)
+from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from requests_oauthlib import OAuth1
 from .TwitterError import *
 
@@ -227,16 +223,14 @@ class _StreamingIterable(object):
                             item = None
                             item = self.stream.read(nbytes)
                         break
-                if item:
-    		        yield item
-            except (ConnectionError, ProtocolError, ReadTimeoutError) as e:
+    	        yield item
+            except (ProtocolError, ReadTimeoutError) as e:
                 # client must re-connect
                 logging.info('%s %s' % (type(e), e.message))
                 raise TwitterConnectionError(e)
             except Exception as e:
                 # ignore the rest
-                logging.error('%s %s, BUF: %s' % 
-                              (type(e), e.message, buf), exc_info=True)
+                logging.error('%s %s' % (type(e), e.message), exc_info=True)
     
     def __iter__(self):
         """Return a tweet status as a JSON object."""
@@ -249,8 +243,7 @@ class _StreamingIterable(object):
                     logging.info('%s %s' % (type(e), e.message))
                 except Exception as e:
                     # ignore the rest
-                    logging.error('%s %s, ITEM: %s' % 
-                                  (type(e), e.message, item), exc_info=True)
+                    logging.error('%s %s' % (type(e), e.message), exc_info=True)
 
 
 def RestIterator(*args, **kwargs):
