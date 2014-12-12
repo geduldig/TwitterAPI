@@ -8,6 +8,7 @@ from datetime import datetime
 import json
 import logging
 import requests
+from requests.exceptions import ConnectionError
 from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from requests_oauthlib import OAuth1
 from .TwitterError import *
@@ -225,7 +226,7 @@ class _StreamingIterable(object):
                             item = self.stream.read(nbytes)
                         break
     	        yield item
-            except (ProtocolError, ReadTimeoutError) as e:
+            except (ConnectionError, ProtocolError, ReadTimeoutError) as e:
                 # client must re-connect
                 logging.info('%s %s' % (type(e), e.message))
                 raise TwitterConnectionError(e)
@@ -240,7 +241,7 @@ class _StreamingIterable(object):
                 try:
                     yield json.loads(item.decode('utf8'))
                 except ValueError as e:
-                    # assume corrupted JSON string was caused by stream disturbance
+                    # assume corrupted JSON string caused by stream disturbance
                     logging.info('%s %s' % (type(e), e.message))
                     raise TwitterConnectionError(e)
                 except Exception as e:

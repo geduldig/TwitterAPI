@@ -22,7 +22,7 @@ api = TwitterAPI(o.consumer_key,
                  o.access_token_key, 
                  o.access_token_secret)
 
-interval = 5
+interval = 5 # seconds
 
 while True:
 	total_count = 0
