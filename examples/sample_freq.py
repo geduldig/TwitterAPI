@@ -35,7 +35,8 @@ while True:
 			if 'text' in item:
 				interval_count += 1
 				total_count += 1
-				#print(item['text'])
+			elif 'warning' in item:
+				print(item['warning'])
 			# PRINT TWEETS PER SECOND
 			now = time.time()
 			elapsed = now - interval_start

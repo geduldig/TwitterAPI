@@ -94,6 +94,7 @@ class TwitterAPI(object):
             if not params:
                 params = {}
             params['delimited'] = 'length'
+            params['stall_warning'] = 'true'
         else:
             session.stream = False
             timeout = REST_TIMEOUT
@@ -239,8 +240,9 @@ class _StreamingIterable(object):
                 try:
                     yield json.loads(item.decode('utf8'))
                 except ValueError as e:
-                    # ignore mal-formed JSON string
+                    # assume corrupted JSON string was caused by stream disturbance
                     logging.info('%s %s' % (type(e), e.message))
+                    raise TwitterConnectionError(e)
                 except Exception as e:
                     # ignore the rest
                     logging.error('%s %s' % (type(e), e.message), exc_info=True)
