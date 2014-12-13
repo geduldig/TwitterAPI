@@ -22,30 +22,45 @@ api = TwitterAPI(o.consumer_key,
                  o.access_token_key, 
                  o.access_token_secret)
 
-interval = 5 # seconds
+
+class Frequency:
+	def __init__(self):
+		self.interval = 5 # seconds
+		self.total_count = 0
+		self.total_start = time.time()
+		self.interval_count = 0
+		self.interval_start = self.total_start
+
+	def record(self):
+		self.interval_count += 1
+		self.total_count += 1
+		now = time.time()
+		elapsed = now - self.interval_start
+		if elapsed >= self.interval:
+			print('%d\t%d\t%d' % (int(self.interval_count/elapsed), 
+			                      self.total_count,
+			                      int(self.total_count/(now-self.total_start))))
+			self.interval_start = now
+			self.interval_count = 0
+
+
+freq = Frequency()
+
 
 while True:
-	total_count = 0
-	total_start = time.time()
-	interval_count = 0
-	interval_start = total_start
 	try:
 		r = api.request('statuses/sample')
 		for item in r:
 			if 'text' in item:
-				interval_count += 1
-				total_count += 1
+				freq.record()
+			elif 'limit' in item:
+				logging.info('TWEETS SKIPPED: %s' % item['limit']['track'])
 			elif 'warning' in item:
-				print(item['warning'])
-			# PRINT TWEETS PER SECOND
-			now = time.time()
-			elapsed = now - interval_start
-			if elapsed >= interval:
-				print('%d\t%d\t%d' % (int(interval_count/elapsed), 
-			                      	total_count,
-			                      	int(total_count/(now-total_start))))
-				interval_start = now
-				interval_count = 0
+				logging.info('WARNING: %s' % item['warning'])
+			elif 'disconnect' in item:
+				if item['disconnect']['code'] in [2,5,6,7]:
+					raise Exception('DISCONNECTED: %s' % item['disconnect'])
+				logging.info('RE-CONNECTING: %s' % item['disconnect'])
 	except TwitterError.TwitterConnectionError as e:
 		logging.info('RE-CONNECTING: %s' % type(e))
 	except KeyboardInterrupt:
