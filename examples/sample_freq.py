@@ -58,11 +58,15 @@ while True:
 			elif 'warning' in item:
 				logging.info('WARNING: %s' % item['warning'])
 			elif 'disconnect' in item:
+				# dev.twitter.com/streaming/overview/messages-types#disconnect_messages
 				if item['disconnect']['code'] in [2,5,6,7]:
-					raise Exception('DISCONNECTED: %s' % item['disconnect'])
-				logging.info('RE-CONNECTING: %s' % item['disconnect'])
+					raise Exception(item['disconnect'])
+				else:
+					logging.info('RE-CONNECTING: %s' % item['disconnect'])
+					break
 	except TwitterError.TwitterConnectionError as e:
 		logging.info('RE-CONNECTING: %s' % type(e))
+		continue
 	except KeyboardInterrupt:
 		print('TERMINATED BY USER')
 		break

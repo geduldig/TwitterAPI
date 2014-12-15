@@ -241,7 +241,7 @@ class _StreamingIterable(object):
                 try:
                     yield json.loads(item.decode('utf8'))
                 except ValueError as e:
-                    # assume corrupted JSON string caused by stream disturbance
+                    # probably JSON string corrupted
                     logging.info('%s %s' % (type(e), e.message))
                     raise TwitterConnectionError(e)
                 except Exception as e:
