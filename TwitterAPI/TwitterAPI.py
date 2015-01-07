@@ -184,6 +184,10 @@ class _RestIterable(object):
             self.results = resp['errors']
         elif 'statuses' in resp:
             self.results = resp['statuses']
+        elif 'users' in resp:
+            self.results = resp['users']
+        elif 'ids' in resp:
+            self.results = resp['ids']
         elif hasattr(resp, '__iter__') and not isinstance(resp, dict):
             if len(resp) > 0 and 'trends' in resp[0]:
                 self.results = resp[0]['trends']
