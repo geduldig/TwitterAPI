@@ -2,6 +2,7 @@ __author__ = "Jonas Geduldig"
 __date__ = "June 8, 2013"
 __license__ = "MIT"
 
+import requests
 import time
 
 
@@ -33,34 +34,37 @@ class TwitterRestPager(object):
         """
         elapsed = 0
         while True:
-            # get one page of results
-            start = time.time()
-            r = self.api.request(self.resource, self.params)
-            it = r.get_iterator()
-            if new_tweets:
-                it = reversed(list(it))
+            try:
+                # get one page of results
+                start = time.time()
+                r = self.api.request(self.resource, self.params)
+                it = r.get_iterator()
+                if new_tweets:
+                    it = reversed(list(it))
 
-            # yield each item in the page
-            id = None
-            for item in it:
-                if 'id' in item:
-                    id = item['id']
-                yield item
+                # yield each item in the page
+                id = None
+                for item in it:
+                    if 'id' in item:
+                        id = item['id']
+                    yield item
 
-			# bail when no more older results
-            if id is None and not new_tweets:
-            	break
+	    		# bail when no more older results
+                if id is None and not new_tweets:
+                	break
 
-            # sleep before getting another page of results
-            elapsed = time.time() - start
-            pause = wait - elapsed if elapsed < wait else 0
-            time.sleep(pause)
+                # sleep before getting another page of results
+                elapsed = time.time() - start
+                pause = wait - elapsed if elapsed < wait else 0
+                time.sleep(pause)
 
-            # use the first id to limit the next batch of newer tweets, or
-            # use the last id to limit the next batch of older tweets
-            if id is None:
-            	continue
-            elif new_tweets:
-                self.params['since_id'] = str(id)
-            else:
-                self.params['max_id'] = str(id - 1)
+                # use the first id to limit the next batch of newer tweets, or
+                # use the last id to limit the next batch of older tweets
+                if id is None:
+                	continue
+                elif new_tweets:
+                    self.params['since_id'] = str(id)
+                else:
+                    self.params['max_id'] = str(id - 1)
+            except requests.exceptions.SSLError:
+                continue
