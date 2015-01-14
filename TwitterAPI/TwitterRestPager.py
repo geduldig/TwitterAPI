@@ -2,8 +2,12 @@ __author__ = "Jonas Geduldig"
 __date__ = "June 8, 2013"
 __license__ = "MIT"
 
-import requests
+import logging
 import time
+import requests
+from requests.exceptions import ConnectionError, SSLError
+from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
+from .TwitterError import *
 
 
 class TwitterRestPager(object):
@@ -38,6 +42,10 @@ class TwitterRestPager(object):
                 # get one page of results
                 start = time.time()
                 r = self.api.request(self.resource, self.params)
+                if r.status_code >= 500:
+                    # client must re-connect
+                    logging.warning('Twitter internal server error (%d)' % r.status_code)
+                    continue
                 it = r.get_iterator()
                 if new_tweets:
                     it = reversed(list(it))
@@ -47,6 +55,9 @@ class TwitterRestPager(object):
                 for item in it:
                     if 'id' in item:
                         id = item['id']
+                    if 'code' in item:
+                        if item['code'] == 130 or item['code'] == 131:
+                            raise TwitterConnectionError(item)
                     yield item
 
 	    		# bail when no more older results
@@ -66,5 +77,7 @@ class TwitterRestPager(object):
                     self.params['since_id'] = str(id)
                 else:
                     self.params['max_id'] = str(id - 1)
-            except requests.exceptions.SSLError:
+            except (ConnectionError, ProtocolError, ReadTimeoutError, SSLError) as e:
+                # client must re-connect
+                logging.warning('%s %s' % (type(e), e.message))
                 continue
