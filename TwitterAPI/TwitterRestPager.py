@@ -5,7 +5,7 @@ __license__ = "MIT"
 import logging
 import time
 import requests
-from requests.exceptions import ConnectionError, SSLError
+from requests.exceptions import ConnectionError, ReadTimeout, SSLError
 from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from .TwitterError import *
 
@@ -77,7 +77,7 @@ class TwitterRestPager(object):
                     self.params['since_id'] = str(id)
                 else:
                     self.params['max_id'] = str(id - 1)
-            except (ConnectionError, ProtocolError, ReadTimeoutError, SSLError) as e:
+            except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, SSLError) as e:
                 # client must re-connect
                 logging.warning('%s %s' % (type(e), e.message))
                 continue
