@@ -76,4 +76,6 @@ v2.2.6,    12 Nov 2014 -- Silenced ValueError for streaming endpoints.
 
 v2.2.7,    12 Nov 2014 -- Fix streaming delimited.
 
+v2.2.9,    12 Nov 2014 -- Merged dilmerv fix in constants.py.
+
 v2.2.8,    12 Nov 2014 -- Fix error in BearerAuth.py for OAuth 2.
