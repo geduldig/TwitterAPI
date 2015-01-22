@@ -141,7 +141,7 @@ ENDPOINTS = {
 	'users/contributees':                      ('GET',  'api'),
 	'users/contributors':                      ('GET',  'api'),
 	'users/lookup':                            ('GET',  'api'),
-	'users/profile_banner':                    ('get'   'api'),
+	'users/profile_banner':                    ('GET'   'api'),
 	'users/report_spam':                       ('POST', 'api'),
 	'users/search':                            ('GET',  'api'),
 	'users/show':                              ('GET',  'api'),

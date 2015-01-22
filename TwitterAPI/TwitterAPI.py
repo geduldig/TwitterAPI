@@ -79,6 +79,7 @@ class TwitterAPI(object):
         :param files: Dictionary with multipart-encoded file or None (default)
 
         :returns: TwitterAPI.TwitterResponse object
+        :raises: TwitterConnectionError
         """
         resource, endpoint = self._get_endpoint(resource)        
         if endpoint not in ENDPOINTS:
@@ -104,14 +105,23 @@ class TwitterAPI(object):
             params = None
         else:
             data = None
-        r = session.request(
-            method,
-            url,
-            data=data,
-            params=params,
-            timeout=timeout,
-            files=files,
-            proxies=self.proxies)
+        try:
+            r = session.request(
+                method,
+                url,
+                data=data,
+                params=params,
+                timeout=timeout,
+                files=files,
+                proxies=self.proxies)
+        except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, SSLError) as e:
+            # client must re-connect
+            logging.warning('%s %s' % (type(e), e.message))
+            raise TwitterConnectionError(e)
+    	if r.status_code >= 500:
+            # client must re-connect
+            logging.warning('STATUS CODE %d' % r.status_code)
+            raise TwitterConnectionError(r.status_code)
         return TwitterResponse(r, session.stream)
 
 
@@ -147,13 +157,22 @@ class TwitterResponse(object):
         return self.response.json()
 
     def get_iterator(self):
-        """:returns: Iterator for tweets or other message objects in response."""
+        """Get API dependent iterator.
+        
+        :returns: Iterator for tweets or other message objects in response.
+        :raises: TwitterConnectionError
+        """
         if self.stream:
             return iter(_StreamingIterable(self.response))
         else:
             return iter(_RestIterable(self.response))
 
     def __iter__(self):
+        """Get API dependent iterator.
+        
+        :returns: Iterator for tweets or other message objects in response.
+        :raises: TwitterConnectionError
+        """
         return self.get_iterator()
 
     def get_rest_quota(self):
@@ -179,7 +198,7 @@ class _RestIterable(object):
 
     def __init__(self, response):
         resp = response.json()
-        # hack to force json response into something iterable
+        # convert json response into something iterable
         if 'errors' in resp:
             self.results = resp['errors']
         elif 'statuses' in resp:
@@ -213,7 +232,11 @@ class _StreamingIterable(object):
         self.stream = response.raw
     
     def _iter_stream(self):
-        """Return next item in the stream (with or without 'delimited')."""
+        """Stream parser.
+        
+        :returns: Next item in the stream (may or may not be 'delimited').
+        :raises: TwitterConnectionError
+        """
         while True:
             item = None
             buf = bytearray()
@@ -232,14 +255,18 @@ class _StreamingIterable(object):
     	        yield item
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, SSLError) as e:
                 # client must re-connect
-                logging.info('%s %s' % (type(e), e.message))
+                logging.warning('%s %s' % (type(e), e.message))
                 raise TwitterConnectionError(e)
             except Exception as e:
                 # ignore the rest
                 logging.error('%s %s' % (type(e), e.message), exc_info=True)
     
     def __iter__(self):
-        """Return a tweet status as a JSON object."""
+        """Iterator.
+        
+        :returns: Tweet status as a JSON object.
+        :raises: TwitterConnectionError
+        """
         for item in self._iter_stream():
             if item:
                 try:

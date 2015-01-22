@@ -28,7 +28,7 @@ class TwitterRestPager(object):
         """Iterate response from Twitter REST API resource.  Resource is called
         in a loop to retrieve consecutive pages of results.
 
-        :param wait: Integer number (default=5) of seconds wait between requests.
+        :param wait: Floating point number (default=5) of seconds wait between requests.
                      Depending on the resource, appropriate values are 5 or 60 seconds.
         :param new_tweets: Boolean determining the search direction.
                            False (default) retrieves old results.
@@ -42,10 +42,6 @@ class TwitterRestPager(object):
                 # get one page of results
                 start = time.time()
                 r = self.api.request(self.resource, self.params)
-                if r.status_code >= 500:
-                    # client must re-connect
-                    logging.warning('Twitter internal server error (%d)' % r.status_code)
-                    continue
                 it = r.get_iterator()
                 if new_tweets:
                     it = reversed(list(it))
@@ -56,7 +52,9 @@ class TwitterRestPager(object):
                     if 'id' in item:
                         id = item['id']
                     if 'code' in item:
-                        if item['code'] == 130 or item['code'] == 131:
+                        if item['code'] in [130,131]:
+                            # Twitter service error
+                            logging.warning('Twitter error: %s' % item)
                             raise TwitterConnectionError(item)
                     yield item
 
@@ -77,7 +75,6 @@ class TwitterRestPager(object):
                     self.params['since_id'] = str(id)
                 else:
                     self.params['max_id'] = str(id - 1)
-            except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, SSLError) as e:
+            except TwitterConnectionError as e:
                 # client must re-connect
-                logging.warning('%s %s' % (type(e), e.message))
                 continue
