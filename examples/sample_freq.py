@@ -37,9 +37,10 @@ class Frequency:
 		now = time.time()
 		elapsed = now - self.interval_start
 		if elapsed >= self.interval:
-			print('%d\t%d\t%d' % (int(self.interval_count/elapsed), 
-			                      self.total_count,
-			                      int(self.total_count/(now-self.total_start))))
+			print('%s -- %d\t%d\t%d' % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(now)),
+			                            int(self.interval_count/elapsed), 
+			                            self.total_count,
+			                            int(self.total_count/(now-self.total_start))))
 			self.interval_start = now
 			self.interval_count = 0
 
@@ -55,15 +56,24 @@ while True:
 				freq.record()
 			elif 'limit' in item:
 				logging.info('TWEETS SKIPPED: %s' % item['limit']['track'])
-			elif 'warning' in item:
-				logging.info('WARNING: %s' % item['warning'])
 			elif 'disconnect' in item:
-				# dev.twitter.com/streaming/overview/messages-types#disconnect_messages
-				if item['disconnect']['code'] in [2,5,6,7]:
-					raise Exception(item['disconnect'])
+				event = item['disconnect']
+				if event['code'] in [2,5,6,7]:
+					# must terminate
+					raise Exception(event)
 				else:
-					logging.info('RE-CONNECTING: %s' % item['disconnect'])
+					logging.warning('RE-CONNECTING: %s' % event)
 					break
+			elif 'error' in item:
+				event = item['error'][0]
+				if event['code'] in [130,131]:
+					logging.warning('RE-CONNECTING: %s' % event)
+					break
+				else:
+					# must terminate
+					raise Exception(event)
+			elif 'warning' in item:
+				logging.warning('WARNING: %s' % item['warning'])
 	except TwitterError.TwitterConnectionError as e:
 		logging.info('RE-CONNECTING: %s' % type(e))
 		continue
