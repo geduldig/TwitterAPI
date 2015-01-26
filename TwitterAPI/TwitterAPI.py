@@ -67,7 +67,7 @@ class TwitterAPI(object):
         else:
             return (resource, resource)
 
-    def request(self, resource, params=None, files=None):
+    def request(self, resource, params=None, files=None, timeout=None):
         """Request a Twitter REST API or Streaming API resource.
 
         :param resource: A valid Twitter endpoint (ex. "search/tweets")
@@ -86,14 +86,16 @@ class TwitterAPI(object):
         url = self._prepare_url(subdomain, resource)
         if 'stream' in subdomain:
             session.stream = True
-            timeout = STREAMING_TIMEOUT
+            if timeout is None:
+                timeout = STREAMING_TIMEOUT
             # always use 'delimited' for efficient stream parsing
             if not params:
                 params = {}
             params['delimited'] = 'length'
         else:
             session.stream = False
-            timeout = REST_TIMEOUT
+            if timeout is None:
+                timeout = REST_TIMEOUT
         if method is 'POST':
             data = params
             params = None
