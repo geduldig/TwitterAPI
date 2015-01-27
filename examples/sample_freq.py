@@ -56,6 +56,8 @@ while True:
 				freq.record()
 			elif 'limit' in item:
 				logging.info('TWEETS SKIPPED: %s' % item['limit']['track'])
+			elif 'warning' in item:
+				logging.warning('WARNING: %s' % item['warning'])
 			elif 'disconnect' in item:
 				event = item['disconnect']
 				if event['code'] in [2,5,6,7]:
@@ -72,10 +74,7 @@ while True:
 				else:
 					# must terminate
 					raise Exception(event)
-			elif 'warning' in item:
-				logging.warning('WARNING: %s' % item['warning'])
 	except TwitterError.TwitterConnectionError as e:
-		logging.info('RE-CONNECTING: %s' % type(e))
 		continue
 	except KeyboardInterrupt:
 		print('TERMINATED BY USER')
