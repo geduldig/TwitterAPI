@@ -2,12 +2,11 @@ __author__ = "Jonas Geduldig"
 __date__ = "June 8, 2013"
 __license__ = "MIT"
 
-import logging
-import time
-import requests
 from requests.exceptions import ConnectionError, ReadTimeout, SSLError
 from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from .TwitterError import *
+import requests
+import time
 
 
 class TwitterRestPager(object):
@@ -54,7 +53,6 @@ class TwitterRestPager(object):
                     if 'code' in item:
                         if item['code'] in [130,131]:
                             # Twitter service error
-                            logging.warning('Twitter error: %s' % item)
                             raise TwitterConnectionError(item)
                     yield item
 
@@ -76,5 +74,4 @@ class TwitterRestPager(object):
                 else:
                     self.params['max_id'] = str(id - 1)
             except TwitterConnectionError as e:
-                # client must re-connect
                 continue

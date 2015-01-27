@@ -5,14 +5,13 @@ __license__ = "MIT"
 from .BearerAuth import BearerAuth as OAuth2
 from .constants import *
 from datetime import datetime
-import json
-import logging
-import requests
 from requests.exceptions import ConnectionError, ReadTimeout, SSLError
 from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from requests_oauthlib import OAuth1
 from .TwitterError import *
-
+import json
+import requests
+import time
 
 class TwitterAPI(object):
 
@@ -115,12 +114,8 @@ class TwitterAPI(object):
                 files=files,
                 proxies=self.proxies)
         except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, SSLError) as e:
-            # client must re-connect
-            logging.warning('%s %s' % (type(e), e.message))
             raise TwitterConnectionError(e)
     	if r.status_code >= 500:
-            # client must re-connect
-            logging.warning('STATUS CODE %d' % r.status_code)
             raise TwitterConnectionError(r.status_code)
         return TwitterResponse(r, session.stream)
 
@@ -240,10 +235,19 @@ class _StreamingIterable(object):
         while True:
             item = None
             buf = bytearray()
+            stall_timer = None
             try:
                 while True:
-                    # add bytes until item boundary reached
+                    # read bytes until item boundary reached
                     buf += self.stream.read(1)
+                    if not buf:
+                        # check for stall (i.e. no data for 90 seconds)
+                        if not stall_timer:
+                            stall_timer = time.time()
+                        elif time.time() - stall_timer > STREAMING_TIMEOUT:
+                            raise TwitterConnectionError('Twitter stream stalled')
+                    elif stall_timer:
+                        stall_timer = None
                     if buf[-2:] == b'\r\n': 
                         item = buf[0:-2]
                         # when delimited=length, use byte size to read next item
@@ -254,12 +258,7 @@ class _StreamingIterable(object):
                         break
     	        yield item
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, SSLError) as e:
-                # client must re-connect
-                logging.warning('%s %s' % (type(e), e.message))
                 raise TwitterConnectionError(e)
-            except Exception as e:
-                # ignore the rest
-                logging.error('%s %s' % (type(e), e.message), exc_info=True)
     
     def __iter__(self):
         """Iterator.
@@ -272,12 +271,8 @@ class _StreamingIterable(object):
                 try:
                     yield json.loads(item.decode('utf8'))
                 except ValueError as e:
-                    # assume corrupted JSON string caused by stream disturbance
-                    logging.info('%s %s' % (type(e), e.message))
+                    # invalid JSON string
                     raise TwitterConnectionError(e)
-                except Exception as e:
-                    # ignore the rest
-                    logging.error('%s %s' % (type(e), e.message), exc_info=True)
 
 
 def RestIterator(*args, **kwargs):
