@@ -79,7 +79,7 @@ class TwitterAPI(object):
         :param params: Dictionary with endpoint parameters or None (default)
         :param files: Dictionary with multipart-encoded file or None (default)
 
-        :returns: TwitterAPI.TwitterResponse object
+        :returns: TwitterResponse
         :raises: TwitterConnectionError
         """
         resource, endpoint = self._get_endpoint(resource)
@@ -117,8 +117,6 @@ class TwitterAPI(object):
                 proxies=self.proxies)
         except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, SSLError) as e:
             raise TwitterConnectionError(e)
-        if r.status_code >= 500:
-            raise TwitterConnectionError(r.status_code)
         return TwitterResponse(r, session.stream)
 
 
@@ -157,8 +155,11 @@ class TwitterResponse(object):
         """Get API dependent iterator.
 
         :returns: Iterator for tweets or other message objects in response.
-        :raises: TwitterConnectionError
+        :raises: TwitterConnectionError, TwitterRequestError
         """
+        if self.response.status_code != 200:
+            raise TwitterRequestError(self.response.status_code)
+
         if self.stream:
             return iter(_StreamingIterable(self.response))
         else:
@@ -168,7 +169,7 @@ class TwitterResponse(object):
         """Get API dependent iterator.
 
         :returns: Iterator for tweets or other message objects in response.
-        :raises: TwitterConnectionError
+        :raises: TwitterConnectionError, TwitterRequestError
         """
         return self.get_iterator()
 
@@ -247,8 +248,7 @@ class _StreamingIterable(object):
                         if not stall_timer:
                             stall_timer = time.time()
                         elif time.time() - stall_timer > STREAMING_TIMEOUT:
-                            raise TwitterConnectionError(
-                                'Twitter stream stalled')
+                            raise TwitterConnectionError('Twitter stream stalled')
                     elif stall_timer:
                         stall_timer = None
                     if buf[-2:] == b'\r\n':
@@ -275,7 +275,7 @@ class _StreamingIterable(object):
                 try:
                     yield json.loads(item.decode('utf8'))
                 except ValueError as e:
-                    # invalid JSON string
+                    # invalid JSON string (possibly an unformatted error message)
                     raise TwitterConnectionError(e)
 
 

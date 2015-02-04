@@ -35,6 +35,7 @@ class TwitterRestPager(object):
                            True retrieves current results.
 
         :returns: JSON objects containing statuses, errors or other return info.
+        :raises: TwitterRequestError
         """
         elapsed = 0
         while True:
@@ -74,5 +75,9 @@ class TwitterRestPager(object):
                     self.params['since_id'] = str(id)
                 else:
                     self.params['max_id'] = str(id - 1)
+            except TwitterRequestError as e:
+                if e.status_code < 500:
+                    raise
+                continue
             except TwitterConnectionError:
                 continue
