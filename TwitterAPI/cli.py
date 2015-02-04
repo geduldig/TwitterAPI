@@ -28,9 +28,11 @@
 		 https://dev.twitter.com/docs/api/1.1
 """
 
+
 __author__ = "Jonas Geduldig"
 __date__ = "June 7, 2013"
 __license__ = "MIT"
+
 
 import argparse
 import codecs
@@ -121,13 +123,14 @@ if __name__ == '__main__':
             oauth.access_token_secret)
         response = api.request(args.endpoint, params)
         if response.status_code != 200:
-        	raise Exception(response.text)
+            raise Exception(response.text)
 
         for item in response.get_iterator():
             if 'message' in item:
                 print('ERROR %s: %s' % (item['code'], item['message']))
             elif not args.fields:
-                print(json.dumps(item, ensure_ascii='False', indent=args.indent))  
+                print(
+                    json.dumps(item, ensure_ascii='False', indent=args.indent))
             else:
                 for name in args.fields:
                     value = _search(name, item)

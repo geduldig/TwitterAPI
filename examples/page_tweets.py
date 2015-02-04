@@ -10,11 +10,10 @@ ACCESS_TOKEN_KEY = ''
 ACCESS_TOKEN_SECRET = ''
 
 
-api = TwitterAPI(
-    CONSUMER_KEY,
-    CONSUMER_SECRET,
-    ACCESS_TOKEN_KEY,
-    ACCESS_TOKEN_SECRET)
+api = TwitterAPI(CONSUMER_KEY,
+                 CONSUMER_SECRET,
+                 ACCESS_TOKEN_KEY,
+                 ACCESS_TOKEN_SECRET)
 
 pager = TwitterRestPager(api, 'search/tweets', {'q': SEARCH_TERM})
 

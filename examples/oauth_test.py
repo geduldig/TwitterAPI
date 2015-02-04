@@ -26,12 +26,11 @@ verifier = raw_input('Enter your authorization code: ')
 
 
 # obtain access token
-oauth = OAuth1(
-    consumer_key,
-    consumer_secret,
-    request_key,
-    request_secret,
-    verifier=verifier)
+oauth = OAuth1(consumer_key,
+               consumer_secret,
+               request_key,
+               request_secret,
+               verifier=verifier)
 r = requests.post(url='https://api.twitter.com/oauth/access_token', auth=oauth)
 credentials = parse_qs(r.content)
 access_token_key = credentials.get('oauth_token')[0]
@@ -39,10 +38,9 @@ access_token_secret = credentials.get('oauth_token_secret')[0]
 
 
 # access resource
-api = TwitterAPI(
-    consumer_key,
-    consumer_secret,
-    access_token_key,
-    access_token_secret)
+api = TwitterAPI(consumer_key,
+                 consumer_secret,
+                 access_token_key,
+                 access_token_secret)
 for item in api.request('statuses/filter', {'track': 'zzz'}):
     print(item['text'])

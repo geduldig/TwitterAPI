@@ -2,6 +2,7 @@ __author__ = "Jonas Geduldig"
 __date__ = "June 8, 2013"
 __license__ = "MIT"
 
+
 from requests.exceptions import ConnectionError, ReadTimeout, SSLError
 from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from .TwitterError import *
@@ -51,14 +52,14 @@ class TwitterRestPager(object):
                     if 'id' in item:
                         id = item['id']
                     if 'code' in item:
-                        if item['code'] in [130,131]:
+                        if item['code'] in [130, 131]:
                             # Twitter service error
                             raise TwitterConnectionError(item)
                     yield item
 
-	    		# bail when no more older results
+                    # bail when no more older results
                 if id is None and not new_tweets:
-                	break
+                    break
 
                 # sleep before getting another page of results
                 elapsed = time.time() - start
@@ -68,10 +69,10 @@ class TwitterRestPager(object):
                 # use the first id to limit the next batch of newer tweets, or
                 # use the last id to limit the next batch of older tweets
                 if id is None:
-                	continue
+                    continue
                 elif new_tweets:
                     self.params['since_id'] = str(id)
                 else:
                     self.params['max_id'] = str(id - 1)
-            except TwitterConnectionError as e:
+            except TwitterConnectionError:
                 continue

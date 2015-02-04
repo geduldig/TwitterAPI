@@ -20,19 +20,19 @@ api = TwitterAPI(CONSUMER_KEY,
 
 followers = []
 for id in api.request('followers/ids'):
-	followers.append(id)
+    followers.append(id)
 
 
 friends = []
 for id in api.request('friends/ids'):
-	friends.append(id)
+    friends.append(id)
 
 
 non_friends = [friend for friend in friends if friend not in followers]
 
 
 for id in non_friends:
-	r = api.request('friendships/destroy', {'user_id':id})
-	if r.status_code == 200:
-		status = r.json()
-		print 'unfollowed %s' % status['screen_name']
+    r = api.request('friendships/destroy', {'user_id': id})
+    if r.status_code == 200:
+        status = r.json()
+        print 'unfollowed %s' % status['screen_name']

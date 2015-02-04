@@ -2,8 +2,9 @@ __author__ = "Andrea Biancini, Jonas Geduldig"
 __date__ = "January 3, 2014"
 __license__ = "MIT"
 
-import base64
+
 from .constants import *
+import base64
 import requests
 
 
@@ -36,10 +37,8 @@ class BearerAuth(requests.auth.AuthBase):
         params = {'grant_type': 'client_credentials'}
         headers = {}
         headers['User-Agent'] = USER_AGENT
-        headers['Authorization'] = 'Basic ' + \
-            b64_bearer_token_creds.decode('utf8')
-        headers['Content-Type'] = \
-            'application/x-www-form-urlencoded;charset=UTF-8'
+        headers['Authorization'] = 'Basic ' + b64_bearer_token_creds.decode('utf8')
+        headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
         try:
             response = requests.post(
                 token_url,

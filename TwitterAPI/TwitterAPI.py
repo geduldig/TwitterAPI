@@ -2,6 +2,7 @@ __author__ = "Jonas Geduldig"
 __date__ = "June 7, 2013"
 __license__ = "MIT"
 
+
 from .BearerAuth import BearerAuth as OAuth2
 from .constants import *
 from datetime import datetime
@@ -12,6 +13,7 @@ from .TwitterError import *
 import json
 import requests
 import time
+
 
 class TwitterAPI(object):
 
@@ -80,7 +82,7 @@ class TwitterAPI(object):
         :returns: TwitterAPI.TwitterResponse object
         :raises: TwitterConnectionError
         """
-        resource, endpoint = self._get_endpoint(resource)        
+        resource, endpoint = self._get_endpoint(resource)
         if endpoint not in ENDPOINTS:
             raise Exception('Endpoint "%s" unsupported' % endpoint)
         session = requests.Session()
@@ -115,7 +117,7 @@ class TwitterAPI(object):
                 proxies=self.proxies)
         except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, SSLError) as e:
             raise TwitterConnectionError(e)
-    	if r.status_code >= 500:
+        if r.status_code >= 500:
             raise TwitterConnectionError(r.status_code)
         return TwitterResponse(r, session.stream)
 
@@ -146,14 +148,14 @@ class TwitterResponse(object):
     def text(self):
         """:returns: Raw API response text."""
         return self.response.text
-        
+
     def json(self):
         """:returns: response as JSON object."""
         return self.response.json()
 
     def get_iterator(self):
         """Get API dependent iterator.
-        
+
         :returns: Iterator for tweets or other message objects in response.
         :raises: TwitterConnectionError
         """
@@ -164,7 +166,7 @@ class TwitterResponse(object):
 
     def __iter__(self):
         """Get API dependent iterator.
-        
+
         :returns: Iterator for tweets or other message objects in response.
         :raises: TwitterConnectionError
         """
@@ -225,10 +227,10 @@ class _StreamingIterable(object):
 
     def __init__(self, response):
         self.stream = response.raw
-    
+
     def _iter_stream(self):
         """Stream parser.
-        
+
         :returns: Next item in the stream (may or may not be 'delimited').
         :raises: TwitterConnectionError
         """
@@ -245,24 +247,26 @@ class _StreamingIterable(object):
                         if not stall_timer:
                             stall_timer = time.time()
                         elif time.time() - stall_timer > STREAMING_TIMEOUT:
-                            raise TwitterConnectionError('Twitter stream stalled')
+                            raise TwitterConnectionError(
+                                'Twitter stream stalled')
                     elif stall_timer:
                         stall_timer = None
-                    if buf[-2:] == b'\r\n': 
+                    if buf[-2:] == b'\r\n':
                         item = buf[0:-2]
-                        # when delimited=length, use byte size to read next item
-                        if item.isdigit():  
+                        # when delimited=length, use byte size to read next
+                        # item
+                        if item.isdigit():
                             nbytes = int(item)
                             item = None
                             item = self.stream.read(nbytes)
                         break
-    	        yield item
+                yield item
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, SSLError) as e:
                 raise TwitterConnectionError(e)
-    
+
     def __iter__(self):
         """Iterator.
-        
+
         :returns: Tweet status as a JSON object.
         :raises: TwitterConnectionError
         """
@@ -291,4 +295,3 @@ def StreamingIterator(*args, **kwargs):
          DeprecationWarning,
          stacklevel=2)
     return _StreamingIterable(*args, **kwargs)
-
