@@ -64,7 +64,7 @@ while True:
                 logging.warning(item['warning'])
             elif 'disconnect' in item:
                 event = item['disconnect']
-                if event['code'] in [2, 5, 6, 7]:
+                if event['code'] in [2,5,6,7]:
                     # streaming connection rejected
                     raise Exception(event)
                 logging.info('RE-CONNECTING: %s' % event)
@@ -79,5 +79,5 @@ while True:
         print('TERMINATED BY USER')
         break
     except Exception as e:
-        print('STOPPED: %s' % e)
+        print('STOPPED: %s %s' % (type(e), e))
         break

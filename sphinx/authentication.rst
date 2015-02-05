@@ -27,7 +27,7 @@ Application Authentication
 Proxy Server Authentication
 ---------------------------
 
-If you are behind a firewall, you may also need to authenticate with a web proxy server in order to reach Twitter's servers. For this situation you include an additional argument in the above examples:
+If you are behind a firewall, you may also need to authenticate with a web proxy server in order to reach Twitter's servers. For this situation you include an additional argument in the initializer:
 
 .. code-block:: python
 
