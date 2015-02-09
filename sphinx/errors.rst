@@ -20,7 +20,7 @@ REST API endpoints can return many more types of messages than Streaming API end
 Streaming API Messages
 ----------------------
 
-Streaming API endpoints return a variety of messages, most are not really errors. For example, a 'limit' message contains the number of tweets missing from the stream. This happens when the number of tweets matching your filter exceeds a threshold set by Twitter. Other useful messages are 'disconnect' and 'delete'. The pattern is similar to the one preceding:
+Streaming API endpoints return a variety of messages, most are not really errors. For example, a "limit" message contains the number of tweets missing from the stream. This happens when the number of tweets matching your filter exceeds a threshold set by Twitter. Other useful messages are "disconnect" and "delete". The pattern is similar to the one preceding:
 
 .. code-block:: python
 
