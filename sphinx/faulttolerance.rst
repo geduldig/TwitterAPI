@@ -48,11 +48,11 @@ Requests for REST API endpoints can throw `TwitterRequestError <./twittererror.h
 
 For making continuos REST API requests (i.e. paging), TwitterAPI provides `TwitterRestPager <./paging.html>`_. If you use this class to request tweets that have been posted back to one week old, for example, the class's iterator will handle both types of exceptions automatically. The iterator also handles "message" objects with 130 or 131 codes for you. Any other "message" object gets passed on for you to handle.
 
-One final consideration is the endpoint's rate limit, determinted by the endpoint and whether you authenticate with oAuth 1 or oAuth 2. By default, the iterator waits 5 seconds between requests. This is sufficient for 180 requests in 15 minutes, the rate limit for "search/tweets" with oAuth 1. However, you may need a little more delay to be safe. The example below uses 5.1 seconds.
+One final consideration is the endpoint's rate limit, determinted by the endpoint and whether you authenticate with oAuth 1 or oAuth 2. By default, the iterator waits 5 seconds between requests. This is sufficient for 180 requests in 15 minutes, the rate limit for "search/tweets" with oAuth 1. You can do better with oAuth 2. It permits 450 requests every 15 minutes, or 1 request per 2 seconds. The example below sets the wait assuming oAuth 2 rate limits.
 
 .. code-block:: python
 
-    iterator = TwitterRestPager(api, 'search/tweets', {'q':'pizza'}).get_iterator(wait=5.1)
+    iterator = TwitterRestPager(api, 'search/tweets', {'q':'pizza'}).get_iterator(wait=2)
     try:
         for item in iterator:
             if 'text' in item:
