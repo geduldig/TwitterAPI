@@ -37,7 +37,7 @@ Stream tweets from New York City::
 	for item in r:
 		print item
 		
-Notice that ``request()`` accepts both REST and Streaming API methods, and it takes two arguments: the Twitter method, and a dictionary of method parameters.  In the above examples we use ``get_iterator()`` to get each tweet object.  The iterator knows how to iterate both REST and Streaming API results, in addition to error objects.  Alternatively, you have access to the response object returned by ``request()``.  From the response object ``r`` you can get the raw response with ``r.text`` or the HTTP status code with ``r.status_code``.  See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
+Notice that ``request()`` accepts both REST and Streaming API methods, and it takes two arguments: the Twitter method, and a dictionary of method parameters.  In the above examples we use ``get_iterator()`` to get each tweet object.  The iterator knows how to iterate both REST and Streaming API results.  Alternatively, you have access to the response object returned by ``request()``.  From the response object ``r`` you can get the raw response with ``r.text`` or the HTTP status code with ``r.status_code``.  See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
 
 Command-Line Usage (cli.py)
 ---------------------------

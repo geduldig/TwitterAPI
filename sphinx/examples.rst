@@ -56,6 +56,14 @@ Post a tweet with a picture
 	    r = api.request('statuses/update', {'status':'I found pizza!', 'media_ids':media_id})
 	    print('UPDATE STATUS SUCCESS' if r.status_code == 200 else 'UPDATE STATUS FAILURE')
 
+Delete a tweet
+--------------
+
+.. code-block:: python 
+
+    r = api.request('statuses/destroy/:%d' % TWEET_ID)
+    print 'SUCCESS' if r.status_code == 200 else 'FAILURE'
+
 
 Stream tweets 
 -------------

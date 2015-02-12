@@ -16,11 +16,10 @@ ACCESS_TOKEN_KEY = ''
 ACCESS_TOKEN_SECRET = ''
 
 
-api = TwitterAPI(
-    CONSUMER_KEY,
-    CONSUMER_SECRET,
-    ACCESS_TOKEN_KEY,
-    ACCESS_TOKEN_SECRET)
+api = TwitterAPI(CONSUMER_KEY,
+                 CONSUMER_SECRET,
+                 ACCESS_TOKEN_KEY,
+                 ACCESS_TOKEN_SECRET)
 
 file = open(IMAGE_PATH, 'rb')
 data = file.read()
