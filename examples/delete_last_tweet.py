@@ -3,7 +3,7 @@ from TwitterAPI import TwitterAPI
 
 NUMBER_OF_TWEETS_TO_DELETE = 1
 
-api = TwitterAPI(<consumer key >, 
+api = TwitterAPI(<consumer key>, 
                  <consumer secreat>,
                  <access token key>,
                  <access token secret>)

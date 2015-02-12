@@ -78,5 +78,5 @@ v2.2.7,    12 Nov 2014 -- Fix streaming delimited.
 
 v2.2.8,    12 Nov 2014 -- Fix error in BearerAuth.py for OAuth 2.
 
-v2.3.0,    07 Dec 2015 -- Added logging, error classes, stall warning for streams,
+v2.3.0,    10 Feb 2015 -- Added logging, error classes, stall warning for streams,
                           _RestIterable can iterate 'users' and 'ids'

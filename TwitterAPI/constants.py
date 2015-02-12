@@ -103,7 +103,7 @@ ENDPOINTS = {
     'mutes/users/ids':                         ('GET',  'api'),
     'mutes/users/list':                        ('GET',  'api'),
 
-    'geo/id/:PARAM':                           ('GET',  'api'),  # PLACE_ID
+    'geo/id/:PARAM':                           ('GET',  'api'), # PLACE_ID
     'geo/place':                               ('POST', 'api'),
     'geo/reverse_geocode':                     ('GET',  'api'),
     'geo/search':                              ('GET',  'api'),
@@ -115,25 +115,24 @@ ENDPOINTS = {
     'help/tos':                                ('GET',  'api'),
 
     'saved_searches/create':                   ('POST', 'api'),
-    'saved_searches/destroy/:PARAM':           ('POST', 'api'),  # ID
+    'saved_searches/destroy/:PARAM':           ('POST', 'api'), # ID
     'saved_searches/list':                     ('GET',  'api'),
-    'saved_searches/show/:PARAM':              ('GET',  'api'),  # ID
+    'saved_searches/show/:PARAM':              ('GET',  'api'), # ID
 
     'search/tweets':                           ('GET',  'api'),
 
-    'statuses/destroy/:PARAM':                 ('POST', 'api'),  # ID
+    'statuses/destroy/:PARAM':                 ('POST', 'api'), # ID
     'statuses/home_timeline':                  ('GET',  'api'),
     'statuses/lookup':                         ('GET',  'api'),
     'statuses/mentions_timeline':              ('GET',  'api'),
     'statuses/oembed':                         ('GET',  'api'),
-    'statuses/retweet/:PARAM':                 ('POST', 'api'),  # ID
+    'statuses/retweet/:PARAM':                 ('POST', 'api'), # ID
     'statuses/retweeters/ids':                 ('GET',  'api'),
-    'statuses/retweets/:PARAM':                ('GET',  'api'),  # ID
+    'statuses/retweets/:PARAM':                ('GET',  'api'), # ID
     'statuses/retweets_of_me':                 ('GET',  'api'),
-    'statuses/show/:PARAM':                    ('GET',  'api'),  # ID
+    'statuses/show/:PARAM':                    ('GET',  'api'), # ID
     'statuses/user_timeline':                  ('GET',  'api'),
-    'statuses/update':                         ('POST', 'api'),
-    # [deprecated]
+    'statuses/update':                         ('POST', 'api'), # deprecated
     'statuses/update_with_media':              ('POST', 'api'),
 
     'trends/available':                        ('GET',  'api'),
@@ -148,6 +147,6 @@ ENDPOINTS = {
     'users/search':                            ('GET',  'api'),
     'users/show':                              ('GET',  'api'),
     'users/suggestions':                       ('GET',  'api'),
-    'users/suggestions/:PARAM':                ('GET',  'api'),  # SLUG
-    'users/suggestions/:PARAM/members':        ('GET',  'api')   # SLUG
+    'users/suggestions/:PARAM':                ('GET',  'api'), # SLUG
+    'users/suggestions/:PARAM/members':        ('GET',  'api')  # SLUG
 }
