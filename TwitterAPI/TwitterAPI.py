@@ -38,21 +38,23 @@ class TwitterAPI(object):
             proxy_url=None):
         """Initialize with your Twitter application credentials"""
         self.proxies = {'https': proxy_url} if proxy_url else None
-        if auth_type is 'oAuth1':
+        if auth_type == 'oAuth1':
             if not all([consumer_key, consumer_secret, access_token_key, access_token_secret]):
-                raise Exception('Missing authentication parameter.')
+                raise Exception('Missing authentication parameter')
             self.auth = OAuth1(
                 consumer_key,
                 consumer_secret,
                 access_token_key,
                 access_token_secret)
-        elif auth_type is 'oAuth2':
+        elif auth_type == 'oAuth2':
             if not all([consumer_key, consumer_secret]):
-                raise Exception("Missing authentication parameter.")
+                raise Exception('Missing authentication parameter')
             self.auth = OAuth2(
                 consumer_key,
                 consumer_secret,
                 proxies=self.proxies)
+        else:
+            raise Exception('Unknown oAuth version')
 
     def _prepare_url(self, subdomain, path):
         return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
@@ -102,7 +104,7 @@ class TwitterAPI(object):
         else:
             session.stream = False
             timeout = REST_TIMEOUT
-        if method is 'POST':
+        if method == 'POST':
             data = params
             params = None
         else:

@@ -81,4 +81,6 @@ v2.2.9,    12 Nov 2014 -- Merged dilmerv fix in constants.py.
 v2.2.8,    12 Nov 2014 -- Fix error in BearerAuth.py for OAuth 2.
 
 v2.3.0,    10 Feb 2015 -- Added logging, error classes, stall warning for streams,
-                          _RestIterable can iterate 'users' and 'ids'
+                          _RestIterable can iterate 'users' and 'ids'.
+
+v2.3.1,    18 Feb 2015 -- Changed 'is' to '==' for string comparison.

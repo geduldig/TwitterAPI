@@ -58,7 +58,7 @@ class TwitterRestPager(object):
                             raise TwitterConnectionError(item)
                     yield item
 
-                    # bail when no more older results
+                # bail when no more older results
                 if id is None and not new_tweets:
                     break
 
