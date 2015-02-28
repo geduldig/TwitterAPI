@@ -4,7 +4,7 @@ from TwitterAPI import TwitterAPI
 NUMBER_OF_TWEETS_TO_DELETE = 1
 
 api = TwitterAPI(<consumer key>, 
-                 <consumer secreat>,
+                 <consumer secret>,
                  <access token key>,
                  <access token secret>)
 
@@ -23,7 +23,7 @@ class DeleteTweet(Thread):
 try:
     count = 0
     r = api.request(
-        'statuses/home_timeline', {'count': NUMBER_OF_TWEETS_TO_DELETE})
+        'statuses/user_timeline', {'count': NUMBER_OF_TWEETS_TO_DELETE})
     for item in r:
         if 'id' in item:
             count += 1
