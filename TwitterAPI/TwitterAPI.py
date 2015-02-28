@@ -12,6 +12,7 @@ from requests_oauthlib import OAuth1
 from .TwitterError import *
 import json
 import requests
+import socket
 import ssl
 import time
 
@@ -119,7 +120,7 @@ class TwitterAPI(object):
                 files=files,
                 proxies=self.proxies)
         except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, 
-                SSLError, ssl.SSLError) as e:
+                SSLError, ssl.SSLError, socket.error) as e:
             raise TwitterConnectionError(e)
         return TwitterResponse(r, session.stream)
 
@@ -258,14 +259,14 @@ class _StreamingIterable(object):
                     if buf[-2:] == b'\r\n':
                         item = buf[0:-2]
                         if item.isdigit():
-	                        # use byte size to read next item
+                            # use byte size to read next item
                             nbytes = int(item)
                             item = None
                             item = self.stream.read(nbytes)
                         break
                 yield item
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, 
-                    SSLError, ssl.SSLError) as e:
+                    SSLError, ssl.SSLError, socket.error) as e:
                 raise TwitterConnectionError(e)
 
     def __iter__(self):
