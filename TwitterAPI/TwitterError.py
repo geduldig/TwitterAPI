@@ -35,4 +35,4 @@ class TwitterRequestError(TwitterError):
         self.status_code = status_code
         
     def __str__(self):
-        return '%s (%d)' % (self.message, self.status_code)
+        return '%s (%d)' % (self.args[0], self.status_code)
