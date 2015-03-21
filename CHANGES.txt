@@ -84,3 +84,5 @@ v2.3.0,    10 Feb 2015 -- Added logging, error classes, stall warning for stream
                           _RestIterable can iterate 'users' and 'ids'.
 
 v2.3.1,    18 Feb 2015 -- Changed 'is' to '==' for string comparison.
+
+v2.3.3,    21 Mar 2015 -- Merged revinewaters fix in TwitterError.py.
