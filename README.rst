@@ -11,6 +11,12 @@
 
 This Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches.  
 
+Installation
+------------
+From the command line::
+
+	pip install TwitterAPI
+
 Some Code Examples
 ------------------
 [See `TwitterAPI/cli.py <https://github.com/geduldig/TwitterAPI/blob/master/TwitterAPI/cli.py>`_ and `TwitterAPI/examples <https://github.com/geduldig/TwitterAPI/tree/master/examples>`_ for more working examples.]
@@ -60,12 +66,6 @@ Calling any Streaming API endpoint works too::
 	python -u -m TwitterAPI.cli -e statuses/filter -p track=zzz -f screen_name text
 
 After the ``-field`` option you must supply one or more key names from the raw JSON response object.  This will print values only for these keys.  When the ``-field`` option is omitted cli.py prints the entire JSON response object.  
-
-Installation
-------------
-From the command line::
-
-	pip install TwitterAPI
 
 Documentation
 -------------
