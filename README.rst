@@ -4,7 +4,7 @@
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
    :height: 50
-.. |BADGE_DOWNLOADS| image:: https://pypip.in/d/TwitterAPI/badge.png
+.. |BADGE_DOWNLOADS| image:: https://img.shields.io/pypi/dm/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_VERSION| image:: https://pypip.in/v/TwitterAPI/badge.png
    :target: https://crate.io/packages/TwitterAPI 
