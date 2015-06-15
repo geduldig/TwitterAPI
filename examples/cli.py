@@ -41,6 +41,11 @@ import codecs
 import json
 import sys
 
+# print UTF-8 to the console
+if sys.platform == "win32":
+    from Unicode_win32 import stdout
+    sys.stdout = stdout
+
 
 def _search(name, obj):
     """Breadth-first search for name in the JSON response and return value."""
@@ -72,11 +77,6 @@ def _to_dict(param_list):
 
 if __name__ == '__main__':
     print('TwitterAPI %s by Jonas Geduldig' % __version__)
-
-    # print UTF-8 to the console
-    if sys.platform == "win32":
-        from Unicode_win32 import stdout
-        sys.stdout = stdout
 
     parser = argparse.ArgumentParser(
         description='Request any Twitter Streaming or REST API endpoint')
