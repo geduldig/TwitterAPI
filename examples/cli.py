@@ -14,15 +14,15 @@
 
 	::
 	
-		python -u -m TwitterAPI.cli -endpoint search/tweets -parameters q=zzz
-		python -u -m TwitterAPI.cli -endpoint statuses/filter -parameters track=zzz
+		python cli -endpoint search/tweets -parameters q=zzz
+		python cli -endpoint statuses/filter -parameters track=zzz
 		
 	These examples print the raw json response.  You can also print one or more fields
 	from the response, for instance the tweet 'text' field, like this:
 	
 	::
 	
-		python -u -m TwitterAPI.cli -endpoint statuses/filter -parameters track=zzz -fields text
+		python cli -endpoint statuses/filter -parameters track=zzz -fields text
 		
 	Documentation for all Twitter endpoints is located at:
 		 https://dev.twitter.com/docs/api/1.1
@@ -34,9 +34,8 @@ __date__ = "June 7, 2013"
 __license__ = "MIT"
 
 
-from . import __version__
-from .TwitterOAuth import TwitterOAuth
-from .TwitterAPI import TwitterAPI
+from TwitterAPI import TwitterAPI, __version__
+from TwitterAPI.TwitterOAuth import TwitterOAuth
 import argparse
 import codecs
 import json
