@@ -4,9 +4,9 @@
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
    :height: 50
-.. |BADGE_DOWNLOADS| image:: https://pypip.in/d/TwitterAPI/badge.png
+.. |BADGE_DOWNLOADS| image:: https://img.shields.io/pypi/dm/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
-.. |BADGE_VERSION| image:: https://pypip.in/v/TwitterAPI/badge.png
+.. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
 
 This Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches.  

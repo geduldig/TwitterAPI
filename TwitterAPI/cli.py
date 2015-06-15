@@ -75,12 +75,16 @@ if __name__ == '__main__':
     print('TwitterAPI %s by Jonas Geduldig' % __version__)
 
     # print UTF-8 to the console
-    try:
-        # python 3
-        sys.stdout = codecs.getwriter('utf8')(sys.stdout.buffer)
-    except:
-        # python 2
-        sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+    if sys.platform == "win32":
+        from .Unicode_win32 import stdout
+        sys.stdout = stdout
+    else:
+        try:
+            # python 3
+            sys.stdout = codecs.getwriter('utf8')(sys.stdout.buffer)
+        except:
+            # python 2
+            sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 
     parser = argparse.ArgumentParser(
         description='Request any Twitter Streaming or REST API endpoint')
