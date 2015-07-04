@@ -1,6 +1,6 @@
-===================================================
-|LOGO| TwitterAPI |BADGE_DOWNLOADS| |BADGE_VERSION|
-===================================================
+================================================================
+|LOGO| TwitterAPI |BADGE_DOWNLOADS| |BADGE_VERSION| |BADGE_CHAT|
+================================================================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
    :height: 50
@@ -8,6 +8,12 @@
    :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
+.. BADGE_CHAT| image:: https://badges.gitter.im/Join%20Chat.svg
+
+   :alt: Join the chat at https://gitter.im/geduldig/TwitterAPI
+
+   :target: https://gitter.im/geduldig/TwitterAPI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
 
 This Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches.  
 
@@ -70,8 +76,3 @@ From the command line::
 Documentation
 -------------
 * `An introduction <http://geduldig.github.com/TwitterAPI>`_
-
-
-.. image:: https://badges.gitter.im/Join%20Chat.svg
-   :alt: Join the chat at https://gitter.im/geduldig/TwitterAPI
-   :target: https://gitter.im/geduldig/TwitterAPI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
