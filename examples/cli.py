@@ -41,6 +41,7 @@ import codecs
 import json
 import sys
 
+
 # print UTF-8 to the console
 if sys.platform == "win32":
     from Unicode_win32 import stdout
@@ -67,10 +68,8 @@ def _to_dict(param_list):
     """Convert a list of key=value to dict[key]=value"""
     if param_list:
         return {
-            name: value for (
-                name,
-                value) in [
-                param.split('=') for param in param_list]}
+            name: value for (name, value) in 
+                [param.split('=') for param in param_list]}
     else:
         return None
 

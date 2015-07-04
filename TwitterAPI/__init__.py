@@ -8,7 +8,7 @@ __copyright__ = 'Copyright 2013 Jonas Geduldig'
 import logging
 
 
-# No logging unless the client provides a handler
+# Suppress logging unless the client provides a handler
 logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 
