@@ -8,14 +8,11 @@
    :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
-.. BADGE_CHAT| image:: https://badges.gitter.im/Join%20Chat.svg
-
+.. |BADGE_CHAT| image:: https://badges.gitter.im/Join%20Chat.svg
    :alt: Join the chat at https://gitter.im/geduldig/TwitterAPI
-
    :target: https://gitter.im/geduldig/TwitterAPI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-
-This Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches.  
+This Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches. 
 
 Some Code Examples
 ------------------
@@ -46,7 +43,7 @@ Stream tweets from New York City::
 Notice that ``request()`` accepts both REST and Streaming API methods, and it takes two arguments: the Twitter method, and a dictionary of method parameters.  In the above examples we use ``get_iterator()`` to get each tweet object.  The iterator knows how to iterate both REST and Streaming API results.  Alternatively, you have access to the response object returned by ``request()``.  From the response object ``r`` you can get the raw response with ``r.text`` or the HTTP status code with ``r.status_code``.  See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
 
 Command-Line Usage (examples/cli.py)
----------------------------
+------------------------------------
 For syntax help::
 
 	python cli.py -h 
