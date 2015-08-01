@@ -20,7 +20,7 @@ api = TwitterAPI(CONSUMER_KEY,
                  ACCESS_TOKEN_SECRET)
 
 def check_status(r):
-	if r.status_code != 202:
+	if r.status_code < 200 or r.status_code > 299:
 		print(r.status_code)
 		print(r.text)
 		sys.exit(0)
