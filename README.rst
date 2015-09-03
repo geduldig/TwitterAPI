@@ -3,7 +3,6 @@
 =======================================================================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
-   :scale: 50%
 .. |BADGE_DOWNLOADS| image:: https://img.shields.io/pypi/dm/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
@@ -12,7 +11,7 @@
    :alt: Join the chat at https://gitter.im/geduldig/TwitterAPI
    :target: https://gitter.im/geduldig/TwitterAPI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-This Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches. 
+TwitterAPI is a Python package supports Twitter's REST and Streaming APIs (version 1.1) with OAuth 1.0 or OAuth 2.0.  It works with the latest Python versions in both 2.x and 3.x branches. 
 
 Installation
 ------------
@@ -29,8 +28,8 @@ Documentation
 * `Tiny Examples <http://geduldig.github.com/TwitterAPI/examples.html>`_
 * `Fault Tolerant Streams and Pages <http://geduldig.github.com/TwitterAPI/faulttolerance.html>`_
 
-Some Code Examples
-------------------
+Some Code...
+------------
 [See `TwitterAPI/examples <https://github.com/geduldig/TwitterAPI/tree/master/examples>`_ for working examples.]
 
 First, authenticate with your application credentials::
@@ -60,12 +59,12 @@ Stream tweets from New York City::
 	for item in r:
 		print(item)
 		
-Notice that ``request()`` accepts both REST and Streaming API methods. Usually the method takes two arguments: the Twitter method, and a dictionary of method parameters.  The above examples use ``get_iterator()`` to consume each tweet object.  The iterator knows how to iterate both REST and Streaming API results.  
+Notice that ``request()`` works with both REST and Streaming API endpoints. Usually ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  The above examples use ``get_iterator()`` to consume each tweet object.  The iterator knows how to iterate both REST and Streaming API results.  
 
-You also have access to the response object returned by ``request()``.  From the response object ``r`` you can get the raw response with ``r.text`` or the HTTP status code with ``r.status_code``.  See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
+You also have access to the response object returned by ``request()``.  From a response object ``r`` you can get the raw response with ``r.text`` and the HTTP status code with ``r.status_code``.  See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
 
-Command-Line Utility (examples/cli.py)
---------------------------------------
+Command-Line Utility (`examples/cli.py <https://github.com/geduldig/TwitterAPI/blob/master/examples/cli.py>`_)
+--------------------------------------------------------------------------------------------------------------
 For syntax help::
 
 	python cli.py -h 
