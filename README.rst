@@ -1,9 +1,9 @@
-================================================================
-TwitterAPI |BADGE_DOWNLOADS| |BADGE_VERSION| |BADGE_CHAT|
-================================================================
+=======================================================================
+|LOGO| TwitterAPI |BADGE_DOWNLOADS| |BADGE_VERSION| |BADGE_CHAT|
+=======================================================================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
-   :height: 50
+   :height: 20
 .. |BADGE_DOWNLOADS| image:: https://img.shields.io/pypi/dm/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
