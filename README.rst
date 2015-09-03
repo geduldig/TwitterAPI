@@ -3,7 +3,7 @@
 =======================================================================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
-   :height: 20
+   :scale: 50%
 .. |BADGE_DOWNLOADS| image:: https://img.shields.io/pypi/dm/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
