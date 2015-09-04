@@ -1,5 +1,6 @@
+|LOGO|
 =======================================================================
-|LOGO| TwitterAPI |BADGE_DOWNLOADS| |BADGE_VERSION| |BADGE_CHAT|
+|BADGE_DOWNLOADS| |BADGE_VERSION| |BADGE_CHAT|
 =======================================================================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
