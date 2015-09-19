@@ -292,21 +292,3 @@ class _StreamingIterable(object):
                 except ValueError as e:
                     # invalid JSON string (possibly an unformatted error message)
                     raise TwitterConnectionError(e)
-
-
-def RestIterator(*args, **kwargs):
-    """Deprecated. Use _RestIterable instead."""
-    from warnings import warn
-    warn('RestIterator is deprecated. Use _RestIterable instead.',
-         DeprecationWarning,
-         stacklevel=2)
-    return _RestIterable(*args, **kwargs)
-
-
-def StreamingIterator(*args, **kwargs):
-    """Deprecated. Use _StreamingIterable instead."""
-    from warnings import warn
-    warn('StreamingIterator is deprecated. Use _StreamingIterable instead.',
-         DeprecationWarning,
-         stacklevel=2)
-    return _StreamingIterable(*args, **kwargs)
