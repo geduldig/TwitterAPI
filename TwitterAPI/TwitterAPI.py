@@ -116,7 +116,7 @@ class TwitterAPI(object):
                 url,
                 data=data,
                 params=params,
-                timeout=timeout,
+                timeout=(CONNECTION_TIMEOUT,timeout),
                 files=files,
                 proxies=self.proxies)
         except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, 
@@ -179,7 +179,10 @@ class TwitterResponse(object):
         return self.get_iterator()
 
     def get_rest_quota(self):
-        """:returns: Quota information in the REST-only response header."""
+        """Quota information in the REST-only response header.
+        
+        :returns: Dictionary of 'remaining' (count), 'limit' (count), 'reset' (time)
+        """
         remaining, limit, reset = None, None, None
         if self.response:
             if 'x-rate-limit-remaining' in self.response.headers:
@@ -190,6 +193,10 @@ class TwitterResponse(object):
                     reset = int(self.response.headers['x-rate-limit-reset'])
                     reset = datetime.fromtimestamp(reset)
         return {'remaining': remaining, 'limit': limit, 'reset': reset}
+
+    def close(self):
+        """Disconnect stream (blocks with Python 3)."""
+        self.response.raw.close()
 
 
 class _RestIterable(object):
@@ -238,7 +245,7 @@ class _StreamingIterable(object):
         """Stream parser.
 
         :returns: Next item in the stream (may or may not be 'delimited').
-        :raises: TwitterConnectionError
+        :raises: TwitterConnectionError, StopIteration
         """
         while True:
             item = None
@@ -268,6 +275,9 @@ class _StreamingIterable(object):
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, 
                     SSLError, ssl.SSLError, socket.error) as e:
                 raise TwitterConnectionError(e)
+            except AttributeError:
+                # inform iterator to exit when client closes connection
+                raise StopIteration
 
     def __iter__(self):
         """Iterator.
