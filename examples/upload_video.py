@@ -2,12 +2,12 @@ from TwitterAPI import TwitterAPI
 import os
 import sys
 
-MOVIE = 'test.mp4'
-TWEET_TEXT = 'my movie uploaded!'
+VIDEO_FILENAME = 'test.mp4'
+TWEET_TEXT = 'Video upload test'
 
-nbytes = os.path.getsize(MOVIE)
-file = open(MOVIE, 'rb')
-data = file.read()
+bytes_sent = 0
+total_bytes = os.path.getsize(VIDEO_FILENAME)
+file = open(VIDEO_FILENAME, 'rb')
 
 CONSUMER_KEY = ''
 CONSUMER_SECRET = ''
@@ -25,12 +25,25 @@ def check_status(r):
 		print(r.text)
 		sys.exit(0)
 
-r = api.request('media/upload', {'command':'INIT', 'media_type':'video/mp4', 'total_bytes':nbytes})
+r = api.request('media/upload', {'command':'INIT', 'media_type':'video/mp4', 'total_bytes':total_bytes})
 check_status(r.status_code)
 
 media_id = r.json()['media_id']
-r = api.request('media/upload', {'command':'APPEND', 'media_id':media_id, 'segment_index':0}, {'media':data})
-check_status(r.status_code)
+segment_id = 0
+
+print ' [' + str(total_bytes) + '] ' + str(bytes_sent)
+
+while bytes_sent < total_bytes:
+  chunk = video.read(4*1024*1024)
+
+  r = api.request('media/upload', {'command':'APPEND', 'media_id':media_id, 'segment_index':segment_id}, {'media':chunk})
+  check_status(r)
+
+  segment_id = segment_id + 1
+  bytes_sent = video.tell()
+
+  print '[' + str(total_bytes) + '] ' + str(bytes_sent)
+  continue
 
 r = api.request('media/upload', {'command':'FINALIZE', 'media_id':media_id})
 check_status(r.status_code)
