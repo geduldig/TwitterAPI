@@ -7,7 +7,7 @@ TWEET_TEXT = 'Video upload test'
 
 bytes_sent = 0
 total_bytes = os.path.getsize(VIDEO_FILENAME)
-file = open(VIDEO_FILENAME, 'rb')
+video = open(VIDEO_FILENAME, 'rb')
 
 CONSUMER_KEY = ''
 CONSUMER_SECRET = ''
