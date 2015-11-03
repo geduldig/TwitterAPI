@@ -122,8 +122,7 @@ if __name__ == '__main__':
 
         for item in response.get_iterator():
             if not args.fields:
-                print(
-                    json.dumps(item, ensure_ascii='False', indent=args.indent))
+                print( json.dumps(item, ensure_ascii='False', indent=args.indent))
             else:
                 for name in args.fields:
                     value = _search(name, item)
