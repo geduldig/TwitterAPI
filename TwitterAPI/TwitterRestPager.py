@@ -25,7 +25,7 @@ class TwitterRestPager(object):
         self.params = params
 
     def get_iterator(self, wait=5, new_tweets=False):
-        """Iterate response from Twitter REST API resource.  Resource is called
+        """Iterate response from Twitter REST API resource. Resource is called
         in a loop to retrieve consecutive pages of results.
 
         :param wait: Floating point number (default=5) of seconds wait between requests.
@@ -58,8 +58,19 @@ class TwitterRestPager(object):
                             raise TwitterConnectionError(item)
                     yield item
 
-                # bail when no more older results
-                if id is None and not new_tweets:
+                # if a cursor is present, use it to get next page
+                # (otherwise, use id to get next page)
+                json = r.json()
+                cursor = -1
+                if new_tweets and 'previous_cursor' in json:
+                    cursor = json['previous_cursor']
+                elif not new_tweets and 'next_cursor' in json:
+                    cursor = json['next_cursor']
+
+                # bail when no more results
+                if cursor == 0:
+                    break
+                elif cursor == -1 and not new_tweets and id is None:
                     break
 
                 # sleep before getting another page of results
@@ -67,14 +78,18 @@ class TwitterRestPager(object):
                 pause = wait - elapsed if elapsed < wait else 0
                 time.sleep(pause)
 
-                # use the first id to limit the next batch of newer tweets, or
-                # use the last id to limit the next batch of older tweets
+                # waiting for new results to come in
                 if id is None:
                     continue
+
+                # use either id or cursor to get a new page
+                if cursor != -1:
+                    self.params['cursor'] = cursor
                 elif new_tweets:
                     self.params['since_id'] = str(id)
                 else:
                     self.params['max_id'] = str(id - 1)
+
             except TwitterRequestError as e:
                 if e.status_code < 500:
                     raise

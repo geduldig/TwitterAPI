@@ -87,4 +87,6 @@ v2.3.1,    18 Feb 2015 -- Changed 'is' to '==' for string comparison.
 
 v2.3.3,    21 Mar 2015 -- Merged revinewaters fix in TwitterError.py.
 
-v2.3.5,    28 Oct 2015 -- Removed deprecated classes RestIterator, StreamingIterator
+v2.3.5,    28 Oct 2015 -- Removed deprecated classes RestIterator, StreamingIterator.
+
+v2.3.6,    20 Dec 2015 -- Added support in TwitterRestPager for endpoints with cursors.
