@@ -90,3 +90,5 @@ v2.3.3,    21 Mar 2015 -- Merged revinewaters fix in TwitterError.py.
 v2.3.5,    28 Oct 2015 -- Removed deprecated classes RestIterator, StreamingIterator.
 
 v2.3.6,    20 Dec 2015 -- Added support in TwitterRestPager for endpoints with cursors.
+
+v2.4.0,    23 Jan 2016 -- Added support for Curator API and Collections API.
