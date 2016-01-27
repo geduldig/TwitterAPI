@@ -12,7 +12,7 @@
    :alt: Join the chat at https://gitter.im/geduldig/TwitterAPI
    :target: https://gitter.im/geduldig/TwitterAPI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-TwitterAPI is a Python package for accessing Twitter's Public APIs and Streaming APIs. It supports OAuth 1.0 and OAuth 2.0 authentication.  And, it works with the latest Python versions in both 2.x and 3.x branches. 
+TwitterAPI is a Python package for accessing Twitter's REST APIs and Streaming APIs. It supports OAuth 1.0 and OAuth 2.0 authentication.  And, it works with the latest Python versions in both 2.x and 3.x branches. 
 
 Installation
 ------------
@@ -60,7 +60,7 @@ Stream tweets from New York City::
 	for item in r:
 		print(item)
 		
-Notice that ``request()`` works with all endpoints found in either the Public APIs or the Streaming APIs. Usually ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  The above examples use ``get_iterator()`` to consume each tweet object.  The iterator knows how to iterate results returned from either the Public APIs or the Streaming APIs.  
+Notice that ``request()`` works with all endpoints found in either the REST APIs or the Streaming APIs. Usually ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  The above examples use ``get_iterator()`` to consume each tweet object.  The iterator knows how to iterate results returned from either the REST APIs or the Streaming APIs.  
 
 You also have access to the response object returned by ``request()``.  From a response object ``r`` you can get the raw response with ``r.text`` and the HTTP status code with ``r.status_code``.  See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
 
