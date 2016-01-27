@@ -19,6 +19,7 @@ PROTOCOL = 'https'
 DOMAIN = 'twitter.com'
 
 VERSION = '1.1'
+CURATOR_VERSION = 'broadcast/1'
 
 USER_AGENT = 'python-TwitterAPI'
 
@@ -29,11 +30,15 @@ REST_TIMEOUT = 5
 ENDPOINTS = {
     # resource:                                (method, subdomain)
 
+    # STREAMING API
+
     'statuses/filter':                         ('POST', 'stream'),
     'statuses/firehose':                       ('GET',  'stream'),
     'statuses/sample':                         ('GET',  'stream'),
     'site':                                    ('GET',  'sitestream'),
     'user':                                    ('GET',  'userstream'),
+
+    # PUBLIC API
 
     'account/remove_profile_banner':           ('POST', 'api'),
     'account/settings':                        ('GET',  'api'),
@@ -149,5 +154,29 @@ ENDPOINTS = {
     'users/show':                              ('GET',  'api'),
     'users/suggestions':                       ('GET',  'api'),
     'users/suggestions/:PARAM':                ('GET',  'api'), # SLUG
-    'users/suggestions/:PARAM/members':        ('GET',  'api')  # SLUG
+    'users/suggestions/:PARAM/members':        ('GET',  'api'), # SLUG
+
+    # COLLECTIONS API
+
+    'collections/create':                      ('POST', 'api'),
+    'collections/destroy':                     ('POST', 'api'),
+    'collections/entries':                     ('GET',  'api'),
+    'collections/entries/add':                 ('POST', 'api'),
+    'collections/entries/curate':              ('POST', 'api'),
+    'collections/entries/move':                ('POST', 'api'),
+    'collections/entries/remove':              ('POST', 'api'),
+    'collections/list':                        ('GET',  'api'),
+    'collections/show':                        ('GET',  'api'),
+    'collections/update':                      ('POST', 'api'),
+
+    # CURATOR API
+
+    'collections/:PARAM/content':              ('GET',  'curator'), # ID
+    'projects':                                ('GET',  'curator'),
+    'projects/:PARAM':                         ('GET',  'curator'), # ID
+    'streams/:PARAM/content':                  ('GET',  'curator'), # ID
+    'streams/:PARAM/metrics':                  ('GET',  'curator'), # ID
+    'streams/:PARAM/trendline':                ('GET',  'curator'), # ID
+    'streams/compare':                         ('GET',  'curator'),
+    'streams/compare_to_target':               ('GET',  'curator')
 }

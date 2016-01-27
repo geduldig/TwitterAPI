@@ -58,11 +58,18 @@ class TwitterAPI(object):
             raise Exception('Unknown oAuth version')
 
     def _prepare_url(self, subdomain, path):
-        return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
-                                          subdomain,
-                                          DOMAIN,
-                                          VERSION,
-                                          path)
+        if subdomain == 'curator':
+            return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
+                                              subdomain,
+                                              DOMAIN,
+                                              CURATOR_VERSION,
+                                              path)
+        else:
+            return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
+                                              subdomain,
+                                              DOMAIN,
+                                              VERSION,
+                                              path)
 
     def _get_endpoint(self, resource):
         """Substitute any parameters in the resource path with :PARAM."""
@@ -217,6 +224,8 @@ class _RestIterable(object):
             self.results = resp['users']
         elif 'ids' in resp:
             self.results = resp['ids']
+        elif 'data' in resp and not isinstance(resp['data'], dict):
+            self.results = resp['data']
         elif hasattr(resp, '__iter__') and not isinstance(resp, dict):
             if len(resp) > 0 and 'trends' in resp[0]:
                 self.results = resp[0]['trends']
