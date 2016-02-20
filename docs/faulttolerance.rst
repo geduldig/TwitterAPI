@@ -18,7 +18,7 @@ Sometimes Twitter will inform you to close the connection by sending you a "disc
 
     while True:
         try:
-            iterator = api.request('statuses/filter', {'track':'pizza').get_iterator()
+            iterator = api.request('statuses/filter', {'track':'pizza'}).get_iterator()
             for item in iterator:
                 if 'text' in item:
                     print(item['text'])
