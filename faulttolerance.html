@@ -59,7 +59,7 @@
 <p>Sometimes Twitter will inform you to close the connection by sending you a &#8220;disconnect&#8221; message. The message will contain a code which indicates the reason. Messages with a code of 2, 5, 6, or 7 are serious and you will need to fix the problem before making a new request. You can ignore all other messages.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">iterator</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;statuses/filter&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;track&#39;</span><span class="p">:</span><span class="s">&#39;pizza&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">()</span>
+        <span class="n">iterator</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;statuses/filter&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;track&#39;</span><span class="p">:</span><span class="s">&#39;pizza&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
             <span class="k">if</span> <span class="s">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
                 <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&#39;text&#39;</span><span class="p">])</span>
@@ -117,7 +117,7 @@
       </div>
 
     <div class="footer">
-        &copy; Copyright 2014, Jonas Geduldig.
+        &copy; Copyright 2014, geduldig.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
     </div>
   </body>
