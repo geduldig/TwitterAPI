@@ -1,4 +1,4 @@
-__author__ = "Andrea Biancini, Jonas Geduldig"
+__author__ = "Andrea Biancini, geduldig"
 __date__ = "January 3, 2014"
 __license__ = "MIT"
 

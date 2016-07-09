@@ -15,7 +15,7 @@ def read(*filenames, **kwargs):
 setup(
     name='TwitterAPI',
     version=__version__,
-    author='Jonas Geduldig',
+    author='geduldig',
     author_email='boxnumber03@gmail.com',
     packages=['TwitterAPI'],
     package_data={'': ['credentials.txt']},

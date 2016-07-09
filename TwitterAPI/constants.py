@@ -9,7 +9,7 @@
 """
 
 
-__author__ = "Jonas Geduldig"
+__author__ = "geduldig"
 __date__ = "February 3, 2012"
 __license__ = "MIT"
 

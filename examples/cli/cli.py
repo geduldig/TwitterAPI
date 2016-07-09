@@ -29,7 +29,7 @@
 """
 
 
-__author__ = "Jonas Geduldig"
+__author__ = "geduldig"
 __date__ = "June 7, 2013"
 __license__ = "MIT"
 
@@ -75,7 +75,7 @@ def _to_dict(param_list):
 
 
 if __name__ == '__main__':
-    print('TwitterAPI %s by Jonas Geduldig' % __version__)
+    print('TwitterAPI %s by geduldig' % __version__)
 
     parser = argparse.ArgumentParser(
         description='Request any Twitter Streaming or REST API endpoint')

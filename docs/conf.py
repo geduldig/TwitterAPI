@@ -46,7 +46,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'TwitterAPI'
-copyright = u'2014, Jonas Geduldig'
+copyright = u'2014, geduldig'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -199,7 +199,7 @@ latex_elements = {
 #  author, documentclass [howto/manual]).
 latex_documents = [
     ('index', 'TwitterAPI.tex', u'TwitterAPI Documentation',
-     u'Jonas Geduldig', 'manual'),
+     u'geduldig', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -229,7 +229,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'twitterapi', u'TwitterAPI Documentation',
-     [u'Jonas Geduldig'], 1)
+     [u'geduldig'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -243,7 +243,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'TwitterAPI', u'TwitterAPI Documentation',
-     u'Jonas Geduldig', 'TwitterAPI', 'One line description of project.',
+     u'geduldig', 'TwitterAPI', 'One line description of project.',
      'Miscellaneous'),
 ]
 
