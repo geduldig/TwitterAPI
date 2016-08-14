@@ -92,3 +92,5 @@ v2.3.5,    28 Oct 2015 -- Removed deprecated classes RestIterator, StreamingIter
 v2.3.6,    20 Dec 2015 -- Added support in TwitterRestPager for endpoints with cursors.
 
 v2.4.0,    23 Jan 2016 -- Added support for Curator API and Collections API.
+
+v2.4.2,    14 Aug 2016 -- Merged karlicoss. Added method_override to request.

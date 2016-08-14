@@ -83,12 +83,13 @@ class TwitterAPI(object):
         else:
             return (resource, resource)
 
-    def request(self, resource, params=None, files=None):
+    def request(self, resource, params=None, files=None, method_override=None):
         """Request a Twitter REST API or Streaming API resource.
 
         :param resource: A valid Twitter endpoint (ex. "search/tweets")
         :param params: Dictionary with endpoint parameters or None (default)
         :param files: Dictionary with multipart-encoded file or None (default)
+        :param method_override: Request method to override or None (default)
 
         :returns: TwitterResponse
         :raises: TwitterConnectionError
@@ -100,6 +101,8 @@ class TwitterAPI(object):
         session.auth = self.auth
         session.headers = {'User-Agent': USER_AGENT}
         method, subdomain = ENDPOINTS[endpoint]
+        if method_override:
+            method = method_override
         url = self._prepare_url(subdomain, resource)
         if 'stream' in subdomain:
             session.stream = True
