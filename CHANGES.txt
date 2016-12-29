@@ -94,3 +94,5 @@ v2.3.6,    20 Dec 2015 -- Added support in TwitterRestPager for endpoints with c
 v2.4.0,    23 Jan 2016 -- Added support for Curator API and Collections API.
 
 v2.4.2,    14 Aug 2016 -- Merged karlicoss. Added method_override to request.
+
+v2.4.3,    29 Dec 2016 -- Create request session inside a with block.

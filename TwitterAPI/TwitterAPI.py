@@ -97,42 +97,42 @@ class TwitterAPI(object):
         resource, endpoint = self._get_endpoint(resource)
         if endpoint not in ENDPOINTS:
             raise Exception('Endpoint "%s" unsupported' % endpoint)
-        session = requests.Session()
-        session.auth = self.auth
-        session.headers = {'User-Agent': USER_AGENT}
-        method, subdomain = ENDPOINTS[endpoint]
-        if method_override:
-            method = method_override
-        url = self._prepare_url(subdomain, resource)
-        if 'stream' in subdomain:
-            session.stream = True
-            timeout = STREAMING_TIMEOUT
-            # always use 'delimited' for efficient stream parsing
-            if not params:
-                params = {}
-            params['delimited'] = 'length'
-            params['stall_warning'] = 'true'
-        else:
-            session.stream = False
-            timeout = REST_TIMEOUT
-        if method == 'POST':
-            data = params
-            params = None
-        else:
-            data = None
-        try:
-            r = session.request(
-                method,
-                url,
-                data=data,
-                params=params,
-                timeout=(CONNECTION_TIMEOUT,timeout),
-                files=files,
-                proxies=self.proxies)
-        except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, 
-                SSLError, ssl.SSLError, socket.error) as e:
-            raise TwitterConnectionError(e)
-        return TwitterResponse(r, session.stream)
+        with requests.Session() as session:
+            session.auth = self.auth
+            session.headers = {'User-Agent': USER_AGENT}
+            method, subdomain = ENDPOINTS[endpoint]
+            if method_override:
+                method = method_override
+            url = self._prepare_url(subdomain, resource)
+            if 'stream' in subdomain:
+                session.stream = True
+                timeout = STREAMING_TIMEOUT
+                # always use 'delimited' for efficient stream parsing
+                if not params:
+                    params = {}
+                params['delimited'] = 'length'
+                params['stall_warning'] = 'true'
+            else:
+                session.stream = False
+                timeout = REST_TIMEOUT
+            if method == 'POST':
+                data = params
+                params = None
+            else:
+                data = None
+            try:
+                r = session.request(
+                    method,
+                    url,
+                    data=data,
+                    params=params,
+                    timeout=(CONNECTION_TIMEOUT,timeout),
+                    files=files,
+                    proxies=self.proxies)
+            except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
+                    SSLError, ssl.SSLError, socket.error) as e:
+                raise TwitterConnectionError(e)
+            return TwitterResponse(r, session.stream)
 
 
 class TwitterResponse(object):
@@ -190,7 +190,7 @@ class TwitterResponse(object):
 
     def get_rest_quota(self):
         """Quota information in the REST-only response header.
-        
+
         :returns: Dictionary of 'remaining' (count), 'limit' (count), 'reset' (time)
         """
         remaining, limit, reset = None, None, None
@@ -284,7 +284,7 @@ class _StreamingIterable(object):
                             item = self.stream.read(nbytes)
                         break
                 yield item
-            except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError, 
+            except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
                     SSLError, ssl.SSLError, socket.error) as e:
                 raise TwitterConnectionError(e)
             except AttributeError:
