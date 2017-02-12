@@ -163,7 +163,12 @@ class TwitterResponse(object):
         return self.response.text
 
     def json(self, **kwargs):
-        """:returns: response as JSON object."""
+        """Get the response as a JSON object.
+
+        :param \*\*kwargs: Optional arguments that ``json.loads`` takes.
+        :returns: response as JSON object.
+        :raises: ValueError
+        """
         return self.response.json(**kwargs)
 
     def get_iterator(self):

@@ -96,3 +96,5 @@ v2.4.0,    23 Jan 2016 -- Added support for Curator API and Collections API.
 v2.4.2,    14 Aug 2016 -- Merged karlicoss. Added method_override to request.
 
 v2.4.3,    29 Dec 2016 -- Create request session inside a with block.
+
+v2.4.4,    29 Dec 2016 -- Merged Socialery patch. Added optional arguments to json() method.
