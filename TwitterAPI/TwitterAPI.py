@@ -162,9 +162,9 @@ class TwitterResponse(object):
         """:returns: Raw API response text."""
         return self.response.text
 
-    def json(self):
+    def json(self, **kwargs):
         """:returns: response as JSON object."""
-        return self.response.json()
+        return self.response.json(**kwargs)
 
     def get_iterator(self):
         """Get API dependent iterator.
