@@ -137,6 +137,7 @@ ENDPOINTS = {
     'statuses/retweets/:PARAM':                ('GET',  'api'), # ID
     'statuses/retweets_of_me':                 ('GET',  'api'),
     'statuses/show/:PARAM':                    ('GET',  'api'), # ID
+    'statuses/unretweet/:PARAM':               ('POST', 'api'), # ID
     'statuses/user_timeline':                  ('GET',  'api'),
     'statuses/update':                         ('POST', 'api'), # deprecated
     'statuses/update_with_media':              ('POST', 'api'),
