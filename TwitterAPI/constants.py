@@ -1,9 +1,9 @@
 """
 	Constants For All Twitter Endpoints
 	-----------------------------------
-	
+
 	Version 1.1, Streaming API and REST API.
-	
+
 	URLs for each endpoint are composed of the following pieces:
 		PROTOCOL://{subdomain}.DOMAIN/VERSION/{resource}?{parameters}
 """
@@ -23,7 +23,7 @@ CURATOR_VERSION = 'broadcast/1'
 
 USER_AGENT = 'python-TwitterAPI'
 
-CONNECTION_TIMEOUT = 5
+CONNECTION_TIMEOUT = 10
 STREAMING_TIMEOUT = 90
 REST_TIMEOUT = 5
 
