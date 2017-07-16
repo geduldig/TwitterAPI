@@ -100,3 +100,5 @@ v2.4.3,    29 Dec 2016 -- Create request session inside a with block.
 v2.4.4,    29 Dec 2016 -- Merged Socialery patch. Added optional arguments to json() method.
 
 v2.4.5,    25 Feb 2017 -- Merged NeilCTurner patch. Added statuses/unretweet API endpoint.
+
+v2.4.6,    16 Jul 2017 -- Merged RickRedSix patch. Added direct message endpoints.
