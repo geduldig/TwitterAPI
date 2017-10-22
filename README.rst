@@ -1,11 +1,9 @@
 |LOGO|
-==============================================
-|BADGE_DOWNLOADS| |BADGE_VERSION| |BADGE_CHAT|
-==============================================
+============================
+|BADGE_VERSION| |BADGE_CHAT|
+============================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
-.. |BADGE_DOWNLOADS| image:: https://img.shields.io/pypi/dm/TwitterAPI.svg
-   :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_CHAT| image:: https://badges.gitter.im/Join%20Chat.svg

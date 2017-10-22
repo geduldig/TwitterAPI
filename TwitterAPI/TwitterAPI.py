@@ -64,6 +64,12 @@ class TwitterAPI(object):
                                               DOMAIN,
                                               CURATOR_VERSION,
                                               path)
+        elif subdomain == 'ads-api':
+            return '%s://%s.%s/%s/%s'      % (PROTOCOL,
+                                              subdomain,
+                                              DOMAIN,
+                                              ADS_VERSION,
+                                              path)
         else:
             return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
                                               subdomain,

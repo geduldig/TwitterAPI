@@ -20,6 +20,7 @@ DOMAIN = 'twitter.com'
 
 VERSION = '1.1'
 CURATOR_VERSION = 'broadcast/1'
+ADS_VERSION = '2'
 
 USER_AGENT = 'python-TwitterAPI'
 
@@ -73,7 +74,6 @@ ENDPOINTS = {
     'direct_messages/welcome_messages/rules/show':       ('GET',    'api'),    
     'direct_messages/welcome_messages/rules/destroy':    ('DELETE', 'api'),        
         
-
     'favorites/create':                                  ('POST',   'api'),
     'favorites/destroy':                                 ('POST',   'api'),
     'favorites/list':                                    ('GET',    'api'),
@@ -190,5 +190,15 @@ ENDPOINTS = {
     'streams/:PARAM/metrics':                            ('GET',    'curator'), # ID
     'streams/:PARAM/trendline':                          ('GET',    'curator'), # ID
     'streams/compare':                                   ('GET',    'curator'),
-    'streams/compare_to_target':                         ('GET',    'curator')
+    'streams/compare_to_target':                         ('GET',    'curator'),
+
+    # ADS API
+
+    'accounts/:PARAM/auction_insights':                  ('GET',    'ads-api'), # ACCOUNT ID
+    'stats/accounts/:PARAM':                             ('GET',    'ads-api'), # ACCOUNT ID
+    'stats/accounts/:PARAM/reach/funding_instruments':   ('GET',    'ads-api'), # ACCOUNT ID
+    'stats/jobs/accounts/:PARAM':                        ('GET',    'ads-api'), # ACCOUNT ID
+    'stats/jobs/accounts/:PARAM':                        ('POST',   'ads-api'), # ACCOUNT ID
+    'stats/jobs/accounts/:PARAM/:PARAM':                 ('DELETE', 'ads-api'), # ACCOUNT ID, JOB ID
+    'stats/jobs/summaries':                              ('GET',    'ads-api')
 }
