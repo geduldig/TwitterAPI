@@ -49,7 +49,23 @@ ENDPOINTS = {
     'account/update_profile_colors':                     ('POST', 'api'),
     'account/update_profile_image':                      ('POST', 'api'),
     'account/verify_credentials':                        ('GET',  'api'),
+    
+    # NEW ACCOUNT ACTIVITY WEBHOOK API (ALL EVENTS) (BETA)
 
+    'account_activity/all/:PARAM/webhooks':               ('POST',   'api'),    
+    'account_activity/all/:PARAM/subscriptions':          ('POST',   'api'),
+    'account_activity/all/webhooks':                      ('GET',    'api'),   
+    'account_activity/all/count':                         ('GET',    'api'), 
+    'account_activity/all/:PARAM/subscriptions/all':      ('GET',    'api'),
+    'account_activity/all/:PARAM/subscriptions/all/list': ('GET',    'api'),          
+    'account_activity/all/:PARAM/subscriptions':          ('DELETE', 'api'),                            
+    
+    # NEW ACCOUNT ACTIVITY WEBHOOK API (DM) (BETA)
+    'account_activity/webhooks':                            ('POST',   'api'),    
+    'account_activity/webhooks/:PARAM':                     ('DELETE', 'api'),
+    'account_activity/webhooks/:PARAM/subscriptions':       ('POST',   'api'),   
+    'account_activity/webhooks/:PARAM/subscriptions/list':  ('GET',    'api'),   
+        
     'application/rate_limit_status':                     ('GET',  'api'),
 
     'blocks/create':                                     ('POST', 'api'),
@@ -65,19 +81,18 @@ ENDPOINTS = {
     
     # NEW DM API (BETA)
     'direct_messages/events/new':                        ('POST', 'api'),
-    'direct_messages/events/list':                       ('GET', 'api'),
-    'direct_messages/events/show':                       ('GET', 'api'),    
+    'direct_messages/events/list':                       ('GET',  'api'),
+    'direct_messages/events/show':                       ('GET',  'api'),    
     
-    'direct_messages/welcome_messages/new':              ('POST', 'api'),
-    'direct_messages/welcome_messages/show':             ('GET', 'api'),
+    'direct_messages/welcome_messages/new':              ('POST',   'api'),
+    'direct_messages/welcome_messages/show':             ('GET',    'api'),
     'direct_messages/welcome_messages/destroy':          ('DELETE', 'api'),    
     
-    'direct_messages/welcome_messages/rules/new':        ('POST', 'api'),
-    'direct_messages/welcome_messages/rules/list':       ('GET', 'api'),
-    'direct_messages/welcome_messages/rules/show':       ('GET', 'api'),    
+    'direct_messages/welcome_messages/rules/new':        ('POST',   'api'),
+    'direct_messages/welcome_messages/rules/list':       ('GET',    'api'),
+    'direct_messages/welcome_messages/rules/show':       ('GET',    'api'),    
     'direct_messages/welcome_messages/rules/destroy':    ('DELETE', 'api'),        
         
-
     'favorites/create':                                  ('POST', 'api'),
     'favorites/destroy':                                 ('POST', 'api'),
     'favorites/list':                                    ('GET',  'api'),
