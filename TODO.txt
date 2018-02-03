@@ -1,2 +1,4 @@
 Build test suite with unittest.
 (If anyone wants to contribute, would be much appreciated.)
+
+Test Ads API endpoints.

@@ -103,4 +103,4 @@ v2.4.5,    25 Feb 2017 -- Merged NeilCTurner patch. Added statuses/unretweet API
 
 v2.4.6,    16 Jul 2017 -- Merged RickRedSix patch. Added direct message endpoints.
 
-v2.4.7,    16 Jul 2017 -- Added endpoints for Ads API.
+v2.4.7,    22 Oct 2017 -- Added endpoints for Ads API.

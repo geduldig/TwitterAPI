@@ -192,7 +192,7 @@ ENDPOINTS = {
     'streams/compare':                                   ('GET',    'curator'),
     'streams/compare_to_target':                         ('GET',    'curator'),
 
-    # ADS API
+    # ADS API (not tested!!)
 
     'accounts/:PARAM/auction_insights':                  ('GET',    'ads-api'), # ACCOUNT ID
     'stats/accounts/:PARAM':                             ('GET',    'ads-api'), # ACCOUNT ID
