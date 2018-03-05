@@ -205,6 +205,7 @@ ENDPOINTS = {
     # NEW ACCOUNT ACTIVITY WEBHOOK API (BETA)
 
     'account_activity/all/:PARAM/webhooks':                 ('POST',   'api'),    
+    'account_activity/all/:PARAM/webhooks/:PARAM':          ('DELETE', 'api'),
     'account_activity/all/:PARAM/subscriptions':            ('POST',   'api'),
     'account_activity/all/:PARAM/subscriptions/all':        ('GET',    'api'),
     'account_activity/all/:PARAM/subscriptions/all/list':   ('GET',    'api'),          
