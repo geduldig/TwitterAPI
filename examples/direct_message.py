@@ -6,8 +6,8 @@ api = TwitterAPI(<consumer key>,
                  <access token key>,
                  <access token secret>)
 
-user_id = 334398732
-message_text = 'DM message 01'
+user_id = <user id of the recipient>
+message_text = <the DM text>
 
 event = {
 	"event": {
@@ -23,7 +23,5 @@ event = {
 	}
 }
 
-
 r = api.request('direct_messages/events/new', json.dumps(event))
-
-print(r.status_code)
+print('SUCCESS' if r.status_code == 200 else 'PROBLEM: ' + r.text)

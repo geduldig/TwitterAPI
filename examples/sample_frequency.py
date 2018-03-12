@@ -33,6 +33,10 @@ class Frequency:
 
 freq = Frequency()
 
+# THIS DEMONSTRATES HOW TO HANDLE ALL TYPES OF STREAMING ERRORS.
+# SO, THIS IS APPLICAPLE TO 'statuses/filter' AS WELL. ONLY WHEN
+# APPROPRIATE, A DROPPED CONNECTION IS RE-ESTABLISHED. 
+
 while True:
     try:
         r = api.request('statuses/sample')

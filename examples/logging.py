@@ -4,7 +4,7 @@ import logging
 # SET UP LOGGING TO FILE AND TO CONSOLE
 formatter = logging.Formatter('%(levelname)s %(asctime)s %(message)s',
                               '%m/%d/%Y %I:%M:%S %p')
-fh = logging.FileHandler('sample_freq.log')
+fh = logging.FileHandler('logging.log')
 fh.setFormatter(formatter)
 ch = logging.StreamHandler()
 ch.setFormatter(formatter)

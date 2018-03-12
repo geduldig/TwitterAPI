@@ -8,5 +8,4 @@ api = TwitterAPI(<consumer key>,
                  <access token secret>)
 
 r = api.request('statuses/update', {'status': TWEET_TEXT})
-
-print('SUCCESS' if r.status_code == 200 else 'FAILURE')
+print('SUCCESS' if r.status_code == 200 else 'PROBLEM: ' + r.text)
