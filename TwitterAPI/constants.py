@@ -67,6 +67,7 @@ ENDPOINTS = {
     'direct_messages/sent':                                 ('GET',    'api'),
     'direct_messages/show':                                 ('GET',    'api'),
     'direct_messages/welcome_messages/new':                 ('POST',   'api'),
+    'direct_messages/welcome_messages/list':                ('GET',    'api'),
     'direct_messages/welcome_messages/show':                ('GET',    'api'),
     'direct_messages/welcome_messages/destroy':             ('DELETE', 'api'),    
     'direct_messages/welcome_messages/rules/new':           ('POST',   'api'),
