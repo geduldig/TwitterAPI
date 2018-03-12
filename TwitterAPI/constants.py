@@ -58,14 +58,14 @@ ENDPOINTS = {
     'blocks/ids':                                           ('GET',    'api'),
     'blocks/list':                                          ('GET',    'api'),
 
-    'direct_messages':                                      ('GET',    'api'),
-    'direct_messages/destroy':                              ('POST',   'api'),
+    'direct_messages':                                      ('GET',    'api'), # deprecated
+    'direct_messages/destroy':                              ('POST',   'api'), # deprecated
     'direct_messages/events/new':                           ('POST',   'api'),
     'direct_messages/events/list':                          ('GET',    'api'),
     'direct_messages/events/show':                          ('GET',    'api'),    
-    'direct_messages/new':                                  ('POST',   'api'),
-    'direct_messages/sent':                                 ('GET',    'api'),
-    'direct_messages/show':                                 ('GET',    'api'),
+    'direct_messages/new':                                  ('POST',   'api'), # deprecated
+    'direct_messages/sent':                                 ('GET',    'api'), # deprecated
+    'direct_messages/show':                                 ('GET',    'api'), # deprecated
     'direct_messages/welcome_messages/new':                 ('POST',   'api'),
     'direct_messages/welcome_messages/list':                ('GET',    'api'),
     'direct_messages/welcome_messages/show':                ('GET',    'api'),
@@ -151,8 +151,8 @@ ENDPOINTS = {
     'statuses/show/:PARAM':                                 ('GET',    'api'), # ID
     'statuses/unretweet/:PARAM':                            ('POST',   'api'), # ID
     'statuses/user_timeline':                               ('GET',    'api'),
-    'statuses/update':                                      ('POST',   'api'), # deprecated
-    'statuses/update_with_media':                           ('POST',   'api'),
+    'statuses/update':                                      ('POST',   'api'),
+    'statuses/update_with_media':                           ('POST',   'api'), # deprecated
 
     'trends/available':                                     ('GET',    'api'),
     'trends/closest':                                       ('GET',    'api'),
