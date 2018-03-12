@@ -106,3 +106,5 @@ v2.4.6,    16 Jul 2017 -- Merged RickRedSix patch. Added direct message endpoint
 v2.4.7,    22 Oct 2017 -- Added endpoints for Ads API.
 
 v2.4.8,    03 Feb 2018 -- Merged RickRedSix patch. Added account activity endpoints.
+
+v2.4.9,    03 Feb 2018 -- Merged torufurukawa patch. Added webhook endpoint.
