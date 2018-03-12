@@ -12,29 +12,21 @@ import sys
 VIDEO_FILENAME = 'test.mp4'
 TWEET_TEXT = 'Video upload test'
 
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
-ACCESS_TOKEN_KEY = ''
-ACCESS_TOKEN_SECRET = ''
-
-
-api = TwitterAPI(CONSUMER_KEY,
-                 CONSUMER_SECRET,
-                 ACCESS_TOKEN_KEY,
-                 ACCESS_TOKEN_SECRET)
-
+api = TwitterAPI(<consumer key>, 
+                 <consumer secret>,
+                 <access token key>,
+                 <access token secret>)
 
 bytes_sent = 0
 total_bytes = os.path.getsize(VIDEO_FILENAME)
 file = open(VIDEO_FILENAME, 'rb')
 
-
 def check_status(r):
+  # EXIT PROGRAM WITH ERROR MESSAGE
 	if r.status_code < 200 or r.status_code > 299:
 		print(r.status_code)
 		print(r.text)
 		sys.exit(0)
-
 
 r = api.request('media/upload', {'command':'INIT', 'media_type':'video/mp4', 'total_bytes':total_bytes})
 check_status(r)

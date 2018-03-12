@@ -1,27 +1,10 @@
-from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterConnectionError, TwitterRequestError
+from TwitterAPI import TwitterAPI, TwitterConnectionError, TwitterRequestError
 import time
-import logging
 
-
-# SET UP LOGGING TO FILE AND TO CONSOLE
-formatter = logging.Formatter('%(levelname)s %(asctime)s %(message)s',
-                              '%m/%d/%Y %I:%M:%S %p')
-fh = logging.FileHandler('sample_freq.log')
-fh.setFormatter(formatter)
-ch = logging.StreamHandler()
-ch.setFormatter(formatter)
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-logger.addHandler(fh)
-logger.addHandler(ch)
-
-
-o = TwitterOAuth.read_file()
-api = TwitterAPI(o.consumer_key,
-                 o.consumer_secret,
-                 o.access_token_key,
-                 o.access_token_secret)
-
+api = TwitterAPI(<consumer key>, 
+                 <consumer secret>,
+                 <access token key>,
+                 <access token secret>)
 
 class Frequency:
 
@@ -48,9 +31,7 @@ class Frequency:
             self.interval_start = now
             self.interval_count = 0
 
-
 freq = Frequency()
-
 
 while True:
     try:
@@ -59,15 +40,15 @@ while True:
             if 'text' in item:
                 freq.update()
             elif 'limit' in item:
-                logging.info('TWEETS SKIPPED: %s' % item['limit']['track'])
+                print('TWEETS SKIPPED: %s' % item['limit']['track'])
             elif 'warning' in item:
-                logging.warning(item['warning'])
+                print(item['warning'])
             elif 'disconnect' in item:
                 event = item['disconnect']
                 if event['code'] in [2,5,6,7]:
                     # streaming connection rejected
                     raise Exception(event)
-                logging.info('RE-CONNECTING: %s' % event)
+                print('RE-CONNECTING: %s' % event)
                 break
     except TwitterRequestError as e:
         if e.status_code < 500:

@@ -8,7 +8,6 @@ api = TwitterAPI(<consumer key>,
                  <access token key>,
                  <access token secret>)
 
-
 class DeleteTweet(Thread):
 
     def __init__(self, tweet_id, count):

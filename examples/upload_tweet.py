@@ -1,13 +1,11 @@
 from TwitterAPI import TwitterAPI
-
-TRACK_TERM = 'pizza'
+ 
+TWEET_TEXT = 'some tweet text'
 
 api = TwitterAPI(<consumer key>, 
                  <consumer secret>,
                  <access token key>,
                  <access token secret>)
-
-r = api.request('statuses/filter', {'track': TRACK_TERM})
-
-for item in r:
-    print(item['text'] if 'text' in item else item)
+ 
+r = api.request('statuses/update', {'status':TWEET_TEXT})
+print(r.status_code)

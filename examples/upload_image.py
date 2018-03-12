@@ -1,25 +1,14 @@
-'''
-This example replaces post_image.py. It demonstrates a method for
-posting an image, which now requires two API calls. 
-'''
+# Post an image with tweet. Requires two API calls. 
 
 from TwitterAPI import TwitterAPI
-
 
 TWEET_TEXT = 'some tweet text'
 IMAGE_PATH = './some_image.png'
 
-
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
-ACCESS_TOKEN_KEY = ''
-ACCESS_TOKEN_SECRET = ''
-
-
-api = TwitterAPI(CONSUMER_KEY,
-                 CONSUMER_SECRET,
-                 ACCESS_TOKEN_KEY,
-                 ACCESS_TOKEN_SECRET)
+api = TwitterAPI(<consumer key>, 
+                 <consumer secret>,
+                 <access token key>,
+                 <access token secret>)
 
 # STEP 1 - upload image
 file = open(IMAGE_PATH, 'rb')
