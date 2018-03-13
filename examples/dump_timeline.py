@@ -10,8 +10,8 @@ api = TwitterAPI(<consumer key>,
                  auth_type='oAuth2')
 
 pager = TwitterRestPager(api, 
-	                     'statuses/user_timeline', 
-	                     {'screen_name':SCREEN_NAME, 'count':200})
+                         'statuses/user_timeline', 
+                         {'screen_name':SCREEN_NAME, 'count':200})
 
 count = 0
 for item in pager.get_iterator(wait=3.5):
