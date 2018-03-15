@@ -1,5 +1,5 @@
 __title__ = 'TwitterAPI'
-__version__ = '2.4.10'
+__version__ = '2.5.0'
 __author__ = 'geduldig'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2013 geduldig'
@@ -16,7 +16,7 @@ try:
     from .TwitterAPI import TwitterAPI, TwitterResponse
     from .TwitterError import TwitterConnectionError, TwitterRequestError
     from .TwitterOAuth import TwitterOAuth
-    from .TwitterRestPager import TwitterRestPager
+    from .TwitterPager import TwitterPager
 except:
     pass
 
@@ -26,5 +26,5 @@ __all__ = [
     'TwitterConnectionError',
     'TwitterRequestError',
     'TwitterOAuth',
-    'TwitterRestPager'
+    'TwitterPager'
 ]

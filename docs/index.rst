@@ -49,5 +49,5 @@ Optional:
 .. toctree::
    :maxdepth: 2
 
-   twitterrestpager.rst
+   twitterpager.rst
    twitteroauth.rst

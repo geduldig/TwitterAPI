@@ -1,7 +1,7 @@
 # Print a user's timeline. This will get up to 3,200 tweets, which
 # is the maximum the Twitter API allows.
 
-from TwitterAPI import TwitterAPI, TwitterRestPager
+from TwitterAPI import TwitterAPI, TwitterPager
 
 SCREEN_NAME = 'TheTweetOfGod'
 
@@ -9,9 +9,9 @@ api = TwitterAPI(<consumer key>,
                  <consumer secret>,
                  auth_type='oAuth2')
 
-pager = TwitterRestPager(api, 
-                         'statuses/user_timeline', 
-                         {'screen_name':SCREEN_NAME, 'count':200})
+pager = TwitterPager(api, 
+                     'statuses/user_timeline', 
+                     {'screen_name':SCREEN_NAME, 'count':200})
 
 count = 0
 for item in pager.get_iterator(wait=3.5):
