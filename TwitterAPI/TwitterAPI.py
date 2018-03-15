@@ -199,7 +199,7 @@ class TwitterResponse(object):
         """
         return self.get_iterator()
 
-    def get_rest_quota(self):
+    def get_quota(self):
         """Quota information in the REST-only response header.
 
         :returns: Dictionary of 'remaining' (count), 'limit' (count), 'reset' (time)
