@@ -1,9 +1,7 @@
 Paging Results
 ==============
 
-Paging refers to getting successive batches of results. The Streaming API endpoints in a sense do this inherently. REST API endpoints will never return more than a specificied maximum number of results. When you request `search/tweets`, for example, by default you will get at most 20 tweets. You can increase that number to a maximum of 100. This is the page size. Twitter provides a `way <http://dev.twitter.com/rest/public/timelines>`_ to get successive pages, so it is possible to get more than 100 tweets with `search/tweets`, just not in a single request.
-
-If you don't want to implement paging yourself, you can use the `TwitterPager <./twitterpager.html>`_ helper class with any REST API endpoint that returns multiples of something. The following, for example, searches for all tweets containing 'pizza' that Twitter has stored -- about a week's worth.
+Whether one is searching for tweets with `search/tweets` or downloading a user's timeline with `statuses/user_timeline` Twitter limits the number of tweets. So, in order to get more tweets, one must make successive requests and with each request skip the previously acquired tweets. This is done by specifying the tweet id from where to start. Twitter has a description `here <http://dev.twitter.com/rest/public/timelines>`_. If you don't want to implement paging yourself, you can use the `TwitterPager <./twitterpager.html>`_ helper class with any REST API endpoint that returns multiples of something. The following, for example, searches for all tweets containing 'pizza' that Twitter has stored -- up to about a week's worth maximum.
 
 .. code-block:: python 
 
@@ -14,3 +12,5 @@ If you don't want to implement paging yourself, you can use the `TwitterPager <.
         elif 'message' in item and item['code'] == 88:
             print 'SUSPEND, RATE LIMIT EXCEEDED: %s\n' % item['message']
             break
+
+By default there is a built-in wait time of 5 seconds between successive calls. This value is overridden with an argument to `get_iterator()`. See the documentation also to learn how to wait for new tweets. In other words, the iterator can be setup to poll for newer pages of tweets rather than older pages.

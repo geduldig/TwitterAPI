@@ -53,10 +53,9 @@ One final consideration is the endpoint's rate limit, determinted by the endpoin
 .. code-block:: python
 
     iterator = TwitterPager(api, 'search/tweets', {'q':'pizza'}).get_iterator(wait=2)
-    try:
-        for item in iterator:
-            if 'text' in item:
-                print(item['text'])
-            elif 'message' in item:
-                # something needs to be fixed before re-connecting
-                raise Exception(item['message'])
+    for item in iterator:
+        if 'text' in item:
+            print(item['text'])
+        elif 'message' in item:
+            # something needs to be fixed before re-connecting
+            raise Exception(item['message'])
