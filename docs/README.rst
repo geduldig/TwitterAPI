@@ -1,37 +1,24 @@
 Instructions for Generating Documentation with Sphinx
 =====================================================
 
-Generate HTML Files
--------------------
+MAKE NEW DOCS IN MASTER BRANCH::
 
-In a command shell::
-
-	cd TwitterAPI\docs
-
-Edit RST files.
-
-In a command shell::
-
+	clone git@github.com:geduldig/TwitterAPI.git
+	cd TwitterAPI/docs
 	make html
 
-Open in a browser::
+DOWNLOAD OLD DOCS FROM GH-PAGES BRANCH::
 
-	TwitterAPI\docs\_build\html\index.html
+	cd TwitterAPI-docs
+	clone -b gh-pages git@github.com:geduldig/TwitterAPI.git
 
-Repeat until happy
+COPY NEW DOCS OVER OLD DOCS::
 
-Clean Up
---------
+	cp TwitterAPI/docs/_build/html/*.* TwitterAPI-docs/TwitterAPI
+	cp -r TwitterAPI/docs/_build/html/* TwitterAPI-docs/TwitterAPI
+	rm -r TwitterAPI/docs/_build
+					
+UPLOAD NEW DOCS TO GH-PAGES BRANCH:::
 
-In a command shell::
-
-	rm -r TwitterAPI\docs\_build
-
-Publish to Git Repository
--------------------------
-
-In a command shell::
-
-	git add *
-	git commit -am '2.2.4 docs'
+	git commit -am "2.5 docs"
 	git push origin gh-pages
