@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>TwitterAPI.TwitterAPI &mdash; TwitterAPI 2.3 documentation</title>
+    <title>TwitterAPI.TwitterAPI &mdash; TwitterAPI 2.5 documentation</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.3',
+        VERSION:     '2.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,19 +25,19 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
-    <link rel="top" title="TwitterAPI 2.3 documentation" href="index.html" />
+    <link rel="top" title="TwitterAPI 2.5 documentation" href="index.html" />
     <link rel="next" title="TwitterAPI.TwitterError" href="twittererror.html" />
-    <link rel="prev" title="Fault Tolerant Streams and Pages" href="faulttolerance.html" /> 
+    <link rel="prev" title="Tiny Examples" href="examples.html" /> 
   </head>
   <body>
       <div class="header"><h1 class="heading"><a href="index.html">
-          <span>TwitterAPI 2.3 documentation</span></a></h1>
+          <span>TwitterAPI 2.5 documentation</span></a></h1>
         <h2 class="heading"><span>TwitterAPI.TwitterAPI</span></h2>
       </div>
       <div class="topnav">
       
         <p>
-        «&#160;&#160;<a href="faulttolerance.html">Fault Tolerant Streams and Pages</a>
+        «&#160;&#160;<a href="examples.html">Tiny Examples</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
@@ -72,7 +72,7 @@
 </table>
 <dl class="method">
 <dt id="TwitterAPI.TwitterAPI.TwitterAPI.request">
-<tt class="descname">request</tt><big>(</big><em>resource</em>, <em>params=None</em>, <em>files=None</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.request" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">request</tt><big>(</big><em>resource</em>, <em>params=None</em>, <em>files=None</em>, <em>method_override=None</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request a Twitter REST API or Streaming API resource.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -82,6 +82,7 @@
 <li><strong>resource</strong> &#8211; A valid Twitter endpoint (ex. &#8220;search/tweets&#8221;)</li>
 <li><strong>params</strong> &#8211; Dictionary with endpoint parameters or None (default)</li>
 <li><strong>files</strong> &#8211; Dictionary with multipart-encoded file or None (default)</li>
+<li><strong>method_override</strong> &#8211; Request method to override or None (default)</li>
 </ul>
 </td>
 </tr>
@@ -136,8 +137,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="TwitterAPI.TwitterAPI.TwitterResponse.get_rest_quota">
-<tt class="descname">get_rest_quota</tt><big>(</big><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_rest_quota" title="Permalink to this definition">¶</a></dt>
+<dt id="TwitterAPI.TwitterAPI.TwitterResponse.get_quota">
+<tt class="descname">get_quota</tt><big>(</big><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_quota" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quota information in the REST-only response header.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -164,12 +165,17 @@
 
 <dl class="method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.json">
-<tt class="descname">json</tt><big>(</big><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.json" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<tt class="descname">json</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the response as a JSON object.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">response as JSON object.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">json.loads</span></tt> takes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">response as JSON object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">ValueError</td>
 </tr>
 </tbody>
 </table>
@@ -210,7 +216,7 @@
       <div class="bottomnav">
       
         <p>
-        «&#160;&#160;<a href="faulttolerance.html">Fault Tolerant Streams and Pages</a>
+        «&#160;&#160;<a href="examples.html">Tiny Examples</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         &#160;&#160;::&#160;&#160;

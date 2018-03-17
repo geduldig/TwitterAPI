@@ -1,9 +1,9 @@
 Authentication
 ==============
 
-The first thing you need to do is create an application on `apps.twitter.com <http://apps.twitter.com>`_ and generate your oAuth keys. 
+Before you can do anything you must create an application on `apps.twitter.com <http://apps.twitter.com>`_ and generate oAuth keys. 
 
-Twitter supports both user and application authentication, known as oAuth 1 and oAuth 2, respectively. User authentication gives you access to all API endpoints, basically read and write persmission. Application authentication gives you access to just the read portion of the API -- so, no creating or destroying tweets. Application authentication also has elevated rate limits.
+Twitter supports both user and application authentication, called oAuth 1 and oAuth 2, respectively. User authentication gives you access to all API endpoints, basically read and write persmission. It is also required in order to using the Streaming API. Application authentication gives you access to just the read portion of the API -- so, no creating or destroying tweets. Application authentication, however, has elevated rate limits.
 
 User Authentication
 -------------------

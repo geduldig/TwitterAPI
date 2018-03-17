@@ -26,7 +26,7 @@ Get your entire timeline
 
 .. code-block:: python 
 
-    pager = TwitterRestPager(api, 'statuses/home_timeline', {'count':200})
+    pager = TwitterPager(api, 'statuses/home_timeline', {'count':200})
     for item in pager.get_iterator(wait=60):
         if 'text' in item:
             print item['text']

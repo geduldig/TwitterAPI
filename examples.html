@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tiny Examples &mdash; TwitterAPI 2.3 documentation</title>
+    <title>Tiny Examples &mdash; TwitterAPI 2.5 documentation</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.3',
+        VERSION:     '2.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
-    <link rel="top" title="TwitterAPI 2.3 documentation" href="index.html" />
-    <link rel="next" title="Fault Tolerant Streams and Pages" href="faulttolerance.html" />
-    <link rel="prev" title="Paging Results" href="paging.html" /> 
+    <link rel="top" title="TwitterAPI 2.5 documentation" href="index.html" />
+    <link rel="next" title="TwitterAPI.TwitterAPI" href="twitterapi.html" />
+    <link rel="prev" title="Fault Tolerant Streams and Pages" href="faulttolerance.html" /> 
   </head>
   <body>
       <div class="header"><h1 class="heading"><a href="index.html">
-          <span>TwitterAPI 2.3 documentation</span></a></h1>
+          <span>TwitterAPI 2.5 documentation</span></a></h1>
         <h2 class="heading"><span>Tiny Examples</span></h2>
       </div>
       <div class="topnav">
       
         <p>
-        «&#160;&#160;<a href="paging.html">Paging Results</a>
+        «&#160;&#160;<a href="faulttolerance.html">Fault Tolerant Streams and Pages</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="faulttolerance.html">Fault Tolerant Streams and Pages</a>&#160;&#160;»
+        <a href="twitterapi.html">TwitterAPI.TwitterAPI</a>&#160;&#160;»
         </p>
 
       </div>
@@ -68,7 +68,7 @@
 </div>
 <div class="section" id="get-your-entire-timeline">
 <h2>Get your entire timeline<a class="headerlink" href="#get-your-entire-timeline" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">pager</span> <span class="o">=</span> <span class="n">TwitterRestPager</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s">&#39;statuses/home_timeline&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;count&#39;</span><span class="p">:</span><span class="mi">200</span><span class="p">})</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pager</span> <span class="o">=</span> <span class="n">TwitterPager</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s">&#39;statuses/home_timeline&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;count&#39;</span><span class="p">:</span><span class="mi">200</span><span class="p">})</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pager</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
     <span class="k">if</span> <span class="s">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;text&#39;</span><span class="p">]</span>
@@ -121,11 +121,11 @@
       <div class="bottomnav">
       
         <p>
-        «&#160;&#160;<a href="paging.html">Paging Results</a>
+        «&#160;&#160;<a href="faulttolerance.html">Fault Tolerant Streams and Pages</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="faulttolerance.html">Fault Tolerant Streams and Pages</a>&#160;&#160;»
+        <a href="twitterapi.html">TwitterAPI.TwitterAPI</a>&#160;&#160;»
         </p>
 
       </div>

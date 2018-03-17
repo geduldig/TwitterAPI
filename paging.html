@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Paging Results &mdash; TwitterAPI 2.3 documentation</title>
+    <title>Paging Results &mdash; TwitterAPI 2.5 documentation</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.3',
+        VERSION:     '2.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
-    <link rel="top" title="TwitterAPI 2.3 documentation" href="index.html" />
-    <link rel="next" title="Tiny Examples" href="examples.html" />
-    <link rel="prev" title="Error Handling" href="errors.html" /> 
+    <link rel="top" title="TwitterAPI 2.5 documentation" href="index.html" />
+    <link rel="next" title="Error Handling" href="errors.html" />
+    <link rel="prev" title="Authentication" href="authentication.html" /> 
   </head>
   <body>
       <div class="header"><h1 class="heading"><a href="index.html">
-          <span>TwitterAPI 2.3 documentation</span></a></h1>
+          <span>TwitterAPI 2.5 documentation</span></a></h1>
         <h2 class="heading"><span>Paging Results</span></h2>
       </div>
       <div class="topnav">
       
         <p>
-        «&#160;&#160;<a href="errors.html">Error Handling</a>
+        «&#160;&#160;<a href="authentication.html">Authentication</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="examples.html">Tiny Examples</a>&#160;&#160;»
+        <a href="errors.html">Error Handling</a>&#160;&#160;»
         </p>
 
       </div>
@@ -50,9 +50,8 @@
         
   <div class="section" id="paging-results">
 <h1>Paging Results<a class="headerlink" href="#paging-results" title="Permalink to this headline">¶</a></h1>
-<p>Paging refers to getting successive batches of results. The Streaming API endpoints in a sense do this inherently. REST API endpoints will never return more than a specificied maximum number of results. When you request <cite>search/tweets</cite>, for example, by default you will get at most 20 tweets. You can increase that number to a maximum of 100. This is the page size. Twitter provides a <a class="reference external" href="http://dev.twitter.com/rest/public/timelines">way</a> to get successive pages, so it is possible to get more than 100 tweets with <cite>search/tweets</cite>, just not in a single request.</p>
-<p>If you don&#8217;t want to implement paging yourself, you can use the <a class="reference external" href="./twitterrestpager.html">TwitterRestPager</a> helper class with any REST API endpoint that returns multiples of something. The following, for example, searches for all tweets containing &#8216;pizza&#8217; that Twitter has stored &#8211; about a week&#8217;s worth.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">r</span> <span class="o">=</span> <span class="n">TwitterRestPager</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s">&#39;search/tweets&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;q&#39;</span><span class="p">:</span><span class="s">&#39;pizza&#39;</span><span class="p">,</span> <span class="s">&#39;count&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">})</span>
+<p>Whether one is searching for tweets with <cite>search/tweets</cite> or downloading a user&#8217;s timeline with <cite>statuses/user_timeline</cite> Twitter limits the number of tweets. So, in order to get more tweets, one must make successive requests and with each request skip the previously acquired tweets. This is done by specifying the tweet id from where to start. Twitter has a description <a class="reference external" href="http://dev.twitter.com/rest/public/timelines">here</a>. If you don&#8217;t want to implement paging yourself, you can use the <a class="reference external" href="./twitterpager.html">TwitterPager</a> helper class with any REST API endpoint that returns multiples of something. The following, for example, searches for all tweets containing &#8216;pizza&#8217; that Twitter has stored &#8211; up to about a week&#8217;s worth maximum.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">r</span> <span class="o">=</span> <span class="n">TwitterPager</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s">&#39;search/tweets&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;q&#39;</span><span class="p">:</span><span class="s">&#39;pizza&#39;</span><span class="p">,</span> <span class="s">&#39;count&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">})</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
     <span class="k">if</span> <span class="s">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s">&#39;text&#39;</span><span class="p">]</span>
@@ -61,6 +60,7 @@
         <span class="k">break</span>
 </pre></div>
 </div>
+<p>By default there is a built-in wait time of 5 seconds between successive calls. This value is overridden with an argument to <cite>get_iterator()</cite>. See the documentation also to learn how to wait for new tweets. In other words, the iterator can be setup to poll for newer pages of tweets rather than older pages.</p>
 </div>
 
 
@@ -68,11 +68,11 @@
       <div class="bottomnav">
       
         <p>
-        «&#160;&#160;<a href="errors.html">Error Handling</a>
+        «&#160;&#160;<a href="authentication.html">Authentication</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="examples.html">Tiny Examples</a>&#160;&#160;»
+        <a href="errors.html">Error Handling</a>&#160;&#160;»
         </p>
 
       </div>
