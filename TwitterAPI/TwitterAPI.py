@@ -26,7 +26,8 @@ class TwitterAPI(object):
     :param access_token_key: Twitter application access token key
     :param access_token_secret: Twitter application access token secret
     :param auth_type: "oAuth1" (default) or "oAuth2"
-    :param proxy_url: HTTPS proxy URL (ex. "https://USER:PASSWORD@SERVER:PORT")
+    :param proxy_url: HTTPS proxy URL string (ex. "https://USER:PASSWORD@SERVER:PORT"),
+                      or dict of URLs (ex. {'http':'http://SERVER', 'https':'https://SERVER'})
     """
 
     def __init__(
@@ -38,7 +39,12 @@ class TwitterAPI(object):
             auth_type='oAuth1',
             proxy_url=None):
         """Initialize with your Twitter application credentials"""
-        self.proxies = {'https': proxy_url} if proxy_url else None
+        if isinstance(proxy_url, dict):
+            self.proxies = proxy_url
+        elif proxy_url is not None:
+            self.proxies = {'https': proxy_url}
+        else:
+            self.proxies = None
         if auth_type == 'oAuth1':
             if not all([consumer_key, consumer_secret, access_token_key, access_token_secret]):
                 raise Exception('Missing authentication parameter')

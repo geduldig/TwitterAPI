@@ -113,3 +113,5 @@ v2.4.10,   11 Mar 2018 -- Merged torufurukawa patch. Added direct message endpoi
 
 v2.5.0,    15 Mar 2018 -- Renamed get_rest_quota() to get_quota().
                           Renamed TwitterRestPager to TwitterPager.
+
+v2.5.1,    19 May 2018 -- Added support for both HTTP and HTTPS proxies.
