@@ -216,5 +216,12 @@ ENDPOINTS = {
     'account_activity/webhooks':                            ('POST',   'api'),    
     'account_activity/webhooks/:PARAM':                     ('DELETE', 'api'), # WEBHOOK ID
     'account_activity/webhooks/:PARAM/subscriptions':       ('POST',   'api'), # ENVIRONMENT NAME   
-    'account_activity/webhooks/:PARAM/subscriptions/list':  ('GET',    'api')  # ENVIRONMENT NAME
+    'account_activity/webhooks/:PARAM/subscriptions/list':  ('GET',    'api'), # ENVIRONMENT NAME
+    
+    # PREMIUM SEARCH API
+
+    'tweets/search/30day/:PARAM':                           ('GET',    'api'), # LABEL
+    'tweets/search/30day/:PARAM/counts':                    ('GET',    'api'), # LABEL
+    'tweets/search/fullarchive/:PARAM':                     ('GET',    'api'), # LABEL
+    'tweets/search/fullarchive/:PARAM/counts':              ('GET',    'api')  # LABEL
 }
