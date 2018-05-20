@@ -244,6 +244,8 @@ class _RestIterable(object):
             self.results = resp['users']
         elif 'ids' in resp:
             self.results = resp['ids']
+        elif 'results' in resp:
+            self.results = resp['results']
         elif 'data' in resp and not isinstance(resp['data'], dict):
             self.results = resp['data']
         elif hasattr(resp, '__iter__') and not isinstance(resp, dict):
