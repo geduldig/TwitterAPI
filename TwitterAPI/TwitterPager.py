@@ -13,6 +13,7 @@ import time
 class TwitterPager(object):
 
     """Continuous (stream-like) pagination of response from Twitter REST API resource.
+    In addition to Public API endpoints, supports Premium Search API.
 
     :param api: An authenticated TwitterAPI object
     :param resource: String with the resource path (ex. search/tweets)
@@ -59,13 +60,20 @@ class TwitterPager(object):
                     yield item
 
                 # if a cursor is present, use it to get next page
-                # (otherwise, use id to get next page)
+                # otherwise, use id to get next page
                 json = r.json()
                 cursor = -1
                 if new_tweets and 'previous_cursor' in json:
                     cursor = json['previous_cursor']
+                    cursor_param = 'cursor'
                 elif not new_tweets and 'next_cursor' in json:
                     cursor = json['next_cursor']
+                    cursor_param = 'cursor'
+                elif not new_tweets and 'next' in json:
+                	# 'next' is used by Premium Search, so only
+                	# works searching back in time
+                    cursor = json['next']
+                    cursor_param = 'next'
 
                 # bail when no more results
                 if cursor == 0:
@@ -84,7 +92,7 @@ class TwitterPager(object):
 
                 # use either id or cursor to get a new page
                 if cursor != -1:
-                    self.params['cursor'] = cursor
+                    self.params[cursor_param] = cursor
                 elif new_tweets:
                     self.params['since_id'] = str(id)
                 else:
