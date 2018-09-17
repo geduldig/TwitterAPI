@@ -74,7 +74,8 @@ ENDPOINTS = {
     'direct_messages/welcome_messages/rules/list':          ('GET',    'api'),
     'direct_messages/welcome_messages/rules/show':          ('GET',    'api'),    
     'direct_messages/welcome_messages/rules/destroy':       ('DELETE', 'api'),        
-        
+    'direct_messages/indicate_typing':                      ('POST',   'api'),
+
     'favorites/create':                                     ('POST',   'api'),
     'favorites/destroy':                                    ('POST',   'api'),
     'favorites/list':                                       ('GET',    'api'),
