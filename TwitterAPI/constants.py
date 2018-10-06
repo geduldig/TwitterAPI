@@ -60,9 +60,11 @@ ENDPOINTS = {
 
     'direct_messages':                                      ('GET',    'api'), # deprecated
     'direct_messages/destroy':                              ('POST',   'api'), # deprecated
+    'direct_messages/events/destroy':                       ('DELETE', 'api'),
     'direct_messages/events/new':                           ('POST',   'api'),
     'direct_messages/events/list':                          ('GET',    'api'),
     'direct_messages/events/show':                          ('GET',    'api'),    
+    'direct_messages/indicate_typing':                      ('POST',   'api'),
     'direct_messages/new':                                  ('POST',   'api'), # deprecated
     'direct_messages/sent':                                 ('GET',    'api'), # deprecated
     'direct_messages/show':                                 ('GET',    'api'), # deprecated
@@ -74,7 +76,6 @@ ENDPOINTS = {
     'direct_messages/welcome_messages/rules/list':          ('GET',    'api'),
     'direct_messages/welcome_messages/rules/show':          ('GET',    'api'),    
     'direct_messages/welcome_messages/rules/destroy':       ('DELETE', 'api'),        
-    'direct_messages/indicate_typing':                      ('POST',   'api'),
 
     'favorites/create':                                     ('POST',   'api'),
     'favorites/destroy':                                    ('POST',   'api'),

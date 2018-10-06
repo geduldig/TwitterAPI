@@ -70,8 +70,8 @@ class TwitterPager(object):
                     cursor = json['next_cursor']
                     cursor_param = 'cursor'
                 elif not new_tweets and 'next' in json:
-                	# 'next' is used by Premium Search, so only
-                	# works searching back in time
+                    # 'next' is used by Premium Search, so only
+                    # works searching back in time
                     cursor = json['next']
                     cursor_param = 'next'
 

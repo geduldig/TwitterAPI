@@ -121,3 +121,6 @@ v2.5.2,    19 May 2018 -- Added endpoints for Premium Search API.
 v2.5.3,    19 May 2018 -- Added 'results' to iterator and a new Premium Search example.
 
 v2.5.4,    25 May 2018 -- Modified TwitterPager to support Premium Search's cursor.
+
+v2.5.5,    25 May 2018 -- Merged x0139 patch. Added typing indicator endpoint.
+                          Added DM destroy endpoint.
