@@ -86,17 +86,18 @@ class TwitterPager(object):
                 pause = wait - elapsed if elapsed < wait else 0
                 time.sleep(pause)
 
-                # waiting for new results to come in
-                if id is None:
-                    continue
-
-                # use either id or cursor to get a new page
+                # waiting for new results to come in...
+                # get a page with cursor if present, or with id if not
+                # a Premium search (i.e. 'query' is not a parameter)
                 if cursor != -1:
                     self.params[cursor_param] = cursor
-                elif new_tweets:
-                    self.params['since_id'] = str(id)
+                elif id is not None and 'query' not in self.params:
+                    if new_tweets:
+                        self.params['since_id'] = str(id)
+                    else:
+                        self.params['max_id'] = str(id - 1)
                 else:
-                    self.params['max_id'] = str(id - 1)
+                    continue
 
             except TwitterRequestError as e:
                 if e.status_code < 500:
