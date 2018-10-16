@@ -50,21 +50,22 @@ ENDPOINTS = {
     'account/update_profile_image':                      ('POST', 'api'),
     'account/verify_credentials':                        ('GET',  'api'),
     
-    # NEW ACCOUNT ACTIVITY WEBHOOK API (ALL EVENTS) (BETA)
+    # NEW ACCOUNT ACTIVITY WEBHOOK API
+    'account_activity/all/:PARAM/webhooks':               ('POST',   'api'), # ENV_NAME   
+    'account_activity/all/webhooks':                      ('GET',    'api'),    
 
-    'account_activity/all/:PARAM/webhooks':               ('POST',   'api'),    
-    'account_activity/all/:PARAM/subscriptions':          ('POST',   'api'),
-    'account_activity/all/webhooks':                      ('GET',    'api'),   
-    'account_activity/all/count':                         ('GET',    'api'), 
-    'account_activity/all/:PARAM/subscriptions/all':      ('GET',    'api'),
-    'account_activity/all/:PARAM/subscriptions/all/list': ('GET',    'api'),          
-    'account_activity/all/:PARAM/subscriptions':          ('DELETE', 'api'),                            
+    'account_activity/all/:PARAM/subscriptions':          ('POST',   'api'), # ENV_NAME      
+    'account_activity/all/subscriptions/count':           ('GET',    'api'),          
+    'account_activity/all/:PARAM/subscriptions':          ('GET',    'api'), # ENV_NAME
+    'account_activity/all/:PARAM/subscriptions/list':     ('GET',    'api'), # ENV_NAME                                 
     
-    # NEW ACCOUNT ACTIVITY WEBHOOK API (DM) (BETA)
-    'account_activity/webhooks':                            ('POST',   'api'),    
-    'account_activity/webhooks/:PARAM':                     ('DELETE', 'api'),
-    'account_activity/webhooks/:PARAM/subscriptions':       ('POST',   'api'),   
-    'account_activity/webhooks/:PARAM/subscriptions/list':  ('GET',    'api'),   
+    # ENTERPRISE ACCOUNT ACTIVITY WEBHOOK API
+    'account_activity/webhooks':                                ('POST',   'api'),    
+    'account_activity/webhooks/:PARAM':                         ('DELETE', 'api'), #WEBHOOK_ID
+    'account_activity/webhooks/:PARAM/subscriptions':           ('POST',   'api'), #WEBHOOK_ID  
+    'account_activity/webhooks/count':                          ('GET',   'api'),       
+    'account_activity/webhooks/:PARAM/subscriptions/all/list':  ('GET',    'api'), #WEBHOOK_ID 
+    'account_activity/webhooks/:PARAM/subscriptions/all':       ('POST',    'api'), #WEBHOOK_ID       
         
     'application/rate_limit_status':                     ('GET',  'api'),
 
