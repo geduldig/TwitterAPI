@@ -208,10 +208,10 @@ ENDPOINTS = {
     # NEW ACCOUNT ACTIVITY WEBHOOK API (BETA)
 
     'account_activity/all/:PARAM/subscriptions':            ('POST',   'api'), # ENVIRONMENT NAME
+    'account_activity/all/:PARAM/subscriptions':            ('DELETE', 'api'), # ENVIRONMENT NAME                            
     'account_activity/all/:PARAM/subscriptions/all':        ('GET',    'api'), # ENVIRONMENT NAME
     'account_activity/all/:PARAM/subscriptions/all/list':   ('GET',    'api'), # ENVIRONMENT NAME
     'account_activity/all/:PARAM/subscriptions/list':       ('GET',    'api'), # ENVIRONMENT NAME
-    'account_activity/all/:PARAM/subscriptions':            ('DELETE', 'api'), # ENVIRONMENT NAME                            
     'account_activity/all/:PARAM/webhooks':                 ('POST',   'api'), # ENVIRONMENT NAME    
     'account_activity/all/:PARAM/webhooks/:PARAM':          ('DELETE', 'api'), # ENVIRONMENT NAME, WEBHOOK ID
     'account_activity/all/count':                           ('GET',    'api'), 
