@@ -127,4 +127,6 @@ v2.5.5,    07 Oct 2018 -- Merged x0139 patch. Added typing indicator endpoint.
 
 v2.5.6,    09 Oct 2018 -- Fixed TwitterPager.
 
-v2.5.7,    09 Oct 2018 -- Merged HyperManTT path. Added subscripts/list endpoint.
+v2.5.7,    15 Dec 2018 -- Merged HyperManTT path. Added subscripts/list endpoint.
+
+v2.5.8,    25 Dec 2018 -- Fixed bug in TwitterPager, repeating results.

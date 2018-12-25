@@ -75,10 +75,12 @@ class TwitterPager(object):
                     cursor = json['next']
                     cursor_param = 'next'
 
+                is_premium_search = 'query' in self.params
+
                 # bail when no more results
                 if cursor == 0:
                     break
-                elif cursor == -1 and not new_tweets and id is None:
+                elif cursor == -1 and is_premium_search:
                     break
 
                 # sleep before getting another page of results
@@ -91,7 +93,7 @@ class TwitterPager(object):
                 # a Premium search (i.e. 'query' is not a parameter)
                 if cursor != -1:
                     self.params[cursor_param] = cursor
-                elif id is not None and 'query' not in self.params:
+                elif id is not None and not is_premium_search:
                     if new_tweets:
                         self.params['since_id'] = str(id)
                     else:
