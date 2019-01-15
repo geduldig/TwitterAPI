@@ -130,3 +130,5 @@ v2.5.6,    09 Oct 2018 -- Fixed TwitterPager.
 v2.5.7,    15 Dec 2018 -- Merged HyperManTT path. Added subscripts/list endpoint.
 
 v2.5.8,    25 Dec 2018 -- Fixed bug in TwitterPager, repeating results.
+
+v2.5.9,    14 Jan 2019 -- Fixed bug in TwitterPager, stalling but not exiting when no more results.

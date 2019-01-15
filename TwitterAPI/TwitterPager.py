@@ -49,8 +49,10 @@ class TwitterPager(object):
                     it = reversed(list(it))
 
                 # yield each item in the page
+                item_count = 0
                 id = None
                 for item in it:
+                    item_count = item_count + 1
                     if 'id' in item:
                         id = item['id']
                     if 'code' in item:
@@ -81,6 +83,8 @@ class TwitterPager(object):
                 if cursor == 0:
                     break
                 elif cursor == -1 and is_premium_search:
+                    break
+                elif not new_tweets and item_count == 0:
                     break
 
                 # sleep before getting another page of results
