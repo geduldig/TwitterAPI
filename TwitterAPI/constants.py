@@ -15,18 +15,11 @@ __license__ = "MIT"
 
 
 PROTOCOL = 'https'
-
 DOMAIN = 'twitter.com'
 
 VERSION = '1.1'
 CURATOR_VERSION = 'broadcast/1'
 ADS_VERSION = '2'
-
-USER_AGENT = 'python-TwitterAPI'
-
-CONNECTION_TIMEOUT = 5
-STREAMING_TIMEOUT = 90
-REST_TIMEOUT = 5
 
 ENDPOINTS = {
     # resource:                                             (method,   subdomain)

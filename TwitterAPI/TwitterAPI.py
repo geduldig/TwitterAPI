@@ -17,6 +17,12 @@ import ssl
 import time
 
 
+DEFAULT_USER_AGENT = 'python-TwitterAPI'
+DEFAULT_CONNECTION_TIMEOUT = 5
+DEFAULT_STREAMING_TIMEOUT = 90
+DEFAULT_REST_TIMEOUT = 5
+
+
 class TwitterAPI(object):
 
     """Access REST API or Streaming API resources.
@@ -29,6 +35,12 @@ class TwitterAPI(object):
     :param proxy_url: HTTPS proxy URL string (ex. "https://USER:PASSWORD@SERVER:PORT"),
                       or dict of URLs (ex. {'http':'http://SERVER', 'https':'https://SERVER'})
     """
+
+    # static properties to be overridden if desired
+    USER_AGENT = DEFAULT_USER_AGENT
+    CONNECTION_TIMEOUT = DEFAULT_CONNECTION_TIMEOUT
+    STREAMING_TIMEOUT = DEFAULT_STREAMING_TIMEOUT
+    REST_TIMEOUT = DEFAULT_REST_TIMEOUT
 
     def __init__(
             self,
@@ -59,7 +71,8 @@ class TwitterAPI(object):
             self.auth = OAuth2(
                 consumer_key,
                 consumer_secret,
-                proxies=self.proxies)
+                proxies=self.proxies,
+                user_agent=TwitterAPI.USER_AGENT)
         else:
             raise Exception('Unknown oAuth version')
 
@@ -111,14 +124,14 @@ class TwitterAPI(object):
             raise Exception('Endpoint "%s" unsupported' % endpoint)
         with requests.Session() as session:
             session.auth = self.auth
-            session.headers = {'User-Agent': USER_AGENT}
+            session.headers = {'User-Agent': TwitterAPI.USER_AGENT}
             method, subdomain = ENDPOINTS[endpoint]
             if method_override:
                 method = method_override
             url = self._prepare_url(subdomain, resource)
             if 'stream' in subdomain:
                 session.stream = True
-                timeout = STREAMING_TIMEOUT
+                timeout = TwitterAPI.STREAMING_TIMEOUT
                 # always use 'delimited' for efficient stream parsing
                 if not params:
                     params = {}
@@ -126,7 +139,7 @@ class TwitterAPI(object):
                 params['stall_warning'] = 'true'
             else:
                 session.stream = False
-                timeout = REST_TIMEOUT
+                timeout = TwitterAPI.REST_TIMEOUT
             if method == 'POST':
                 data = params
                 params = None
@@ -138,7 +151,7 @@ class TwitterAPI(object):
                     url,
                     data=data,
                     params=params,
-                    timeout=(CONNECTION_TIMEOUT,timeout),
+                    timeout=(TwitterAPI.CONNECTION_TIMEOUT,timeout),
                     files=files,
                     proxies=self.proxies)
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
@@ -290,7 +303,7 @@ class _StreamingIterable(object):
                         # check for stall (i.e. no data for 90 seconds)
                         if not stall_timer:
                             stall_timer = time.time()
-                        elif time.time() - stall_timer > STREAMING_TIMEOUT:
+                        elif time.time() - stall_timer > TwitterAPI.STREAMING_TIMEOUT:
                             raise TwitterConnectionError('Twitter stream stalled')
                     elif stall_timer:
                         stall_timer = None
