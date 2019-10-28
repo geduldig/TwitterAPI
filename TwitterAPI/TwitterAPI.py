@@ -15,12 +15,13 @@ import requests
 import socket
 import ssl
 import time
+import os
 
 
-DEFAULT_USER_AGENT = 'python-TwitterAPI'
-DEFAULT_CONNECTION_TIMEOUT = 5
-DEFAULT_STREAMING_TIMEOUT = 90
-DEFAULT_REST_TIMEOUT = 5
+DEFAULT_USER_AGENT = os.getenv('DEFAULT_USER_AGENT', 'python-TwitterAPI')
+DEFAULT_CONNECTION_TIMEOUT = os.getenv('DEFAULT_CONNECTION_TIMEOUT', 5)
+DEFAULT_STREAMING_TIMEOUT = os.getenv('DEFAULT_STREAMING_TIMEOUT', 90)
+DEFAULT_REST_TIMEOUT = os.getenv('DEFAULT_REST_TIMEOUT', 5)
 
 
 class TwitterAPI(object):
@@ -72,7 +73,7 @@ class TwitterAPI(object):
                 consumer_key,
                 consumer_secret,
                 proxies=self.proxies,
-                user_agent=TwitterAPI.USER_AGENT)
+                user_agent=self.USER_AGENT)
         else:
             raise Exception('Unknown oAuth version')
 
@@ -124,14 +125,14 @@ class TwitterAPI(object):
             raise Exception('Endpoint "%s" unsupported' % endpoint)
         with requests.Session() as session:
             session.auth = self.auth
-            session.headers = {'User-Agent': TwitterAPI.USER_AGENT}
+            session.headers = {'User-Agent': self.USER_AGENT}
             method, subdomain = ENDPOINTS[endpoint]
             if method_override:
                 method = method_override
             url = self._prepare_url(subdomain, resource)
             if 'stream' in subdomain:
                 session.stream = True
-                timeout = TwitterAPI.STREAMING_TIMEOUT
+                timeout = self.STREAMING_TIMEOUT
                 # always use 'delimited' for efficient stream parsing
                 if not params:
                     params = {}
@@ -139,7 +140,7 @@ class TwitterAPI(object):
                 params['stall_warning'] = 'true'
             else:
                 session.stream = False
-                timeout = TwitterAPI.REST_TIMEOUT
+                timeout = self.REST_TIMEOUT
             if method == 'POST':
                 data = params
                 params = None
@@ -151,7 +152,7 @@ class TwitterAPI(object):
                     url,
                     data=data,
                     params=params,
-                    timeout=(TwitterAPI.CONNECTION_TIMEOUT,timeout),
+                    timeout=(self.CONNECTION_TIMEOUT, timeout),
                     files=files,
                     proxies=self.proxies)
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
