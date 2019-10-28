@@ -133,3 +133,5 @@ v2.5.8,    25 Dec 2018 -- Fixed bug in TwitterPager, repeating results.
 
 v2.5.9,    14 Jan 2019 -- Fixed bug in TwitterPager, stalling but not exiting when no more results.
                           Moved USER_AGENT and TIMEOUT constants to TwitterAPI class static variables.
+
+v2.5.10,   28 Oct 2019 -- Merged HammadH-variable-timeouts
