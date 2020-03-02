@@ -8,7 +8,6 @@ api = TwitterAPI(<consumer key>,
                  <access token key>,
                  <access token secret>)
 
-
 class DeleteTweet(Thread):
 
     def __init__(self, tweet_id, count):
@@ -18,7 +17,7 @@ class DeleteTweet(Thread):
 
     def run(self):
         r = api.request('statuses/destroy/:%d' % self.tweet_id)
-        print(self.count if r.status_code == 200 else r.text)
+        print(self.count if r.status_code == 200 else 'PROBLEM: ' + r.text)
 
 try:
     count = 0

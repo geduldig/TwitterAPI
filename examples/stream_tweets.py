@@ -1,19 +1,11 @@
 from TwitterAPI import TwitterAPI
 
-
 TRACK_TERM = 'pizza'
 
-
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
-ACCESS_TOKEN_KEY = ''
-ACCESS_TOKEN_SECRET = ''
-
-
-api = TwitterAPI(CONSUMER_KEY,
-                 CONSUMER_SECRET,
-                 ACCESS_TOKEN_KEY,
-                 ACCESS_TOKEN_SECRET)
+api = TwitterAPI(<consumer key>, 
+                 <consumer secret>,
+                 <access token key>,
+                 <access token secret>)
 
 r = api.request('statuses/filter', {'track': TRACK_TERM})
 

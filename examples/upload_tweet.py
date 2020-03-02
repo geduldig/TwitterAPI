@@ -1,15 +1,11 @@
 from TwitterAPI import TwitterAPI
-
-SEARCH_TERM = 'pizza'
+ 
+TWEET_TEXT = 'some tweet text'
 
 api = TwitterAPI(<consumer key>, 
                  <consumer secret>,
                  <access token key>,
                  <access token secret>)
-
-r = api.request('search/tweets', {'q': SEARCH_TERM})
-
-for item in r:
-    print(item['text'] if 'text' in item else item)
-
-print('\nQUOTA: %s' % r.get_quota())
+ 
+r = api.request('statuses/update', {'status':TWEET_TEXT})
+print('SUCCESS' if r.status_code == 200 else 'PROBLEM: ' + r.text)

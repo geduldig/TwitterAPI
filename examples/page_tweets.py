@@ -1,21 +1,13 @@
-from TwitterAPI import TwitterAPI, TwitterRestPager
-
+from TwitterAPI import TwitterAPI, TwitterPager
 
 SEARCH_TERM = 'pizza'
 
+api = TwitterAPI(<consumer key>, 
+                 <consumer secret>,
+                 <access token key>,
+                 <access token secret>)
 
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
-ACCESS_TOKEN_KEY = ''
-ACCESS_TOKEN_SECRET = ''
-
-
-api = TwitterAPI(CONSUMER_KEY,
-                 CONSUMER_SECRET,
-                 ACCESS_TOKEN_KEY,
-                 ACCESS_TOKEN_SECRET)
-
-pager = TwitterRestPager(api, 'search/tweets', {'q': SEARCH_TERM})
+pager = TwitterPager(api, 'search/tweets', {'q': SEARCH_TERM})
 
 for item in pager.get_iterator():
     print(item['text'] if 'text' in item else item)

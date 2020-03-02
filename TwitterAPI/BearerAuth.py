@@ -21,10 +21,11 @@ class BearerAuth(requests.auth.AuthBase):
     :param proxies: Dictionary of proxy URLs (see documentation for python-requests).
     """
 
-    def __init__(self, consumer_key, consumer_secret, proxies=None):
+    def __init__(self, consumer_key, consumer_secret, proxies=None, user_agent=None):
         self._consumer_key = consumer_key
         self._consumer_secret = consumer_secret
         self.proxies = proxies
+        self.user_agent = user_agent
         self._bearer_token = self._get_access_token()
 
     def _get_access_token(self):
@@ -36,7 +37,7 @@ class BearerAuth(requests.auth.AuthBase):
         b64_bearer_token_creds = base64.b64encode(auth.encode('utf8'))
         params = {'grant_type': 'client_credentials'}
         headers = {}
-        headers['User-Agent'] = USER_AGENT
+        headers['User-Agent'] = self.user_agent
         headers['Authorization'] = 'Basic ' + b64_bearer_token_creds.decode('utf8')
         headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
         try:

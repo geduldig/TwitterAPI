@@ -35,10 +35,10 @@ class IteratorTest(unittest.TestCase):
             self.use_iterator(it)
 
     def test_paging_iterator(self):
-        pager = TwitterAPI.TwitterRestPager(self.api,
-                                            'search/tweets',
-                                            {'q': 'pizza'})
-        self.assertIsInstance(pager, TwitterAPI.TwitterRestPager)
+        pager = TwitterAPI.TwitterPager(self.api,
+                                        'search/tweets',
+                                        {'q': 'pizza'})
+        self.assertIsInstance(pager, TwitterAPI.TwitterPager)
         it = pager.get_iterator()
         self.use_iterator(it)
 

@@ -10,9 +10,10 @@ import requests
 import time
 
 
-class TwitterRestPager(object):
+class TwitterPager(object):
 
     """Continuous (stream-like) pagination of response from Twitter REST API resource.
+    In addition to Public API endpoints, supports Premium Search API.
 
     :param api: An authenticated TwitterAPI object
     :param resource: String with the resource path (ex. search/tweets)
@@ -48,8 +49,10 @@ class TwitterRestPager(object):
                     it = reversed(list(it))
 
                 # yield each item in the page
+                item_count = 0
                 id = None
                 for item in it:
+                    item_count = item_count + 1
                     if 'id' in item:
                         id = item['id']
                     if 'code' in item:
@@ -59,18 +62,29 @@ class TwitterRestPager(object):
                     yield item
 
                 # if a cursor is present, use it to get next page
-                # (otherwise, use id to get next page)
+                # otherwise, use id to get next page
                 json = r.json()
                 cursor = -1
                 if new_tweets and 'previous_cursor' in json:
                     cursor = json['previous_cursor']
+                    cursor_param = 'cursor'
                 elif not new_tweets and 'next_cursor' in json:
                     cursor = json['next_cursor']
+                    cursor_param = 'cursor'
+                elif not new_tweets and 'next' in json:
+                    # 'next' is used by Premium Search, so only
+                    # works searching back in time
+                    cursor = json['next']
+                    cursor_param = 'next'
+
+                is_premium_search = 'query' in self.params
 
                 # bail when no more results
                 if cursor == 0:
                     break
-                elif cursor == -1 and not new_tweets and id is None:
+                elif cursor == -1 and is_premium_search:
+                    break
+                elif not new_tweets and item_count == 0:
                     break
 
                 # sleep before getting another page of results
@@ -78,17 +92,18 @@ class TwitterRestPager(object):
                 pause = wait - elapsed if elapsed < wait else 0
                 time.sleep(pause)
 
-                # waiting for new results to come in
-                if id is None:
-                    continue
-
-                # use either id or cursor to get a new page
+                # waiting for new results to come in...
+                # get a page with cursor if present, or with id if not
+                # a Premium search (i.e. 'query' is not a parameter)
                 if cursor != -1:
-                    self.params['cursor'] = cursor
-                elif new_tweets:
-                    self.params['since_id'] = str(id)
+                    self.params[cursor_param] = cursor
+                elif id is not None and not is_premium_search:
+                    if new_tweets:
+                        self.params['since_id'] = str(id)
+                    else:
+                        self.params['max_id'] = str(id - 1)
                 else:
-                    self.params['max_id'] = str(id - 1)
+                    continue
 
             except TwitterRequestError as e:
                 if e.status_code < 500:

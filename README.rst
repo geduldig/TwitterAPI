@@ -1,11 +1,9 @@
 |LOGO|
-==============================================
-|BADGE_DOWNLOADS| |BADGE_VERSION| |BADGE_CHAT|
-==============================================
+============================
+|BADGE_VERSION| |BADGE_CHAT|
+============================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
-.. |BADGE_DOWNLOADS| image:: https://img.shields.io/pypi/dm/TwitterAPI.svg
-   :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
    :target: https://crate.io/packages/TwitterAPI 
 .. |BADGE_CHAT| image:: https://badges.gitter.im/Join%20Chat.svg
@@ -13,6 +11,8 @@
    :target: https://gitter.im/geduldig/TwitterAPI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 TwitterAPI is a Python package for accessing Twitter's REST APIs and Streaming APIs. It supports OAuth 1.0 and OAuth 2.0 authentication.  And, it works with the latest Python versions in both 2.x and 3.x branches. 
+
+REST APIs that are supported are: Public API, Collections API, Curator API, Ads API, Webhook API, Premium Search API.
 
 Installation
 ------------
