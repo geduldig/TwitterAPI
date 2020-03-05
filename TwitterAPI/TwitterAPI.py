@@ -90,6 +90,11 @@ class TwitterAPI(object):
                                               DOMAIN,
                                               ADS_VERSION,
                                               path)
+        elif subdomain == 'api' and 'labs/' in path:
+            return '%s://%s.%s/%s' % (PROTOCOL,
+                                              subdomain,
+                                              DOMAIN,
+                                              path)        
         else:
             return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
                                               subdomain,
@@ -146,15 +151,23 @@ class TwitterAPI(object):
                 params = None
             else:
                 data = None
-            try:
-                r = session.request(
-                    method,
-                    url,
-                    data=data,
-                    params=params,
-                    timeout=(self.CONNECTION_TIMEOUT, timeout),
-                    files=files,
-                    proxies=self.proxies)
+            try:            
+                if method == 'PUT':
+                    session.headers['Content-type'] = 'application/json'            
+                    data = params                        
+                    r = session.request(
+                        method,
+                        url,
+                        json=data)                
+                else:
+                    r = session.request(
+                        method,
+                        url,
+                        data=data,
+                        params=params,
+                        timeout=(self.CONNECTION_TIMEOUT, timeout),
+                        files=files,
+                        proxies=self.proxies)
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
                     SSLError, ssl.SSLError, socket.error) as e:
                 raise TwitterConnectionError(e)
