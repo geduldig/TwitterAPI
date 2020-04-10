@@ -198,7 +198,7 @@ ENDPOINTS = {
     'stats/jobs/accounts/:PARAM/:PARAM':                    ('DELETE', 'ads-api'), # ACCOUNT ID, JOB ID
     'stats/jobs/summaries':                                 ('GET',    'ads-api'),
     
-    # NEW ACCOUNT ACTIVITY WEBHOOK API (BETA)
+    # ACCOUNT ACTIVITY WEBHOOK API
 
     'account_activity/all/:PARAM/subscriptions':            ('POST',   'api'), # ENVIRONMENT NAME
     'account_activity/all/:PARAM/subscriptions':            ('DELETE', 'api'), # ENVIRONMENT NAME                            
@@ -219,5 +219,16 @@ ENDPOINTS = {
     'tweets/search/30day/:PARAM':                           ('GET',    'api'), # LABEL
     'tweets/search/30day/:PARAM/counts':                    ('GET',    'api'), # LABEL
     'tweets/search/fullarchive/:PARAM':                     ('GET',    'api'), # LABEL
-    'tweets/search/fullarchive/:PARAM/counts':              ('GET',    'api')  # LABEL
+    'tweets/search/fullarchive/:PARAM/counts':              ('GET',    'api'),  # LABEL
+    
+    #LABS API (BETAS) WILL NEED APPLICATION APPROVAL
+    'labs/2/tweets/:PARAM':                                 ('GET',    'api'), # TWEET ID
+    'labs/2/tweets':                                        ('GET',    'api'),
+    'labs/2/tweets/search':                                 ('GET',    'api'),
+    'labs/2/tweets/:PARAM/hidden':                          ('PUT',    'api'), # TWEET ID
+    'labs/2/users/:PARAM':                                  ('GET',    'api'), # USER ID
+    'labs/2/users':                                         ('GET',    'api'),          
+    
+    'labs/1/tweets/metrics/private':                        ('GET',    'api')     
+               
 }
