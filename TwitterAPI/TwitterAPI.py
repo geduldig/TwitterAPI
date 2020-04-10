@@ -91,7 +91,7 @@ class TwitterAPI(object):
                                               ADS_VERSION,
                                               path)
         elif subdomain == 'api' and 'labs/' in path:
-            return '%s://%s.%s/%s' % (PROTOCOL,
+            return '%s://%s.%s/%s'         % (PROTOCOL,
                                               subdomain,
                                               DOMAIN,
                                               path)        

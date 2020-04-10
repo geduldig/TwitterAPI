@@ -1,5 +1,5 @@
 __title__ = 'TwitterAPI'
-__version__ = '2.5.10'
+__version__ = '2.5.11'
 __author__ = 'geduldig'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2013 geduldig'

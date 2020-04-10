@@ -219,7 +219,7 @@ ENDPOINTS = {
     'tweets/search/30day/:PARAM':                           ('GET',    'api'), # LABEL
     'tweets/search/30day/:PARAM/counts':                    ('GET',    'api'), # LABEL
     'tweets/search/fullarchive/:PARAM':                     ('GET',    'api'), # LABEL
-    'tweets/search/fullarchive/:PARAM/counts':              ('GET',    'api'),  # LABEL
+    'tweets/search/fullarchive/:PARAM/counts':              ('GET',    'api'), # LABEL
     
     #LABS API (BETAS) WILL NEED APPLICATION APPROVAL
     'labs/2/tweets/:PARAM':                                 ('GET',    'api'), # TWEET ID
@@ -229,6 +229,5 @@ ENDPOINTS = {
     'labs/2/users/:PARAM':                                  ('GET',    'api'), # USER ID
     'labs/2/users':                                         ('GET',    'api'),          
     
-    'labs/1/tweets/metrics/private':                        ('GET',    'api')     
-               
+    'labs/1/tweets/metrics/private':                        ('GET',    'api')
 }
