@@ -25,14 +25,16 @@ class TwitterRequestError(TwitterError):
 
     """Raised when request fails"""
 
-    def __init__(self, status_code):
-        if status_code >= 500:
-            msg = 'Twitter internal error (you may re-try)'
-        else:
-            msg = 'Twitter request failed'
+    def __init__(self, status_code, msg=None):
+        if msg is None:
+            if status_code >= 500:
+                msg = 'Twitter internal error (you may re-try)'
+            else:
+                msg = 'Twitter request failed'
         logging.info('Status code %d: %s' % (status_code, msg))
         super(Exception, self).__init__(msg)
         self.status_code = status_code
-        
+        self.msg = msg
+
     def __str__(self):
-        return '%s (%d)' % (self.args[0], self.status_code)
+        return '%s (%d): %s' % (self.args[0], self.status_code, self.msg)
