@@ -136,4 +136,6 @@ v2.5.9,    14 Jan 2019 -- Fixed bug in TwitterPager, stalling but not exiting wh
 
 v2.5.10,   28 Oct 2019 -- Merged HammadH-variable-timeouts.
 
-v2.5.11,   28 Oct 2019 -- Merged RickRedSix patch. Added Labs API.
+v2.5.11,   10 Apr 2020 -- Merged RickRedSix patch. Added Labs API.
+
+v2.5.12,   13 Jul 2020 -- Merged drbig patch. Improved error reporting.
