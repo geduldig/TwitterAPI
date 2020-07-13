@@ -217,7 +217,7 @@ class TwitterResponse(object):
         :raises: TwitterConnectionError, TwitterRequestError
         """
         if self.response.status_code != 200:
-            raise TwitterRequestError(self.response.status_code)
+            raise TwitterRequestError(self.response.status_code, msg=self.response.text)
 
         if self.stream:
             return iter(_StreamingIterable(self.response))
