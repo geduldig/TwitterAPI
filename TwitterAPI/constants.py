@@ -109,8 +109,8 @@ ENDPOINTS = {
     'lists/subscriptions':                                  ('GET',    'api'),
     'lists/update':                                         ('POST',   'api'),
 
-    'media/upload':                                         ('POST',   'upload'),
     'media/metadata/create':                                ('POST',   'upload'),
+    'media/upload':                                         ('POST',   'upload'),
 
     'mutes/users/create':                                   ('POST',   'api'),
     'mutes/users/destroy':                                  ('POST',   'api'),
