@@ -112,12 +112,11 @@ class TwitterPager(object):
             except TwitterRequestError as e:
                 if self.RAISE_REQUEST_ERROR:
                     raise
-
                 if e.status_code < 500:
                     raise
                 continue
+
             except TwitterConnectionError:
                 if self.RAISE_CONNECTION_ERROR:
                     raise
-
                 continue
