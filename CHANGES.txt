@@ -142,3 +142,5 @@ v2.5.12,   13 Jul 2020 -- Merged drbig patch. Improved error reporting.
 
 v2.5.13,   17 Jul 2020 -- Merged drbig patch. Override exception handling in TwitterPager.
                           Merged reuning patch. Added new endpoint.
+
+v2.5.14,   17 Sep 2020 -- Fix TwitterPager to iterate integer ids.

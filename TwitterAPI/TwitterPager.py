@@ -20,10 +20,6 @@ class TwitterPager(object):
     :param params: Dictionary of resource parameters
     """
 
-    # static properties to be overridden if desired
-    RAISE_CONNECTION_ERROR = False
-    RAISE_REQUEST_ERROR = False
-
     def __init__(self, api, resource, params=None):
         self.api = api
         self.resource = resource
@@ -57,12 +53,13 @@ class TwitterPager(object):
                 id = None
                 for item in it:
                     item_count = item_count + 1
-                    if 'id' in item:
-                        id = item['id']
-                    if 'code' in item:
-                        if item['code'] in [130, 131]:
-                            # Twitter service error
-                            raise TwitterConnectionError(item)
+                    if type(item) is dict:
+                        if 'id' in item:
+                            id = item['id']
+                        if 'code' in item:
+                            if item['code'] in [130, 131]:
+                                # Twitter service error
+                                raise TwitterConnectionError(item)
                     yield item
 
                 # if a cursor is present, use it to get next page
@@ -81,7 +78,7 @@ class TwitterPager(object):
                     cursor = json['next']
                     cursor_param = 'next'
 
-                is_premium_search = 'query' in self.params
+                is_premium_search = self.params and 'query' in self.params
 
                 # bail when no more results
                 if cursor == 0:
@@ -110,13 +107,8 @@ class TwitterPager(object):
                     continue
 
             except TwitterRequestError as e:
-                if self.RAISE_REQUEST_ERROR:
-                    raise
                 if e.status_code < 500:
                     raise
                 continue
-
             except TwitterConnectionError:
-                if self.RAISE_CONNECTION_ERROR:
-                    raise
                 continue
