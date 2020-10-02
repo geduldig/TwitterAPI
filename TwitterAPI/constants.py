@@ -17,7 +17,7 @@ __license__ = "MIT"
 PROTOCOL = 'https'
 DOMAIN = 'twitter.com'
 
-VERSION = '1.1'
+# VERSION = '1.1'
 CURATOR_VERSION = 'broadcast/1'
 ADS_VERSION = '2'
 
@@ -216,17 +216,18 @@ ENDPOINTS = {
     'account_activity/webhooks/:PARAM/subscriptions/list':  ('GET',    'api'), # ENVIRONMENT NAME
     
     # API V2 EARLY ACCESS
-    '2/tweets/:PARAM':                                      ('GET',    'api'), # ID
-    '2/tweets?ids=:PARAM':                                  ('GET',    'api'), # IDS
-    '2/users/:PARAM':                                       ('GET',    'api'), # ID
-    '2/users?ids=:PARAM':                                   ('GET',    'api'), # IDS
-    '2/users/by/username/:PARAM':                           ('GET',    'api'), # USERNAME
-    '2/users/by?usernames=:PARAM':                          ('GET',    'api'), # USERNAMES
-    '2/tweets/search/recent?query=:PARAM':                  ('GET',    'api'), # QUERY
-    '2/tweets/search/stream/rules':                         ('POST',   'api'),
-    '2/tweets/search/stream/rules':                         ('GET',    'api'),
-    '2/tweets/sample/stream':                               ('GET',    'api'),
-    '2/tweets/:id/hidden':                                  ('PUT',    'api'),
+
+    'tweets/:PARAM':                                      ('GET',    'api'), # ID
+    'tweets?ids=:PARAM':                                  ('GET',    'api'), # IDS
+    'users/:PARAM':                                       ('GET',    'api'), # ID
+    'users?ids=:PARAM':                                   ('GET',    'api'), # IDS
+    'users/by/username/:PARAM':                           ('GET',    'api'), # USERNAME
+    'users/by?usernames=:PARAM':                          ('GET',    'api'), # USERNAMES
+    'tweets/search/recent?query=:PARAM':                  ('GET',    'api'), # QUERY
+    'tweets/search/stream/rules':                         ('POST',   'api'),
+    'tweets/search/stream/rules':                         ('GET',    'api'),
+    'tweets/sample/stream':                               ('GET',    'api'),
+    'tweets/:id/hidden':                                  ('PUT',    'api'),
 
 
     # PREMIUM SEARCH API
