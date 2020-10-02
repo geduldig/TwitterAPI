@@ -215,6 +215,20 @@ ENDPOINTS = {
     'account_activity/webhooks/:PARAM/subscriptions':       ('POST',   'api'), # ENVIRONMENT NAME   
     'account_activity/webhooks/:PARAM/subscriptions/list':  ('GET',    'api'), # ENVIRONMENT NAME
     
+    # API V2 EARLY ACCESS
+    '2/tweets/:PARAM':                                      ('GET',    'api'), # ID
+    '2/tweets?ids=:PARAM':                                  ('GET',    'api'), # IDS
+    '2/users/:PARAM':                                       ('GET',    'api'), # ID
+    '2/users?ids=:PARAM':                                   ('GET',    'api'), # IDS
+    '2/users/by/username/:PARAM':                           ('GET',    'api'), # USERNAME
+    '2/users/by?usernames=:PARAM':                          ('GET',    'api'), # USERNAMES
+    '2/tweets/search/recent?query=:PARAM':                  ('GET',    'api'), # QUERY
+    '2/tweets/search/stream/rules':                         ('POST',   'api'),
+    '2/tweets/search/stream/rules':                         ('GET',    'api'),
+    '2/tweets/sample/stream':                               ('GET',    'api'),
+    '2/tweets/:id/hidden':                                  ('PUT',    'api'),
+
+
     # PREMIUM SEARCH API
 
     'tweets/search/30day/:PARAM':                           ('GET',    'api'), # LABEL
@@ -223,6 +237,7 @@ ENDPOINTS = {
     'tweets/search/fullarchive/:PARAM/counts':              ('GET',    'api'), # LABEL
     
     #LABS API (BETAS) WILL NEED APPLICATION APPROVAL
+
     'labs/2/tweets/:PARAM':                                 ('GET',    'api'), # TWEET ID
     'labs/2/tweets':                                        ('GET',    'api'),
     'labs/2/tweets/search':                                 ('GET',    'api'),
