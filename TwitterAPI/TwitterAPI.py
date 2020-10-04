@@ -78,6 +78,9 @@ class TwitterAPI(object):
             raise Exception('Unknown oAuth version')
 
     def _prepare_url(self, subdomain, path):
+        if self.version:
+            version = self.version
+
         if subdomain == 'curator':
             return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
                                               subdomain,
@@ -90,6 +93,13 @@ class TwitterAPI(object):
                                               DOMAIN,
                                               ADS_VERSION,
                                               path)
+        elif version == '2':
+            return '%s://%s.%s/%s/%s'      % (PROTOCOL,
+                                              subdomain,
+                                              DOMAIN,
+                                              version,
+                                              path)
+
         elif subdomain == 'api' and 'labs/' in path:
             return '%s://%s.%s/%s'         % (PROTOCOL,
                                               subdomain,
@@ -114,7 +124,7 @@ class TwitterAPI(object):
         else:
             return (resource, resource)
 
-    def request(self, resource, params=None, files=None, method_override=None):
+    def request(self, resource, params=None, files=None, method_override=None, version=None):
         """Request a Twitter REST API or Streaming API resource.
 
         :param resource: A valid Twitter endpoint (ex. "search/tweets")
@@ -125,6 +135,7 @@ class TwitterAPI(object):
         :returns: TwitterResponse
         :raises: TwitterConnectionError
         """
+        self.version = version
         resource, endpoint = self._get_endpoint(resource)
         if endpoint not in ENDPOINTS:
             raise Exception('Endpoint "%s" unsupported' % endpoint)
