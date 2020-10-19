@@ -50,14 +50,22 @@ class TwitterAPI(object):
             access_token_key=None,
             access_token_secret=None,
             auth_type='oAuth1',
-            proxy_url=None):
+            proxy_url=None,
+            api_version=VERSION):
         """Initialize with your Twitter application credentials"""
+        # if there are multiple API versions, this will be the default version which can
+        # also be overridden by specifying the version when calling the request method.
+        self.version = api_version
+
+        # Optional proxy or proxies.
         if isinstance(proxy_url, dict):
             self.proxies = proxy_url
         elif proxy_url is not None:
             self.proxies = {'https': proxy_url}
         else:
             self.proxies = None
+
+        # Twitter supports two types of authentication.
         if auth_type == 'oAuth1':
             if not all([consumer_key, consumer_secret, access_token_key, access_token_secret]):
                 raise Exception('Missing authentication parameter')
@@ -77,10 +85,7 @@ class TwitterAPI(object):
         else:
             raise Exception('Unknown oAuth version')
 
-    def _prepare_url(self, subdomain, path):
-        if self.version:
-            version = self.version
-
+    def _prepare_url(self, subdomain, path, api_version):
         if subdomain == 'curator':
             return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
                                               subdomain,
@@ -93,24 +98,25 @@ class TwitterAPI(object):
                                               DOMAIN,
                                               ADS_VERSION,
                                               path)
-        elif version == '2':
-            return '%s://%s.%s/%s/%s'      % (PROTOCOL,
-                                              subdomain,
-                                              DOMAIN,
-                                              version,
-                                              path)
-
         elif subdomain == 'api' and 'labs/' in path:
             return '%s://%s.%s/%s'         % (PROTOCOL,
                                               subdomain,
                                               DOMAIN,
                                               path)        
-        else:
+        elif api_version == '1.1':
             return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
                                               subdomain,
                                               DOMAIN,
-                                              VERSION,
+                                              api_version,
                                               path)
+        elif api_version == '2':
+            return '%s://%s.%s/%s/%s'      % (PROTOCOL,
+                                              subdomain,
+                                              DOMAIN,
+                                              api_version,
+                                              path)
+        else:
+            raise Exception('Unsupported API version')
 
     def _get_endpoint(self, resource):
         """Substitute any parameters in the resource path with :PARAM."""
@@ -124,18 +130,18 @@ class TwitterAPI(object):
         else:
             return (resource, resource)
 
-    def request(self, resource, params=None, files=None, method_override=None, version=None):
+    def request(self, resource, params=None, files=None, method_override=None, api_version=None):
         """Request a Twitter REST API or Streaming API resource.
 
         :param resource: A valid Twitter endpoint (ex. "search/tweets")
         :param params: Dictionary with endpoint parameters or None (default)
         :param files: Dictionary with multipart-encoded file or None (default)
         :param method_override: Request method to override or None (default)
+        :param api_version: override default API version or None (default)
 
         :returns: TwitterResponse
         :raises: TwitterConnectionError
         """
-        self.version = version
         resource, endpoint = self._get_endpoint(resource)
         if endpoint not in ENDPOINTS:
             raise Exception('Endpoint "%s" unsupported' % endpoint)
@@ -145,8 +151,10 @@ class TwitterAPI(object):
             method, subdomain = ENDPOINTS[endpoint]
             if method_override:
                 method = method_override
-            url = self._prepare_url(subdomain, resource)
-            if 'stream' in subdomain:
+            if not api_version:
+                api_version = self.version
+            url = self._prepare_url(subdomain, resource, api_version)
+            if api_version == '1.1' and 'stream' in subdomain:
                 session.stream = True
                 timeout = self.STREAMING_TIMEOUT
                 # always use 'delimited' for efficient stream parsing
@@ -154,16 +162,29 @@ class TwitterAPI(object):
                     params = {}
                 params['delimited'] = 'length'
                 params['stall_warning'] = 'true'
+            elif api_version == '2' and resource.endswith('/stream'):
+                session.stream = True
+                timeout = self.STREAMING_TIMEOUT
             else:
                 session.stream = False
                 timeout = self.REST_TIMEOUT
+            # if method == 'POST':
+            #     data = params
+            #     params = None
+            # else:
+            #     data = None
+            d = p = j = None
             if method == 'POST':
-                data = params
-                params = None
+                if api_version == '1.1':
+                    d = params
+                else:
+                    j = params
+            elif method == 'PUT':
+                j = params
             else:
-                data = None
-            try:            
-                if method == 'PUT':
+                p = params
+            try:           
+                if False and method == 'PUT':
                     session.headers['Content-type'] = 'application/json'            
                     data = params                        
                     r = session.request(
@@ -174,8 +195,12 @@ class TwitterAPI(object):
                     r = session.request(
                         method,
                         url,
-                        data=data,
-                        params=params,
+                        # data=data,
+                        # params=params,
+                        # json=params,
+                        data=d,
+                        params=p,
+                        json=j,
                         timeout=(self.CONNECTION_TIMEOUT, timeout),
                         files=files,
                         proxies=self.proxies)

@@ -4,6 +4,7 @@ __license__ = "MIT"
 
 
 import logging
+import json
 
 
 class TwitterError(Exception):
@@ -17,7 +18,7 @@ class TwitterConnectionError(TwitterError):
     """Raised when the connection needs to be re-established"""
 
     def __init__(self, value):
-        super(Exception, self).__init__(value)
+        super().__init__(value)
         logging.warning('%s %s' % (type(value), value))
 
 
@@ -32,9 +33,23 @@ class TwitterRequestError(TwitterError):
             else:
                 msg = 'Twitter request failed'
         logging.info('Status code %d: %s' % (status_code, msg))
-        super(Exception, self).__init__(msg)
+        super().__init__(msg)
         self.status_code = status_code
         self.msg = msg
 
     def __str__(self):
-        return '%s (%d): %s' % (self.args[0], self.status_code, self.msg)
+        return '%s (%d): %s' % (self.args, self.status_code, self.msg)
+
+
+    def __iter__(self):
+        try:
+            msg = json.loads(self.msg)
+            if 'errors' in msg:
+                for error in msg['errors']:
+                    yield error['message']
+            elif 'detail' in msg:
+                yield msg['detail']
+            else:
+                yield self.msg
+        except:
+            yield self.msg

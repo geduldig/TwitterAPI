@@ -214,21 +214,6 @@ ENDPOINTS = {
     'account_activity/webhooks/:PARAM':                     ('DELETE', 'api'), # WEBHOOK ID
     'account_activity/webhooks/:PARAM/subscriptions':       ('POST',   'api'), # ENVIRONMENT NAME   
     'account_activity/webhooks/:PARAM/subscriptions/list':  ('GET',    'api'), # ENVIRONMENT NAME
-    
-    # API V2 EARLY ACCESS
-
-    'tweets/:PARAM':                                      ('GET',    'api'), # ID
-    'tweets?ids=:PARAM':                                  ('GET',    'api'), # IDS
-    'users/:PARAM':                                       ('GET',    'api'), # ID
-    'users?ids=:PARAM':                                   ('GET',    'api'), # IDS
-    'users/by/username/:PARAM':                           ('GET',    'api'), # USERNAME
-    'users/by?usernames=:PARAM':                          ('GET',    'api'), # USERNAMES
-    'tweets/search/recent?query=:PARAM':                  ('GET',    'api'), # QUERY
-    'tweets/search/stream/rules':                         ('POST',   'api'),
-    'tweets/search/stream/rules':                         ('GET',    'api'),
-    'tweets/sample/stream':                               ('GET',    'api'),
-    'tweets/:id/hidden':                                  ('PUT',    'api'),
-
 
     # PREMIUM SEARCH API
 
@@ -237,8 +222,9 @@ ENDPOINTS = {
     'tweets/search/fullarchive/:PARAM':                     ('GET',    'api'), # LABEL
     'tweets/search/fullarchive/:PARAM/counts':              ('GET',    'api'), # LABEL
     
-    #LABS API (BETAS) WILL NEED APPLICATION APPROVAL
+    # LABS API (BETAS) WILL NEED APPLICATION APPROVAL
 
+    'labs/1/tweets/metrics/private':                        ('GET',    'api'),
     'labs/2/tweets/:PARAM':                                 ('GET',    'api'), # TWEET ID
     'labs/2/tweets':                                        ('GET',    'api'),
     'labs/2/tweets/search':                                 ('GET',    'api'),
@@ -246,5 +232,17 @@ ENDPOINTS = {
     'labs/2/users/:PARAM':                                  ('GET',    'api'), # USER ID
     'labs/2/users':                                         ('GET',    'api'),          
     
-    'labs/1/tweets/metrics/private':                        ('GET',    'api')
+    # API V2 EARLY ACCESS
+
+    'tweets':                                               ('GET',    'api'),
+    'tweets/:PARAM/hidden':                                 ('PUT',    'api'), # ID
+    'tweets/:PARAM':                                        ('GET',    'api'), # ID
+    'tweets/sample/stream':                                 ('GET',    'api'),
+    'tweets/search/recent':                                 ('GET',    'api'),
+    'tweets/search/stream':                                 ('GET',    'api'),
+    'tweets/search/stream/rules':                           ('POST',   'api'), # use method_override for 'GET'
+    'users':                                                ('GET',    'api'),
+    'users/:PARAM':                                         ('GET',    'api'), # ID
+    'users/by':                                             ('GET',    'api'),
+    'users/by/username/:PARAM':                             ('GET',    'api'), # USERNAME
 }

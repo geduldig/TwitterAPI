@@ -34,25 +34,25 @@ class TwitterPager(object):
         :param new_tweets: Boolean determining the search direction.
                            False (default) retrieves old results.
                            True retrieves current results.
+        :param version: override default API version or None (default)
 
         :returns: JSON objects containing statuses, errors or other return info.
-        :raises: TwitterRequestError
         """
         elapsed = 0
         while True:
             try:
-                # get one page of results
+                # REQUEST ONE PAGE OF RESULTS...
                 start = time.time()
                 r = self.api.request(self.resource, self.params)
                 it = r.get_iterator()
                 if new_tweets:
                     it = reversed(list(it))
 
-                # yield each item in the page
+                # YIELD FOR EACH ITEM IN THE PAGE...
                 item_count = 0
                 id = None
                 for item in it:
-                    item_count = item_count + 1
+                    item_count += 1
                     if type(item) is dict:
                         if 'id' in item:
                             id = item['id']
@@ -62,49 +62,59 @@ class TwitterPager(object):
                                 raise TwitterConnectionError(item)
                     yield item
 
-                # if a cursor is present, use it to get next page
-                # otherwise, use id to get next page
                 json = r.json()
-                cursor = -1
-                if new_tweets and 'previous_cursor' in json:
-                    cursor = json['previous_cursor']
-                    cursor_param = 'cursor'
-                elif not new_tweets and 'next_cursor' in json:
-                    cursor = json['next_cursor']
-                    cursor_param = 'cursor'
-                elif not new_tweets and 'next' in json:
-                    # 'next' is used by Premium Search, so only
-                    # works searching back in time
-                    cursor = json['next']
-                    cursor_param = 'next'
 
-                is_premium_search = self.params and 'query' in self.params
+                # CHECK FOR NEXT PAGE OR BAIL...
+                if self.api.version == '1.1':
+                    # if a cursor is present, use it to get next page
+                    # otherwise, use id to get next page
+                    is_premium_search = self.params and 'query' in self.params and self.api.version == '1.1'
+                    cursor = -1
+                    if new_tweets and 'previous_cursor' in json:
+                        cursor = json['previous_cursor']
+                        cursor_param = 'cursor'
+                    elif not new_tweets:
+                        if 'next_cursor' in json:
+                            cursor = json['next_cursor']
+                            cursor_param = 'cursor'
+                        elif 'next' in json:
+                            # 'next' is used by Premium Search (OLD searches only)
+                            cursor = json['next']
+                            cursor_param = 'next'
 
-                # bail when no more results
-                if cursor == 0:
-                    break
-                elif cursor == -1 and is_premium_search:
-                    break
-                elif not new_tweets and item_count == 0:
-                    break
+                    # bail when no more results
+                    if cursor == 0:
+                        break
+                    elif cursor == -1 and is_premium_search:
+                        break
+                    elif not new_tweets and item_count == 0:
+                        break
+                else: # VERSION 2
+                    meta = json['meta']
 
-                # sleep before getting another page of results
+                # SLEEP...
                 elapsed = time.time() - start
                 pause = wait - elapsed if elapsed < wait else 0
                 time.sleep(pause)
 
-                # waiting for new results to come in...
-                # get a page with cursor if present, or with id if not
-                # a Premium search (i.e. 'query' is not a parameter)
-                if cursor != -1:
-                    self.params[cursor_param] = cursor
-                elif id is not None and not is_premium_search:
-                    if new_tweets:
-                        self.params['since_id'] = str(id)
+                # SETUP REQUEST FOR NEXT PAGE...
+                if self.api.version == '1.1':
+                    # get a page with cursor if present, or with id if not
+                    # a Premium search (i.e. 'query' is not a parameter)
+                    if cursor != -1:
+                        self.params[cursor_param] = cursor
+                    elif id is not None and not is_premium_search:
+                        if new_tweets:
+                            self.params['since_id'] = str(id)
+                        else:
+                            self.params['max_id'] = str(id - 1)
                     else:
-                        self.params['max_id'] = str(id - 1)
-                else:
-                    continue
+                        continue
+                else: # VERSION 2
+                    if new_tweets:
+                        self.params['since_id'] = meta['newest_id']
+                    else:
+                        self.params['next_token'] = meta['next_token']
 
             except TwitterRequestError as e:
                 if e.status_code < 500:

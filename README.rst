@@ -10,9 +10,17 @@
    :alt: Join the chat at https://gitter.im/geduldig/TwitterAPI
    :target: https://gitter.im/geduldig/TwitterAPI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-TwitterAPI is a Python package for accessing Twitter's REST APIs and Streaming APIs. It supports OAuth 1.0 and OAuth 2.0 authentication.  And, it works with the latest Python versions in both 2.x and 3.x branches. 
+TwitterAPI is a Python package for accessing Twitter's REST APIs and Streaming APIs. It supports both Version 1.1 and Version 2 endpoints. 
 
 REST APIs that are supported are: Public API, Collections API, Curator API, Ads API, Webhook API, Premium Search API.
+
+NEW -- Twitter API Version 2!!
+------------------------------
+To access Version 2 endpoints, specify the API version::
+
+	api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret, api_version='2')
+
+Check the examples folder for more information on making requests using Version 2 endpoints.
 
 Installation
 ------------
