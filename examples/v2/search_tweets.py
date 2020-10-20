@@ -5,7 +5,7 @@ QUERY = 'pizza'
 try:
 	o = TwitterOAuth.read_file()
 	api = TwitterAPI(o.consumer_key, o.consumer_secret, o.access_token_key, o.access_token_secret, api_version='2')
-	r = api.request(f'tweets/search/recent', {f'query':{QUERY}, 'tweet.fields':'public_metrics'})
+	r = api.request('tweets/search/recent', {'query':QUERY, 'tweet.fields':'public_metrics'})
 
 	for item in r:
 		print(item)

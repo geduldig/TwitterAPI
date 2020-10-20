@@ -50,10 +50,21 @@ class TwitterOAuth:
             oauth = {}
             for line in f:
                 if '=' in line:
-                    name, value = line.split('=', 1)
-                    oauth[name.strip()] = value.strip()
+                    tokens = line.strip().split('=', 1)
+                    if len(tokens) != 2 or not tokens[1]:
+                        raise Exception(cls.usage(file_name))
+                    oauth[tokens[0].strip()] = tokens[1].strip()
             return TwitterOAuth(
                 oauth['consumer_key'],
                 oauth['consumer_secret'],
                 oauth['access_token_key'],
                 oauth['access_token_secret'])
+
+    @classmethod
+    def usage(cls, file_name):
+        return (f'Credentials file: {file_name}\n'
+                 'Expected format:\n'
+                 'consumer_key=YOUR_CONSUMER_KEY\n'
+                 'consumer_secret=YOUR_CONSUMER_SECRET\n'
+                 'access_token_key=YOUR_ACCESS_TOKEN\n'
+                 'access_token_secret=YOUR_ACCESS_TOKEN_SECRET\n')

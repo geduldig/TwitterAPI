@@ -29,17 +29,20 @@
 """
 
 
-__author__ = "geduldig"
+__author__ = "Jonas Geduldig"
 __date__ = "June 7, 2013"
 __license__ = "MIT"
 
 
-from TwitterAPI import TwitterAPI, __version__
+from TwitterAPI import TwitterAPI, TwitterRequestError, TwitterConnectionError, __version__
 from TwitterAPI.TwitterOAuth import TwitterOAuth
 import argparse
 import codecs
 import json
 import sys
+
+
+DEFAULT_API_VERSION = '1.1'
 
 
 # print UTF-8 to the console
@@ -75,7 +78,7 @@ def _to_dict(param_list):
 
 
 if __name__ == '__main__':
-    print('TwitterAPI %s by geduldig' % __version__)
+    print('TwitterAPI %s by Jonas Geduldig' % __version__)
 
     parser = argparse.ArgumentParser(
         description='Request any Twitter Streaming or REST API endpoint')
@@ -84,6 +87,13 @@ if __name__ == '__main__':
         metavar='FILENAME',
         type=str,
         help='file containing OAuth credentials')
+    parser.add_argument(
+        '-bearertoken',
+        metavar='BEARERTOKEN',
+        type=eval,
+        choices=[True, False],
+        default=False,
+        help='use OAuth 2.0')
     parser.add_argument(
         '-endpoint',
         metavar='ENDPOINT',
@@ -108,26 +118,49 @@ if __name__ == '__main__':
         type=int,
         help='number of spaces to indent json output',
         default=None)
+    parser.add_argument(
+        '-version',
+        metavar='VERSION',
+        type=str,
+        help='Twitter API version',
+        default=DEFAULT_API_VERSION)
+    parser.add_argument(
+        '-methodoverride',
+        metavar='METHOD',
+        type=str,
+        help='override default HTTP method',
+        default=None)
     args = parser.parse_args()
 
     try:
         params = _to_dict(args.parameters)
         oauth = TwitterOAuth.read_file(args.oauth)
+        auth_type = 'oAuth2' if args.bearertoken else 'oAuth1'
 
         api = TwitterAPI(oauth.consumer_key,
-                         oauth.consumer_secret,
-                         oauth.access_token_key,
-                         oauth.access_token_secret)
-        response = api.request(args.endpoint, params)
+                        oauth.consumer_secret,
+                        oauth.access_token_key,
+                        oauth.access_token_secret,
+                        api_version=args.version,
+                        auth_type=auth_type)
+        response = api.request(args.endpoint, params, method_override=args.methodoverride)
 
         for item in response.get_iterator():
             if not args.fields:
-                print( json.dumps(item, ensure_ascii='False', indent=args.indent))
+                print(json.dumps(item, ensure_ascii='False', indent=args.indent))
             else:
                 for name in args.fields:
                     value = _search(name, item)
                     if value:
                         print('%s: %s' % (name, value))
+
+    except TwitterRequestError as e:
+        print(e.status_code)
+        for msg in iter(e):
+            print(msg)
+
+    except TwitterConnectionError as e:
+        print(e)
 
     except KeyboardInterrupt:
         print('Terminated by user')
