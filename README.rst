@@ -16,7 +16,7 @@ REST APIs that are supported are: Public API, Collections API, Curator API, Ads 
 
 NEW -- Twitter API Version 2!!
 ------------------------------
-To access Version 2 endpoints, specify the API version::
+By default TwitterAPI will permit only Version 1.1 endpoints. To start using Verson 2 endpoint you must supply the api_version parameter:
 
 	api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret, api_version='2')
 

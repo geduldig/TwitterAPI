@@ -1,12 +1,14 @@
 from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError
 
+QUERY = 'pizza'
+
 try:
 	o = TwitterOAuth.read_file()
 	api = TwitterAPI(o.consumer_key, o.consumer_secret, auth_type='oAuth2', api_version='2')
 
 	# ADD STREAM RULES
 
-	r = api.request('tweets/search/stream/rules', {'add': [{'value':'pizza'}]})
+	r = api.request('tweets/search/stream/rules', {'add': [{'value':QUERY}]})
 	print(f'[{r.status_code}] RULE ADDED: {r.text}')
 	if r.status_code != 201: exit()
 
