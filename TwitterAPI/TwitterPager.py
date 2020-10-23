@@ -62,7 +62,7 @@ class TwitterPager(object):
                                 raise TwitterConnectionError(item)
                     yield item
 
-                json = r.json()
+                data = r.json()
 
                 # CHECK FOR NEXT PAGE OR BAIL...
                 if self.api.version == '1.1':
@@ -70,16 +70,16 @@ class TwitterPager(object):
                     # otherwise, use id to get next page
                     is_premium_search = self.params and 'query' in self.params and self.api.version == '1.1'
                     cursor = -1
-                    if new_tweets and 'previous_cursor' in json:
-                        cursor = json['previous_cursor']
+                    if new_tweets and 'previous_cursor' in data:
+                        cursor = data['previous_cursor']
                         cursor_param = 'cursor'
                     elif not new_tweets:
-                        if 'next_cursor' in json:
-                            cursor = json['next_cursor']
+                        if 'next_cursor' in data:
+                            cursor = data['next_cursor']
                             cursor_param = 'cursor'
-                        elif 'next' in json:
+                        elif 'next' in data:
                             # 'next' is used by Premium Search (OLD searches only)
-                            cursor = json['next']
+                            cursor = data['next']
                             cursor_param = 'next'
 
                     # bail when no more results
@@ -90,7 +90,9 @@ class TwitterPager(object):
                     elif not new_tweets and item_count == 0:
                         break
                 else: # VERSION 2
-                    meta = json['meta']
+                    meta = data['meta']
+                    if not new_tweets and not 'next_token' in meta:
+                        break
 
                 # SLEEP...
                 elapsed = time.time() - start

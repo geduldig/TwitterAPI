@@ -148,3 +148,5 @@ v2.5.14,   17 Sep 2020 -- Fix TwitterPager to iterate integer ids.
 v2.6.0,    04 Oct 2020 -- Merged dylancaponi-twitter-v2 with V2 support.
                           Made several modifications to complete V2 support.
                           Dropping Python 2.7 compatibility.
+
+v2.6.1,    23 Oct 2020 -- Fix TwitterPager, add conversation example.
