@@ -18,7 +18,7 @@ class Node:
 		return self.data['in_reply_to_user_id']
 
 	def print_tree(self, level):
-		"""level is 0 for the root node, then incremented for every generaion"""
+		"""level is 0 for the root node, then incremented for every generation"""
 		print(f'{level*"_"}{level}: {self.id()}')
 		level += 1
 		for child in self.children:
