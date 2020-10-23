@@ -1,9 +1,8 @@
 from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, TwitterPager
-import json
 
 CONVERSATION_ID = '1318769013640450048'
 
-class Node:
+class TreeNode:
 	def __init__(self, data):
 		"""data is a tweet's json object"""
 		self.data = data
@@ -17,13 +16,6 @@ class Node:
 		"""the reply-to user is the parent of the node"""
 		return self.data['in_reply_to_user_id']
 
-	def print_tree(self, level):
-		"""level is 0 for the root node, then incremented for every generaion"""
-		print(f'{level*"_"}{level}: {self.id()}')
-		level += 1
-		for child in self.children:
-			child.print_tree(level)
-
 	def find_parent_of(self, node):
 		"""append a node to the children of it's reply-to user"""
 		if node.reply_to() == self.id():
@@ -33,6 +25,13 @@ class Node:
 			if child.find_parent_of(node):
 				return True
 		return False
+
+	def print_tree(self, level):
+		"""level is 0 for the root node, then incremented for every generation"""
+		print(f'{level*"_"}{level}: {self.id()}')
+		level += 1
+		for child in self.children:
+			child.print_tree(level)
 
 try:
 	o = TwitterOAuth.read_file()
@@ -46,7 +45,7 @@ try:
 		})
 
 	for item in r:
-		root = Node(item)
+		root = TreeNode(item)
 		print(f'ROOT {root.id()}')
 
 	# GET ALL REPLIES IN CONVERSATION
@@ -65,11 +64,11 @@ try:
 	orphans = []
 
 	for item in pager.get_iterator(wait=2):
-		node = Node(item)
+		node = TreeNode(item)
 		print(f'{node.id()} => {node.reply_to()}')
-		# REMOVE ORPHANS THAT ARE CHILDREN OF THE NODE
+		# COLLECT ANY ORPHANS THAT ARE NODE'S CHILD
 		orphans = [orphan for orphan in orphans if not node.find_parent_of(orphan)]
-		# IF NODE CANNOT BE PLACED IN CURRENT TREE, ADD NODE TO ORPHANS
+		# IF NODE CANNOT BE PLACED IN TREE, ORPHAN IT UNTIL IT'S PARENT IS FOUND
 		if not root.find_parent_of(node):
 			orphans.append(node)
 
