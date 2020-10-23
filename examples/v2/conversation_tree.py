@@ -68,7 +68,7 @@ try:
 		print(f'{node.id()} => {node.reply_to()}')
 		# COLLECT ANY ORPHANS THAT ARE NODE'S CHILD
 		orphans = [orphan for orphan in orphans if not node.find_parent_of(orphan)]
-		# IF NODE CANNOT BE PLACED IN TREE, ORPHAN IT UNTIL IT'S PARENT IS FOUND
+		# IF NODE CANNOT BE PLACED IN TREE, ORPHAN IT UNTIL ITS PARENT IS FOUND
 		if not root.find_parent_of(node):
 			orphans.append(node)
 
