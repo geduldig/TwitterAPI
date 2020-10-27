@@ -150,3 +150,5 @@ v2.6.0,    04 Oct 2020 -- Merged dylancaponi-twitter-v2 with V2 support.
                           Dropping Python 2.7 compatibility.
 
 v2.6.1,    23 Oct 2020 -- Fix TwitterPager, add conversation example.
+
+v2.6.2,    27 Oct 2020 -- Merged ckovamees-master with add media endpoints.

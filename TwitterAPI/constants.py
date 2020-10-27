@@ -110,7 +110,7 @@ ENDPOINTS = {
     'lists/update':                                         ('POST',   'api'),
 
     'media/metadata/create':                                ('POST',   'upload'),
-    'media/upload':                                         ('POST',   'upload'),   
+    'media/upload':                                         ('POST',   'upload'), # use method_override for 'GET' 
     'media/subtitles/create':                               ('POST',   'upload'),
     'media/subtitles/delete':                               ('POST',   'upload'),
 
