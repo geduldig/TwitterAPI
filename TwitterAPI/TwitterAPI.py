@@ -168,11 +168,6 @@ class TwitterAPI(object):
             else:
                 session.stream = False
                 timeout = self.REST_TIMEOUT
-            # if method == 'POST':
-            #     data = params
-            #     params = None
-            # else:
-            #     data = None
             d = p = j = None
             if method == 'POST':
                 if api_version == '1.1':
@@ -195,9 +190,6 @@ class TwitterAPI(object):
                     r = session.request(
                         method,
                         url,
-                        # data=data,
-                        # params=params,
-                        # json=params,
                         data=d,
                         params=p,
                         json=j,
