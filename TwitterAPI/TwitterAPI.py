@@ -301,6 +301,8 @@ class _RestIterable(object):
             self.results = resp['ids']
         elif 'results' in resp:
             self.results = resp['results']
+        elif 'includes' in resp:
+            self.results = resp['includes']
         elif 'data' in resp:
             if not isinstance(resp['data'], dict):
                 self.results = resp['data']
