@@ -291,8 +291,11 @@ class _RestIterable(object):
     def __init__(self, response):
         resp = response.json()
         # convert json response into something iterable
+
         if 'errors' in resp:
             self.results = resp['errors']
+        elif 'includes' in resp:
+            self.results = [resp]
         elif 'statuses' in resp:
             self.results = resp['statuses']
         elif 'users' in resp:
@@ -301,8 +304,6 @@ class _RestIterable(object):
             self.results = resp['ids']
         elif 'results' in resp:
             self.results = resp['results']
-        elif 'includes' in resp:
-            self.results = resp['includes']
         elif 'data' in resp:
             if not isinstance(resp['data'], dict):
                 self.results = resp['data']
