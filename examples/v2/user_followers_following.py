@@ -7,15 +7,12 @@ try:
     api = TwitterAPI(o.consumer_key, o.consumer_secret, o.access_token_key, o.access_token_secret, api_version='2')
     
     # Get followers
-    r = api.request(f'users/:{USER_ID}/followers')
-    followers = r.json()['data']
+    followers = api.request(f'users/:{USER_ID}/followers')
     for f in followers:
         print(f)
     
     # Get following
-    for item in r:
-    r = api.request(f'users/:{USER_ID}/following')
-    following = r.json()['data']
+    following = api.request(f'users/:{USER_ID}/following')
     for f in following:
         print(f)
 
