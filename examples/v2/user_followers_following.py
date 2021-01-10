@@ -1,6 +1,6 @@
 from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError
 
-USER_ID = 'id'
+USER_ID = '2244994945'  # https://twitter.com/TwitterDev
 
 try:
     o = TwitterOAuth.read_file()
