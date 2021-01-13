@@ -179,23 +179,15 @@ class TwitterAPI(object):
             else:
                 p = params
             try:           
-                if False and method == 'PUT':
-                    session.headers['Content-type'] = 'application/json'            
-                    data = params                        
-                    r = session.request(
-                        method,
-                        url,
-                        json=data)                
-                else:
-                    r = session.request(
-                        method,
-                        url,
-                        data=d,
-                        params=p,
-                        json=j,
-                        timeout=(self.CONNECTION_TIMEOUT, timeout),
-                        files=files,
-                        proxies=self.proxies)
+                r = session.request(
+                    method,
+                    url,
+                    data=d,
+                    params=p,
+                    json=j,
+                    timeout=(self.CONNECTION_TIMEOUT, timeout),
+                    files=files,
+                    proxies=self.proxies)
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
                     SSLError, ssl.SSLError, socket.error) as e:
                 raise TwitterConnectionError(e)

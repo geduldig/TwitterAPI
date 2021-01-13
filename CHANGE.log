@@ -152,3 +152,5 @@ v2.6.0,    04 Oct 2020 -- Merged dylancaponi-twitter-v2 with V2 support.
 v2.6.1,    23 Oct 2020 -- Fix TwitterPager, add conversation example.
 
 v2.6.2,    27 Oct 2020 -- Merged ckovamees-master with add media endpoints.
+
+v2.6.3,    12 Jan 2021 -- Merged peguerosdc-master with v2 user endpoints.
