@@ -245,6 +245,9 @@ ENDPOINTS = {
     'tweets/search/stream/rules':                           ('POST',   'api'), # use method_override for 'GET'
     'users':                                                ('GET',    'api'),
     'users/:PARAM':                                         ('GET',    'api'), # ID
+    'users/:PARAM/followers':                               ('GET',    'api'), # ID
+    'users/:PARAM/following':                               ('GET',    'api'), # ID
+    'users/:PARAM/tweets':                                  ('GET',    'api'), # ID
     'users/by':                                             ('GET',    'api'),
     'users/by/username/:PARAM':                             ('GET',    'api'), # USERNAME
 }
