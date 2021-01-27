@@ -8,24 +8,24 @@ class TreeNode:
 		"""data is a tweet's json object"""
 		self.data = data
 		self.children = []
-		self.parent = None
+		self.replied_to_tweet = None
 		if 'referenced_tweets' in self.data:
 			for tweet in self.data['referenced_tweets']: 
 				if tweet['type'] == 'replied_to':
-					self.parent = tweet['id']
+					self.replied_to_tweet = tweet['id']
 					break
 
 	def id(self):
 		"""a node is identified by its tweet id"""
 		return self.data['id']
 
-	def reply_to(self):
+	def parent(self):
 		"""the reply-to tweet is the parent of the node"""
-		return self.parent
+		return self.replied_to_tweet
 
 	def find_parent_of(self, node):
 		"""append a node to the children of it's parent tweet"""
-		if node.reply_to() == self.id():
+		if node.parent() == self.id():
 			self.children.append(node)
 			return True
 		for child in self.children:
@@ -72,7 +72,7 @@ try:
 
 	for item in pager.get_iterator(wait=2):
 		node = TreeNode(item)
-		print(f'{node.id()} => {node.reply_to()}')
+		print(f'{node.id()} => {node.parent()}')
 		# COLLECT ANY ORPHANS THAT ARE CHILDREN OF THE NEW NODE
 		orphans = [orphan for orphan in orphans if not node.find_parent_of(orphan)]
 		# IF THE NEW NODE CANNOT BE PLACED IN TREE, ORPHAN IT UNTIL ITS PARENT IS FOUND
