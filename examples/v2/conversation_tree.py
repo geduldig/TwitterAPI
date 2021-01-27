@@ -1,23 +1,30 @@
 from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, TwitterPager
+from datetime import datetime
 
-CONVERSATION_ID = '1318769013640450048'
+CONVERSATION_ID = '1354097088179687425'
 
 class TreeNode:
 	def __init__(self, data):
 		"""data is a tweet's json object"""
 		self.data = data
 		self.children = []
+		self.parent = None
+		if 'referenced_tweets' in self.data:
+			for tweet in self.data['referenced_tweets']: 
+				if tweet['type'] == 'replied_to':
+					self.parent = tweet['id']
+					break
 
 	def id(self):
-		"""a node is identified by its author"""
-		return self.data['author_id']
+		"""a node is identified by its tweet id"""
+		return self.data['id']
 
 	def reply_to(self):
-		"""the reply-to user is the parent of the node"""
-		return self.data['in_reply_to_user_id']
+		"""the reply-to tweet is the parent of the node"""
+		return self.parent
 
 	def find_parent_of(self, node):
-		"""append a node to the children of it's reply-to user"""
+		"""append a node to the children of it's parent tweet"""
 		if node.reply_to() == self.id():
 			self.children.append(node)
 			return True
@@ -28,9 +35,9 @@ class TreeNode:
 
 	def print_tree(self, level):
 		"""level 0 is the root node, then incremented for subsequent generations"""
-		print(f'{level*"_"}{level}: {self.id()}')
+		print(f'{level*"_"}{level}: [{self.data["created_at"]}] {self.data["text"][0:40]}')
 		level += 1
-		for child in self.children:
+		for child in reversed(self.children):
 			child.print_tree(level)
 
 try:
@@ -41,7 +48,7 @@ try:
 
 	r = api.request(f'tweets/:{CONVERSATION_ID}',
 		{
-			'tweet.fields':'author_id,conversation_id,created_at,in_reply_to_user_id'
+			'tweet.fields':'author_id,conversation_id,created_at,referenced_tweets'
 		})
 
 	for item in r:
@@ -54,7 +61,7 @@ try:
 	pager = TwitterPager(api, 'tweets/search/recent', 
 		{
 			'query':f'conversation_id:{CONVERSATION_ID}',
-			'tweet.fields':'author_id,conversation_id,created_at,in_reply_to_user_id'
+			'tweet.fields':'author_id,conversation_id,created_at,referenced_tweets'
 		})
 
 	# "wait=2" means wait 2 seconds between each request.
@@ -66,9 +73,9 @@ try:
 	for item in pager.get_iterator(wait=2):
 		node = TreeNode(item)
 		print(f'{node.id()} => {node.reply_to()}')
-		# COLLECT ANY ORPHANS THAT ARE NODE'S CHILD
+		# COLLECT ANY ORPHANS THAT ARE CHILDREN OF THE NEW NODE
 		orphans = [orphan for orphan in orphans if not node.find_parent_of(orphan)]
-		# IF NODE CANNOT BE PLACED IN TREE, ORPHAN IT UNTIL ITS PARENT IS FOUND
+		# IF THE NEW NODE CANNOT BE PLACED IN TREE, ORPHAN IT UNTIL ITS PARENT IS FOUND
 		if not root.find_parent_of(node):
 			orphans.append(node)
 
