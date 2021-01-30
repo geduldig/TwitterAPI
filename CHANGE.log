@@ -156,3 +156,5 @@ v2.6.2,    27 Oct 2020 -- Merged ckovamees-master with add media endpoints.
 v2.6.3,    12 Jan 2021 -- Merged peguerosdc-master with v2 user endpoints.
 
 v2.6.4,    27 Jan 2021 -- Fixed conversation_tree.py example.
+
+v2.6.5,    30 Jan 2021 -- Merged dylancaponi-patch-1 with Ads endpoints.
