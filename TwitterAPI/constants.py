@@ -19,7 +19,7 @@ DOMAIN = 'twitter.com'
 
 VERSION = '1.1'
 CURATOR_VERSION = 'broadcast/1'
-ADS_VERSION = '2'
+ADS_VERSION = '8'
 
 ENDPOINTS = {
     # resource:                                             (method,   subdomain)
@@ -194,6 +194,7 @@ ENDPOINTS = {
     # ADS API (not tested!!)
 
     'accounts/:PARAM/auction_insights':                     ('GET',    'ads-api'), # ACCOUNT ID
+    'accounts/:PARAM/promoted_tweets':                      ('GET',    'ads-api'), # ACCOUNT ID
     'stats/accounts/:PARAM':                                ('GET',    'ads-api'), # ACCOUNT ID
     'stats/accounts/:PARAM/reach/funding_instruments':      ('GET',    'ads-api'), # ACCOUNT ID
     'stats/jobs/accounts/:PARAM':                           ('GET',    'ads-api'), # ACCOUNT ID
