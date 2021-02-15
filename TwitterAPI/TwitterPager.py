@@ -23,6 +23,8 @@ class TwitterPager(object):
     def __init__(self, api, resource, params=None):
         self.api = api
         self.resource = resource
+        if not params:
+            params = {}
         self.params = params
 
     def get_iterator(self, wait=5, new_tweets=False):
@@ -114,9 +116,9 @@ class TwitterPager(object):
                         continue
                 else: # VERSION 2
                     if new_tweets:
-                        self.params['since_id'] = meta['newest_id']
+                        self.params['pagination_token'] = meta['previous_token']
                     else:
-                        self.params['next_token'] = meta['next_token']
+                        self.params['pagination_token'] = meta['next_token']
 
             except TwitterRequestError as e:
                 if e.status_code < 500:
