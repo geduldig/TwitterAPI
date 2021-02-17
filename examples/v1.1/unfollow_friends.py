@@ -7,9 +7,9 @@ api = TwitterAPI(<consumer key>,
                  <access token key>,
                  <access token secret>)
 
-followers = set(id for id in api.request('followers/ids'))
 friends = set(id for id in api.request('friends/ids'))
-unfollow = set(followers) - set(friends)
+followers = set(id for id in api.request('followers/ids'))
+unfollow = set(friends) - set(followers)
 
 for id in unfollow:
     r = api.request('friendships/destroy', {'user_id': id})
