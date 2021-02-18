@@ -91,7 +91,7 @@ class TwitterPager(object):
                         break
                     elif not new_tweets and item_count == 0:
                         break
-                else: # VERSION 2
+                else:  # VERSION 2
                     meta = data['meta']
                     if not new_tweets and not 'next_token' in meta:
                         break
@@ -114,11 +114,13 @@ class TwitterPager(object):
                             self.params['max_id'] = str(id - 1)
                     else:
                         continue
-                else: # VERSION 2
+                else:  # VERSION 2
+                    SEARCH_ENDPOINTS = ['tweets/search/recent', 'tweets/search/all']
+                    pagination_token = 'next_token' if self.resource in SEARCH_ENDPOINTS else 'pagination_token'
                     if new_tweets:
-                        self.params['pagination_token'] = meta['previous_token']
+                        self.params[pagination_token] = meta['previous_token']
                     else:
-                        self.params['pagination_token'] = meta['next_token']
+                        self.params[pagination_token] = meta['next_token']
 
             except TwitterRequestError as e:
                 if e.status_code < 500:
