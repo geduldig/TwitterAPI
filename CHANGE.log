@@ -160,3 +160,5 @@ v2.6.4,    27 Jan 2021 -- Fixed conversation_tree.py example.
 v2.6.5,    30 Jan 2021 -- Merged dylancaponi-patch-1 with Ads endpoints.
 
 v2.6.6,    14 Feb 2021 -- Fixed v2 next/prev token in TwitterPager.
+
+v2.6.7,    19 Feb 2021 -- Fixed v2 next/prev token in TwitterPager for search.

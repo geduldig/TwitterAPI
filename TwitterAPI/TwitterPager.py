@@ -36,7 +36,6 @@ class TwitterPager(object):
         :param new_tweets: Boolean determining the search direction.
                            False (default) retrieves old results.
                            True retrieves current results.
-        :param version: override default API version or None (default)
 
         :returns: JSON objects containing statuses, errors or other return info.
         """
@@ -115,10 +114,13 @@ class TwitterPager(object):
                     else:
                         continue
                 else: # VERSION 2
+                    # TWITTER SHOULD STANDARDIZE ON pagination_token IN THE FUTURE
+                    SEARCH_ENDPOINTS = ['tweets/search/recent', 'tweets/search/all']
+                    pagination_token = 'next_token' if self.resource in SEARCH_ENDPOINTS else 'pagination_token'
                     if new_tweets:
-                        self.params['pagination_token'] = meta['previous_token']
+                        self.params[pagination_token] = meta['previous_token']
                     else:
-                        self.params['pagination_token'] = meta['next_token']
+                        self.params[pagination_token] = meta['next_token']
 
             except TwitterRequestError as e:
                 if e.status_code < 500:
