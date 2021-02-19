@@ -2,7 +2,6 @@ from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterCon
 
 TWEET_ID = '964575983633252353'
 
-
 try:
 	o = TwitterOAuth.read_file()
 	api = TwitterAPI(o.consumer_key, o.consumer_secret, o.access_token_key, o.access_token_secret, api_version='2')

@@ -18,14 +18,19 @@ class TwitterPager(object):
     :param api: An authenticated TwitterAPI object
     :param resource: String with the resource path (ex. search/tweets)
     :param params: Dictionary of resource parameters
+    :param hydrate_tweets: Boolean determining whether to insert expansion data from
+                            "includes" directly into the tweet "data" structure. 
+                            False (default) does not hydrate.
+                            True hydrates.
     """
 
-    def __init__(self, api, resource, params=None):
+    def __init__(self, api, resource, params=None, hydrate_tweets=False):
         self.api = api
         self.resource = resource
         if not params:
             params = {}
         self.params = params
+        self.hydrate_tweets = hydrate_tweets
 
     def get_iterator(self, wait=5, new_tweets=False):
         """Iterate response from Twitter REST API resource. Resource is called
@@ -44,7 +49,7 @@ class TwitterPager(object):
             try:
                 # REQUEST ONE PAGE OF RESULTS...
                 start = time.time()
-                r = self.api.request(self.resource, self.params)
+                r = self.api.request(self.resource, self.params, hydrate_tweets=self.hydrate_tweets)
                 it = r.get_iterator()
                 if new_tweets:
                     it = reversed(list(it))

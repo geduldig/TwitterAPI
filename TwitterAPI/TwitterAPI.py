@@ -11,11 +11,11 @@ from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from requests_oauthlib import OAuth1
 from .TwitterError import *
 import json
+import os
 import requests
 import socket
 import ssl
 import time
-import os
 
 
 DEFAULT_USER_AGENT = os.getenv('DEFAULT_USER_AGENT', 'python-TwitterAPI')
@@ -85,7 +85,7 @@ class TwitterAPI(object):
         else:
             raise Exception('Unknown oAuth version')
 
-    def _prepare_url(self, subdomain, path, api_version):
+    def _prepare_url(self, subdomain, path):
         if subdomain == 'curator':
             return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
                                               subdomain,
@@ -103,17 +103,17 @@ class TwitterAPI(object):
                                               subdomain,
                                               DOMAIN,
                                               path)        
-        elif api_version == '1.1':
+        elif self.version == '1.1':
             return '%s://%s.%s/%s/%s.json' % (PROTOCOL,
                                               subdomain,
                                               DOMAIN,
-                                              api_version,
+                                              self.version,
                                               path)
-        elif api_version == '2':
+        elif self.version == '2':
             return '%s://%s.%s/%s/%s'      % (PROTOCOL,
                                               subdomain,
                                               DOMAIN,
-                                              api_version,
+                                              self.version,
                                               path)
         else:
             raise Exception('Unsupported API version')
@@ -130,14 +130,17 @@ class TwitterAPI(object):
         else:
             return (resource, resource)
 
-    def request(self, resource, params=None, files=None, method_override=None, api_version=None):
+    def request(self, resource, params=None, files=None, method_override=None, hydrate_tweets=False):
         """Request a Twitter REST API or Streaming API resource.
 
         :param resource: A valid Twitter endpoint (ex. "search/tweets")
         :param params: Dictionary with endpoint parameters or None (default)
         :param files: Dictionary with multipart-encoded file or None (default)
         :param method_override: Request method to override or None (default)
-        :param api_version: override default API version or None (default)
+        :param hydrate_tweets: Boolean determining whether to insert expansion data from
+                               "includes" directly into the tweet "data" structure. 
+                               False (default) does not hydrate.
+                               True hydrates.
 
         :returns: TwitterResponse
         :raises: TwitterConnectionError
@@ -151,10 +154,8 @@ class TwitterAPI(object):
             method, subdomain = ENDPOINTS[endpoint]
             if method_override:
                 method = method_override
-            if not api_version:
-                api_version = self.version
-            url = self._prepare_url(subdomain, resource, api_version)
-            if api_version == '1.1' and 'stream' in subdomain:
+            url = self._prepare_url(subdomain, resource)
+            if self.version == '1.1' and 'stream' in subdomain:
                 session.stream = True
                 timeout = self.STREAMING_TIMEOUT
                 # always use 'delimited' for efficient stream parsing
@@ -162,7 +163,7 @@ class TwitterAPI(object):
                     params = {}
                 params['delimited'] = 'length'
                 params['stall_warning'] = 'true'
-            elif api_version == '2' and resource.endswith('/stream'):
+            elif self.version == '2' and resource.endswith('/stream'):
                 session.stream = True
                 timeout = self.STREAMING_TIMEOUT
             else:
@@ -170,7 +171,7 @@ class TwitterAPI(object):
                 timeout = self.REST_TIMEOUT
             d = p = j = None
             if method == 'POST':
-                if api_version == '1.1':
+                if self.version == '1.1':
                     d = params
                 else:
                     j = params
@@ -178,20 +179,35 @@ class TwitterAPI(object):
                 j = params
             else:
                 p = params
+
             try:           
-                r = session.request(
-                    method,
-                    url,
-                    data=d,
-                    params=p,
-                    json=j,
-                    timeout=(self.CONNECTION_TIMEOUT, timeout),
-                    files=files,
-                    proxies=self.proxies)
+                if False and method == 'PUT':
+                    session.headers['Content-type'] = 'application/json'            
+                    data = params                        
+                    r = session.request(
+                        method,
+                        url,
+                        json=data)                
+                else:
+                    r = session.request(
+                        method,
+                        url,
+                        data=d,
+                        params=p,
+                        json=j,
+                        timeout=(self.CONNECTION_TIMEOUT, timeout),
+                        files=files,
+                        proxies=self.proxies)
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
                     SSLError, ssl.SSLError, socket.error) as e:
                 raise TwitterConnectionError(e)
-            return TwitterResponse(r, session.stream)
+
+            options = {
+                'api_version': self.version,
+                'is_stream': session.stream,
+                'hydrate_tweets': hydrate_tweets
+            }
+            return TwitterResponse(r, options)
 
 
 class TwitterResponse(object):
@@ -200,11 +216,12 @@ class TwitterResponse(object):
 
     :param response: The requests.Response object returned by the API call
     :param stream: Boolean connection type (True if a streaming connection)
+    :param options: Dict containing parsing options
     """
 
-    def __init__(self, response, stream):
+    def __init__(self, response, options):
         self.response = response
-        self.stream = stream
+        self.options = options
 
     @property
     def headers(self):
@@ -239,10 +256,10 @@ class TwitterResponse(object):
         if self.response.status_code != 200:
             raise TwitterRequestError(self.response.status_code, msg=self.response.text)
 
-        if self.stream:
-            return iter(_StreamingIterable(self.response))
+        if self.options['is_stream']:
+            return iter(_StreamingIterable(self.response, self.options))
         else:
-            return iter(_RestIterable(self.response))
+            return iter(_RestIterable(self.response, self.options))
 
     def __iter__(self):
         """Get API dependent iterator.
@@ -278,33 +295,47 @@ class _RestIterable(object):
     """Iterate statuses, errors or other iterable objects in a REST API response.
 
     :param response: The request.Response from a Twitter REST API request
+    :param options: Dict containing parsing options
     """
 
-    def __init__(self, response):
+    def __init__(self, response, options):
         resp = response.json()
-        # convert json response into something iterable
-        if 'errors' in resp:
-            self.results = resp['errors']
-        elif 'statuses' in resp:
-            self.results = resp['statuses']
-        elif 'users' in resp:
-            self.results = resp['users']
-        elif 'ids' in resp:
-            self.results = resp['ids']
-        elif 'results' in resp:
-            self.results = resp['results']
-        elif 'data' in resp:
-            if not isinstance(resp['data'], dict):
-                self.results = resp['data']
+        if options['api_version'] == '2':
+            if 'data' in resp:
+                if not isinstance(resp['data'], dict):
+                    self.results = resp['data']
+                else:
+                    self.results = [resp['data']]
             else:
-                self.results = [resp['data']]
-        elif hasattr(resp, '__iter__') and not isinstance(resp, dict):
-            if len(resp) > 0 and 'trends' in resp[0]:
-                self.results = resp[0]['trends']
+                self.results = []
+            if 'includes' in resp and options['hydrate_tweets']:
+                self.results = _hydrate_tweets(self.results, resp['includes'])
+        elif options['api_version'] == '1.1':
+            # convert json response into something iterable
+            if 'errors' in resp:
+                self.results = resp['errors']
+            elif 'statuses' in resp:
+                self.results = resp['statuses']
+            elif 'users' in resp:
+                self.results = resp['users']
+            elif 'ids' in resp:
+                self.results = resp['ids']
+            elif 'results' in resp:
+                self.results = resp['results']
+            elif 'data' in resp:
+                if not isinstance(resp['data'], dict):
+                    self.results = resp['data']
+                else:
+                    self.results = [resp['data']]
+            elif hasattr(resp, '__iter__') and not isinstance(resp, dict):
+                if len(resp) > 0 and 'trends' in resp[0]:
+                    self.results = resp[0]['trends']
+                else:
+                    self.results = resp
             else:
-                self.results = resp
+                self.results = (resp,)
         else:
-            self.results = (resp,)
+            self.results = []
 
     def __iter__(self):
         """Return a tweet status as a JSON object."""
@@ -317,10 +348,12 @@ class _StreamingIterable(object):
     """Iterate statuses or other objects in a Streaming API response.
 
     :param response: The request.Response from a Twitter Streaming API request
+    :param options: Dict containing parsing options
     """
 
-    def __init__(self, response):
+    def __init__(self, response, options):
         self.stream = response.raw
+        self.options = options
 
     def _iter_stream(self):
         """Stream parser.
@@ -352,9 +385,14 @@ class _StreamingIterable(object):
                             item = None
                             item = self.stream.read(nbytes)
                         break
+                item = json.loads(item.decode('utf8'))
+                if self.options['api_version'] == '2':
+                    if self.options['hydrate_tweets']:
+                        if 'data' in item and 'includes' in item:
+                            item = _hydrate_tweets(item['data'], item['includes'])
                 yield item
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
-                    SSLError, ssl.SSLError, socket.error) as e:
+                    SSLError, ssl.SSLError, socket.error, ValueError) as e:
                 raise TwitterConnectionError(e)
             except AttributeError:
                 # inform iterator to exit when client closes connection
@@ -368,8 +406,26 @@ class _StreamingIterable(object):
         """
         for item in self._iter_stream():
             if item:
-                try:
-                    yield json.loads(item.decode('utf8'))
-                except ValueError as e:
-                    # invalid JSON string (possibly an unformatted error message)
-                    raise TwitterConnectionError(e)
+                yield item
+
+
+def _hydrate_tweets(data, includes):
+    """Insert expansion fields back into tweet data.
+
+    :returns: Tweet status as a JSON object.
+    """
+    substitutes = []
+    for key in includes:
+        incl = includes[key]
+        for obj in incl:
+            if 'id' in obj:
+                replace = ('id', obj['id'], obj)
+            elif 'media_key' in obj:
+                replace = ('media_key', obj['media_key'], obj)
+            else:
+                raise Exception('Unsupported "includes" object: %s' % key)
+            substitutes.append(replace)
+    data = json.dumps(data)
+    for replace in substitutes:
+        data = data.replace('"' + replace[1] + '"', json.dumps(replace[2]))
+    return json.loads(data)
