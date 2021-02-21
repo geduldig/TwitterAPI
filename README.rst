@@ -1,5 +1,8 @@
 |LOGO|
-|BADGE_VERSION| |BADGE_CHAT| |BADGE_1.1| |BADGE_PREMIUM| |BADGE_2| |BADGE_ADS8| |BADGE_LABS|
+============================
+|BADGE_VERSION| |BADGE_CHAT| 
+============================
+|BADGE_1.1| |BADGE_PREMIUM| |BADGE_2| |BADGE_ADS8| |BADGE_LABS|
 ============================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
