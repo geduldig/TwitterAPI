@@ -1,5 +1,4 @@
 |LOGO|
-============================
 |BADGE_VERSION| |BADGE_CHAT| |BADGE_1.1| |BADGE_PREMIUM| |BADGE_2| |BADGE_ADS8| |BADGE_LABS|
 ============================
 
