@@ -164,3 +164,5 @@ v2.6.6,    14 Feb 2021 -- Fixed v2 next/prev token in TwitterPager.
 v2.6.7,    19 Feb 2021 -- Fixed v2 next/prev token in TwitterPager for search.
 
 v2.6.8,    19 Feb 2021 -- Added v2 tweet hydration.
+
+v2.6.9,    21 Feb 2021 -- Fixed bug in _StreamingIterable.

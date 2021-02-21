@@ -302,14 +302,14 @@ class _RestIterable(object):
         resp = response.json()
         if options['api_version'] == '2':
             if 'data' in resp:
-                if not isinstance(resp['data'], dict):
-                    self.results = resp['data']
+                if isinstance(resp['data'], dict):
+                    resp['data'] = [resp['data']]
+                if 'includes' in resp and options['hydrate_tweets']:
+                    self.results = _hydrate_tweets(resp['data'], resp['includes'])
                 else:
-                    self.results = [resp['data']]
+                    self.results = resp['data']
             else:
                 self.results = []
-            if 'includes' in resp and options['hydrate_tweets']:
-                self.results = _hydrate_tweets(self.results, resp['includes'])
         elif options['api_version'] == '1.1':
             # convert json response into something iterable
             if 'errors' in resp:
@@ -338,7 +338,9 @@ class _RestIterable(object):
             self.results = []
 
     def __iter__(self):
-        """Return a tweet status as a JSON object."""
+        """
+        :returns: Tweet status as a JSON object.
+        """
         for item in self.results:
             yield item
 
@@ -385,22 +387,22 @@ class _StreamingIterable(object):
                             item = None
                             item = self.stream.read(nbytes)
                         break
-                item = json.loads(item.decode('utf8'))
+                if item:
+                    item = json.loads(item.decode('utf8'))
                 if self.options['api_version'] == '2':
                     if self.options['hydrate_tweets']:
                         if 'data' in item and 'includes' in item:
                             item = _hydrate_tweets(item['data'], item['includes'])
                 yield item
             except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
-                    SSLError, ssl.SSLError, socket.error, ValueError) as e:
+                    SSLError, ssl.SSLError, socket.error, ValueError, json.decoder.JSONDecodeError) as e:
                 raise TwitterConnectionError(e)
             except AttributeError:
                 # inform iterator to exit when client closes connection
                 raise StopIteration
 
     def __iter__(self):
-        """Iterator.
-
+        """
         :returns: Tweet status as a JSON object.
         :raises: TwitterConnectionError
         """
@@ -412,6 +414,8 @@ class _StreamingIterable(object):
 def _hydrate_tweets(data, includes):
     """Insert expansion fields back into tweet data.
 
+    :param data: "data" property value in JSON response
+    :param includes: "includes" property value in JSON response
     :returns: Tweet status as a JSON object.
     """
     substitutes = []
