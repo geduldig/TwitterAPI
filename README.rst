@@ -1,6 +1,6 @@
 |LOGO|
 ============================
-|BADGE_VERSION| |BADGE_CHAT|
+|BADGE_VERSION| |BADGE_CHAT| |BADGE_1.1| |BADGE_1.1_PREMIUM| |BADGE_2| |BADGE_ADS8| |BADGE_LABS|
 ============================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
@@ -9,6 +9,17 @@
 .. |BADGE_CHAT| image:: https://badges.gitter.im/Join%20Chat.svg
    :alt: Join the chat at https://gitter.im/geduldig/TwitterAPI
    :target: https://gitter.im/geduldig/TwitterAPI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
+.. |BADGE_2| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fv2
+   :target: https://developer.twitter.com/en/docs/twitter-api 
+.. |BADGE_LABS| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Flabs
+   :target: https://developer.twitter.com/en/docs/labs 
+.. |BADGE_ADS8| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fadsv8
+   :target: https://developer.twitter.com/en/docs/twitter-ads-api
+.. |BADGE_1.1| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard
+   :target: https://developer.twitter.com/en/docs/twitter-api
+.. |BADGE_PREMIUM| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fpremium
+   :target: https://developer.twitter.com
 
 TwitterAPI is a Python package for accessing Twitter's REST APIs and Streaming APIs. It supports both Version 1.1 and Version 2 endpoints. 
 
