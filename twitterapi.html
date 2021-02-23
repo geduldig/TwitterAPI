@@ -1,40 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>TwitterAPI.TwitterAPI &mdash; TwitterAPI 2.5 documentation</title>
-    
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TwitterAPI.TwitterAPI &#8212; TwitterAPI 2.5 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '2.5',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/theme_extras.js"></script>
-    <link rel="top" title="TwitterAPI 2.5 documentation" href="index.html" />
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="TwitterAPI.TwitterError" href="twittererror.html" />
     <link rel="prev" title="Tiny Examples" href="examples.html" /> 
-  </head>
-  <body>
-      <div class="header"><h1 class="heading"><a href="index.html">
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
           <span>TwitterAPI 2.5 documentation</span></a></h1>
         <h2 class="heading"><span>TwitterAPI.TwitterAPI</span></h2>
       </div>
-      <div class="topnav">
+      <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
         «&#160;&#160;<a href="examples.html">Tiny Examples</a>
@@ -45,166 +32,165 @@
         </p>
 
       </div>
-      <div class="content">
+      <div class="content" role="main">
         
         
   <div class="section" id="module-TwitterAPI.TwitterAPI">
 <span id="twitterapi-twitterapi"></span><h1>TwitterAPI.TwitterAPI<a class="headerlink" href="#module-TwitterAPI.TwitterAPI" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="TwitterAPI.TwitterAPI.TwitterAPI">
-<em class="property">class </em><tt class="descclassname">TwitterAPI.TwitterAPI.</tt><tt class="descname">TwitterAPI</tt><big>(</big><em>consumer_key=None</em>, <em>consumer_secret=None</em>, <em>access_token_key=None</em>, <em>access_token_secret=None</em>, <em>auth_type='oAuth1'</em>, <em>proxy_url=None</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterAPI.</span></code><code class="sig-name descname"><span class="pre">TwitterAPI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'oAuth1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1.1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI" title="Permalink to this definition">¶</a></dt>
 <dd><p>Access REST API or Streaming API resources.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>consumer_key</strong> &#8211; Twitter application consumer key</li>
-<li><strong>consumer_secret</strong> &#8211; Twitter application consumer secret</li>
-<li><strong>access_token_key</strong> &#8211; Twitter application access token key</li>
-<li><strong>access_token_secret</strong> &#8211; Twitter application access token secret</li>
-<li><strong>auth_type</strong> &#8211; &#8220;oAuth1&#8221; (default) or &#8220;oAuth2&#8221;</li>
-<li><strong>proxy_url</strong> &#8211; HTTPS proxy URL (ex. &#8220;<a class="reference external" href="https://USER:PASSWORD&#64;SERVER:PORT">https://USER:PASSWORD&#64;SERVER:PORT</a>&#8221;)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>consumer_key</strong> – Twitter application consumer key</p></li>
+<li><p><strong>consumer_secret</strong> – Twitter application consumer secret</p></li>
+<li><p><strong>access_token_key</strong> – Twitter application access token key</p></li>
+<li><p><strong>access_token_secret</strong> – Twitter application access token secret</p></li>
+<li><p><strong>auth_type</strong> – “oAuth1” (default) or “oAuth2”</p></li>
+<li><p><strong>proxy_url</strong> – HTTPS proxy URL string (ex. “<a class="reference external" href="https://USER:PASSWORD&#64;SERVER:PORT">https://USER:PASSWORD&#64;SERVER:PORT</a>”),
+or dict of URLs (ex. {‘http’:’<a class="reference external" href="http://SERVER">http://SERVER</a>’, ‘https’:’<a class="reference external" href="https://SERVER">https://SERVER</a>’})</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="TwitterAPI.TwitterAPI.TwitterAPI.CONNECTION_TIMEOUT">
+<code class="sig-name descname"><span class="pre">CONNECTION_TIMEOUT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.CONNECTION_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="TwitterAPI.TwitterAPI.TwitterAPI.REST_TIMEOUT">
+<code class="sig-name descname"><span class="pre">REST_TIMEOUT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.REST_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="TwitterAPI.TwitterAPI.TwitterAPI.STREAMING_TIMEOUT">
+<code class="sig-name descname"><span class="pre">STREAMING_TIMEOUT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">90</span></em><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.STREAMING_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="TwitterAPI.TwitterAPI.TwitterAPI.USER_AGENT">
+<code class="sig-name descname"><span class="pre">USER_AGENT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'python-TwitterAPI'</span></em><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.USER_AGENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterAPI.request">
-<tt class="descname">request</tt><big>(</big><em>resource</em>, <em>params=None</em>, <em>files=None</em>, <em>method_override=None</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hydrate_tweets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request a Twitter REST API or Streaming API resource.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>resource</strong> &#8211; A valid Twitter endpoint (ex. &#8220;search/tweets&#8221;)</li>
-<li><strong>params</strong> &#8211; Dictionary with endpoint parameters or None (default)</li>
-<li><strong>files</strong> &#8211; Dictionary with multipart-encoded file or None (default)</li>
-<li><strong>method_override</strong> &#8211; Request method to override or None (default)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resource</strong> – A valid Twitter endpoint (ex. “search/tweets”)</p></li>
+<li><p><strong>params</strong> – Dictionary with endpoint parameters or None (default)</p></li>
+<li><p><strong>files</strong> – Dictionary with multipart-encoded file or None (default)</p></li>
+<li><p><strong>method_override</strong> – Request method to override or None (default)</p></li>
+<li><p><strong>hydrate_tweets</strong> – Boolean determining whether to insert expansion data from
+“includes” directly into the tweet “data” structure. 
+False (default) does not hydrate.
+True hydrates.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">TwitterResponse</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">TwitterConnectionError</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>TwitterResponse</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>TwitterConnectionError</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse">
-<em class="property">class </em><tt class="descclassname">TwitterAPI.TwitterAPI.</tt><tt class="descname">TwitterResponse</tt><big>(</big><em>response</em>, <em>stream</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterAPI.</span></code><code class="sig-name descname"><span class="pre">TwitterResponse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Response from either a REST API or Streaming API resource call.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>response</strong> &#8211; The requests.Response object returned by the API call</li>
-<li><strong>stream</strong> &#8211; Boolean connection type (True if a streaming connection)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> – The requests.Response object returned by the API call</p></li>
+<li><p><strong>stream</strong> – Boolean connection type (True if a streaming connection)</p></li>
+<li><p><strong>options</strong> – Dict containing parsing options</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
+</dd>
+</dl>
+<dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.close">
-<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.close" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">close</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disconnect stream (blocks with Python 3).</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.get_iterator">
-<tt class="descname">get_iterator</tt><big>(</big><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_iterator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_iterator</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_iterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get API dependent iterator.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Iterator for tweets or other message objects in response.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body">TwitterConnectionError, TwitterRequestError</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Iterator for tweets or other message objects in response.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>TwitterConnectionError, TwitterRequestError</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.get_quota">
-<tt class="descname">get_quota</tt><big>(</big><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_quota" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_quota</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_quota" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quota information in the REST-only response header.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Dictionary of &#8216;remaining&#8217; (count), &#8216;limit&#8217; (count), &#8216;reset&#8217; (time)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary of ‘remaining’ (count), ‘limit’ (count), ‘reset’ (time)</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.headers">
-<tt class="descname">headers</tt><em class="property"> None</em><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.headers" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Dictionary of API response header contents.</td>
-</tr>
-</tbody>
-</table>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">headers</span></code><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.headers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary of API response header contents.</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.json">
-<tt class="descname">json</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.json" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the response as a JSON object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>**kwargs</strong> &#8211; Optional arguments that <tt class="docutils literal"><span class="pre">json.loads</span></tt> takes.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">response as JSON object.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">ValueError</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – Optional arguments that <code class="docutils literal notranslate"><span class="pre">json.loads</span></code> takes.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response as JSON object.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>ValueError</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.status_code">
-<tt class="descname">status_code</tt><em class="property"> None</em><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.status_code" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">HTTP response status code.</td>
-</tr>
-</tbody>
-</table>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">status_code</span></code><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.status_code" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>HTTP response status code.</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.text">
-<tt class="descname">text</tt><em class="property"> None</em><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.text" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Raw API response text.</td>
-</tr>
-</tbody>
-</table>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">text</span></code><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.text" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Raw API response text.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -213,7 +199,7 @@
 
 
       </div>
-      <div class="bottomnav">
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
         «&#160;&#160;<a href="examples.html">Tiny Examples</a>
@@ -225,9 +211,9 @@
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2014, geduldig.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, geduldig.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
     </div>
   </body>
 </html>
