@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TwitterAPI.TwitterAPI &#8212; TwitterAPI 2.5 documentation</title>
+    <title>TwitterAPI.TwitterAPI &#8212; TwitterAPI 2.6 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -18,7 +18,7 @@
     <link rel="prev" title="Tiny Examples" href="examples.html" /> 
   </head><body>
       <div class="header" role="banner"><h1 class="heading"><a href="index.html">
-          <span>TwitterAPI 2.5 documentation</span></a></h1>
+          <span>TwitterAPI 2.6 documentation</span></a></h1>
         <h2 class="heading"><span>TwitterAPI.TwitterAPI</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
@@ -39,7 +39,7 @@
 <span id="twitterapi-twitterapi"></span><h1>TwitterAPI.TwitterAPI<a class="headerlink" href="#module-TwitterAPI.TwitterAPI" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="TwitterAPI.TwitterAPI.TwitterAPI">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterAPI.</span></code><code class="sig-name descname"><span class="pre">TwitterAPI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'oAuth1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1.1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterAPI.</span></code><code class="sig-name descname"><span class="pre">TwitterAPI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_secret</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'oAuth1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proxy_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1.1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterAPI.html#TwitterAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI" title="Permalink to this definition">¶</a></dt>
 <dd><p>Access REST API or Streaming API resources.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -76,7 +76,7 @@ or dict of URLs (ex. {‘http’:’<a class="reference external" href="http://S
 
 <dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterAPI.request">
-<code class="sig-name descname"><span class="pre">request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hydrate_tweets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hydrate_tweets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterAPI.html#TwitterAPI.request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterAPI.request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request a Twitter REST API or Streaming API resource.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -104,7 +104,7 @@ True hydrates.</p></li>
 
 <dl class="py class">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterAPI.</span></code><code class="sig-name descname"><span class="pre">TwitterResponse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterAPI.</span></code><code class="sig-name descname"><span class="pre">TwitterResponse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterAPI.html#TwitterResponse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Response from either a REST API or Streaming API resource call.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -117,13 +117,13 @@ True hydrates.</p></li>
 </dl>
 <dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.close">
-<code class="sig-name descname"><span class="pre">close</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.close" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">close</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterAPI.html#TwitterResponse.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disconnect stream (blocks with Python 3).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.get_iterator">
-<code class="sig-name descname"><span class="pre">get_iterator</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_iterator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_iterator</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterAPI.html#TwitterResponse.get_iterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_iterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get API dependent iterator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -137,7 +137,7 @@ True hydrates.</p></li>
 
 <dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.get_quota">
-<code class="sig-name descname"><span class="pre">get_quota</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_quota" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_quota</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterAPI.html#TwitterResponse.get_quota"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.get_quota" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quota information in the REST-only response header.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -158,7 +158,7 @@ True hydrates.</p></li>
 
 <dl class="py method">
 <dt id="TwitterAPI.TwitterAPI.TwitterResponse.json">
-<code class="sig-name descname"><span class="pre">json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.json" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterAPI.html#TwitterResponse.json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterAPI.TwitterResponse.json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the response as a JSON object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -212,7 +212,7 @@ True hydrates.</p></li>
       </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014, geduldig.
+        &#169; Copyright 2021, geduldig.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
     </div>
   </body>
