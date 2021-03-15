@@ -33,7 +33,7 @@ class TwitterAPI(object):
     :param access_token_key: Twitter application access token key
     :param access_token_secret: Twitter application access token secret
     :param auth_type: "oAuth1" (default) or "oAuth2"
-    :param proxy_url: HTTPS proxy URL string (ex. "https://USER:PASSWORD@SERVER:PORT"),
+    :param proxy_url: HTTPS proxy URL string (ex. 'https://USER:PASSWORD@SERVER:PORT'),
                       or dict of URLs (ex. {'http':'http://SERVER', 'https':'https://SERVER'})
     """
 

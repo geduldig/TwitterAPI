@@ -1,25 +1,31 @@
 from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, TwitterPager
 
-# NOTE: If conversation is over a week old then it will not get returned. 
-CONVERSATION_ID = '1362514443566014471'
+# NOTE: If conversation is over a week old then it will not get returned.
+CONVERSATION_ID = '1369393783482236933'
 
 class TreeNode:
 	def __init__(self, data):
 		"""data is a tweet's json object"""
 		self.data = data
 		self.children = []
+		self.replied_to_tweet = None
+		if 'referenced_tweets' in self.data:
+			for tweet in self.data['referenced_tweets']: 
+				if tweet['type'] == 'replied_to':
+					self.replied_to_tweet = tweet['id']
+					break
 
 	def id(self):
-		"""a node is identified by its author"""
-		return self.data['author_id']
+		"""a node is identified by its tweet id"""
+		return self.data['id']
 
-	def reply_to(self):
-		"""the reply-to user is the parent of the node"""
-		return self.data['in_reply_to_user_id']
+	def parent(self):
+		"""the reply-to tweet is the parent of the node"""
+		return self.replied_to_tweet
 
 	def find_parent_of(self, node):
-		"""append a node to the children of it's reply-to user"""
-		if node.reply_to() == self.id():
+		"""append a node to the children of it's parent tweet"""
+		if node.parent() == self.id():
 			self.children.append(node)
 			return True
 		for child in self.children:
@@ -29,9 +35,12 @@ class TreeNode:
 
 	def print_tree(self, level):
 		"""level 0 is the root node, then incremented for subsequent generations"""
-		print(f'{level*"_"}{level}: {self.id()}')
+		created_at = self.data['created_at']
+		username = self.data['author_id']['username']
+		text_80chars = self.data['text'][0:80].replace('\n', ' ')
+		print(f'{level*"_"}{level}: [{created_at}][{username}] {text_80chars}')
 		level += 1
-		for child in self.children:
+		for child in reversed(self.children):
 			child.print_tree(level)
 
 try:
@@ -42,8 +51,10 @@ try:
 
 	r = api.request(f'tweets/:{CONVERSATION_ID}',
 		{
-			'tweet.fields': 'author_id,conversation_id,created_at,in_reply_to_user_id'
-		})
+			'expansions':'author_id',
+			'tweet.fields':'author_id,conversation_id,created_at,referenced_tweets'
+		},
+		hydrate_tweets=True)
 
 	for item in r:
 		root = TreeNode(item)
@@ -54,9 +65,11 @@ try:
 
 	pager = TwitterPager(api, 'tweets/search/recent', 
 		{
-			'query': f'conversation_id:{CONVERSATION_ID}',
-			'tweet.fields': 'author_id,conversation_id,created_at,in_reply_to_user_id'
-		})
+			'query':f'conversation_id:{CONVERSATION_ID}',
+			'expansions':'author_id',
+			'tweet.fields':'author_id,conversation_id,created_at,referenced_tweets'
+		},
+		hydrate_tweets=True)
 
 	# "wait=2" means wait 2 seconds between each request.
 	# The rate limit is 450 requests per 15 minutes, or
@@ -64,13 +77,12 @@ try:
 
 	orphans = []
 
-	print('\nBUILDING TREE...')
 	for item in pager.get_iterator(wait=2):
 		node = TreeNode(item)
-		print(f'{node.id()} => {node.reply_to()}')
-		# COLLECT ANY ORPHANS THAT ARE NODE'S CHILD
+		print(f'{node.id()} => {node.parent()}', item['author_id']['username'])
+		# COLLECT ANY ORPHANS THAT ARE CHILDREN OF THE NEW NODE
 		orphans = [orphan for orphan in orphans if not node.find_parent_of(orphan)]
-		# IF NODE CANNOT BE PLACED IN TREE, ORPHAN IT UNTIL ITS PARENT IS FOUND
+		# IF THE NEW NODE CANNOT BE PLACED IN TREE, ORPHAN IT UNTIL ITS PARENT IS FOUND
 		if not root.find_parent_of(node):
 			orphans.append(node)
 
