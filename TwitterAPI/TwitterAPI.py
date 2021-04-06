@@ -422,13 +422,10 @@ def _hydrate_tweets(data, includes):
     for key in includes:
         incl = includes[key]
         for obj in incl:
-            if 'id' in obj:
-                replace = ('id', obj['id'], obj)
-            elif 'media_key' in obj:
-                replace = ('media_key', obj['media_key'], obj)
-            else:
-                raise Exception('Unsupported "includes" object: %s' % key)
-            substitutes.append(replace)
+            for field in ['id', 'media_key', 'username']:
+                if field in obj:
+                    replace = (field, obj[field], obj)
+                    substitutes.append(replace)
     data = json.dumps(data)
     for replace in substitutes:
         data = data.replace('"' + replace[1] + '"', json.dumps(replace[2]))

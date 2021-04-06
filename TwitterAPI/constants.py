@@ -250,7 +250,9 @@ ENDPOINTS = {
     'users':                                                ('GET',    'api'),
     'users/:PARAM':                                         ('GET',    'api'), # ID
     'users/:PARAM/followers':                               ('GET',    'api'), # ID
-    'users/:PARAM/following':                               ('GET',    'api'), # ID
+    'users/:PARAM/following':                               ('GET',    'api'), # ID, use method_override for 'POST'
+    'users/:PARAM/following/:PARAM':                        ('DELETE', 'api'), # USER SOURCE ID, USER TARGET ID
+    'users/:PARAM/mentions':                                ('GET',    'api'), # ID
     'users/:PARAM/tweets':                                  ('GET',    'api'), # ID
     'users/by':                                             ('GET',    'api'),
     'users/by/username/:PARAM':                             ('GET',    'api'), # USERNAME
