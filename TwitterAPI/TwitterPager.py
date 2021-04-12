@@ -3,9 +3,10 @@ __date__ = "June 8, 2013"
 __license__ = "MIT"
 
 
+from .TwitterAPI import HydrateType
+from .TwitterError import *
 from requests.exceptions import ConnectionError, ReadTimeout, SSLError
 from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
-from .TwitterError import *
 import requests
 import time
 
@@ -18,19 +19,19 @@ class TwitterPager(object):
     :param api: An authenticated TwitterAPI object
     :param resource: String with the resource path (ex. search/tweets)
     :param params: Dictionary of resource parameters
-    :param hydrate_tweets: Boolean determining whether to insert expansion data from
-                            "includes" directly into the tweet "data" structure. 
-                            False (default) does not hydrate.
-                            True hydrates.
+    :param hydrate_type: HydrateType or int
+                         Do not hydrate - NONE or 0 (default)
+                         Append new field with '_hydrate' suffix with hydrate values - APPEND or 1
+                         Replace current field value with hydrate values - REPLACE or 2
     """
 
-    def __init__(self, api, resource, params=None, hydrate_tweets=False):
+    def __init__(self, api, resource, params=None, hydrate_type=HydrateType.NONE):
         self.api = api
         self.resource = resource
         if not params:
             params = {}
         self.params = params
-        self.hydrate_tweets = hydrate_tweets
+        self.hydrate_type = hydrate_type
 
     def get_iterator(self, wait=5, new_tweets=False):
         """Iterate response from Twitter REST API resource. Resource is called
@@ -49,7 +50,7 @@ class TwitterPager(object):
             try:
                 # REQUEST ONE PAGE OF RESULTS...
                 start = time.time()
-                r = self.api.request(self.resource, self.params, hydrate_tweets=self.hydrate_tweets)
+                r = self.api.request(self.resource, self.params, hydrate_type=self.hydrate_type)
                 it = r.get_iterator()
                 if new_tweets:
                     it = reversed(list(it))

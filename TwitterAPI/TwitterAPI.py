@@ -5,11 +5,12 @@ __license__ = "MIT"
 
 from .BearerAuth import BearerAuth as OAuth2
 from .constants import *
+from .TwitterError import *
 from datetime import datetime
+from enum import Enum
 from requests.exceptions import ConnectionError, ReadTimeout, SSLError
 from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from requests_oauthlib import OAuth1
-from .TwitterError import *
 import json
 import os
 import requests
@@ -22,6 +23,17 @@ DEFAULT_USER_AGENT = os.getenv('DEFAULT_USER_AGENT', 'python-TwitterAPI')
 DEFAULT_CONNECTION_TIMEOUT = os.getenv('DEFAULT_CONNECTION_TIMEOUT', 5)
 DEFAULT_STREAMING_TIMEOUT = os.getenv('DEFAULT_STREAMING_TIMEOUT', 90)
 DEFAULT_REST_TIMEOUT = os.getenv('DEFAULT_REST_TIMEOUT', 5)
+
+
+class OAuthType(Enum):
+    OAUTH1 = 'oAuth1'
+    OAUTH2 = 'oAuth2'
+
+
+class HydrateType(Enum):
+    NONE = 0
+    APPEND = 1
+    REPLACE = 2
 
 
 class TwitterAPI(object):
@@ -49,7 +61,7 @@ class TwitterAPI(object):
             consumer_secret=None,
             access_token_key=None,
             access_token_secret=None,
-            auth_type='oAuth1',
+            auth_type=OAuthType.OAUTH1,
             proxy_url=None,
             api_version=VERSION):
         """Initialize with your Twitter application credentials"""
@@ -66,7 +78,7 @@ class TwitterAPI(object):
             self.proxies = None
 
         # Twitter supports two types of authentication.
-        if auth_type == 'oAuth1':
+        if auth_type == OAuthType.OAUTH1:
             if not all([consumer_key, consumer_secret, access_token_key, access_token_secret]):
                 raise Exception('Missing authentication parameter')
             self.auth = OAuth1(
@@ -74,7 +86,7 @@ class TwitterAPI(object):
                 consumer_secret,
                 access_token_key,
                 access_token_secret)
-        elif auth_type == 'oAuth2':
+        elif auth_type == OAuthType.OAUTH2:
             if not all([consumer_key, consumer_secret]):
                 raise Exception('Missing authentication parameter')
             self.auth = OAuth2(
@@ -130,17 +142,17 @@ class TwitterAPI(object):
         else:
             return (resource, resource)
 
-    def request(self, resource, params=None, files=None, method_override=None, hydrate_tweets=False):
+    def request(self, resource, params=None, files=None, method_override=None, hydrate_type=HydrateType.NONE):
         """Request a Twitter REST API or Streaming API resource.
 
-        :param resource: A valid Twitter endpoint (ex. "search/tweets")
+        :param resource: A Twitter endpoint (ex. "search/tweets")
         :param params: Dictionary with endpoint parameters or None (default)
         :param files: Dictionary with multipart-encoded file or None (default)
         :param method_override: Request method to override or None (default)
-        :param hydrate_tweets: Boolean determining whether to insert expansion data from
-                               "includes" directly into the tweet "data" structure. 
-                               False (default) does not hydrate.
-                               True hydrates.
+        :param hydrate_type: HydrateType or int
+                             Do not hydrate - NONE or 0 (default)
+                             Append new field with '_hydrate' suffix with hydrate values - APPEND or 1
+                             Replace current field value with hydrate values - REPLACE or 2
 
         :returns: TwitterResponse
         :raises: TwitterConnectionError
@@ -205,7 +217,7 @@ class TwitterAPI(object):
             options = {
                 'api_version': self.version,
                 'is_stream': session.stream,
-                'hydrate_tweets': hydrate_tweets
+                'hydrate_type': hydrate_type
             }
             return TwitterResponse(r, options)
 
@@ -304,8 +316,10 @@ class _RestIterable(object):
             if 'data' in resp:
                 if isinstance(resp['data'], dict):
                     resp['data'] = [resp['data']]
-                if 'includes' in resp and options['hydrate_tweets']:
-                    self.results = _hydrate_tweets(resp['data'], resp['includes'])
+                h_type = options['hydrate_type']
+                if 'includes' in resp and h_type != HydrateType.NONE:
+                    field_suffix = '' if h_type == HydrateType.REPLACE else '_hydrate'                        
+                    self.results = _hydrate_tweets(resp['data'], resp['includes'], field_suffix)
                 else:
                     self.results = resp['data']
             else:
@@ -390,12 +404,14 @@ class _StreamingIterable(object):
                 if item:
                     item = json.loads(item.decode('utf8'))
                 if self.options['api_version'] == '2':
-                    if self.options['hydrate_tweets']:
+                    h_type = self.options['hydrate_type']
+                    if h_type != HydrateType.NONE:
                         if 'data' in item and 'includes' in item:
-                            item = _hydrate_tweets(item['data'], item['includes'])
+                            field_suffix = '' if h_type == HydrateType.REPLACE else '_hydrate'                        
+                            item = _hydrate_tweets(item['data'], item['includes'], field_suffix)
                 yield item
-            except (ConnectionError, ProtocolError, ReadTimeout, ReadTimeoutError,
-                    SSLError, ssl.SSLError, socket.error, ValueError, json.decoder.JSONDecodeError) as e:
+            except (ConnectionError, ValueError, ProtocolError, ReadTimeout, ReadTimeoutError,
+                    SSLError, ssl.SSLError, socket.error, json.decoder.JSONDecodeError) as e:
                 raise TwitterConnectionError(e)
             except AttributeError:
                 # inform iterator to exit when client closes connection
@@ -411,22 +427,45 @@ class _StreamingIterable(object):
                 yield item
 
 
-def _hydrate_tweets(data, includes):
-    """Insert expansion fields back into tweet data.
+def _hydrate_tweets(data, includes, field_suffix):
+    """Insert expansion fields back into tweet data by appending
+    a new field as a sibling to the referenced field.
 
     :param data: "data" property value in JSON response
     :param includes: "includes" property value in JSON response
+    :param field_suffix: Suffix appended to a hydrated field name.
+                         Either "_hydrate" which puts hydrated values into
+                         a new field, or "" which replaces the current
+                         field value with hydrated values.
+                         
     :returns: Tweet status as a JSON object.
     """
-    substitutes = []
+    new_fields = []
     for key in includes:
         incl = includes[key]
         for obj in incl:
             for field in ['id', 'media_key', 'username']:
                 if field in obj:
-                    replace = (field, obj[field], obj)
-                    substitutes.append(replace)
-    data = json.dumps(data)
-    for replace in substitutes:
-        data = data.replace('"' + replace[1] + '"', json.dumps(replace[2]))
-    return json.loads(data)
+                    _create_include_fields(data, (obj[field], obj), new_fields)
+
+    for item in new_fields:
+        parent = item[0]
+        field = item[1] + field_suffix
+        include = item[2]
+        parent[field] = include
+    return data
+
+
+def _create_include_fields(parent, include, new_fields):
+    """Depth-first seach into 'parent' to locate fields referenced in
+    'include'. Each match is appended to 'new_fields'.
+    """
+    if isinstance(parent, list):
+        for item in parent:
+            _create_include_fields(item, include, new_fields)
+    elif isinstance(parent, dict):
+        for key, value in parent.items():
+            if value == include[0]:
+                new_fields.append((parent, key, include[1]))
+            else:
+                _create_include_fields(value, include, new_fields)

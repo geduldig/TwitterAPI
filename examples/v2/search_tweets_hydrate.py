@@ -1,4 +1,4 @@
-from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError
+from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, HydrateType
 import json
 
 QUERY = 'kitten'
@@ -18,7 +18,7 @@ try:
 			'tweet.fields': TWEET_FIELDS,
 			'user.fields': USER_FIELDS,
 		},
-		hydrate_tweets=True)
+		hydrate_type=HydrateType.APPEND)
 
 	for item in r:
 		print(json.dumps(item, indent=2))

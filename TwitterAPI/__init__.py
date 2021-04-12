@@ -1,5 +1,5 @@
 __title__ = 'TwitterAPI'
-__version__ = '2.6.10'
+__version__ = '2.7.0'
 __author__ = 'geduldig'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2013 geduldig'
@@ -13,7 +13,7 @@ logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 
 try:
-    from .TwitterAPI import TwitterAPI, TwitterResponse
+    from .TwitterAPI import TwitterAPI, TwitterResponse, OAuthType, HydrateType
     from .TwitterError import TwitterConnectionError, TwitterRequestError
     from .TwitterOAuth import TwitterOAuth
     from .TwitterPager import TwitterPager

@@ -1,4 +1,4 @@
-from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError
+from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, HydrateType, OAuthType
 import json
 
 QUERY = '"pizza" OR "burger"'
@@ -8,7 +8,7 @@ USER_FIELDS='created_at,description,entities,location,name,profile_image_url,pub
 
 try:
 	o = TwitterOAuth.read_file()
-	api = TwitterAPI(o.consumer_key, o.consumer_secret, auth_type='oAuth2', api_version='2')
+	api = TwitterAPI(o.consumer_key, o.consumer_secret, auth_type=OAuthType.OAUTH2, api_version='2')
 
 	# ADD STREAM RULES
 
@@ -29,7 +29,8 @@ try:
 			'tweet.fields': TWEET_FIELDS,
 			'user.fields': USER_FIELDS,
 		},
-		hydrate_tweets=True)
+		hydrate_type=HydrateType.APPEND)
+
 	print(f'[{r.status_code}] START...')
 	if r.status_code != 200: exit()
 	for item in r:

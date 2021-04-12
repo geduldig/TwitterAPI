@@ -1,4 +1,4 @@
-from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, TwitterPager
+from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, TwitterPager, HydrateType
 import json
 
 QUERY = 'pizza'
@@ -19,7 +19,7 @@ try:
 			'user.fields': USER_FIELDS,
 			'media.fields': MEDIA_FIELDS,
 		}, 
-		hydrate_tweets=True)
+		hydrate_type=HydrateType.APPEND)
 		
 	for item in pager.get_iterator(new_tweets=False):
 		print(json.dumps(item, indent=2))
