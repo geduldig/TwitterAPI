@@ -78,7 +78,7 @@ class TwitterAPI(object):
             self.proxies = None
 
         # Twitter supports two types of authentication.
-        if auth_type == OAuthType.OAUTH1:
+        if auth_type == OAuthType.OAUTH1 or auth_type == 'oAuth1':
             if not all([consumer_key, consumer_secret, access_token_key, access_token_secret]):
                 raise Exception('Missing authentication parameter')
             self.auth = OAuth1(
@@ -86,7 +86,7 @@ class TwitterAPI(object):
                 consumer_secret,
                 access_token_key,
                 access_token_secret)
-        elif auth_type == OAuthType.OAUTH2:
+        elif auth_type == OAuthType.OAUTH2 or auth_type == 'oAuth2':
             if not all([consumer_key, consumer_secret]):
                 raise Exception('Missing authentication parameter')
             self.auth = OAuth2(
