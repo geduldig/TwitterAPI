@@ -403,12 +403,12 @@ class _StreamingIterable(object):
                         break
                 if item:
                     item = json.loads(item.decode('utf8'))
-                if self.options['api_version'] == '2':
-                    h_type = self.options['hydrate_type']
-                    if h_type != HydrateType.NONE:
-                        if 'data' in item and 'includes' in item:
-                            field_suffix = '' if h_type == HydrateType.REPLACE else '_hydrate'                        
-                            item = _hydrate_tweets(item['data'], item['includes'], field_suffix)
+                    if self.options['api_version'] == '2':
+                        h_type = self.options['hydrate_type']
+                        if h_type != HydrateType.NONE:
+                            if 'data' in item and 'includes' in item:
+                                field_suffix = '' if h_type == HydrateType.REPLACE else '_hydrate' 
+                                item = { 'data':_hydrate_tweets(item['data'], item['includes'], field_suffix) }
                 yield item
             except (ConnectionError, ValueError, ProtocolError, ReadTimeout, ReadTimeoutError,
                     SSLError, ssl.SSLError, socket.error, json.decoder.JSONDecodeError) as e:

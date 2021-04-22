@@ -173,3 +173,5 @@ v2.7.0,    12 Apr 2021 -- Two types of hydrate: APPEND and REPLACE.
                           Two new enums: HydrateType, OAuthType.
 
 v2.7.1,    14 Apr 2021 -- Fixed oAuth version resolution.
+
+v2.7.2,    22 Apr 2021 -- Fixed _StreamIterable for v2.
