@@ -467,5 +467,13 @@ def _create_include_fields(parent, include, new_fields):
         for key, value in parent.items():
             if value == include[0]:
                 new_fields.append((parent, key, include[1]))
+            elif isinstance(value, list) and all(isinstance(elem, str) for elem in value):
+                # this code gets executed for "media_keys" which are in a list object
+                includes_list = []
+                for elem in value:
+                    if elem == include[0]:
+                        includes_list.append(include[1])
+                if len(includes_list) > 0:
+                    new_fields.append((parent, key, includes_list))
             else:
                 _create_include_fields(value, include, new_fields)
