@@ -9,7 +9,7 @@ from .TwitterError import *
 from datetime import datetime
 from enum import Enum
 from requests.exceptions import ConnectionError, ReadTimeout, SSLError
-from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
+from urllib3.exceptions import ReadTimeoutError, ProtocolError
 from requests_oauthlib import OAuth1
 import json
 import os
@@ -286,15 +286,12 @@ class TwitterResponse(object):
 
         :returns: Dictionary of 'remaining' (count), 'limit' (count), 'reset' (time)
         """
-        remaining, limit, reset = None, None, None
+        
         if self.response:
-            if 'x-rate-limit-remaining' in self.response.headers:
-                remaining = int(
-                    self.response.headers['x-rate-limit-remaining'])
-                if remaining == 0:
-                    limit = int(self.response.headers['x-rate-limit-limit'])
-                    reset = int(self.response.headers['x-rate-limit-reset'])
-                    reset = datetime.fromtimestamp(reset)
+            remaining = int(self.response.headers['x-rate-limit-remaining']) if 'x-rate-limit-remaining' in self.response.headers else None
+            limit = int(self.response.headers['x-rate-limit-limit']) if 'x-rate-limit-limit' in self.response.headers else None
+            reset_epoch = int(self.response.headers['x-rate-limit-reset']) if 'x-rate-limit-reset' in self.response.headers else None
+            reset = datetime.fromtimestamp(reset_epoch) if reset_epoch else None
         return {'remaining': remaining, 'limit': limit, 'reset': reset}
 
     def close(self):

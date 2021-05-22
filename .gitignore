@@ -39,3 +39,6 @@ nosetests.xml
 .pydevproject
 .idea/*
 env/*
+
+# VSCode
+.vscode/*

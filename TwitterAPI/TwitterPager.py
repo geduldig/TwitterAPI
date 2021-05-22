@@ -6,9 +6,10 @@ __license__ = "MIT"
 from .TwitterAPI import HydrateType
 from .TwitterError import *
 from requests.exceptions import ConnectionError, ReadTimeout, SSLError
-from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
+from urllib3.exceptions import ReadTimeoutError, ProtocolError
 import requests
 import time
+import math
 
 
 class TwitterPager(object):
@@ -52,6 +53,7 @@ class TwitterPager(object):
                 start = time.time()
                 r = self.api.request(self.resource, self.params, hydrate_type=self.hydrate_type)
                 it = r.get_iterator()
+                quota = r.get_quota()
                 if new_tweets:
                     it = reversed(list(it))
 
@@ -102,10 +104,14 @@ class TwitterPager(object):
                         break
 
                 # SLEEP...
-                elapsed = time.time() - start
-                pause = wait - elapsed if elapsed < wait else 0
+                if quota['remaining'] == 0:
+                    pause = quota['reset_epoch'] - math.floor(time.time()) + wait
+                else:
+                    elapsed = time.time() - start
+                    pause = wait - elapsed if elapsed < wait else 0
+                
                 time.sleep(pause)
-
+                
                 # SETUP REQUEST FOR NEXT PAGE...
                 if self.api.version == '1.1':
                     # get a page with cursor if present, or with id if not
@@ -127,7 +133,7 @@ class TwitterPager(object):
                         self.params[pagination_token] = meta['previous_token']
                     else:
                         self.params[pagination_token] = meta['next_token']
-
+            
             except TwitterRequestError as e:
                 if e.status_code < 500:
                     raise
