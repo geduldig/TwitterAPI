@@ -284,7 +284,7 @@ class TwitterResponse(object):
     def get_quota(self):
         """Quota information in the REST-only response header.
 
-        :returns: Dictionary of 'remaining' (count), 'limit' (count), 'reset' (time)
+        :returns: Dictionary of 'remaining' (count), 'limit' (count), 'reset' (time), 'reset_epoch' (timestamp)
         """
         
         if self.response:
@@ -292,7 +292,7 @@ class TwitterResponse(object):
             limit = int(self.response.headers['x-rate-limit-limit']) if 'x-rate-limit-limit' in self.response.headers else None
             reset_epoch = int(self.response.headers['x-rate-limit-reset']) if 'x-rate-limit-reset' in self.response.headers else None
             reset = datetime.fromtimestamp(reset_epoch) if reset_epoch else None
-        return {'remaining': remaining, 'limit': limit, 'reset': reset}
+        return {'remaining': remaining, 'limit': limit, 'reset': reset, 'reset_epoch': reset_epoch}
 
     def close(self):
         """Disconnect stream (blocks with Python 3)."""
