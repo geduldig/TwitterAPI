@@ -43,12 +43,12 @@ From the command line::
 
 Documentation
 -------------
-* `An Introduction <http://geduldig.github.com/TwitterAPI>`_
-* `Authentication <http://geduldig.github.com/TwitterAPI/authentication.html>`_
-* `Error Handling <http://geduldig.github.com/TwitterAPI/errors.html>`_
-* `Paging Results <http://geduldig.github.com/TwitterAPI/paging.html>`_
-* `Tiny Examples <http://geduldig.github.com/TwitterAPI/examples.html>`_
-* `Fault Tolerant Streams and Pages <http://geduldig.github.com/TwitterAPI/faulttolerance.html>`_
+* `An Introduction <http://geduldig.github.io/TwitterAPI>`_
+* `Authentication <http://geduldig.github.io/TwitterAPI/authentication.html>`_
+* `Error Handling <http://geduldig.github.io/TwitterAPI/errors.html>`_
+* `Paging Results <http://geduldig.github.io/TwitterAPI/paging.html>`_
+* `Tiny Examples <http://geduldig.github.io/TwitterAPI/examples.html>`_
+* `Fault Tolerant Streams and Pages <http://geduldig.github.io/TwitterAPI/faulttolerance.html>`_
 
 Some Code...
 ------------
