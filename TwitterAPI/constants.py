@@ -258,6 +258,8 @@ ENDPOINTS = {
     'users/:PARAM/mentions':                                ('GET',    'api'), # ID
     'users/:PARAM/tweets':                                  ('GET',    'api'), # ID
     'users/:PARAM/liked_tweets':                            ('GET',    'api'), # ID
+    'users/:PARAM/likes':                                   ('POST',   'api'), # ID
+    'users/:PARAM/likes/:PARAM':                            ('DELETE', 'api'), # USER ID, TWEET ID
     'users/by':                                             ('GET',    'api'),
     'users/by/username/:PARAM':                             ('GET',    'api'), # USERNAME
 }
