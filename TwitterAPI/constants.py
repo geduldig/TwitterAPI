@@ -241,6 +241,7 @@ ENDPOINTS = {
 
     'tweets':                                               ('GET',    'api'),
     'tweets/:PARAM/hidden':                                 ('PUT',    'api'), # ID
+    'tweets/:PARAM/liking_users':                           ('GET',    'api'), # ID
     'tweets/:PARAM':                                        ('GET',    'api'), # ID
     'tweets/compliance/jobs':                               ('POST',   'api'), # use method_override for 'GET'
     'tweets/compliance/jobs/:PARAM':                        ('POST',   'api'), # ID
@@ -256,6 +257,7 @@ ENDPOINTS = {
     'users/:PARAM/following/:PARAM':                        ('DELETE', 'api'), # USER SOURCE ID, USER TARGET ID
     'users/:PARAM/mentions':                                ('GET',    'api'), # ID
     'users/:PARAM/tweets':                                  ('GET',    'api'), # ID
+    'users/:PARAM/liked_tweets':                            ('GET',    'api'), # ID
     'users/by':                                             ('GET',    'api'),
     'users/by/username/:PARAM':                             ('GET',    'api'), # USERNAME
 }
