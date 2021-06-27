@@ -177,3 +177,7 @@ v2.7.1,    14 Apr 2021 -- Fixed oAuth version resolution.
 v2.7.2,    22 Apr 2021 -- Fixed _StreamIterable for v2.
 
 v2.7.3,    26 Apr 2021 -- Fixed hydrate for media_keys.
+
+v2.7.4,    27 Jun 2021 -- Merged RojerGS-patch-1 to fix documentation links.
+                          Merged peguerosdc-endpoint/v2-liking to add support for V2 likes.
+                          Changed 'stall_warning' to 'stall_warnings'.

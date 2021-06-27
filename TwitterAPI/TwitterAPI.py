@@ -174,7 +174,7 @@ class TwitterAPI(object):
                 if not params:
                     params = {}
                 params['delimited'] = 'length'
-                params['stall_warning'] = 'true'
+                params['stall_warnings'] = 'true'
             elif self.version == '2' and resource.endswith('/stream'):
                 session.stream = True
                 timeout = self.STREAMING_TIMEOUT
