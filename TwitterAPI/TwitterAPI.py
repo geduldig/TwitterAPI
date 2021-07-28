@@ -452,10 +452,10 @@ def _hydrate_tweets(data, includes, field_suffix):
         parent = item[0]
         field = item[1] + field_suffix
         include = item[2]
-        if field not in parent:
-            parent[field] = include
-        else:
+        if field == 'media_keys_hydrate' and field in parent:
             parent[field] += include
+            continue
+        parent[field] = include
     return data
 
 
