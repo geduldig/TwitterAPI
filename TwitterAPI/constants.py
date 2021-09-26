@@ -245,6 +245,8 @@ ENDPOINTS = {
     'tweets/:PARAM':                                        ('GET',    'api'), # ID
     'tweets/compliance/jobs':                               ('POST',   'api'), # use method_override for 'GET'
     'tweets/compliance/jobs/:PARAM':                        ('POST',   'api'), # ID
+    'tweets/counts/all':                                    ('GET',    'api'),
+    'tweets/counts/recent':                                 ('GET',    'api'),
     'tweets/sample/stream':                                 ('GET',    'api'),
     'tweets/search/all':                                    ('GET',    'api'),
     'tweets/search/recent':                                 ('GET',    'api'),
