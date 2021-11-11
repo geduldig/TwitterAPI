@@ -150,7 +150,7 @@ class TwitterAPI(object):
         :param files: Dictionary with multipart-encoded file or None (default)
         :param method_override: Request method to override or None (default)
         :param hydrate_type: HydrateType or int
-                             Do not hydrate - NONE or 0 (default)
+                             Do not hydrate ('includes' field and all its content will be lost for non-streaming requests) - NONE or 0 (default)
                              Append new field with '_hydrate' suffix with hydrate values - APPEND or 1
                              Replace current field value with hydrate values - REPLACE or 2
 
