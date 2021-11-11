@@ -183,3 +183,5 @@ v2.7.4,    27 Jun 2021 -- Merged RojerGS-patch-1 to fix documentation links.
                           Changed 'stall_warning' to 'stall_warnings'.
 
 v2.7.5,    18 Jul 2021 -- Merged Dheavyman-fix-meta-keyerror.
+
+v2.7.6,    11 Nov 2021 -- Merged dylancaponi-patch-2 to update ADS version.
