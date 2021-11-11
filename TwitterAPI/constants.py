@@ -245,6 +245,8 @@ ENDPOINTS = {
     'tweets/:PARAM':                                        ('GET',    'api'), # ID
     'tweets/compliance/jobs':                               ('POST',   'api'), # use method_override for 'GET'
     'tweets/compliance/jobs/:PARAM':                        ('POST',   'api'), # ID
+    'tweets/counts/all':                                    ('GET',    'api'),
+    'tweets/counts/recent':                                 ('GET',    'api'),
     'tweets/sample/stream':                                 ('GET',    'api'),
     'tweets/search/all':                                    ('GET',    'api'),
     'tweets/search/recent':                                 ('GET',    'api'),
@@ -252,10 +254,12 @@ ENDPOINTS = {
     'tweets/search/stream/rules':                           ('POST',   'api'), # use method_override for 'GET'
     'users':                                                ('GET',    'api'),
     'users/:PARAM':                                         ('GET',    'api'), # ID
+    'users/:PARAM/blocking':                                ('GET',    'api'), # ID
     'users/:PARAM/followers':                               ('GET',    'api'), # ID
     'users/:PARAM/following':                               ('GET',    'api'), # ID, use method_override for 'POST'
     'users/:PARAM/following/:PARAM':                        ('DELETE', 'api'), # USER SOURCE ID, USER TARGET ID
     'users/:PARAM/mentions':                                ('GET',    'api'), # ID
+    'users/:PARAM/muting':                                  ('GET',    'api'), # ID
     'users/:PARAM/tweets':                                  ('GET',    'api'), # ID
     'users/:PARAM/liked_tweets':                            ('GET',    'api'), # ID
     'users/:PARAM/likes':                                   ('POST',   'api'), # ID
