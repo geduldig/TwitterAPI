@@ -2,7 +2,7 @@
 ============================
 |BADGE_VERSION| |BADGE_CHAT| 
 ============================
-|BADGE_1.1| |BADGE_PREMIUM| |BADGE_2| |BADGE_ADS8| |BADGE_LABS|
+|BADGE_1.1| |BADGE_PREMIUM| |BADGE_2| |BADGE_ADS| |BADGE_LABS|
 ============================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
@@ -16,7 +16,7 @@
    :target: https://developer.twitter.com/en/docs/twitter-api 
 .. |BADGE_LABS| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Flabs
    :target: https://developer.twitter.com/en/docs/labs 
-.. |BADGE_ADS8| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fadsv8
+.. |BADGE_ADS| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fadsv9
    :target: https://developer.twitter.com/en/docs/twitter-ads-api
 .. |BADGE_1.1| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fstandard
    :target: https://developer.twitter.com/en/docs/twitter-api
