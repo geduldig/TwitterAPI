@@ -18,19 +18,20 @@ TEST DOC WEB PAGE::
 
 DOWNLOAD OLD DOCS FROM GH-PAGES BRANCH::
 
-	cd ..
-	mkdir TwitterAPI-docs
-	cd TwitterAPI-docs
 	git clone -b gh-pages git@github.com:geduldig/TwitterAPI.git
 
 COPY NEW DOCS OVER OLD DOCS::
 
-	cd ..
-	cp TwitterAPI/docs/_build/html/*.* TwitterAPI-docs/TwitterAPI
-	cp -r TwitterAPI/docs/_build/html/* TwitterAPI-docs/TwitterAPI
-	rm -r TwitterAPI/docs/_build
+	cp ./_build/html/*.* ./TwitterAPI
+	cp -r ./_build/html/* ./TwitterAPI
+	rm -r ./_build
 					
 UPLOAD NEW DOCS TO GH-PAGES BRANCH:::
 
+	cd TwitterAPI
 	git commit -am "2.5 docs"
 	git push origin gh-pages
+
+CLEAN UP::
+	cd ..
+	rm -r TwitterAPI
