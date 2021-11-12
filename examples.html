@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Tiny Examples &#8212; TwitterAPI 2.6 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/haiku.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -35,7 +36,7 @@
       <div class="content" role="main">
         
         
-  <div class="section" id="tiny-examples">
+  <section id="tiny-examples">
 <h1>Tiny Examples<a class="headerlink" href="#tiny-examples" title="Permalink to this headline">¶</a></h1>
 <p>All the examples assume <cite>api</cite> is an authenticated instance of <a class="reference external" href="./twitterapi.html">TwitterAPI</a>. Typically, this is done as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">TwitterAPI</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span>
@@ -44,64 +45,64 @@
                  <span class="n">access_token_secret</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="get-your-last-50-tweets">
+<section id="get-your-last-50-tweets">
 <h2>Get your last 50 tweets<a class="headerlink" href="#get-your-last-50-tweets" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;statuses/home_timeline&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">})</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
     <span class="k">if</span> <span class="s1">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+        <span class="nb">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="get-your-entire-timeline">
+</section>
+<section id="get-your-entire-timeline">
 <h2>Get your entire timeline<a class="headerlink" href="#get-your-entire-timeline" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pager</span> <span class="o">=</span> <span class="n">TwitterPager</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s1">&#39;statuses/home_timeline&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">200</span><span class="p">})</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pager</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
     <span class="k">if</span> <span class="s1">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+        <span class="nb">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="post-a-tweet">
+</section>
+<section id="post-a-tweet">
 <h2>Post a tweet<a class="headerlink" href="#post-a-tweet" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;statuses/update&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;I need pizza!&#39;</span><span class="p">})</span>
-<span class="k">print</span> <span class="s1">&#39;SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s1">&#39;FAILURE&#39;</span>
+<span class="nb">print</span> <span class="s1">&#39;SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s1">&#39;FAILURE&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="post-a-tweet-with-a-picture">
+</section>
+<section id="post-a-tweet-with-a-picture">
 <h2>Post a tweet with a picture<a class="headerlink" href="#post-a-tweet-with-a-picture" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># STEP 1 - upload image</span>
-<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./image_of_pizza.png&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;media/upload&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;media&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">})</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;UPLOAD MEDIA SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s1">&#39;UPLOAD MEDIA FAILURE&#39;</span><span class="p">)</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./image_of_pizza.png&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;media/upload&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;media&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;UPLOAD MEDIA SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s1">&#39;UPLOAD MEDIA FAILURE&#39;</span><span class="p">)</span>
 
 <span class="c1"># STEP 2 - post tweet with reference to uploaded image</span>
 <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
         <span class="n">media_id</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;media_id&#39;</span><span class="p">]</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;statuses/update&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span><span class="s1">&#39;I found pizza!&#39;</span><span class="p">,</span> <span class="s1">&#39;media_ids&#39;</span><span class="p">:</span><span class="n">media_id</span><span class="p">})</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;UPDATE STATUS SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s1">&#39;UPDATE STATUS FAILURE&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;UPDATE STATUS SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s1">&#39;UPDATE STATUS FAILURE&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="delete-a-tweet">
+</section>
+<section id="delete-a-tweet">
 <h2>Delete a tweet<a class="headerlink" href="#delete-a-tweet" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;statuses/destroy/:</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">TWEET_ID</span><span class="p">)</span>
-<span class="k">print</span> <span class="s1">&#39;SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s1">&#39;FAILURE&#39;</span>
+<span class="nb">print</span> <span class="s1">&#39;SUCCESS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="k">else</span> <span class="s1">&#39;FAILURE&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="stream-tweets">
+</section>
+<section id="stream-tweets">
 <h2>Stream tweets<a class="headerlink" href="#stream-tweets" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;statuses/filter&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;track&#39;</span><span class="p">:</span><span class="s1">&#39;pizza&#39;</span><span class="p">})</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
     <span class="k">if</span> <span class="s1">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+        <span class="nb">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
       </div>
@@ -119,7 +120,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, geduldig.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>

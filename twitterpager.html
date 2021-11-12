@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>TwitterAPI.TwitterPager &#8212; TwitterAPI 2.6 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/haiku.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -35,11 +36,11 @@
       <div class="content" role="main">
         
         
-  <div class="section" id="module-TwitterAPI.TwitterPager">
+  <section id="module-TwitterAPI.TwitterPager">
 <span id="twitterapi-twitterpager"></span><h1>TwitterAPI.TwitterPager<a class="headerlink" href="#module-TwitterAPI.TwitterPager" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="TwitterAPI.TwitterPager.TwitterPager">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterPager.</span></code><code class="sig-name descname"><span class="pre">TwitterPager</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hydrate_tweets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterPager.html#TwitterPager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterPager.TwitterPager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="TwitterAPI.TwitterPager.TwitterPager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterPager.</span></span><span class="sig-name descname"><span class="pre">TwitterPager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hydrate_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">HydrateType.NONE</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterPager.html#TwitterPager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterPager.TwitterPager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Continuous (stream-like) pagination of response from Twitter REST API resource.
 In addition to Public API endpoints, supports Premium Search API.</p>
 <dl class="field-list simple">
@@ -48,16 +49,16 @@ In addition to Public API endpoints, supports Premium Search API.</p>
 <li><p><strong>api</strong> – An authenticated TwitterAPI object</p></li>
 <li><p><strong>resource</strong> – String with the resource path (ex. search/tweets)</p></li>
 <li><p><strong>params</strong> – Dictionary of resource parameters</p></li>
-<li><p><strong>hydrate_tweets</strong> – Boolean determining whether to insert expansion data from
-“includes” directly into the tweet “data” structure. 
-False (default) does not hydrate.
-True hydrates.</p></li>
+<li><p><strong>hydrate_type</strong> – HydrateType or int
+Do not hydrate - NONE or 0 (default)
+Append new field with ‘_hydrate’ suffix with hydrate values - APPEND or 1
+Replace current field value with hydrate values - REPLACE or 2</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="TwitterAPI.TwitterPager.TwitterPager.get_iterator">
-<code class="sig-name descname"><span class="pre">get_iterator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_tweets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterPager.html#TwitterPager.get_iterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterPager.TwitterPager.get_iterator" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="TwitterAPI.TwitterPager.TwitterPager.get_iterator">
+<span class="sig-name descname"><span class="pre">get_iterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_tweets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterPager.html#TwitterPager.get_iterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterPager.TwitterPager.get_iterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iterate response from Twitter REST API resource. Resource is called
 in a loop to retrieve consecutive pages of results.</p>
 <dl class="field-list simple">
@@ -78,7 +79,7 @@ True retrieves current results.</p></li>
 
 </dd></dl>
 
-</div>
+</section>
 
 
       </div>
@@ -96,7 +97,7 @@ True retrieves current results.</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, geduldig.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>

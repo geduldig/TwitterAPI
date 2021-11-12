@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Authentication &#8212; TwitterAPI 2.6 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/haiku.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -35,11 +36,11 @@
       <div class="content" role="main">
         
         
-  <div class="section" id="authentication">
+  <section id="authentication">
 <h1>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h1>
 <p>Before you can do anything you must create an application on <a class="reference external" href="http://apps.twitter.com">apps.twitter.com</a> and generate oAuth keys.</p>
 <p>Twitter supports both user and application authentication, called oAuth 1 and oAuth 2, respectively. User authentication gives you access to all API endpoints, basically read and write persmission. It is also required in order to using the Streaming API. Application authentication gives you access to just the read portion of the API – so, no creating or destroying tweets. Application authentication, however, has elevated rate limits.</p>
-<div class="section" id="user-authentication">
+<section id="user-authentication">
 <h2>User Authentication<a class="headerlink" href="#user-authentication" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">TwitterAPI</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span>
                  <span class="n">consumer_secret</span><span class="p">,</span>
@@ -47,16 +48,16 @@
                  <span class="n">access_token_secret</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="application-authentication">
+</section>
+<section id="application-authentication">
 <h2>Application Authentication<a class="headerlink" href="#application-authentication" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">TwitterAPI</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span>
                  <span class="n">consumer_secret</span><span class="p">,</span>
                  <span class="n">auth_type</span><span class="o">=</span><span class="s1">&#39;oAuth2&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="proxy-server-authentication">
+</section>
+<section id="proxy-server-authentication">
 <h2>Proxy Server Authentication<a class="headerlink" href="#proxy-server-authentication" title="Permalink to this headline">¶</a></h2>
 <p>If you are behind a firewall, you may also need to authenticate with a web proxy server in order to reach Twitter’s servers. For this situation you include an additional argument in the initializer:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">TwitterAPI</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span>
@@ -67,8 +68,8 @@
 </pre></div>
 </div>
 <p>Replace SERVER:PORT with your proxy server, and replace USER and PASSWORD with your proxy server credentials.</p>
-</div>
-</div>
+</section>
+</section>
 
 
       </div>
@@ -86,7 +87,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, geduldig.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>

@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Introduction &#8212; TwitterAPI 2.6 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/haiku.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -32,25 +33,25 @@
       <div class="content" role="main">
         
         
-  <div class="section" id="introduction">
+  <section id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p><em>Minimal Python wrapper for Twitter’s REST and Streaming APIs</em></p>
 <p>The principle behind TwitterAPI’s design is to provide a single method for accessing the Twitter API. The <code class="docutils literal notranslate"><span class="pre">request</span></code> method allows one to call <em>any</em> endpoint found on Twitter’s <a class="reference external" href="https://dev.twitter.com/overview/documentation">developer site</a>, the complete reference for all endpoints. The benefits of a single-method approach are: 1) less code for me to maintain, and 2) a single method for you to learn. Here is a quck example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">TwitterAPI</span> <span class="kn">import</span> <span class="n">TwitterAPI</span>
 <span class="n">api</span> <span class="o">=</span> <span class="n">TwitterAPI</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">,</span> <span class="n">access_token_key</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;search/tweets&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span><span class="s1">&#39;pizza&#39;</span><span class="p">})</span>
-<span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+<span class="nb">print</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
 </pre></div>
 </div>
 <p>Get Twitter’s entire response as one long string containing tweets (in this example) by calling <code class="docutils literal notranslate"><span class="pre">r.text</span></code>. More often an iterator is useful:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
-    <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;screen_name&#39;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+    <span class="nb">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">][</span><span class="s1">&#39;screen_name&#39;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>The iterator returns JSON objects. What makes the iterator very powerful is it works with both REST API and Streaming API endpoints. No syntax changes required – supply any endpoint and parameters that are found on Twitter’s developer site.</p>
 <p>TwitterAPI is compatible with Python 2 and Python 3. It authenticates using either OAauth 1 or OAuth 2. It also supports web proxy server authentication. All this with minimal code change for you.</p>
-</div>
-<div class="section" id="topics">
+</section>
+<section id="topics">
 <h1>Topics<a class="headerlink" href="#topics" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
@@ -61,8 +62,8 @@
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Tiny Examples</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="modules">
+</section>
+<section id="modules">
 <h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
@@ -77,7 +78,7 @@
 <li class="toctree-l1"><a class="reference internal" href="twitteroauth.html">TwitterAPI.TwitterOAuth</a></li>
 </ul>
 </div>
-</div>
+</section>
 
 
       </div>
@@ -93,7 +94,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, geduldig.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>

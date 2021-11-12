@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Error Handling &#8212; TwitterAPI 2.6 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/haiku.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -35,38 +36,38 @@
       <div class="content" role="main">
         
         
-  <div class="section" id="error-handling">
+  <section id="error-handling">
 <h1>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
 <p>Besides tweet statuses, the REST API and Streaming API iterators can return errors and other messages. It is up to the application to test what type of object has been returned. Message types are documented <a class="reference external" href="http://dev.twitter.com/overview/api/response-codes">here</a> and <a class="reference external" href="http://dev.twitter.com/streaming/overview/messages-types">here</a>.</p>
-<div class="section" id="rest-api-messages">
+<section id="rest-api-messages">
 <h2>REST API Messages<a class="headerlink" href="#rest-api-messages" title="Permalink to this headline">¶</a></h2>
 <p>REST API endpoints can return many more types of messages than Streaming API endpoints. Depending on the endpoint, you may want to handle a particular type of message, such as exceeding a rate limit or posting a duplicate tweet. Here is a general pattern for simply printing out any message and error code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;search/tweets&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span><span class="s1">&#39;pizza&#39;</span><span class="p">})</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
     <span class="k">if</span> <span class="s1">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+        <span class="nb">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
     <span class="k">elif</span> <span class="s1">&#39;message&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">])</span>
+        <span class="nb">print</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="streaming-api-messages">
+</section>
+<section id="streaming-api-messages">
 <h2>Streaming API Messages<a class="headerlink" href="#streaming-api-messages" title="Permalink to this headline">¶</a></h2>
 <p>Streaming API endpoints return a variety of messages. Some are not errors. For example, a “limit” message contains the number of tweets missing from the stream. This happens when the number of tweets matching your filter exceeds a threshold set by Twitter. Other useful messages are “disconnect” and “delete”.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;statuses/filter&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;track&#39;</span><span class="p">:</span><span class="s1">&#39;pizza&#39;</span><span class="p">})</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
     <span class="k">if</span> <span class="s1">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+        <span class="nb">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
     <span class="k">elif</span> <span class="s1">&#39;limit&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> tweets missed&#39;</span> <span class="o">%</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">][</span><span class="s1">&#39;track&#39;</span><span class="p">]</span>
+        <span class="nb">print</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> tweets missed&#39;</span> <span class="o">%</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">][</span><span class="s1">&#39;track&#39;</span><span class="p">]</span>
     <span class="k">elif</span> <span class="s1">&#39;disconnect&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s1">&#39;disconnecting because </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;disconnect&#39;</span><span class="p">][</span><span class="s1">&#39;reason&#39;</span><span class="p">]</span>
+        <span class="nb">print</span> <span class="s1">&#39;disconnecting because </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;disconnect&#39;</span><span class="p">][</span><span class="s1">&#39;reason&#39;</span><span class="p">]</span>
         <span class="k">break</span>
 </pre></div>
 </div>
 <p>Even if you are not interested in handling errors it is necessary to test that the object returned by an iterator is a valid tweet status before using the object. Valid tweet objects have a ‘text’ property (or a ‘full_text’ property if it is an extended tweet).</p>
-</div>
-</div>
+</section>
+</section>
 
 
       </div>
@@ -84,7 +85,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, geduldig.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>

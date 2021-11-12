@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>TwitterAPI.TwitterOAuth &#8212; TwitterAPI 2.6 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/haiku.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -32,11 +33,11 @@
       <div class="content" role="main">
         
         
-  <div class="section" id="module-TwitterAPI.TwitterOAuth">
+  <section id="module-TwitterAPI.TwitterOAuth">
 <span id="twitterapi-twitteroauth"></span><h1>TwitterAPI.TwitterOAuth<a class="headerlink" href="#module-TwitterAPI.TwitterOAuth" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="TwitterAPI.TwitterOAuth.TwitterOAuth">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterOAuth.</span></code><code class="sig-name descname"><span class="pre">TwitterOAuth</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_secret</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_secret</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterOAuth.html#TwitterOAuth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterOAuth.TwitterOAuth" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="TwitterAPI.TwitterOAuth.TwitterOAuth">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">TwitterAPI.TwitterOAuth.</span></span><span class="sig-name descname"><span class="pre">TwitterOAuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_secret</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token_secret</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterOAuth.html#TwitterOAuth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterOAuth.TwitterOAuth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optional class for retrieving Twitter credentials stored in a text file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -49,8 +50,8 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="TwitterAPI.TwitterOAuth.TwitterOAuth.read_file">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">read_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterOAuth.html#TwitterOAuth.read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterOAuth.TwitterOAuth.read_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="TwitterAPI.TwitterOAuth.TwitterOAuth.read_file">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterOAuth.html#TwitterOAuth.read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterOAuth.TwitterOAuth.read_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read OAuth credentials from a text file.  File format:</p>
 <blockquote>
 <div><p>consumer_key=YOUR_CONSUMER_KEY</p>
@@ -67,13 +68,13 @@ from TwitterAPI/credentials.txt</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="TwitterAPI.TwitterOAuth.TwitterOAuth.usage">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">usage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterOAuth.html#TwitterOAuth.usage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterOAuth.TwitterOAuth.usage" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="TwitterAPI.TwitterOAuth.TwitterOAuth.usage">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">usage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TwitterAPI/TwitterOAuth.html#TwitterOAuth.usage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#TwitterAPI.TwitterOAuth.TwitterOAuth.usage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
       </div>
@@ -89,7 +90,7 @@ from TwitterAPI/credentials.txt</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, geduldig.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>

@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Fault Tolerant Streams and Pages &#8212; TwitterAPI 2.6 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/haiku.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -35,21 +36,21 @@
       <div class="content" role="main">
         
         
-  <div class="section" id="fault-tolerant-streams-and-pages">
+  <section id="fault-tolerant-streams-and-pages">
 <h1>Fault Tolerant Streams and Pages<a class="headerlink" href="#fault-tolerant-streams-and-pages" title="Permalink to this headline">¶</a></h1>
 <p>There are a number of reasons for a stream to stop. Twitter will break your connection if you have more than two streams open with the same credentials, or if your credentials are not valid. Occassionally, the problem will be internal to Twitter and you will be disconnected. Other causes might be network instability or connection timeout.</p>
-<div class="section" id="endless-stream">
+<section id="endless-stream">
 <h2>Endless Stream<a class="headerlink" href="#endless-stream" title="Permalink to this headline">¶</a></h2>
 <p>In order to keep a Streaming API request going indefinitely, you will need to re-make the request whenever the connection drops. TwitterAPI defines two exception classes for this purpose.</p>
 <p><a class="reference external" href="./twittererror.html">TwitterRequestError</a> is thrown whenever the request fails (i.e. when the response status code is not 200). A status code of 500 or higher indicates a server error which is safe to ignore. Any other status code indicates an error with your request which you should fix before re-trying.</p>
 <p><a class="reference external" href="./twittererror.html">TwitterConnectionError</a> is thrown when the connection times out or is interrupted. You can always immediately try making the request again.</p>
 <p>Sometimes Twitter will inform you to close the connection by sending you a “disconnect” message. The message will contain a code which indicates the reason. Messages with a code of 2, 5, 6, or 7 are serious and you will need to fix the problem before making a new request. You can ignore all other messages.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">iterator</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;statuses/filter&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;track&#39;</span><span class="p">:</span><span class="s1">&#39;pizza&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
             <span class="k">if</span> <span class="s1">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
             <span class="k">elif</span> <span class="s1">&#39;disconnect&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
                 <span class="n">event</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;disconnect&#39;</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]:</span>
@@ -70,8 +71,8 @@
         <span class="k">pass</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="last-week-s-pages">
+</section>
+<section id="last-week-s-pages">
 <h2>Last Week’s Pages<a class="headerlink" href="#last-week-s-pages" title="Permalink to this headline">¶</a></h2>
 <p>Requests for REST API endpoints can throw <a class="reference external" href="./twittererror.html">TwitterRequestError</a> and <a class="reference external" href="./twittererror.html">TwitterConnectionError</a>. They do not, however, return “disconnect” messages. Twitter returns error messages for these endpoints with “message”. Most of these errors require attention before re-trying the request, except those with codes of 130 or 131, which are internal server errors.</p>
 <p>For making continuos REST API requests (i.e. paging), TwitterAPI provides <a class="reference external" href="./paging.html">TwitterPager</a>. If you use this class to request tweets that have been posted back to one week old, for example, the class’s iterator will handle both types of exceptions automatically. The iterator also handles “message” objects with 130 or 131 codes for you. Any other “message” object gets passed on for you to handle.</p>
@@ -79,14 +80,14 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">iterator</span> <span class="o">=</span> <span class="n">TwitterPager</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s1">&#39;search/tweets&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span><span class="s1">&#39;pizza&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
     <span class="k">if</span> <span class="s1">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
     <span class="k">elif</span> <span class="s1">&#39;message&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
         <span class="c1"># something needs to be fixed before re-connecting</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
       </div>
@@ -104,7 +105,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, geduldig.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>

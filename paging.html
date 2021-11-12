@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Paging Results &#8212; TwitterAPI 2.6 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/haiku.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -35,20 +36,20 @@
       <div class="content" role="main">
         
         
-  <div class="section" id="paging-results">
+  <section id="paging-results">
 <h1>Paging Results<a class="headerlink" href="#paging-results" title="Permalink to this headline">¶</a></h1>
 <p>Whether one is searching for tweets with <cite>search/tweets</cite> or downloading a user’s timeline with <cite>statuses/user_timeline</cite> Twitter limits the number of tweets. So, in order to get more tweets, one must make successive requests and with each request skip the previously acquired tweets. This is done by specifying the tweet id from where to start. Twitter has a description <a class="reference external" href="http://dev.twitter.com/rest/public/timelines">here</a>. If you don’t want to implement paging yourself, you can use the <a class="reference external" href="./twitterpager.html">TwitterPager</a> helper class with any REST API endpoint that returns multiples of something. The following, for example, searches for all tweets containing ‘pizza’ that Twitter has stored – up to about a week’s worth maximum.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">TwitterPager</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="s1">&#39;search/tweets&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span><span class="s1">&#39;pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">})</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">get_iterator</span><span class="p">():</span>
     <span class="k">if</span> <span class="s1">&#39;text&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+        <span class="nb">print</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
     <span class="k">elif</span> <span class="s1">&#39;message&#39;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">88</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s1">&#39;SUSPEND, RATE LIMIT EXCEEDED: </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span>
+        <span class="nb">print</span> <span class="s1">&#39;SUSPEND, RATE LIMIT EXCEEDED: </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span>
         <span class="k">break</span>
 </pre></div>
 </div>
 <p>By default there is a built-in wait time of 5 seconds between successive calls. This value is overridden with an argument to <cite>get_iterator()</cite>. See the documentation also to learn how to wait for new tweets. In other words, the iterator can be setup to poll for newer pages of tweets rather than older pages.</p>
-</div>
+</section>
 
 
       </div>
@@ -66,7 +67,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, geduldig.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
     </div>
   </body>
 </html>
