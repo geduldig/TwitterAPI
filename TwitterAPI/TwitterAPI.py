@@ -148,7 +148,8 @@ class TwitterAPI(object):
         :param resource: A Twitter endpoint (ex. "search/tweets")
         :param params: Dictionary with endpoint parameters or None (default)
         :param files: Dictionary with multipart-encoded file or None (default)
-        :param method_override: Request method to override or None (default)
+        :param method_override: Request method to override or None (default).
+                                If an endpoint supports more than one method, the default method is the first in the list of methods.
         :param hydrate_type: HydrateType or int
                              Do not hydrate ('includes' field and all its content will be lost for non-streaming requests) - NONE or 0 (default)
                              Append new field with '_hydrate' suffix with hydrate values - APPEND or 1
@@ -157,24 +158,34 @@ class TwitterAPI(object):
         :returns: TwitterResponse
         :raises: TwitterConnectionError
         """
+        # check that the endpoint is valid
         resource, endpoint = self._get_endpoint(resource)
         if endpoint not in ENDPOINTS:
             raise Exception('Endpoint "%s" unsupported' % endpoint)
+        # check that the method is valid if the endpoint supports more than one method
+        method, subdomain = ENDPOINTS[endpoint]
+        if not method_override and isinstance(method, list):
+            method = method[0] # by default use first method in list
+        elif isinstance(method, list):
+            if method_override in method:
+                method = method_override # use method_override
+            else:
+                raise Exception(f'Endpoint "{endpoint}" with method "{method_override}" unsupported')
+
+        if not params:
+            params = {}
+        if self.version == '1.1':
+            # used only for streaming
+            params['delimited'] = 'length'
+            params['stall_warnings'] = 'true'
+
         with requests.Session() as session:
             session.auth = self.auth
             session.headers = {'User-Agent': self.USER_AGENT}
-            method, subdomain = ENDPOINTS[endpoint]
-            if method_override:
-                method = method_override
             url = self._prepare_url(subdomain, resource)
             if self.version == '1.1' and 'stream' in subdomain:
                 session.stream = True
                 timeout = self.STREAMING_TIMEOUT
-                # always use 'delimited' for efficient stream parsing
-                if not params:
-                    params = {}
-                params['delimited'] = 'length'
-                params['stall_warnings'] = 'true'
             elif self.version == '2' and resource.endswith('/stream'):
                 session.stream = True
                 timeout = self.STREAMING_TIMEOUT
