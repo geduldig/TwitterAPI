@@ -41,15 +41,6 @@ From the command line::
 
 	pip install TwitterAPI
 
-Documentation
--------------
-* `An Introduction <http://geduldig.github.io/TwitterAPI>`_
-* `Authentication <http://geduldig.github.io/TwitterAPI/authentication.html>`_
-* `Error Handling <http://geduldig.github.io/TwitterAPI/errors.html>`_
-* `Paging Results <http://geduldig.github.io/TwitterAPI/paging.html>`_
-* `Tiny Examples <http://geduldig.github.io/TwitterAPI/examples.html>`_
-* `Fault Tolerant Streams and Pages <http://geduldig.github.io/TwitterAPI/faulttolerance.html>`_
-
 Some Code...
 ------------
 [See `TwitterAPI/examples <https://github.com/geduldig/TwitterAPI/tree/master/examples>`_ for working examples.]
@@ -81,9 +72,18 @@ Stream tweets from New York City::
 	for item in r:
 		print(item)
 		
-Notice that ``request()`` works with all endpoints found in either the REST APIs or the Streaming APIs. Usually ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  The above examples use ``get_iterator()`` to consume each tweet object.  The iterator knows how to iterate results returned from either the REST APIs or the Streaming APIs.  
+``request()`` works with all version 1.1 and version 2 endpoints and the other supported Twitter APIs. Typcally, ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  The above examples use ``get_iterator()`` to consume each tweet object.  The iterator can iterate results returned from either the REST APIs or the Streaming APIs.  
 
-You also have access to the response object returned by ``request()``.  From a response object ``r`` you can get the raw response with ``r.text`` and the HTTP status code with ``r.status_code``.  See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
+You also have access to the response object returned by ``request()``. With a response object ``r`` comes the raw response (``r.text``) and the HTTP status code (``r.status_code``).  See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
+
+Documentation
+-------------
+* `An Introduction <http://geduldig.github.io/TwitterAPI>`_
+* `Authentication <http://geduldig.github.io/TwitterAPI/authentication.html>`_
+* `Error Handling <http://geduldig.github.io/TwitterAPI/errors.html>`_
+* `Paging Results <http://geduldig.github.io/TwitterAPI/paging.html>`_
+* `Tiny Examples <http://geduldig.github.io/TwitterAPI/examples.html>`_
+* `Fault Tolerant Streams and Pages <http://geduldig.github.io/TwitterAPI/faulttolerance.html>`_
 
 Extra Goodies
 -------------

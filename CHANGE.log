@@ -187,3 +187,5 @@ v2.7.5,    18 Jul 2021 -- Merged Dheavyman-fix-meta-keyerror.
 v2.7.6,    11 Nov 2021 -- Merged dylancaponi-patch-2 to update ADS version.
 
 v2.7.7,    11 Nov 2021 -- Merged NeodymiumFerBore-patch-1, musicist288-master
+
+v2.7.8,    29 Nov 2021 -- Fixed hydrated media keys

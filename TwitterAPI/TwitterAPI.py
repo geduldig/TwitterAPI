@@ -452,7 +452,16 @@ def _hydrate_tweets(data, includes, field_suffix):
         parent = item[0]
         field = item[1] + field_suffix
         include = item[2]
-        parent[field] = include
+        if field in parent:
+            if item[1] == 'media_keys':
+                parent[field] += include
+                if field_suffix == '':
+                    # REPLACE option
+                    parent[field].remove(include[0]['media_key'])
+            else:
+                parent[field] = include
+        else:
+            parent[field] = include
     return data
 
 
