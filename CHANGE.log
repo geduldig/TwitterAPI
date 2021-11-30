@@ -191,3 +191,4 @@ v2.7.7,    11 Nov 2021 -- Merged NeodymiumFerBore-patch-1, musicist288-master
 v2.7.8,    29 Nov 2021 -- Fixed hydrated media keys
 
 v2.7.9,    30 Nov 2021 -- Specify all supported endpoint methods in constants.py
+                          Added new v2 endpoints
