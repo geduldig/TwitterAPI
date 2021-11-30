@@ -1,6 +1,7 @@
 MANIFEST 
 
 .DS_Store
+.vscode/*
 
 *.py[cod]
 
