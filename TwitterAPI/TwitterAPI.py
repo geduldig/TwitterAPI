@@ -172,13 +172,6 @@ class TwitterAPI(object):
             else:
                 raise Exception(f'Endpoint "{endpoint}" with method "{method_override}" unsupported')
 
-        if not params:
-            params = {}
-        if self.version == '1.1':
-            # used only for streaming
-            params['delimited'] = 'length'
-            params['stall_warnings'] = 'true'
-
         with requests.Session() as session:
             session.auth = self.auth
             session.headers = {'User-Agent': self.USER_AGENT}
@@ -186,6 +179,10 @@ class TwitterAPI(object):
             if self.version == '1.1' and 'stream' in subdomain:
                 session.stream = True
                 timeout = self.STREAMING_TIMEOUT
+                if not params:
+                    params = {}
+                params['delimited'] = 'length'
+                params['stall_warnings'] = 'true'
             elif self.version == '2' and resource.endswith('/stream'):
                 session.stream = True
                 timeout = self.STREAMING_TIMEOUT
