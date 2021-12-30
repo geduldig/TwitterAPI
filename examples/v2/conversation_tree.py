@@ -1,4 +1,4 @@
-from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, TwitterPager
+from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, TwitterPager, HydrateType
 
 # NOTE: If conversation is over a week old then it will not get returned.
 CONVERSATION_ID = '1369393783482236933'
@@ -54,7 +54,7 @@ try:
 			'expansions':'author_id',
 			'tweet.fields':'author_id,conversation_id,created_at,referenced_tweets'
 		},
-		hydrate_tweets=True)
+		hydrate_type=HydrateType.REPLACE)
 
 	for item in r:
 		root = TreeNode(item)
@@ -69,7 +69,7 @@ try:
 			'expansions':'author_id',
 			'tweet.fields':'author_id,conversation_id,created_at,referenced_tweets'
 		},
-		hydrate_tweets=True)
+		hydrate_type=HydrateType.REPLACE)
 
 	# "wait=2" means wait 2 seconds between each request.
 	# The rate limit is 450 requests per 15 minutes, or
