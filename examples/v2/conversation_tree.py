@@ -1,9 +1,19 @@
-from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRequestError, TwitterConnectionError, TwitterPager, HydrateType
+from TwitterAPI import (TwitterAPI, TwitterOAuth, TwitterRequestError, 
+	TwitterConnectionError, TwitterPager, HydrateType)
 
-# NOTE: If conversation is over a week old then it will not get returned.
-CONVERSATION_ID = '1369393783482236933'
+
+# NOTE: If any of the conversation is over a week old then it will not get 
+# returned unless you are using academic credentials.
+CONVERSATION_ID = '20'
+
+
+#
+# UTILITY CLASS
+#
 
 class TreeNode:
+	"""TreeNode is used to organize tweets as a tree structure"""
+
 	def __init__(self, data):
 		"""data is a tweet's json object"""
 		self.data = data
@@ -43,6 +53,11 @@ class TreeNode:
 		for child in reversed(self.children):
 			child.print_tree(level)
 
+
+#
+# PROGRAM BEGINS HERE
+#
+
 try:
 	o = TwitterOAuth.read_file()
 	api = TwitterAPI(o.consumer_key, o.consumer_secret, auth_type='oAuth2', api_version='2')
@@ -56,9 +71,13 @@ try:
 		},
 		hydrate_type=HydrateType.REPLACE)
 
+	root = None
 	for item in r:
 		root = TreeNode(item)
 		print(f'ROOT {root.id()}')
+	if not root:
+		print(f'Conversation ID {CONVERSATION_ID} does not exist')
+		exit()
 
 	# GET ALL REPLIES IN CONVERSATION
 	# (RETURNED IN REVERSE CHRONOLOGICAL ORDER)
@@ -72,8 +91,7 @@ try:
 		hydrate_type=HydrateType.REPLACE)
 
 	# "wait=2" means wait 2 seconds between each request.
-	# The rate limit is 450 requests per 15 minutes, or
-	# 15*60/450 = 2 seconds. 
+	# The rate limit is 450 requests per 15 minutes, or 1 request every 15*60/450 = 2 seconds. 
 
 	orphans = []
 
@@ -88,6 +106,8 @@ try:
 
 	print('\nTREE...')
 	root.print_tree(0)
+
+	# YOU MIGHT GET ORPHANS WHEN PART OF THE CONVERSATION IS OLDER THAN A WEEK
 	assert len(orphans) == 0, f'{len(orphans)} orphaned tweets'
 
 except TwitterRequestError as e:
