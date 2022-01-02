@@ -123,7 +123,7 @@ class TwitterPager(object):
                         continue
                 else: # VERSION 2
                     # TWITTER SHOULD STANDARDIZE ON pagination_token IN THE FUTURE
-                    SEARCH_ENDPOINTS = ['tweets/search/recent', 'tweets/search/all']
+                    SEARCH_ENDPOINTS = ['tweets/search/recent', 'tweets/search/all', 'tweets/counts/all']
                     pagination_token = 'next_token' if self.resource in SEARCH_ENDPOINTS else 'pagination_token'
                     if new_tweets:
                         self.params[pagination_token] = meta['previous_token']
