@@ -33,7 +33,7 @@ Twitter API Version 1.1 Code Snippets
 [More examples in `TwitterAPI/examples/v1.1 <https://github.com/geduldig/TwitterAPI/tree/master/examples/v1.1>`_]
 
 Search for recent tweets
-.. code:: python
+::
 
 	from TwitterAPI import TwitterAPI
 	api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret)
