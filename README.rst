@@ -1,9 +1,9 @@
 |LOGO|
 ======
-|BADGE_VERSION| |BADGE_CHAT| 
-============================
 |BADGE_1.1| |BADGE_PREMIUM| |BADGE_2| |BADGE_ADS| |BADGE_LABS|
 ==============================================================
+|BADGE_VERSION| |BADGE_CHAT| 
+============================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
@@ -69,7 +69,7 @@ The ``request()`` Method
 
 This method works with all version 1.1 and version 2 endpoints. Typcally, ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  
 
-The method returns an object that will iterate either search results and streams. The returned object also give you access to the raw response (``r.text``) and the HTTP status code (``r.status_code``). See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
+The method returns an object that will iterate either search results and streams. The returned object also gives you access to the raw response (``r.text``) and the HTTP status code (``r.status_code``). See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
 
 Documentation
 -------------
