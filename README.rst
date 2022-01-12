@@ -1,9 +1,9 @@
 |LOGO|
-============================
+======
 |BADGE_VERSION| |BADGE_CHAT| 
 ============================
 |BADGE_1.1| |BADGE_PREMIUM| |BADGE_2| |BADGE_ADS| |BADGE_LABS|
-============================
+==============================================================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
@@ -23,58 +23,53 @@
 .. |BADGE_PREMIUM| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fpremium
    :target: https://developer.twitter.com
 
-TwitterAPI is a Python package for accessing Twitter's REST APIs and Streaming APIs. It supports both Version 1.1 and Version 2 endpoints. 
-
-REST APIs that are supported are: Public API, Collections API, Curator API, Ads API, Webhook API, Premium Search API.
-
-NEW -- Twitter API Version 2!!
-------------------------------
-By default TwitterAPI will permit only Version 1.1 endpoints. To start using Verson 2 endpoint you must supply the api_version parameter:
-
-	api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret, api_version='2')
-
-Check the examples folder for more information on making requests using Version 2 endpoints.
-
 Installation
 ------------
-From the command line::
 
-	pip install TwitterAPI
+	> pip install TwitterAPI
 
-Some Code...
-------------
-[See `TwitterAPI/examples <https://github.com/geduldig/TwitterAPI/tree/master/examples>`_ for working examples.]
+Twitter API Version 1.1 Code Snippets
+-------------------------------------
+[More examples in `TwitterAPI/examples/v1.1 <https://github.com/geduldig/TwitterAPI/tree/master/examples/v1.1>`_]
 
-First, authenticate with your application credentials::
+Search for recent tweets
+::
 
 	from TwitterAPI import TwitterAPI
 	api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret)
-
-Tweet something::
-
-	r = api.request('statuses/update', {'status':'This is a tweet!'})
-	print(r.status_code)
-
-Get tweet by its id::
-
-	r = api.request('statuses/show/:%d' % 210462857140252672)
-	print(r.text)
-
-Get some tweets::
-
 	r = api.request('search/tweets', {'q':'pizza'})
 	for item in r:
 		print(item)
 
-Stream tweets from New York City::
+Stream tweets from New York City as they get tweeted
+::
 
 	r = api.request('statuses/filter', {'locations':'-74,40,-73,41'})
 	for item in r:
 		print(item)
-		
-``request()`` works with all version 1.1 and version 2 endpoints and the other supported Twitter APIs. Typcally, ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  The above examples use ``get_iterator()`` to consume each tweet object.  The iterator can iterate results returned from either the REST APIs or the Streaming APIs.  
 
-You also have access to the response object returned by ``request()``. With a response object ``r`` comes the raw response (``r.text``) and the HTTP status code (``r.status_code``).  See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
+Twitter API Version 2 Code Snippets 
+------------------------------------
+[More examples in `TwitterAPI/examples/v2 <https://github.com/geduldig/TwitterAPI/tree/master/examples/v2>`_ ]
+
+Search for recent tweets, and specify `fields` and `expansions`
+::
+
+	from TwitterAPI import TwitterAPI
+	api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret, api_version='2')
+	r = api.request('tweets/search/recent', {
+		'query':'pizza', 
+		'tweet.fields':'author_id',
+		'expansions':'author_id'})
+	for item in r:
+		print(item)
+
+The ``request()`` Method
+------------------------
+
+This method works with all version 1.1 and version 2 endpoints. Typcally, ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  
+
+The method returns an object that will iterate either search results and streams. The returned object also give you access to the raw response (``r.text``) and the HTTP status code (``r.status_code``). See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
 
 Documentation
 -------------
