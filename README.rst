@@ -1,9 +1,5 @@
 |LOGO|
 ======
-|BADGE_1.1| |BADGE_PREMIUM| |BADGE_2| |BADGE_ADS| |BADGE_LABS|
-==============================================================
-|BADGE_VERSION| |BADGE_CHAT| 
-============================
 
 .. |LOGO| image:: https://raw.githubusercontent.com/geduldig/TwitterAPI/master/logo.png 
 .. |BADGE_VERSION| image:: http://img.shields.io/pypi/v/TwitterAPI.svg
@@ -22,6 +18,16 @@
    :target: https://developer.twitter.com/en/docs/twitter-api
 .. |BADGE_PREMIUM| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Ftwbadges.glitch.me%2Fbadges%2Fpremium
    :target: https://developer.twitter.com
+
+
+TwitterAPI is a minimal python wrapper for the TwitterAPIs. A list of what it can do:
+
+* Support for all V1.1 and V2 endpoints, plus Premium, Ads, Labs, Collections.
+* OAuth1 and bearer token authentication, and proxy server authentication.
+* Streaming endpoints.
+* Paging results.
+* The option to "hydrate" results returned by V2 endpoints. 
+* Error handling.
 
 Installation
 ------------
@@ -64,10 +70,10 @@ Search for recent tweets, and specify `fields` and `expansions`
 	for item in r:
 		print(item)
 
-The ``request()`` Method
-------------------------
+One Method For Everything
+-------------------------
 
-This method works with all version 1.1 and version 2 endpoints. Typcally, ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  
+The ``request()`` method works with all version 1.1 and version 2 endpoints. Typcally, ``request()`` takes two arguments: a Twitter endpoint and a dictionary of endpoint parameters.  
 
 The method returns an object that will iterate either search results and streams. The returned object also gives you access to the raw response (``r.text``) and the HTTP status code (``r.status_code``). See the `requests <http://docs.python-requests.org/en/latest/user/quickstart/>`_ library documentation for more details.
 
