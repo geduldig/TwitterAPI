@@ -20,7 +20,7 @@ DOMAIN = 'twitter.com'
 
 VERSION = '1.1'
 CURATOR_VERSION = 'broadcast/1'
-ADS_VERSION = '9'
+ADS_VERSION = '10'
 
 
 ENDPOINTS = {
