@@ -206,36 +206,35 @@ ENDPOINTS = {
     
     # ACCOUNT ACTIVITY WEBHOOK API
 
-    'account_activity/all/:PARAM/subscriptions':            ('POST',           'api'), # ENVIRONMENT NAME
-    'account_activity/all/:PARAM/subscriptions':            ('DELETE',         'api'), # ENVIRONMENT NAME                            
-    'account_activity/all/:PARAM/subscriptions/all':        ('GET',            'api'), # ENVIRONMENT NAME
-    'account_activity/all/:PARAM/subscriptions/all/list':   ('GET',            'api'), # ENVIRONMENT NAME
-    'account_activity/all/:PARAM/subscriptions/list':       ('GET',            'api'), # ENVIRONMENT NAME
-    'account_activity/all/:PARAM/webhooks':                 ('POST',           'api'), # ENVIRONMENT NAME    
-    'account_activity/all/:PARAM/webhooks/:PARAM':          ('DELETE',         'api'), # ENVIRONMENT NAME, WEBHOOK ID
-    'account_activity/all/count':                           ('GET',            'api'), 
-    'account_activity/all/webhooks':                        ('GET',            'api'),   
-    'account_activity/webhooks':                            ('POST',           'api'),    
-    'account_activity/webhooks/:PARAM':                     ('DELETE',         'api'), # WEBHOOK ID
-    'account_activity/webhooks/:PARAM/subscriptions':       ('POST',           'api'), # ENVIRONMENT NAME   
-    'account_activity/webhooks/:PARAM/subscriptions/list':  ('GET',            'api'), # ENVIRONMENT NAME
+    'account_activity/all/:PARAM/subscriptions':            (['POST', 'DELETE'], 'api'), # ENVIRONMENT NAME
+    'account_activity/all/:PARAM/subscriptions/all':        ('GET',              'api'), # ENVIRONMENT NAME
+    'account_activity/all/:PARAM/subscriptions/all/list':   ('GET',              'api'), # ENVIRONMENT NAME
+    'account_activity/all/:PARAM/subscriptions/list':       ('GET',              'api'), # ENVIRONMENT NAME
+    'account_activity/all/:PARAM/webhooks':                 ('POST',             'api'), # ENVIRONMENT NAME    
+    'account_activity/all/:PARAM/webhooks/:PARAM':          ('DELETE',           'api'), # ENVIRONMENT NAME, WEBHOOK ID
+    'account_activity/all/count':                           ('GET',              'api'), 
+    'account_activity/all/webhooks':                        ('GET',              'api'),   
+    'account_activity/webhooks':                            ('POST',             'api'),    
+    'account_activity/webhooks/:PARAM':                     ('DELETE',           'api'), # WEBHOOK ID
+    'account_activity/webhooks/:PARAM/subscriptions':       ('POST',             'api'), # ENVIRONMENT NAME   
+    'account_activity/webhooks/:PARAM/subscriptions/list':  ('GET',              'api'), # ENVIRONMENT NAME
 
     # PREMIUM SEARCH API
 
-    'tweets/search/30day/:PARAM':                           ('GET',            'api'), # LABEL
-    'tweets/search/30day/:PARAM/counts':                    ('GET',            'api'), # LABEL
-    'tweets/search/fullarchive/:PARAM':                     ('GET',            'api'), # LABEL
-    'tweets/search/fullarchive/:PARAM/counts':              ('GET',            'api'), # LABEL
+    'tweets/search/30day/:PARAM':                           ('GET',              'api'), # LABEL
+    'tweets/search/30day/:PARAM/counts':                    ('GET',              'api'), # LABEL
+    'tweets/search/fullarchive/:PARAM':                     ('GET',              'api'), # LABEL
+    'tweets/search/fullarchive/:PARAM/counts':              ('GET',              'api'), # LABEL
     
     # LABS API (BETAS) WILL NEED APPLICATION APPROVAL
 
-    'labs/1/tweets/metrics/private':                        ('GET',            'api'),
-    'labs/2/tweets/:PARAM':                                 ('GET',            'api'), # TWEET ID
-    'labs/2/tweets':                                        ('GET',            'api'),
-    'labs/2/tweets/search':                                 ('GET',            'api'),
-    'labs/2/tweets/:PARAM/hidden':                          ('PUT',            'api'), # TWEET ID
-    'labs/2/users/:PARAM':                                  ('GET',            'api'), # USER ID
-    'labs/2/users':                                         ('GET',            'api'),          
+    'labs/1/tweets/metrics/private':                        ('GET',              'api'),
+    'labs/2/tweets/:PARAM':                                 ('GET',              'api'), # TWEET ID
+    'labs/2/tweets':                                        ('GET',              'api'),
+    'labs/2/tweets/search':                                 ('GET',              'api'),
+    'labs/2/tweets/:PARAM/hidden':                          ('PUT',              'api'), # TWEET ID
+    'labs/2/users/:PARAM':                                  ('GET',              'api'), # USER ID
+    'labs/2/users':                                         ('GET',              'api'),          
     
     # !!!!!!!!!!!!!!!!!!!
     # API V2 EARLY ACCESS
