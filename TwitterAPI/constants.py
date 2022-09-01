@@ -272,6 +272,7 @@ ENDPOINTS = {
     'users':                                                ('GET',                  'api'),
     'users/:PARAM':                                         ('GET',                  'api'), # ID
     'users/:PARAM/blocking':                                (['GET','POST'],         'api'), # ID
+    'users/:PARAM/bookmarks':                               (['GET','DELETE'],       'api'), # ID
     'users/:PARAM/followed_lists':                          (['GET','POST'],         'api'), # ID
     'users/:PARAM/followed_lists/:PARAM':                   ('DELETE',               'api'), # ID, LIST ID
     'users/:PARAM/followers':                               ('GET',                  'api'), # ID

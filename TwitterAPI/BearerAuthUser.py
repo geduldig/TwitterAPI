@@ -1,0 +1,64 @@
+__author__ = "Andrea Biancini, geduldig"
+__date__ = "January 3, 2014"
+__license__ = "MIT"
+
+
+from .constants import *
+import base64
+import requests
+
+
+OAUTH2_SUBDOMAIN = 'api'
+OAUTH2_ENDPOINT = 'oauth2/token'
+
+
+class BearerAuthUser(requests.auth.AuthBase):
+
+    """Request bearer access token for oAuth2 authentication.
+
+    :param consumer_key: Twitter application consumer key
+    :param consumer_secret: Twitter application consumer secret
+    :param proxies: Dictionary of proxy URLs (see documentation for python-requests).
+    """
+
+    def __init__(self, consumer_key, consumer_secret, oauth2_access_token, proxies=None, user_agent=None):
+        self._consumer_key = consumer_key
+        self._consumer_secret = consumer_secret
+        self._access_token = oauth2_access_token
+        self.proxies = proxies
+        self.user_agent = user_agent
+        self._bearer_token = self._get_access_token()
+
+    def _get_access_token(self):
+        token_url = '%s://%s.%s/%s' % (PROTOCOL,
+                                       OAUTH2_SUBDOMAIN,
+                                       DOMAIN,
+                                       OAUTH2_ENDPOINT)
+        auth = self._consumer_key + ':' + self._consumer_secret
+        b64_bearer_token_creds = base64.b64encode(auth.encode('utf8'))
+        params = {'grant_type': 'client_credentials'}
+        headers = {}
+        headers['User-Agent'] = self.user_agent
+        headers['Authorization'] = 'Basic ' + b64_bearer_token_creds.decode('utf8')
+        headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+        try:
+            response = requests.post(
+                token_url,
+                params=params,
+                headers=headers,
+                proxies=self.proxies)
+            data = response.json()
+            return data['access_token']
+        except Exception as e:
+            raise Exception('Error requesting bearer access token: %s' % e)
+
+    def __call__(self, r):
+        auth_list = [
+            self._consumer_key,
+            self._consumer_secret,
+            self._access_token]
+        if all(auth_list):
+            r.headers['Authorization'] = "Bearer %s" % self._access_token
+            return r
+        else:
+            raise Exception('Not enough keys passed to Bearer token manager.')
