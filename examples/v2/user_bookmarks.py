@@ -6,7 +6,7 @@ access_token = ""
 
 try:
     o = TwitterOAuth.read_file()
-    api = TwitterAPI(o.consumer_key, o.consumer_secret, oauth2_access_token=access_token, api_version='2', auth_type="oAuth2User")
+    api = TwitterAPI(oauth2_access_token=access_token, api_version='2', auth_type="oAuth2User")
 
     # Get tweets - default setting
     tweets = api.request(f'users/:{USER_ID}/bookmarks')

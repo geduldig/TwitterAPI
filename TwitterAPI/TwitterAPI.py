@@ -98,11 +98,9 @@ class TwitterAPI(object):
                 proxies=self.proxies,
                 user_agent=self.USER_AGENT)
         elif auth_type == OAuthType.OAUTH2USER or auth_type == 'oAuth2User':
-            if not all([consumer_key, consumer_secret, oauth2_access_token]):
+            if not all([oauth2_access_token]):
                 raise Exception('Missing authentication parameter')
             self.auth = OAuth2User(
-                consumer_key,
-                consumer_secret,
                 oauth2_access_token=oauth2_access_token,
                 proxies=self.proxies,
                 user_agent=self.USER_AGENT)
