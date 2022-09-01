@@ -4,6 +4,7 @@ __license__ = "MIT"
 
 
 from .BearerAuth import BearerAuth as OAuth2
+from .BearerAuthUser import BearerAuthUser as OAuth2User
 from .constants import *
 from .TwitterError import *
 from datetime import datetime
@@ -28,6 +29,7 @@ DEFAULT_REST_TIMEOUT = os.getenv('DEFAULT_REST_TIMEOUT', 5)
 class OAuthType(Enum):
     OAUTH1 = 'oAuth1'
     OAUTH2 = 'oAuth2'
+    OAUTH2USER = 'oAuth2User'
 
 
 class HydrateType(Enum):
@@ -61,6 +63,7 @@ class TwitterAPI(object):
             consumer_secret=None,
             access_token_key=None,
             access_token_secret=None,
+            oauth2_access_token=None,
             auth_type=OAuthType.OAUTH1,
             proxy_url=None,
             api_version=VERSION):
@@ -92,6 +95,15 @@ class TwitterAPI(object):
             self.auth = OAuth2(
                 consumer_key,
                 consumer_secret,
+                proxies=self.proxies,
+                user_agent=self.USER_AGENT)
+        elif auth_type == OAuthType.OAUTH2USER or auth_type == 'oAuth2User':
+            if not all([consumer_key, consumer_secret, oauth2_access_token]):
+                raise Exception('Missing authentication parameter')
+            self.auth = OAuth2User(
+                consumer_key,
+                consumer_secret,
+                oauth2_access_token=oauth2_access_token,
                 proxies=self.proxies,
                 user_agent=self.USER_AGENT)
         else:
