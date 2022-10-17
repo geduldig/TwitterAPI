@@ -200,3 +200,5 @@ v2.7.11,   02 Jan 2022 -- Merged m0namon-counts_all_next_token
 v2.7.12,   11 Feb 2022 -- Merged Dheavyman-update-ads-api-v10
 
 v2.7.13,   06 Jun 2022 -- Fixed endpoint conflict in constanst.py
+
+v2.8.0,    16 Oct 2022 -- Merged codewithbas-feature/user-bookmarks
