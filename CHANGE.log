@@ -204,3 +204,5 @@ v2.7.13,   06 Jun 2022 -- Fixed endpoint conflict in constanst.py
 v2.8.0,    16 Oct 2022 -- Merged codewithbas-feature/user-bookmarks
 
 v2.8.1,    16 Oct 2022 -- Merged Dheavyman-ads-api-v11
+
+v2.8.2,    22 Mar 2023 -- Merged ERosendo PR
