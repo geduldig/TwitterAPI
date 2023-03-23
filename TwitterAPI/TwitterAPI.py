@@ -201,7 +201,7 @@ class TwitterAPI(object):
                 timeout = self.REST_TIMEOUT
             d = p = j = None
             if method == 'POST':
-                if self.version == '1.1':
+                if self.version == '1.1' and 'metadata' not in resource:
                     d = params
                 else:
                     j = params
